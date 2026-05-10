@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200" fill="none" role="img" aria-label="رسم بياني لمبيعات آخر ٣٠ يوم">
+  <defs>
+    <linearGradient id="clbg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0.01"/>
+    </linearGradient>
+    <linearGradient id="clline" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="200" rx="12" fill="white"/>
+  <!-- Grid lines -->
+  <line x1="40" y1="30" x2="460" y2="30" stroke="#f1f5f9" stroke-width="1"/>
+  <line x1="40" y1="70" x2="460" y2="70" stroke="#f1f5f9" stroke-width="1"/>
+  <line x1="40" y1="110" x2="460" y2="110" stroke="#f1f5f9" stroke-width="1"/>
+  <line x1="40" y1="150" x2="460" y2="150" stroke="#f1f5f9" stroke-width="1"/>
+  <!-- Y-axis labels -->
+  <text x="30" y="34" font-size="10" fill="#94a3b8" text-anchor="end" font-family="system-ui">40k</text>
+  <text x="30" y="74" font-size="10" fill="#94a3b8" text-anchor="end" font-family="system-ui">30k</text>
+  <text x="30" y="114" font-size="10" fill="#94a3b8" text-anchor="end" font-family="system-ui">20k</text>
+  <text x="30" y="154" font-size="10" fill="#94a3b8" text-anchor="end" font-family="system-ui">10k</text>
+  <!-- X-axis labels -->
+  <text x="60" y="175" font-size="9" fill="#94a3b8" text-anchor="middle" font-family="system-ui">10 أبر</text>
+  <text x="120" y="175" font-size="9" fill="#94a3b8" text-anchor="middle" font-family="system-ui">12 أبر</text>
+  <text x="180" y="175" font-size="9" fill="#94a3b8" text-anchor="middle" font-family="system-ui">14 أبر</text>
+  <text x="240" y="175" font-size="9" fill="#94a3b8" text-anchor="middle" font-family="system-ui">16 أبر</text>
+  <text x="300" y="175" font-size="9" fill="#94a3b8" text-anchor="middle" font-family="system-ui">18 أبر</text>
+  <text x="360" y="175" font-size="9" fill="#94a3b8" text-anchor="middle" font-family="system-ui">20 أبر</text>
+  <text x="420" y="175" font-size="9" fill="#94a3b8" text-anchor="middle" font-family="system-ui">22 أبر</text>
+  <!-- Area fill -->
+  <path d="M60 130 L90 118 L120 105 L150 115 L180 90 L210 100 L240 78 L270 90 L300 70 L330 82 L360 58 L390 68 L420 50 L450 62 L450 160 L60 160 Z" fill="url(#clbg)"/>
+  <!-- Line -->
+  <polyline points="60,130 90,118 120,105 150,115 180,90 210,100 240,78 270,90 300,70 330,82 360,58 390,68 420,50 450,62" fill="none" stroke="url(#clline)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Data points -->
+  <circle cx="300" cy="70" r="4" fill="white" stroke="#6366f1" stroke-width="2"/>
+  <circle cx="420" cy="50" r="4" fill="white" stroke="#3b82f6" stroke-width="2"/>
+  <!-- Tooltip -->
+  <rect x="278" y="44" width="90" height="26" rx="6" fill="#0f172a"/>
+  <text x="323" y="61" font-size="10" fill="white" text-anchor="middle" font-family="system-ui">32,450 SAR</text>
+</svg>

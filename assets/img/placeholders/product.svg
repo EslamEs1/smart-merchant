@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="صورة المنتج">
+  <defs>
+    <linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0e7ff"/>
+      <stop offset="100%" stop-color="#ede9fe"/>
+    </linearGradient>
+    <linearGradient id="pg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#pg)"/>
+  <!-- Grid lines -->
+  <line x1="0" y1="50" x2="200" y2="50" stroke="#c7d2fe" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="0" y1="100" x2="200" y2="100" stroke="#c7d2fe" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="0" y1="150" x2="200" y2="150" stroke="#c7d2fe" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="50" y1="0" x2="50" y2="200" stroke="#c7d2fe" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="100" y1="0" x2="100" y2="200" stroke="#c7d2fe" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="150" y1="0" x2="150" y2="200" stroke="#c7d2fe" stroke-width="1" stroke-dasharray="4 4"/>
+  <!-- Box shape representing product -->
+  <rect x="55" y="60" width="90" height="80" rx="8" fill="url(#pg2)" stroke="#8b5cf6" stroke-width="2"/>
+  <polyline points="55,70 100,55 145,70" fill="none" stroke="#6366f1" stroke-width="2" stroke-linejoin="round"/>
+  <line x1="100" y1="55" x2="100" y2="140" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <!-- Tag line -->
+  <rect x="72" y="148" width="56" height="8" rx="4" fill="#8b5cf6" opacity="0.25"/>
+</svg>

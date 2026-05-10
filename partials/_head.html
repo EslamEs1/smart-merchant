@@ -1,0 +1,57 @@
+<!-- HEAD PARTIAL — paste entire block inside <head>…</head> of every page -->
+<!-- Instructions:
+     1. Update <title> per page
+     2. Update <link rel="canonical"> href if applicable
+     3. The Tailwind config below is shared across all pages — do NOT alter tokens
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Merchant OS — سمارت مرتشانت</title>
+  <meta name="description" content="منصة إدارة التجارة الإلكترونية الذكية — المنتجات والطلبات والعملاء والمسوقين">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+
+  <!-- Google Fonts: Cairo + Tajawal (Arabic-optimised) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap">
+
+  <!-- Tailwind Play CDN (JIT in-browser — prototype only) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#6366f1',
+            'brand-accent':  '#8b5cf6',
+            'brand-info':    '#3b82f6',
+          },
+          fontFamily: {
+            sans: ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'],
+          },
+          backgroundImage: {
+            'gradient-brand': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Lucide Icons (CDN — createIcons called from main.js after DOMContentLoaded) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS (badges, table-responsive, focus-ring, animations) -->
+  <link rel="stylesheet" href="assets/css/app.css">
+
+  <!-- Pre-paint theme: sets dark class before first render to avoid FOUC -->
+  <script>
+    try {
+      var t = localStorage.getItem('smos:theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>

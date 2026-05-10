@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans bg-surface-base text-text-primary">
+<!--
+  PAGE SKELETON — copy this file as the starting point for every HTML page.
+  1. Replace <!-- HEAD CONTENT --> with the contents of partials/_head.html
+  2. Replace <!-- SIDEBAR --> with the contents of partials/_sidebar.html
+  3. Replace <!-- HEADER --> with the contents of partials/_header.html (dashboard pages only)
+  4. Replace <!-- PAGE CONTENT --> with the page-specific markup
+  5. Update <title> inside _head.html content
+  6. Set aria-current="page" on the correct sidebar nav item
+-->
+<head>
+  <!-- HEAD CONTENT — paste from partials/_head.html -->
+</head>
+<body class="min-h-screen bg-surface-base text-text-primary antialiased">
+
+  <!-- Sidebar overlay (mobile) -->
+  <div data-sidebar-overlay
+       class="fixed inset-0 z-30 bg-black/50 hidden lg:hidden"
+       aria-hidden="true"></div>
+
+  <!-- SIDEBAR — paste from partials/_sidebar.html (dashboard pages only) -->
+
+  <!-- Main wrapper -->
+  <div class="lg:pe-64 min-h-screen flex flex-col">
+
+    <!-- HEADER — paste from partials/_header.html (dashboard pages only) -->
+
+    <!-- PAGE CONTENT -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8">
+      <!-- page-specific content here -->
+    </main>
+
+  </div><!-- /main wrapper -->
+
+  <!-- MODAL BACKDROP — used by all confirmation modals -->
+  <div data-modal-backdrop
+       class="fixed inset-0 z-50 bg-black/50 hidden items-center justify-center p-4"
+       aria-hidden="true">
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

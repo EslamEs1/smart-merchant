@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" role="img" aria-label="صورة الملف الشخصي">
+  <defs>
+    <linearGradient id="avbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0e7ff"/>
+      <stop offset="100%" stop-color="#ede9fe"/>
+    </linearGradient>
+    <linearGradient id="avfg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="80" height="80" rx="40" fill="url(#avbg)"/>
+  <!-- Head -->
+  <circle cx="40" cy="30" r="14" fill="url(#avfg)" opacity="0.7"/>
+  <!-- Body / shoulders -->
+  <ellipse cx="40" cy="68" rx="22" ry="16" fill="url(#avfg)" opacity="0.5"/>
+</svg>

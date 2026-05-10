@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Smart Merchant OS">
+  <defs>
+    <linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="18" width="22" height="22" rx="5" fill="url(#fg)" transform="rotate(45 17 29)"/>
+  <rect x="28" y="12" width="16" height="16" rx="4" fill="url(#fg)" opacity="0.72" transform="rotate(45 36 20)"/>
+  <rect x="22" y="34" width="12" height="12" rx="3" fill="url(#fg)" opacity="0.50" transform="rotate(45 28 40)"/>
+</svg>

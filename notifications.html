@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الإشعارات — Smart Merchant OS</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { 'brand-primary': '#6366f1', 'brand-accent': '#8b5cf6', 'brand-info': '#3b82f6' },
+        fontFamily: { sans: ['Cairo','Tajawal','system-ui','sans-serif'] },
+        backgroundImage: { 'gradient-brand': 'linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#3b82f6 100%)' }
+      }}
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script>try{var t=localStorage.getItem('smos:theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}</script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+
+<!-- Sidebar overlay -->
+<div data-sidebar-overlay class="fixed inset-0 z-30 bg-black/50 hidden lg:hidden" aria-hidden="true"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="fixed top-0 start-0 z-40 h-screen w-64 bg-slate-900 dark:bg-slate-950 flex flex-col translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" aria-label="القائمة الجانبية">
+  <div class="flex items-center gap-3 px-5 py-5 border-b border-slate-700/60">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" aria-hidden="true" class="h-9 w-9 shrink-0">
+      <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="50%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs>
+      <rect x="4" y="12" width="14" height="14" rx="3" fill="url(#sg)" transform="rotate(45 11 19)"/>
+      <rect x="18" y="8" width="10" height="10" rx="2" fill="url(#sg)" opacity=".72" transform="rotate(45 23 13)"/>
+      <rect x="14" y="22" width="8" height="8" rx="2" fill="url(#sg)" opacity=".50" transform="rotate(45 18 26)"/>
+    </svg>
+    <div class="leading-tight"><p class="text-xs font-semibold text-white tracking-wide">Smart Merchant OS</p><p class="text-xs text-slate-400">سمارت مرتشانت</p></div>
+  </div>
+  <nav class="flex-1 overflow-y-auto py-4 px-3"><ul class="space-y-1" role="list">
+    <li><a href="dashboard.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="layout-dashboard" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>لوحة التحكم</span></a></li>
+    <li><a href="products.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="package" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المنتجات والخدمات</span></a></li>
+    <li><a href="orders.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="shopping-cart" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>الطلبات</span></a></li>
+    <li><a href="customers.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="users" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>العملاء</span></a></li>
+    <li><a href="affiliates.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="handshake" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المسوقون</span></a></li>
+    <li><a href="affiliate-payouts.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="wallet" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المدفوعات</span></a></li>
+    <li><a href="landing-pages.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="layout-template" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>صفحات الهبوط</span></a></li>
+    <li><a href="analytics.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="bar-chart-3" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>التحليلات</span></a></li>
+    <li><a href="settings.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="settings" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>الإعدادات</span></a></li>
+  </ul></nav>
+  <div class="border-t border-slate-700/60 px-4 py-4">
+    <div class="flex items-center gap-3">
+      <img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-8 w-8 rounded-full">
+      <div class="min-w-0"><p class="text-xs font-semibold text-white truncate">متجر الأناقة</p><p class="text-xs text-slate-400 truncate">merchant@smos.example</p></div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main wrapper -->
+<div class="lg:ps-64 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-700 flex items-center gap-3 px-4 sm:px-6 h-14">
+    <button type="button" data-sidebar-toggle class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="فتح القائمة الجانبية" aria-expanded="false" aria-controls="sidebar"><i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i></button>
+    <div class="flex-1 max-w-md"><div class="relative"><span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400"><i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i></span><input type="search" placeholder="بحث في الإشعارات..." class="w-full ps-9 pe-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-colors" aria-label="بحث في الإشعارات"></div></div>
+    <div class="flex-1"></div>
+    <div class="flex items-center gap-1 sm:gap-2">
+      <button type="button" data-theme-toggle class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="تبديل الوضع الليلي"><i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i><i data-lucide="moon" class="h-4 w-4 hidden dark:block" aria-hidden="true"></i></button>
+      <a href="notifications.html" class="relative p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="الإشعارات"><i data-lucide="bell" class="h-4 w-4" aria-hidden="true"></i></a>
+      <div class="relative" data-actions-dropdown="profile-menu">
+        <button type="button" class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="قائمة الملف الشخصي" aria-expanded="false" aria-haspopup="true"><img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-7 w-7 rounded-full"><span class="hidden sm:block text-sm font-medium text-slate-900 dark:text-slate-100">متجر الأناقة</span></button>
+        <div class="dropdown-panel absolute end-0 top-full mt-1 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+          <a href="profile.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="user-circle" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الملف الشخصي</a>
+          <a href="settings.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="settings" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الإعدادات</a>
+          <hr class="my-1 border-slate-200 dark:border-slate-600">
+          <a href="login.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="log-out" class="h-4 w-4" aria-hidden="true"></i>تسجيل الخروج</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page content -->
+  <main class="flex-1 p-4 sm:p-6 lg:p-8">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-6" aria-label="مسار التنقل">
+      <a href="dashboard.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">لوحة التحكم</a>
+      <i data-lucide="chevron-left" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+      <span class="text-slate-900 dark:text-slate-100 font-medium">الإشعارات</span>
+    </nav>
+
+    <!-- Page header -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">الإشعارات</h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">لديك <span class="font-semibold text-indigo-600 dark:text-indigo-400">8 إشعارات</span> غير مقروءة</p>
+      </div>
+      <button type="button" id="mark-all-read" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 rounded-xl border border-indigo-200 dark:border-indigo-800 transition-colors">
+        <i data-lucide="check-check" class="h-4 w-4" aria-hidden="true"></i>
+        تحديد الكل كمقروء
+      </button>
+    </div>
+
+    <!-- Filter chips -->
+    <div class="flex flex-wrap gap-2 mb-5" role="tablist" aria-label="فلتر الإشعارات" data-tabs="notif-filter">
+      <button type="button" data-tab="all" role="tab" aria-selected="true" class="tab-active inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium rounded-full transition-colors">
+        الكل
+        <span class="inline-flex items-center justify-center h-4.5 w-5 text-xs rounded-full bg-white/30 dark:bg-white/20">12</span>
+      </button>
+      <button type="button" data-tab="unread" role="tab" aria-selected="false" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors">
+        غير مقروء
+        <span class="inline-flex items-center justify-center h-4.5 min-w-5 px-1 text-xs rounded-full bg-indigo-100 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400">8</span>
+      </button>
+      <button type="button" data-tab="orders" role="tab" aria-selected="false" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors">
+        <i data-lucide="shopping-cart" class="h-3.5 w-3.5" aria-hidden="true"></i>
+        طلبات
+      </button>
+      <button type="button" data-tab="affiliates-notif" role="tab" aria-selected="false" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors">
+        <i data-lucide="handshake" class="h-3.5 w-3.5" aria-hidden="true"></i>
+        مسوقين
+      </button>
+      <button type="button" data-tab="payouts-notif" role="tab" aria-selected="false" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors">
+        <i data-lucide="wallet" class="h-3.5 w-3.5" aria-hidden="true"></i>
+        مدفوعات
+      </button>
+      <button type="button" data-tab="stock-notif" role="tab" aria-selected="false" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors">
+        <i data-lucide="package" class="h-3.5 w-3.5" aria-hidden="true"></i>
+        مخزون
+      </button>
+      <button type="button" data-tab="payment-notif" role="tab" aria-selected="false" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors">
+        <i data-lucide="credit-card" class="h-3.5 w-3.5" aria-hidden="true"></i>
+        دفع
+      </button>
+    </div>
+
+    <!-- Notifications inbox -->
+    <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+
+      <!-- Panels — all visible under "all" tab, individual filters would hide/show in real JS -->
+      <!-- For MVP static: all entries always visible -->
+
+      <ul class="divide-y divide-slate-100 dark:divide-slate-700" aria-label="قائمة الإشعارات">
+
+        <!-- 1 — New order UNREAD -->
+        <li>
+          <a href="order-detail.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors group">
+            <div class="h-10 w-10 rounded-xl bg-indigo-100 dark:bg-indigo-950/40 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="shopping-cart" class="h-5 w-5 text-indigo-600 dark:text-indigo-400" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">طلب جديد #ORD-1182</p>
+                <div class="flex items-center gap-2 shrink-0">
+                  <span class="text-xs text-slate-400 whitespace-nowrap">منذ 8 دقائق</span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-indigo-500 shrink-0" aria-label="غير مقروء"></span>
+                </div>
+              </div>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 truncate">طلب جديد من <strong class="text-slate-700 dark:text-slate-300">نورة القحطاني</strong> بمبلغ 499 SAR — كورس التسويق الرقمي</p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400">طلب</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- 2 — New order UNREAD -->
+        <li>
+          <a href="order-detail.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+            <div class="h-10 w-10 rounded-xl bg-indigo-100 dark:bg-indigo-950/40 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="shopping-cart" class="h-5 w-5 text-indigo-600 dark:text-indigo-400" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">طلب جديد #ORD-1181</p>
+                <div class="flex items-center gap-2 shrink-0">
+                  <span class="text-xs text-slate-400 whitespace-nowrap">منذ 42 دقيقة</span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-indigo-500 shrink-0" aria-label="غير مقروء"></span>
+                </div>
+              </div>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 truncate">طلب جديد من <strong class="text-slate-700 dark:text-slate-300">عمر البلوي</strong> بمبلغ 1,200 SAR — حقيبة جلدية فاخرة</p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400">طلب</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- 3 — Affiliate request UNREAD -->
+        <li>
+          <a href="affiliate-requests.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+            <div class="h-10 w-10 rounded-xl bg-violet-100 dark:bg-violet-950/40 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="handshake" class="h-5 w-5 text-violet-600 dark:text-violet-400" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">طلب انضمام مسوّق جديد</p>
+                <div class="flex items-center gap-2 shrink-0">
+                  <span class="text-xs text-slate-400 whitespace-nowrap">منذ ساعة</span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-indigo-500 shrink-0" aria-label="غير مقروء"></span>
+                </div>
+              </div>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 truncate"><strong class="text-slate-700 dark:text-slate-300">فيصل الدوسري</strong> يطلب الانضمام كمسوّق — يمتلك 15K متابع على Instagram</p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-violet-100 dark:bg-violet-950/40 text-violet-700 dark:text-violet-400">مسوقون</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- 4 — New order UNREAD -->
+        <li>
+          <a href="order-detail.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+            <div class="h-10 w-10 rounded-xl bg-indigo-100 dark:bg-indigo-950/40 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="shopping-cart" class="h-5 w-5 text-indigo-600 dark:text-indigo-400" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">طلب جديد #ORD-1180</p>
+                <div class="flex items-center gap-2 shrink-0">
+                  <span class="text-xs text-slate-400 whitespace-nowrap">منذ 2 ساعة</span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-indigo-500 shrink-0" aria-label="غير مقروء"></span>
+                </div>
+              </div>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 truncate">طلب جديد من <strong class="text-slate-700 dark:text-slate-300">هنا الزهراني</strong> بمبلغ 249 SAR عبر مسوّق <strong>أحمد الشمري</strong></p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400">طلب</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- 5 — Payout request UNREAD -->
+        <li>
+          <a href="affiliate-payouts.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+            <div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="wallet" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">طلب سحب عمولة</p>
+                <div class="flex items-center gap-2 shrink-0">
+                  <span class="text-xs text-slate-400 whitespace-nowrap">منذ 3 ساعات</span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-indigo-500 shrink-0" aria-label="غير مقروء"></span>
+                </div>
+              </div>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 truncate"><strong class="text-slate-700 dark:text-slate-300">سلطان الغامدي</strong> طلب سحب 850 SAR عبر حساب بنك الراجحي</p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400">مدفوعات</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- 6 — Low stock UNREAD -->
+        <li>
+          <a href="products.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+            <div class="h-10 w-10 rounded-xl bg-amber-100 dark:bg-amber-950/40 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="package" class="h-5 w-5 text-amber-600 dark:text-amber-400" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">تنبيه مخزون منخفض</p>
+                <div class="flex items-center gap-2 shrink-0">
+                  <span class="text-xs text-slate-400 whitespace-nowrap">منذ 5 ساعات</span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-indigo-500 shrink-0" aria-label="غير مقروء"></span>
+                </div>
+              </div>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 truncate">باتت الكمية المتبقية من <strong class="text-slate-700 dark:text-slate-300">حقيبة جلدية فاخرة</strong> أقل من 5 وحدات</p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400">مخزون</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- 7 — Affiliate request UNREAD -->
+        <li>
+          <a href="affiliate-requests.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+            <div class="h-10 w-10 rounded-xl bg-violet-100 dark:bg-violet-950/40 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="handshake" class="h-5 w-5 text-violet-600 dark:text-violet-400" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">طلب انضمام مسوّق</p>
+                <div class="flex items-center gap-2 shrink-0">
+                  <span class="text-xs text-slate-400 whitespace-nowrap">أمس 3:20م</span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-indigo-500 shrink-0" aria-label="غير مقروء"></span>
+                </div>
+              </div>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 truncate"><strong class="text-slate-700 dark:text-slate-300">ريم السبيعي</strong> تطلب الانضمام — خبرة في التسويق عبر TikTok (82K متابع)</p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-violet-100 dark:bg-violet-950/40 text-violet-700 dark:text-violet-400">مسوقون</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- 8 — New order UNREAD -->
+        <li>
+          <a href="order-detail.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+            <div class="h-10 w-10 rounded-xl bg-indigo-100 dark:bg-indigo-950/40 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="shopping-cart" class="h-5 w-5 text-indigo-600 dark:text-indigo-400" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">طلب جديد #ORD-1179</p>
+                <div class="flex items-center gap-2 shrink-0">
+                  <span class="text-xs text-slate-400 whitespace-nowrap">أمس 11:05ص</span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-indigo-500 shrink-0" aria-label="غير مقروء"></span>
+                </div>
+              </div>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 truncate">طلب جديد من <strong class="text-slate-700 dark:text-slate-300">محمد العمري</strong> بمبلغ 750 SAR — باقة إدارة التواصل</p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400">طلب</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- separator: read items below -->
+        <li class="px-5 py-2 bg-slate-50/80 dark:bg-slate-700/20">
+          <p class="text-xs text-slate-400 font-medium">مقروءة</p>
+        </li>
+
+        <!-- 9 — Payout request READ -->
+        <li>
+          <a href="affiliate-payouts.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors opacity-70">
+            <div class="h-10 w-10 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="wallet" class="h-5 w-5 text-slate-500" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-medium text-slate-700 dark:text-slate-300">طلب سحب عمولة — تمت المعالجة</p>
+                <span class="text-xs text-slate-400 whitespace-nowrap shrink-0">8 مايو 2026</span>
+              </div>
+              <p class="text-sm text-slate-400 mt-0.5 truncate"><strong>أحمد الشمري</strong> طلب سحب 1,240 SAR — تمت المعالجة بنجاح</p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-500">مدفوعات</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- 10 — Low stock READ -->
+        <li>
+          <a href="products.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors opacity-70">
+            <div class="h-10 w-10 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="package" class="h-5 w-5 text-slate-500" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-medium text-slate-700 dark:text-slate-300">تنبيه مخزون — اشتراك أدوات التسويق</p>
+                <span class="text-xs text-slate-400 whitespace-nowrap shrink-0">7 مايو 2026</span>
+              </div>
+              <p class="text-sm text-slate-400 mt-0.5 truncate">وصلت الكمية المتبقية من <strong>اشتراك أدوات التسويق الشهري</strong> إلى أقل من 10 وحدات</p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-500">مخزون</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- 11 — Affiliate request READ -->
+        <li>
+          <a href="affiliate-requests.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors opacity-70">
+            <div class="h-10 w-10 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="handshake" class="h-5 w-5 text-slate-500" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-medium text-slate-700 dark:text-slate-300">طلب انضمام مسوّق — تمت الموافقة</p>
+                <span class="text-xs text-slate-400 whitespace-nowrap shrink-0">6 مايو 2026</span>
+              </div>
+              <p class="text-sm text-slate-400 mt-0.5 truncate">تمت الموافقة على انضمام <strong>خالد الرشيدي</strong> كمسوّق برونزي</p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-500">مسوقون</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- 12 — Payment update READ -->
+        <li>
+          <a href="order-detail.html" class="flex items-start gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors opacity-70">
+            <div class="h-10 w-10 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="credit-card" class="h-5 w-5 text-slate-500" aria-hidden="true"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-sm font-medium text-slate-700 dark:text-slate-300">تحديث حالة الدفع — #ORD-1176</p>
+                <span class="text-xs text-slate-400 whitespace-nowrap shrink-0">5 مايو 2026</span>
+              </div>
+              <p class="text-sm text-slate-400 mt-0.5 truncate">تم تحديث حالة الدفع للطلب #ORD-1176 من <strong>Unpaid</strong> إلى <strong>Paid</strong> — 299 SAR</p>
+              <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-500">دفع</span>
+            </div>
+          </a>
+        </li>
+
+      </ul>
+
+      <!-- Footer -->
+      <div class="px-5 py-4 border-t border-slate-200 dark:border-slate-700 text-center">
+        <p class="text-xs text-slate-400">عرض جميع الإشعارات — 12 من 12</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div id="copied-toast" class="fixed bottom-6 start-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm px-4 py-2.5 rounded-xl shadow-lg hidden z-50 pointer-events-none" aria-live="polite">تم نسخ الرابط</div>
+
+<script src="assets/js/main.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.lucide) lucide.createIcons();
+
+  // Mark all as read — visual feedback only
+  document.getElementById('mark-all-read')?.addEventListener('click', function() {
+    document.querySelectorAll('[aria-label="غير مقروء"]').forEach(function(dot) {
+      dot.style.display = 'none';
+    });
+    var unread = document.querySelector('.flex-1 p .text-indigo-600, .flex-1 p .text-indigo-400');
+    var countEl = document.querySelector('main p span.font-semibold');
+    if (countEl) countEl.textContent = '0 إشعارات';
+    this.disabled = true;
+    this.classList.add('opacity-50', 'cursor-not-allowed');
+  });
+});
+</script>
+</body>
+</html>

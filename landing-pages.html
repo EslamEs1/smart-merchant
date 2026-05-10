@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>صفحات الهبوط — Smart Merchant OS</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { 'brand-primary': '#6366f1', 'brand-accent': '#8b5cf6', 'brand-info': '#3b82f6' },
+        fontFamily: { sans: ['Cairo','Tajawal','system-ui','sans-serif'] },
+        backgroundImage: { 'gradient-brand': 'linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#3b82f6 100%)' }
+      }}
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script>try{var t=localStorage.getItem('smos:theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}</script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+
+<!-- Sidebar overlay -->
+<div data-sidebar-overlay class="fixed inset-0 z-30 bg-black/50 hidden lg:hidden" aria-hidden="true"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="fixed top-0 start-0 z-40 h-screen w-64 bg-slate-900 dark:bg-slate-950 flex flex-col translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" aria-label="القائمة الجانبية">
+  <div class="flex items-center gap-3 px-5 py-5 border-b border-slate-700/60">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" aria-hidden="true" class="h-9 w-9 shrink-0">
+      <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="50%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs>
+      <rect x="4" y="12" width="14" height="14" rx="3" fill="url(#sg)" transform="rotate(45 11 19)"/>
+      <rect x="18" y="8" width="10" height="10" rx="2" fill="url(#sg)" opacity=".72" transform="rotate(45 23 13)"/>
+      <rect x="14" y="22" width="8" height="8" rx="2" fill="url(#sg)" opacity=".50" transform="rotate(45 18 26)"/>
+    </svg>
+    <div class="leading-tight"><p class="text-xs font-semibold text-white tracking-wide">Smart Merchant OS</p><p class="text-xs text-slate-400">سمارت مرتشانت</p></div>
+  </div>
+  <nav class="flex-1 overflow-y-auto py-4 px-3"><ul class="space-y-1" role="list">
+    <li><a href="dashboard.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="layout-dashboard" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>لوحة التحكم</span></a></li>
+    <li><a href="products.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="package" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المنتجات والخدمات</span></a></li>
+    <li><a href="orders.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="shopping-cart" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>الطلبات</span></a></li>
+    <li><a href="customers.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="users" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>العملاء</span></a></li>
+    <li><a href="affiliates.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="handshake" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المسوقون</span></a></li>
+    <li><a href="affiliate-payouts.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="wallet" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المدفوعات</span></a></li>
+    <li><a href="landing-pages.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium bg-indigo-600/20 text-white transition-colors" aria-current="page"><i data-lucide="layout-template" class="h-4 w-4 shrink-0 text-indigo-400" aria-hidden="true"></i><span>صفحات الهبوط</span></a></li>
+    <li><a href="analytics.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="bar-chart-3" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>التحليلات</span></a></li>
+    <li><a href="settings.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="settings" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>الإعدادات</span></a></li>
+  </ul></nav>
+  <div class="border-t border-slate-700/60 px-4 py-4">
+    <div class="flex items-center gap-3">
+      <img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-8 w-8 rounded-full">
+      <div class="min-w-0"><p class="text-xs font-semibold text-white truncate">متجر الأناقة</p><p class="text-xs text-slate-400 truncate">merchant@smos.example</p></div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main wrapper -->
+<div class="lg:ps-64 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-700 flex items-center gap-3 px-4 sm:px-6 h-14">
+    <button type="button" data-sidebar-toggle class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="فتح القائمة الجانبية" aria-expanded="false" aria-controls="sidebar"><i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i></button>
+    <div class="flex-1 max-w-md"><div class="relative"><span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400"><i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i></span><input type="search" placeholder="بحث في صفحات الهبوط..." class="w-full ps-9 pe-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-colors" aria-label="بحث في صفحات الهبوط"></div></div>
+    <div class="flex-1"></div>
+    <div class="flex items-center gap-1 sm:gap-2">
+      <button type="button" data-theme-toggle class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="تبديل الوضع الليلي"><i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i><i data-lucide="moon" class="h-4 w-4 hidden dark:block" aria-hidden="true"></i></button>
+      <a href="notifications.html" class="relative p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="الإشعارات"><i data-lucide="bell" class="h-4 w-4" aria-hidden="true"></i><span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-rose-500" aria-hidden="true"></span></a>
+      <div class="relative" data-actions-dropdown="profile-menu">
+        <button type="button" class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="قائمة الملف الشخصي" aria-expanded="false" aria-haspopup="true"><img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-7 w-7 rounded-full"><span class="hidden sm:block text-sm font-medium text-slate-900 dark:text-slate-100">متجر الأناقة</span></button>
+        <div class="dropdown-panel absolute end-0 top-full mt-1 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+          <a href="profile.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="user-circle" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الملف الشخصي</a>
+          <a href="settings.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="settings" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الإعدادات</a>
+          <hr class="my-1 border-slate-200 dark:border-slate-600">
+          <a href="login.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="log-out" class="h-4 w-4" aria-hidden="true"></i>تسجيل الخروج</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page content -->
+  <main class="flex-1 p-4 sm:p-6 lg:p-8">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-6" aria-label="مسار التنقل">
+      <a href="dashboard.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">لوحة التحكم</a>
+      <i data-lucide="chevron-left" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+      <span class="text-slate-900 dark:text-slate-100 font-medium">صفحات الهبوط</span>
+    </nav>
+
+    <!-- Page header -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">صفحات الهبوط</h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">أنشئ صفحات مبيعات لمنتجاتك وعروضك وتابع أداءها</p>
+      </div>
+      <a href="landing-page-create.html" class="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-brand text-white text-sm font-semibold rounded-xl shadow-sm hover:opacity-90 transition-opacity">
+        <i data-lucide="plus" class="h-4 w-4" aria-hidden="true"></i>
+        إنشاء صفحة هبوط
+      </a>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">إجمالي الصفحات</p>
+        <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">8</p>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">الصفحات النشطة</p>
+        <p class="text-2xl font-bold text-emerald-600">5</p>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">إجمالي الزيارات</p>
+        <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">14,820</p>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">متوسط التحويل</p>
+        <p class="text-2xl font-bold text-indigo-600">4.2%</p>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap gap-3 mb-4">
+      <div class="relative flex-1 min-w-48">
+        <span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400"><i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i></span>
+        <input type="search" placeholder="بحث باسم الصفحة أو المنتج..." class="w-full ps-9 pe-4 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100 placeholder:text-slate-400" aria-label="بحث في صفحات الهبوط">
+      </div>
+      <select class="px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100" aria-label="فلتر الحالة">
+        <option value="">كل الحالات</option>
+        <option>نشط</option>
+        <option>معطل</option>
+        <option>مسودة</option>
+      </select>
+      <select class="px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100" aria-label="فلتر المنتج">
+        <option value="">كل المنتجات</option>
+        <option>كورس التسويق الرقمي</option>
+        <option>باقة إدارة التواصل</option>
+        <option>حقيبة جلدية فاخرة</option>
+      </select>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+      <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+        <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">قائمة الصفحات <span class="text-slate-400 font-normal">(8)</span></p>
+        <p class="text-xs text-slate-400">آخر تحديث: اليوم</p>
+      </div>
+
+      <div class="table-responsive">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-700/30">
+              <th class="text-start px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">عنوان الصفحة</th>
+              <th class="text-start px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">المنتج المرتبط</th>
+              <th class="text-start px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">الحالة</th>
+              <th class="text-start px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">الزيارات</th>
+              <th class="text-start px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">معدل التحويل</th>
+              <th class="text-start px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">الطلبات</th>
+              <th class="text-start px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">الإيراد</th>
+              <th class="text-start px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">آخر تعديل</th>
+              <th class="px-4 py-3"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+
+            <!-- Row 1 -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-3">
+                  <div class="h-9 w-9 rounded-lg bg-gradient-brand flex items-center justify-center shrink-0">
+                    <i data-lucide="layout-template" class="h-4 w-4 text-white" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <a href="landing-page-preview.html" class="font-medium text-slate-900 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">عرض كورس التسويق الرقمي 🔥</a>
+                    <p class="text-xs text-slate-400">/lp/digital-marketing</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-slate-700 dark:text-slate-300">كورس التسويق الرقمي الشامل</td>
+              <td class="px-4 py-3.5 whitespace-nowrap"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>نشط</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-900 dark:text-slate-100">4,230</td>
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-2">
+                  <div class="w-16 h-1.5 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden"><div class="h-full bg-emerald-500 rounded-full" style="width:6.2%"></div></div>
+                  <span class="text-emerald-600 dark:text-emerald-400 font-medium">6.2%</span>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-900 dark:text-slate-100">262</td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-semibold text-slate-900 dark:text-slate-100">65,238 <span class="text-xs font-normal text-slate-400">SAR</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-xs text-slate-500 dark:text-slate-400">3 مايو 2026</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-end">
+                <div class="relative inline-block" data-actions-dropdown="lp-actions-1">
+                  <button type="button" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors" aria-label="خيارات" aria-haspopup="true" aria-expanded="false"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button>
+                  <div class="dropdown-panel absolute end-0 top-full mt-1 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+                    <a href="landing-page-preview.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>معاينة</a>
+                    <a href="landing-page-create.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="pencil" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تعديل</a>
+                    <button type="button" data-copy="/lp/digital-marketing" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>نسخ الرابط</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="copy" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تكرار</button>
+                    <hr class="my-1 border-slate-200 dark:border-slate-600">
+                    <button type="button" data-modal-open="modal-disable-lp1" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30" role="menuitem"><i data-lucide="pause-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>تعطيل</button>
+                    <button type="button" data-modal-open="modal-delete-lp1" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="trash-2" class="h-3.5 w-3.5" aria-hidden="true"></i>حذف</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 2 -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-3">
+                  <div class="h-9 w-9 rounded-lg bg-violet-100 dark:bg-violet-950/40 flex items-center justify-center shrink-0">
+                    <i data-lucide="layout-template" class="h-4 w-4 text-violet-600 dark:text-violet-400" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <p class="font-medium text-slate-900 dark:text-slate-100">باقة إدارة التواصل — عرض خاص</p>
+                    <p class="text-xs text-slate-400">/lp/social-offer</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-slate-700 dark:text-slate-300">باقة إدارة التواصل الاجتماعي</td>
+              <td class="px-4 py-3.5 whitespace-nowrap"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>نشط</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-900 dark:text-slate-100">2,870</td>
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-2">
+                  <div class="w-16 h-1.5 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden"><div class="h-full bg-indigo-500 rounded-full" style="width:4.8%"></div></div>
+                  <span class="text-indigo-600 dark:text-indigo-400 font-medium">4.8%</span>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-900 dark:text-slate-100">138</td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-semibold text-slate-900 dark:text-slate-100">41,400 <span class="text-xs font-normal text-slate-400">SAR</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-xs text-slate-500 dark:text-slate-400">28 أبريل 2026</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-end">
+                <div class="relative inline-block" data-actions-dropdown="lp-actions-2">
+                  <button type="button" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors" aria-label="خيارات" aria-haspopup="true" aria-expanded="false"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button>
+                  <div class="dropdown-panel absolute end-0 top-full mt-1 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+                    <a href="landing-page-preview.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>معاينة</a>
+                    <a href="landing-page-create.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="pencil" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تعديل</a>
+                    <button type="button" data-copy="/lp/social-offer" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>نسخ الرابط</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="copy" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تكرار</button>
+                    <hr class="my-1 border-slate-200 dark:border-slate-600">
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30" role="menuitem"><i data-lucide="pause-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>تعطيل</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="trash-2" class="h-3.5 w-3.5" aria-hidden="true"></i>حذف</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 3 -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-3">
+                  <div class="h-9 w-9 rounded-lg bg-amber-100 dark:bg-amber-950/40 flex items-center justify-center shrink-0">
+                    <i data-lucide="layout-template" class="h-4 w-4 text-amber-600 dark:text-amber-400" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <p class="font-medium text-slate-900 dark:text-slate-100">حقيبة جلدية — إصدار محدود</p>
+                    <p class="text-xs text-slate-400">/lp/luxury-bag-limited</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-slate-700 dark:text-slate-300">حقيبة جلدية فاخرة</td>
+              <td class="px-4 py-3.5 whitespace-nowrap"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>نشط</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-900 dark:text-slate-100">1,940</td>
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-2">
+                  <div class="w-16 h-1.5 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden"><div class="h-full bg-amber-500 rounded-full" style="width:3.5%"></div></div>
+                  <span class="text-amber-600 dark:text-amber-400 font-medium">3.5%</span>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-900 dark:text-slate-100">68</td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-semibold text-slate-900 dark:text-slate-100">27,200 <span class="text-xs font-normal text-slate-400">SAR</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-xs text-slate-500 dark:text-slate-400">22 أبريل 2026</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-end">
+                <div class="relative inline-block" data-actions-dropdown="lp-actions-3">
+                  <button type="button" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors" aria-label="خيارات" aria-haspopup="true" aria-expanded="false"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button>
+                  <div class="dropdown-panel absolute end-0 top-full mt-1 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+                    <a href="landing-page-preview.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>معاينة</a>
+                    <a href="landing-page-create.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="pencil" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تعديل</a>
+                    <button type="button" data-copy="/lp/luxury-bag-limited" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>نسخ الرابط</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="copy" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تكرار</button>
+                    <hr class="my-1 border-slate-200 dark:border-slate-600">
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30" role="menuitem"><i data-lucide="pause-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>تعطيل</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="trash-2" class="h-3.5 w-3.5" aria-hidden="true"></i>حذف</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 4 -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-3">
+                  <div class="h-9 w-9 rounded-lg bg-blue-100 dark:bg-blue-950/40 flex items-center justify-center shrink-0">
+                    <i data-lucide="layout-template" class="h-4 w-4 text-blue-600 dark:text-blue-400" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <p class="font-medium text-slate-900 dark:text-slate-100">اشتراك أدوات التسويق</p>
+                    <p class="text-xs text-slate-400">/lp/marketing-tools</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-slate-700 dark:text-slate-300">اشتراك أدوات التسويق الشهري</td>
+              <td class="px-4 py-3.5 whitespace-nowrap"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>نشط</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-900 dark:text-slate-100">3,115</td>
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-2">
+                  <div class="w-16 h-1.5 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden"><div class="h-full bg-blue-500 rounded-full" style="width:5.1%"></div></div>
+                  <span class="text-blue-600 dark:text-blue-400 font-medium">5.1%</span>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-900 dark:text-slate-100">159</td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-semibold text-slate-900 dark:text-slate-100">19,080 <span class="text-xs font-normal text-slate-400">SAR</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-xs text-slate-500 dark:text-slate-400">18 أبريل 2026</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-end">
+                <div class="relative inline-block" data-actions-dropdown="lp-actions-4">
+                  <button type="button" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors" aria-label="خيارات" aria-haspopup="true" aria-expanded="false"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button>
+                  <div class="dropdown-panel absolute end-0 top-full mt-1 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+                    <a href="landing-page-preview.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>معاينة</a>
+                    <a href="landing-page-create.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="pencil" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تعديل</a>
+                    <button type="button" data-copy="/lp/marketing-tools" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>نسخ الرابط</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="copy" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تكرار</button>
+                    <hr class="my-1 border-slate-200 dark:border-slate-600">
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30" role="menuitem"><i data-lucide="pause-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>تعطيل</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="trash-2" class="h-3.5 w-3.5" aria-hidden="true"></i>حذف</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 5 -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-3">
+                  <div class="h-9 w-9 rounded-lg bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0">
+                    <i data-lucide="layout-template" class="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <p class="font-medium text-slate-900 dark:text-slate-100">خدمة تصميم الهوية البصرية</p>
+                    <p class="text-xs text-slate-400">/lp/brand-identity-service</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-slate-700 dark:text-slate-300">خدمة تصميم هوية بصرية</td>
+              <td class="px-4 py-3.5 whitespace-nowrap"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>نشط</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-900 dark:text-slate-100">1,280</td>
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-2">
+                  <div class="w-16 h-1.5 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden"><div class="h-full bg-emerald-500 rounded-full" style="width:4.0%"></div></div>
+                  <span class="text-emerald-600 dark:text-emerald-400 font-medium">4.0%</span>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-900 dark:text-slate-100">51</td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-semibold text-slate-900 dark:text-slate-100">15,300 <span class="text-xs font-normal text-slate-400">SAR</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-xs text-slate-500 dark:text-slate-400">15 أبريل 2026</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-end">
+                <div class="relative inline-block" data-actions-dropdown="lp-actions-5">
+                  <button type="button" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors" aria-label="خيارات" aria-haspopup="true" aria-expanded="false"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button>
+                  <div class="dropdown-panel absolute end-0 top-full mt-1 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+                    <a href="landing-page-preview.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>معاينة</a>
+                    <a href="landing-page-create.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="pencil" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تعديل</a>
+                    <button type="button" data-copy="/lp/brand-identity-service" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>نسخ الرابط</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="copy" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تكرار</button>
+                    <hr class="my-1 border-slate-200 dark:border-slate-600">
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30" role="menuitem"><i data-lucide="pause-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>تعطيل</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="trash-2" class="h-3.5 w-3.5" aria-hidden="true"></i>حذف</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 6 — Disabled -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors opacity-70">
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-3">
+                  <div class="h-9 w-9 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center shrink-0">
+                    <i data-lucide="layout-template" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <p class="font-medium text-slate-900 dark:text-slate-100">كتاب أسرار التجارة الرقمية</p>
+                    <p class="text-xs text-slate-400">/lp/ebook-digital</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-slate-700 dark:text-slate-300">كتاب إلكتروني: أسرار التجارة</td>
+              <td class="px-4 py-3.5 whitespace-nowrap"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400"><span class="h-1.5 w-1.5 rounded-full bg-slate-400"></span>معطل</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-500">842</td>
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-2">
+                  <div class="w-16 h-1.5 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden"><div class="h-full bg-slate-400 rounded-full" style="width:2.1%"></div></div>
+                  <span class="text-slate-400 font-medium">2.1%</span>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-500">18</td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-semibold text-slate-500">1,800 <span class="text-xs font-normal text-slate-400">SAR</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-xs text-slate-500 dark:text-slate-400">10 أبريل 2026</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-end">
+                <div class="relative inline-block" data-actions-dropdown="lp-actions-6">
+                  <button type="button" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors" aria-label="خيارات" aria-haspopup="true" aria-expanded="false"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button>
+                  <div class="dropdown-panel absolute end-0 top-full mt-1 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+                    <a href="landing-page-preview.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>معاينة</a>
+                    <a href="landing-page-create.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="pencil" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تعديل</a>
+                    <button type="button" data-copy="/lp/ebook-digital" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>نسخ الرابط</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="copy" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تكرار</button>
+                    <hr class="my-1 border-slate-200 dark:border-slate-600">
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/30" role="menuitem"><i data-lucide="play-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>تفعيل</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="trash-2" class="h-3.5 w-3.5" aria-hidden="true"></i>حذف</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 7 — Draft -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-3">
+                  <div class="h-9 w-9 rounded-lg bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0">
+                    <i data-lucide="layout-template" class="h-4 w-4 text-rose-500 dark:text-rose-400" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <p class="font-medium text-slate-900 dark:text-slate-100">عرض خاص — رمضان 2026</p>
+                    <p class="text-xs text-slate-400">/lp/ramadan-offer</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-slate-700 dark:text-slate-300">كورس التسويق الرقمي الشامل</td>
+              <td class="px-4 py-3.5 whitespace-nowrap"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400"><span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span>مسودة</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-500">—</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-slate-400">—</td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-500">—</td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-semibold text-slate-500">—</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-xs text-slate-500 dark:text-slate-400">8 مايو 2026</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-end">
+                <div class="relative inline-block" data-actions-dropdown="lp-actions-7">
+                  <button type="button" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors" aria-label="خيارات" aria-haspopup="true" aria-expanded="false"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button>
+                  <div class="dropdown-panel absolute end-0 top-full mt-1 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+                    <a href="landing-page-create.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="pencil" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تعديل</a>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="copy" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تكرار</button>
+                    <hr class="my-1 border-slate-200 dark:border-slate-600">
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="trash-2" class="h-3.5 w-3.5" aria-hidden="true"></i>حذف</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 8 — Draft -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+              <td class="px-4 py-3.5 whitespace-nowrap">
+                <div class="flex items-center gap-3">
+                  <div class="h-9 w-9 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center shrink-0">
+                    <i data-lucide="layout-template" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <p class="font-medium text-slate-900 dark:text-slate-100">خدمة كتابة المحتوى الاحترافي</p>
+                    <p class="text-xs text-slate-400">/lp/content-writing</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-slate-700 dark:text-slate-300">خدمة كتابة المحتوى الاحترافي</td>
+              <td class="px-4 py-3.5 whitespace-nowrap"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400"><span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span>مسودة</span></td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-500">—</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-slate-400">—</td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-medium text-slate-500">—</td>
+              <td class="px-4 py-3.5 whitespace-nowrap font-semibold text-slate-500">—</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-xs text-slate-500 dark:text-slate-400">10 مايو 2026</td>
+              <td class="px-4 py-3.5 whitespace-nowrap text-end">
+                <div class="relative inline-block" data-actions-dropdown="lp-actions-8">
+                  <button type="button" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors" aria-label="خيارات" aria-haspopup="true" aria-expanded="false"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button>
+                  <div class="dropdown-panel absolute end-0 top-full mt-1 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+                    <a href="landing-page-create.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="pencil" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تعديل</a>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="copy" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>تكرار</button>
+                    <hr class="my-1 border-slate-200 dark:border-slate-600">
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="trash-2" class="h-3.5 w-3.5" aria-hidden="true"></i>حذف</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="px-5 py-4 border-t border-slate-200 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3">
+        <p class="text-sm text-slate-500 dark:text-slate-400">عرض <span class="font-medium text-slate-900 dark:text-slate-100">1–8</span> من <span class="font-medium text-slate-900 dark:text-slate-100">8</span> صفحة</p>
+        <div class="flex items-center gap-1">
+          <button type="button" class="px-3 py-1.5 text-sm rounded-lg border border-slate-200 dark:border-slate-600 text-slate-400 cursor-not-allowed" disabled>السابق</button>
+          <button type="button" class="px-3 py-1.5 text-sm rounded-lg bg-indigo-600 text-white font-medium">1</button>
+          <button type="button" class="px-3 py-1.5 text-sm rounded-lg border border-slate-200 dark:border-slate-600 text-slate-400 cursor-not-allowed" disabled>التالي</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal: Disable LP -->
+<div data-modal="modal-disable-lp1" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modal-disable-lp1-title">
+  <div class="relative bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-6 w-full max-w-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="h-10 w-10 rounded-xl bg-amber-100 dark:bg-amber-950/40 flex items-center justify-center shrink-0"><i data-lucide="pause-circle" class="h-5 w-5 text-amber-600 dark:text-amber-400" aria-hidden="true"></i></div>
+      <h3 id="modal-disable-lp1-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">تعطيل صفحة الهبوط</h3>
+    </div>
+    <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">سيتوقف وصول الزوار لهذه الصفحة. يمكنك إعادة تفعيلها في أي وقت.</p>
+    <div class="flex gap-3">
+      <button type="button" data-modal-close class="flex-1 px-4 py-2.5 text-sm font-medium rounded-xl border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">إلغاء</button>
+      <button type="button" class="flex-1 px-4 py-2.5 text-sm font-semibold rounded-xl bg-amber-500 text-white hover:bg-amber-600 transition-colors">تعطيل الصفحة</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Delete LP -->
+<div data-modal="modal-delete-lp1" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modal-delete-lp1-title">
+  <div class="relative bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-6 w-full max-w-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="trash-2" class="h-5 w-5 text-rose-600" aria-hidden="true"></i></div>
+      <h3 id="modal-delete-lp1-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">حذف صفحة الهبوط</h3>
+    </div>
+    <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">سيتم حذف الصفحة وبياناتها نهائياً بما في ذلك إحصاءات الزيارات والتحويلات. هذا الإجراء لا يمكن التراجع عنه.</p>
+    <div class="flex gap-3">
+      <button type="button" data-modal-close class="flex-1 px-4 py-2.5 text-sm font-medium rounded-xl border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">إلغاء</button>
+      <button type="button" class="flex-1 px-4 py-2.5 text-sm font-semibold rounded-xl bg-rose-600 text-white hover:bg-rose-700 transition-colors">حذف الصفحة</button>
+    </div>
+  </div>
+</div>
+
+<div id="copied-toast" class="fixed bottom-6 start-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm px-4 py-2.5 rounded-xl shadow-lg hidden z-50 pointer-events-none" aria-live="polite">تم نسخ الرابط</div>
+
+<script src="assets/js/main.js" defer></script>
+<script>document.addEventListener('DOMContentLoaded', function(){ if(window.lucide) lucide.createIcons(); });</script>
+</body>
+</html>

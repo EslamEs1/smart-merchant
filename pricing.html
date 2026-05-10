@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans bg-surface-base text-text-primary scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الأسعار | Smart Merchant OS</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#6366f1',
+            'brand-accent': '#8b5cf6',
+            'brand-info': '#3b82f6',
+            'surface-base': '#f8fafc',
+            'surface-card': '#ffffff',
+            'surface-muted': '#f1f5f9',
+            'surface-border': '#e2e8f0',
+            'text-primary': '#0f172a',
+            'text-secondary': '#475569',
+            'text-muted': '#94a3b8',
+          },
+          fontFamily: { sans: ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'] },
+          backgroundImage: {
+            'gradient-brand': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%)',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css" />
+  <script>
+    (function () {
+      var t = localStorage.getItem('smos:theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+<body class="bg-surface-base dark:bg-slate-900">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-40 bg-surface-card/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-surface-border dark:border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-3 flex-shrink-0">
+          <div class="h-9 w-9 rounded-xl bg-gradient-brand flex items-center justify-center">
+            <svg class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="hidden sm:block">
+            <p class="text-sm font-bold text-text-primary dark:text-white leading-tight">Smart Merchant OS</p>
+            <p class="text-xs text-text-muted leading-tight">سمارت مرتشانت</p>
+          </div>
+        </a>
+        <div class="hidden md:flex items-center gap-1">
+          <a href="features.html" class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-brand-primary transition-colors rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700/60">الميزات</a>
+          <a href="pricing.html" aria-current="page" class="px-4 py-2 text-sm font-semibold text-brand-primary dark:text-indigo-300 rounded-xl bg-brand-primary/10 dark:bg-brand-primary/20">الأسعار</a>
+          <a href="index.html#faq" class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-brand-primary transition-colors rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700/60">الأسئلة الشائعة</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <button data-theme-toggle class="p-2 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors">
+            <i data-lucide="sun" class="h-5 w-5 text-text-secondary dark:text-slate-300 block dark:hidden"></i>
+            <i data-lucide="moon" class="h-5 w-5 text-text-secondary dark:text-slate-300 hidden dark:block"></i>
+          </button>
+          <a href="login.html" class="hidden sm:block px-4 py-2 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-brand-primary transition-colors">دخول</a>
+          <a href="register.html" class="px-4 py-2 text-sm font-semibold rounded-xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-sm">ابدأ مجاناً</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="py-20 lg:py-28 text-center bg-gradient-to-b from-indigo-50/60 dark:from-slate-900 to-surface-base dark:to-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-text-primary dark:text-white mb-6">
+        خطط أسعار <span class="bg-gradient-brand bg-clip-text text-transparent">شفافة وبسيطة</span>
+      </h1>
+      <p class="text-lg text-text-secondary dark:text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
+        ابدأ بالخطة التي تناسب حجم عملك اليوم — وارتقِ إلى خطة أعلى عندما تنمو بدون أي التزام طويل الأمد.
+      </p>
+
+      <!-- Billing toggle (visual only) -->
+      <div class="inline-flex items-center gap-3 p-1 bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 shadow-sm mb-2">
+        <button id="monthly-btn" class="px-5 py-2.5 text-sm font-semibold rounded-xl bg-gradient-brand text-white transition-all">
+          شهري
+        </button>
+        <button id="yearly-btn" class="px-5 py-2.5 text-sm font-medium text-text-secondary dark:text-slate-300 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-all">
+          سنوي
+        </button>
+      </div>
+      <p class="text-xs text-text-muted">وفّر 20% مع الاشتراك السنوي</p>
+    </div>
+  </section>
+
+  <!-- PRICING CARDS -->
+  <section class="pb-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- Starter -->
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-8 shadow-sm flex flex-col">
+          <div class="mb-6">
+            <div class="h-12 w-12 rounded-2xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center mb-4">
+              <i data-lucide="zap" class="h-6 w-6 text-slate-600 dark:text-slate-300"></i>
+            </div>
+            <h2 class="text-xl font-bold text-text-primary dark:text-white mb-1">Starter</h2>
+            <p class="text-sm text-text-muted">للمشاريع الناشئة والتجار الجدد</p>
+          </div>
+          <div class="mb-6">
+            <div class="flex items-end gap-1 mb-1">
+              <span class="text-4xl font-extrabold text-text-primary dark:text-white" dir="ltr" id="starter-price">99</span>
+              <span class="text-lg text-text-muted mb-1">SAR</span>
+            </div>
+            <p class="text-sm text-text-muted">/ شهرياً · يُدفع شهرياً</p>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>50 منتج</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>10 مسوّقين</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>500 طلب / شهر</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>صفحة تسويقية واحدة</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>روابط إحالة ورموز QR</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>تقارير أساسية</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-muted">
+              <i data-lucide="x" class="h-4 w-4 text-surface-border flex-shrink-0"></i>
+              <span class="line-through">دعم أولوية</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-muted">
+              <i data-lucide="x" class="h-4 w-4 text-surface-border flex-shrink-0"></i>
+              <span class="line-through">API Access</span>
+            </li>
+          </ul>
+          <a href="register.html" class="block text-center w-full py-3 text-sm font-semibold rounded-xl border-2 border-surface-border dark:border-slate-600 text-text-secondary dark:text-slate-300 hover:border-brand-primary hover:text-brand-primary dark:hover:border-indigo-400 dark:hover:text-indigo-300 transition-colors">
+            ابدأ مجاناً 14 يوم
+          </a>
+        </div>
+
+        <!-- Growth (recommended) -->
+        <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl border-2 border-brand-primary p-8 shadow-xl flex flex-col">
+          <div class="absolute -top-4 start-1/2 -translate-x-1/2 rtl:translate-x-1/2">
+            <span class="bg-gradient-brand text-white text-xs font-semibold px-5 py-1.5 rounded-full shadow-lg">الأكثر شيوعاً ✦ موصى به</span>
+          </div>
+          <div class="mb-6 mt-2">
+            <div class="h-12 w-12 rounded-2xl bg-gradient-brand flex items-center justify-center mb-4">
+              <i data-lucide="trending-up" class="h-6 w-6 text-white"></i>
+            </div>
+            <h2 class="text-xl font-bold text-text-primary dark:text-white mb-1">Growth</h2>
+            <p class="text-sm text-text-muted">للمتاجر النامية والمحترفين</p>
+          </div>
+          <div class="mb-6">
+            <div class="flex items-end gap-1 mb-1">
+              <span class="text-4xl font-extrabold text-brand-primary" dir="ltr" id="growth-price">249</span>
+              <span class="text-lg text-text-muted mb-1">SAR</span>
+            </div>
+            <p class="text-sm text-text-muted">/ شهرياً · يُدفع شهرياً</p>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>500 منتج</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>100 مسوّق</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>5,000 طلب / شهر</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>10 صفحات تسويقية</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>تقارير متقدمة</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>مستويات المسوّقين الأربعة</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>دعم عبر البريد والواتساب</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-muted">
+              <i data-lucide="x" class="h-4 w-4 text-surface-border flex-shrink-0"></i>
+              <span class="line-through">API Access</span>
+            </li>
+          </ul>
+          <a href="register.html" class="block text-center w-full py-3 text-sm font-semibold rounded-xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-md">
+            ابدأ مجاناً 14 يوم
+          </a>
+        </div>
+
+        <!-- Pro -->
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-8 shadow-sm flex flex-col">
+          <div class="mb-6">
+            <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mb-4">
+              <i data-lucide="crown" class="h-6 w-6 text-white"></i>
+            </div>
+            <h2 class="text-xl font-bold text-text-primary dark:text-white mb-1">Pro</h2>
+            <p class="text-sm text-text-muted">للمؤسسات والمتاجر الكبرى</p>
+          </div>
+          <div class="mb-6">
+            <div class="flex items-end gap-1 mb-1">
+              <span class="text-4xl font-extrabold text-text-primary dark:text-white" dir="ltr" id="pro-price">599</span>
+              <span class="text-lg text-text-muted mb-1">SAR</span>
+            </div>
+            <p class="text-sm text-text-muted">/ شهرياً · يُدفع شهرياً</p>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>منتجات <strong>غير محدودة</strong></span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>مسوّقون <strong>غير محدودون</strong></span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>طلبات <strong>غير محدودة</strong></span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>صفحات تسويقية <strong>غير محدودة</strong></span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>تقارير وتحليلات Pro</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>API Access كامل</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>دعم أولوية 24/7</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i>
+              <span>مدير حساب مخصص</span>
+            </li>
+          </ul>
+          <a href="register.html" class="block text-center w-full py-3 text-sm font-semibold rounded-xl border-2 border-surface-border dark:border-slate-600 text-text-secondary dark:text-slate-300 hover:border-brand-primary hover:text-brand-primary dark:hover:border-indigo-400 dark:hover:text-indigo-300 transition-colors">
+            ابدأ مجاناً 14 يوم
+          </a>
+        </div>
+      </div>
+
+      <!-- Free trial notice -->
+      <div class="mt-10 text-center">
+        <p class="text-sm text-text-muted">
+          جميع الخطط تبدأ بتجربة مجانية 14 يوماً بدون الحاجة لبطاقة ائتمانية.
+          <a href="register.html" class="text-brand-primary font-medium hover:underline">ابدأ الآن</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="py-16 lg:py-20 bg-surface-muted/50 dark:bg-slate-800/50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl lg:text-3xl font-extrabold text-text-primary dark:text-white text-center mb-12">مقارنة تفصيلية</h2>
+      <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 shadow-sm overflow-hidden">
+        <div class="table-responsive">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-surface-border dark:border-slate-700 bg-surface-muted/80 dark:bg-slate-700/50">
+                <th class="py-4 px-6 text-start text-xs font-semibold text-text-muted uppercase tracking-wider whitespace-nowrap w-48">الميزة</th>
+                <th class="py-4 px-6 text-center text-xs font-semibold text-text-muted uppercase tracking-wider whitespace-nowrap">Starter</th>
+                <th class="py-4 px-6 text-center text-xs font-semibold text-brand-primary uppercase tracking-wider whitespace-nowrap">Growth ★</th>
+                <th class="py-4 px-6 text-center text-xs font-semibold text-text-muted uppercase tracking-wider whitespace-nowrap">Pro</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-surface-border dark:divide-slate-700">
+              <tr class="hover:bg-surface-muted/50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="py-3.5 px-6 font-medium text-text-primary dark:text-white whitespace-nowrap">المنتجات</td>
+                <td class="py-3.5 px-6 text-center text-text-secondary dark:text-slate-300">50</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-brand-primary">500</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-text-primary dark:text-white">غير محدود</td>
+              </tr>
+              <tr class="hover:bg-surface-muted/50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="py-3.5 px-6 font-medium text-text-primary dark:text-white whitespace-nowrap">المسوّقون</td>
+                <td class="py-3.5 px-6 text-center text-text-secondary dark:text-slate-300">10</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-brand-primary">100</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-text-primary dark:text-white">غير محدود</td>
+              </tr>
+              <tr class="hover:bg-surface-muted/50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="py-3.5 px-6 font-medium text-text-primary dark:text-white whitespace-nowrap">الطلبات / شهر</td>
+                <td class="py-3.5 px-6 text-center text-text-secondary dark:text-slate-300">500</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-brand-primary">5,000</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-text-primary dark:text-white">غير محدود</td>
+              </tr>
+              <tr class="hover:bg-surface-muted/50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="py-3.5 px-6 font-medium text-text-primary dark:text-white whitespace-nowrap">الصفحات التسويقية</td>
+                <td class="py-3.5 px-6 text-center text-text-secondary dark:text-slate-300">1</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-brand-primary">10</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-text-primary dark:text-white">غير محدود</td>
+              </tr>
+              <tr class="hover:bg-surface-muted/50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="py-3.5 px-6 font-medium text-text-primary dark:text-white whitespace-nowrap">التقارير</td>
+                <td class="py-3.5 px-6 text-center text-text-secondary dark:text-slate-300">أساسية</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-brand-primary">متقدمة</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-text-primary dark:text-white">Pro + API</td>
+              </tr>
+              <tr class="hover:bg-surface-muted/50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="py-3.5 px-6 font-medium text-text-primary dark:text-white whitespace-nowrap">مستوى الدعم</td>
+                <td class="py-3.5 px-6 text-center text-text-secondary dark:text-slate-300">بريد إلكتروني</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-brand-primary">بريد + واتساب</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-text-primary dark:text-white">أولوية 24/7</td>
+              </tr>
+              <tr class="hover:bg-surface-muted/50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="py-3.5 px-6 font-medium text-text-primary dark:text-white whitespace-nowrap">نسبة العمولة (max)</td>
+                <td class="py-3.5 px-6 text-center text-text-secondary dark:text-slate-300" dir="ltr">20%</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-brand-primary" dir="ltr">30%</td>
+                <td class="py-3.5 px-6 text-center font-semibold text-text-primary dark:text-white">مخصصة</td>
+              </tr>
+              <tr class="hover:bg-surface-muted/50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="py-3.5 px-6 font-medium text-text-primary dark:text-white whitespace-nowrap">API Access</td>
+                <td class="py-3.5 px-6 text-center"><i data-lucide="x" class="h-4 w-4 text-red-400 mx-auto"></i></td>
+                <td class="py-3.5 px-6 text-center"><i data-lucide="x" class="h-4 w-4 text-red-400 mx-auto"></i></td>
+                <td class="py-3.5 px-6 text-center"><i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 mx-auto"></i></td>
+              </tr>
+              <tr class="hover:bg-surface-muted/50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="py-3.5 px-6 font-medium text-text-primary dark:text-white whitespace-nowrap">مدير حساب مخصص</td>
+                <td class="py-3.5 px-6 text-center"><i data-lucide="x" class="h-4 w-4 text-red-400 mx-auto"></i></td>
+                <td class="py-3.5 px-6 text-center"><i data-lucide="x" class="h-4 w-4 text-red-400 mx-auto"></i></td>
+                <td class="py-3.5 px-6 text-center"><i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500 mx-auto"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-20 lg:py-28">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl lg:text-3xl font-extrabold text-text-primary dark:text-white text-center mb-12">أسئلة حول الأسعار</h2>
+      <div class="space-y-3">
+        <details class="group bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none font-semibold text-text-primary dark:text-white hover:text-brand-primary transition-colors list-none">
+            هل يمكنني تغيير الخطة في أي وقت؟
+            <i data-lucide="chevron-down" class="h-5 w-5 text-text-muted transition-transform group-open:rotate-180 flex-shrink-0"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
+            نعم، يمكنك الترقية إلى خطة أعلى في أي وقت وسيُحسب الفرق بشكل نسبي. يمكنك أيضاً الخفض في نهاية دورة الفوترة الحالية.
+          </div>
+        </details>
+        <details class="group bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none font-semibold text-text-primary dark:text-white hover:text-brand-primary transition-colors list-none">
+            ما طرق الدفع المقبولة؟
+            <i data-lucide="chevron-down" class="h-5 w-5 text-text-muted transition-transform group-open:rotate-180 flex-shrink-0"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
+            نقبل البطاقات البنكية (Visa / Mastercard)، مدى، Apple Pay، STC Pay، وتحويل بنكي للاشتراكات السنوية.
+          </div>
+        </details>
+        <details class="group bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none font-semibold text-text-primary dark:text-white hover:text-brand-primary transition-colors list-none">
+            هل الأسعار شاملة لضريبة القيمة المضافة؟
+            <i data-lucide="chevron-down" class="h-5 w-5 text-text-muted transition-transform group-open:rotate-180 flex-shrink-0"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
+            الأسعار المعروضة لا تشمل ضريبة القيمة المضافة. سيُضاف 15% VAT عند الدفع للمستخدمين في المملكة العربية السعودية.
+          </div>
+        </details>
+        <details class="group bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none font-semibold text-text-primary dark:text-white hover:text-brand-primary transition-colors list-none">
+            ماذا يحدث إذا تجاوزت حدود الخطة؟
+            <i data-lucide="chevron-down" class="h-5 w-5 text-text-muted transition-transform group-open:rotate-180 flex-shrink-0"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
+            ستتلقى تنبيهاً عند الوصول إلى 80% من الحد المسموح. يمكنك الترقية فوراً، وإلا ستتوقف إضافة عناصر جديدة بعد الوصول للحد دون فقدان البيانات الحالية.
+          </div>
+        </details>
+        <details class="group bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none font-semibold text-text-primary dark:text-white hover:text-brand-primary transition-colors list-none">
+            هل هناك خصم للمنظمات غير الربحية أو الطلاب؟
+            <i data-lucide="chevron-down" class="h-5 w-5 text-text-muted transition-transform group-open:rotate-180 flex-shrink-0"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
+            نعم، نقدم خصماً 30% للمنظمات غير الربحية و20% للطلاب. تواصل معنا عبر البريد الإلكتروني مع إثبات مناسب.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="py-16 bg-gradient-to-b from-surface-base dark:from-slate-900 to-indigo-50/50 dark:to-slate-800/50">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl lg:text-3xl font-extrabold text-text-primary dark:text-white mb-4">هل لا تزال متردداً؟</h2>
+      <p class="text-text-secondary dark:text-slate-300 mb-8">
+        جرّب Smart Merchant OS 14 يوماً مجاناً بدون أي التزام — ولا حاجة لبطاقة ائتمانية.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="register.html" class="px-8 py-4 text-base font-semibold rounded-2xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-lg inline-flex items-center gap-2">
+          <i data-lucide="rocket" class="h-5 w-5"></i>
+          ابدأ تجربتك المجانية
+        </a>
+        <a href="dashboard.html" class="px-8 py-4 text-base font-medium rounded-2xl border border-surface-border dark:border-slate-600 text-text-secondary dark:text-slate-300 hover:border-brand-primary hover:text-brand-primary transition-colors">
+          شاهد العرض التجريبي
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 dark:bg-slate-950 text-slate-300 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="h-10 w-10 rounded-xl bg-gradient-brand flex items-center justify-center">
+              <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-bold text-white text-sm">Smart Merchant OS</p>
+              <p class="text-xs text-slate-500">سمارت مرتشانت</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed">نظام إدارة التجارة الذكي للسوق العربي.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4 text-sm">المنتج</h4>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li><a href="features.html" class="hover:text-white transition-colors">الميزات</a></li>
+            <li><a href="pricing.html" class="hover:text-white transition-colors">الأسعار</a></li>
+            <li><a href="dashboard.html" class="hover:text-white transition-colors">العرض التجريبي</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4 text-sm">الموارد</h4>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li><a href="#" class="hover:text-white transition-colors">الدليل التعليمي</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">مركز المساعدة</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">المدونة</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4 text-sm">الشركة</h4>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li><a href="#" class="hover:text-white transition-colors">من نحن</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">تواصل معنا</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">سياسة الخصوصية</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <p>© 2024 Smart Merchant OS — جميع الحقوق محفوظة</p>
+        <p>صُنع بـ ❤ للسوق العربي</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Billing toggle visual (no actual price change — static prototype)
+    var monthlyBtn = document.getElementById('monthly-btn');
+    var yearlyBtn = document.getElementById('yearly-btn');
+    var prices = { starter: [99, 79], growth: [249, 199], pro: [599, 479] };
+    function setMode(mode) {
+      var idx = mode === 'yearly' ? 1 : 0;
+      document.getElementById('starter-price').textContent = prices.starter[idx];
+      document.getElementById('growth-price').textContent = prices.growth[idx];
+      document.getElementById('pro-price').textContent = prices.pro[idx];
+      if (mode === 'yearly') {
+        yearlyBtn.classList.add('bg-gradient-brand', 'text-white');
+        yearlyBtn.classList.remove('text-text-secondary', 'dark:text-slate-300');
+        monthlyBtn.classList.remove('bg-gradient-brand', 'text-white');
+        monthlyBtn.classList.add('text-text-secondary', 'dark:text-slate-300');
+      } else {
+        monthlyBtn.classList.add('bg-gradient-brand', 'text-white');
+        monthlyBtn.classList.remove('text-text-secondary', 'dark:text-slate-300');
+        yearlyBtn.classList.remove('bg-gradient-brand', 'text-white');
+        yearlyBtn.classList.add('text-text-secondary', 'dark:text-slate-300');
+      }
+    }
+    monthlyBtn?.addEventListener('click', function () { setMode('monthly'); });
+    yearlyBtn?.addEventListener('click', function () { setMode('yearly'); });
+  </script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" fill="none" role="img" aria-label="قالب Minimal">
+  <defs>
+    <linearGradient id="tm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="140" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <!-- Minimal centered layout -->
+  <rect x="60" y="16" width="80" height="8" rx="4" fill="#0f172a"/>
+  <rect x="40" y="30" width="120" height="5" rx="2.5" fill="#94a3b8"/>
+  <rect x="50" y="40" width="100" height="5" rx="2.5" fill="#94a3b8"/>
+  <!-- Divider -->
+  <rect x="90" y="52" width="20" height="2" rx="1" fill="url(#tm)"/>
+  <!-- Price -->
+  <rect x="75" y="60" width="50" height="12" rx="4" fill="#0f172a"/>
+  <rect x="83" y="64" width="34" height="4" rx="2" fill="white"/>
+  <!-- CTA -->
+  <rect x="60" y="80" width="80" height="18" rx="9" fill="url(#tm)"/>
+  <rect x="74" y="85" width="52" height="8" rx="4" fill="white"/>
+  <!-- FAQ dots -->
+  <rect x="16" y="108" width="168" height="1" fill="#e2e8f0"/>
+  <rect x="16" y="116" width="120" height="5" rx="2.5" fill="#94a3b8"/>
+  <rect x="16" y="126" width="90" height="5" rx="2.5" fill="#94a3b8"/>
+</svg>

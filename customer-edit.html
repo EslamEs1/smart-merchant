@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans bg-surface-base text-text-primary">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تعديل بيانات العميل: محمد العمري | Smart Merchant OS</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#6366f1',
+            'brand-accent': '#8b5cf6',
+            'brand-info': '#3b82f6',
+            'surface-base': '#f8fafc',
+            'surface-card': '#ffffff',
+            'surface-muted': '#f1f5f9',
+            'surface-border': '#e2e8f0',
+            'text-primary': '#0f172a',
+            'text-secondary': '#475569',
+            'text-muted': '#94a3b8',
+          },
+          fontFamily: {
+            sans: ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'],
+          },
+          backgroundImage: {
+            'gradient-brand': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%)',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css" />
+  <script>
+    (function () {
+      var t = localStorage.getItem('smos:theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+<body class="bg-surface-base dark:bg-slate-900 min-h-screen">
+
+  <!-- Sidebar Overlay -->
+  <div data-sidebar-overlay class="fixed inset-0 z-20 bg-black/50 hidden lg:hidden"></div>
+
+  <!-- Sidebar -->
+  <aside
+    data-sidebar
+    class="fixed top-0 start-0 z-30 h-full w-64 bg-surface-card dark:bg-slate-800 border-e border-surface-border dark:border-slate-700 transform translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col"
+  >
+    <div class="flex items-center gap-3 px-5 py-5 border-b border-surface-border dark:border-slate-700">
+      <div class="h-9 w-9 rounded-xl bg-gradient-brand flex items-center justify-center flex-shrink-0">
+        <svg class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <div>
+        <p class="text-sm font-bold text-text-primary dark:text-white leading-tight">Smart Merchant</p>
+        <p class="text-xs text-text-muted leading-tight">سمارت مرتشانت</p>
+      </div>
+    </div>
+    <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-0.5">
+      <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-text-secondary dark:text-slate-400 hover:bg-surface-muted dark:hover:bg-slate-700/60 transition-colors">
+        <i data-lucide="layout-dashboard" class="h-4 w-4 flex-shrink-0"></i>
+        <span>لوحة التحكم</span>
+      </a>
+      <a href="products.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-text-secondary dark:text-slate-400 hover:bg-surface-muted dark:hover:bg-slate-700/60 transition-colors">
+        <i data-lucide="package" class="h-4 w-4 flex-shrink-0"></i>
+        <span>المنتجات والخدمات</span>
+      </a>
+      <a href="orders.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-text-secondary dark:text-slate-400 hover:bg-surface-muted dark:hover:bg-slate-700/60 transition-colors">
+        <i data-lucide="shopping-cart" class="h-4 w-4 flex-shrink-0"></i>
+        <span>الطلبات</span>
+      </a>
+      <a href="customers.html" aria-current="page" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold bg-brand-primary/10 text-brand-primary dark:bg-brand-primary/20 dark:text-indigo-300 border-e-2 border-brand-primary">
+        <i data-lucide="users" class="h-4 w-4 flex-shrink-0"></i>
+        <span>العملاء</span>
+      </a>
+      <a href="affiliates.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-text-secondary dark:text-slate-400 hover:bg-surface-muted dark:hover:bg-slate-700/60 transition-colors">
+        <i data-lucide="handshake" class="h-4 w-4 flex-shrink-0"></i>
+        <span>المسوقون</span>
+      </a>
+      <a href="affiliate-payouts.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-text-secondary dark:text-slate-400 hover:bg-surface-muted dark:hover:bg-slate-700/60 transition-colors">
+        <i data-lucide="wallet" class="h-4 w-4 flex-shrink-0"></i>
+        <span>المدفوعات</span>
+      </a>
+      <a href="landing-pages.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-text-secondary dark:text-slate-400 hover:bg-surface-muted dark:hover:bg-slate-700/60 transition-colors">
+        <i data-lucide="layout-template" class="h-4 w-4 flex-shrink-0"></i>
+        <span>الصفحات التسويقية</span>
+      </a>
+      <a href="analytics.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-text-secondary dark:text-slate-400 hover:bg-surface-muted dark:hover:bg-slate-700/60 transition-colors">
+        <i data-lucide="bar-chart-3" class="h-4 w-4 flex-shrink-0"></i>
+        <span>التقارير</span>
+      </a>
+      <a href="settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-text-secondary dark:text-slate-400 hover:bg-surface-muted dark:hover:bg-slate-700/60 transition-colors">
+        <i data-lucide="settings" class="h-4 w-4 flex-shrink-0"></i>
+        <span>الإعدادات</span>
+      </a>
+    </nav>
+    <div class="px-4 py-4 border-t border-surface-border dark:border-slate-700">
+      <div class="flex items-center gap-3">
+        <img src="assets/img/placeholders/avatar.svg" alt="صورة التاجر" class="h-8 w-8 rounded-full object-cover" />
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold text-text-primary dark:text-white truncate">متجر النور</p>
+          <p class="text-xs text-text-muted truncate">merchant@example.com</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main wrapper -->
+  <div class="lg:ps-64 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-10 bg-surface-card/80 dark:bg-slate-800/80 backdrop-blur-sm border-b border-surface-border dark:border-slate-700">
+      <div class="flex items-center gap-3 px-4 lg:px-6 h-16">
+        <button data-sidebar-toggle class="lg:hidden p-2 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors" aria-label="فتح القائمة الجانبية">
+          <i data-lucide="menu" class="h-5 w-5 text-text-secondary dark:text-slate-300"></i>
+        </button>
+        <div class="flex-1 max-w-sm">
+          <div class="relative">
+            <i data-lucide="search" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-text-muted pointer-events-none"></i>
+            <input type="search" placeholder="بحث..." class="w-full ps-9 pe-4 py-2 text-sm bg-surface-muted dark:bg-slate-700 border border-surface-border dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white placeholder:text-text-muted" />
+          </div>
+        </div>
+        <div class="flex items-center gap-2 ms-auto">
+          <button data-theme-toggle class="p-2 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors" aria-label="تبديل الوضع">
+            <i data-lucide="sun" class="h-5 w-5 text-text-secondary dark:text-slate-300 block dark:hidden"></i>
+            <i data-lucide="moon" class="h-5 w-5 text-text-secondary dark:text-slate-300 hidden dark:block"></i>
+          </button>
+          <a href="notifications.html" class="relative p-2 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors">
+            <i data-lucide="bell" class="h-5 w-5 text-text-secondary dark:text-slate-300"></i>
+            <span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-red-500"></span>
+          </a>
+          <div class="relative" data-profile-menu>
+            <button class="flex items-center gap-2 ps-2 pe-3 py-1.5 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors">
+              <img src="assets/img/placeholders/avatar.svg" alt="صورة الملف الشخصي" class="h-7 w-7 rounded-full" />
+              <span class="text-sm font-medium text-text-primary dark:text-white hidden sm:block">متجر النور</span>
+              <i data-lucide="chevron-down" class="h-4 w-4 text-text-muted"></i>
+            </button>
+            <div class="absolute top-full end-0 mt-1 w-44 bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50">
+              <a href="profile.html" class="flex items-center gap-2 px-4 py-2 text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700">
+                <i data-lucide="user" class="h-4 w-4"></i> الملف الشخصي
+              </a>
+              <a href="settings.html" class="flex items-center gap-2 px-4 py-2 text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700">
+                <i data-lucide="settings" class="h-4 w-4"></i> الإعدادات
+              </a>
+              <hr class="my-1 border-surface-border dark:border-slate-700" />
+              <a href="login.html" class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-surface-muted dark:hover:bg-slate-700">
+                <i data-lucide="log-out" class="h-4 w-4"></i> تسجيل الخروج
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="flex-1 px-4 lg:px-6 py-6">
+
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm text-text-muted mb-6">
+        <a href="dashboard.html" class="hover:text-brand-primary transition-colors">لوحة التحكم</a>
+        <i data-lucide="chevron-left" class="h-4 w-4 rtl:rotate-180"></i>
+        <a href="customers.html" class="hover:text-brand-primary transition-colors">العملاء</a>
+        <i data-lucide="chevron-left" class="h-4 w-4 rtl:rotate-180"></i>
+        <a href="customer-detail.html" class="hover:text-brand-primary transition-colors">محمد العمري</a>
+        <i data-lucide="chevron-left" class="h-4 w-4 rtl:rotate-180"></i>
+        <span class="text-text-primary dark:text-white font-medium">تعديل</span>
+      </nav>
+
+      <!-- Page title -->
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold text-text-primary dark:text-white">تعديل بيانات العميل: محمد العمري</h1>
+        <p class="text-sm text-text-muted mt-1">تحديث معلومات العميل، المصدر، التصنيفات، والملاحظات</p>
+      </div>
+
+      <!-- Form + sidebar -->
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 pb-24">
+
+        <!-- Main form column -->
+        <div class="xl:col-span-2 space-y-6">
+
+          <!-- Basic Info -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 shadow-sm overflow-hidden">
+            <div class="px-5 py-4 border-b border-surface-border dark:border-slate-700">
+              <h2 class="text-base font-semibold text-text-primary dark:text-white flex items-center gap-2">
+                <i data-lucide="user" class="h-4 w-4 text-brand-primary"></i>
+                البيانات الأساسية
+              </h2>
+            </div>
+            <div class="p-5 space-y-4">
+              <!-- Name -->
+              <div>
+                <label for="cust-name" class="block text-sm font-medium text-text-primary dark:text-white mb-1.5">
+                  الاسم الكامل <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="cust-name"
+                  value="محمد العمري"
+                  class="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-700 border border-surface-border dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white placeholder:text-text-muted"
+                />
+              </div>
+
+              <!-- Phone + Email -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="cust-phone" class="block text-sm font-medium text-text-primary dark:text-white mb-1.5">
+                    رقم الجوال
+                  </label>
+                  <div class="relative">
+                    <i data-lucide="phone" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-text-muted pointer-events-none"></i>
+                    <input
+                      type="tel"
+                      id="cust-phone"
+                      value="+966 50 234 5678"
+                      dir="ltr"
+                      class="w-full ps-9 pe-4 py-2.5 text-sm bg-white dark:bg-slate-700 border border-surface-border dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white placeholder:text-text-muted"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label for="cust-email" class="block text-sm font-medium text-text-primary dark:text-white mb-1.5">
+                    البريد الإلكتروني
+                  </label>
+                  <div class="relative">
+                    <i data-lucide="mail" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-text-muted pointer-events-none"></i>
+                    <input
+                      type="email"
+                      id="cust-email"
+                      value="m.alomari@example.com"
+                      dir="ltr"
+                      class="w-full ps-9 pe-4 py-2.5 text-sm bg-white dark:bg-slate-700 border border-surface-border dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white placeholder:text-text-muted"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address -->
+              <div>
+                <label for="cust-address" class="block text-sm font-medium text-text-primary dark:text-white mb-1.5">
+                  العنوان
+                </label>
+                <textarea
+                  id="cust-address"
+                  rows="2"
+                  class="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-700 border border-surface-border dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white placeholder:text-text-muted resize-none"
+                >الرياض، حي السليمانية، شارع الأمير سلطان، المملكة العربية السعودية</textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Source -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 shadow-sm overflow-hidden">
+            <div class="px-5 py-4 border-b border-surface-border dark:border-slate-700">
+              <h2 class="text-base font-semibold text-text-primary dark:text-white flex items-center gap-2">
+                <i data-lucide="radar" class="h-4 w-4 text-brand-primary"></i>
+                مصدر العميل
+              </h2>
+            </div>
+            <div class="p-5">
+              <label for="cust-source" class="block text-sm font-medium text-text-primary dark:text-white mb-1.5">
+                كيف وصل العميل؟
+              </label>
+              <select
+                id="cust-source"
+                class="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-700 border border-surface-border dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white appearance-none"
+              >
+                <option value="direct">مباشر (Direct)</option>
+                <option value="affiliate" selected>عبر مسوّق (Affiliate)</option>
+                <option value="whatsapp">واتساب (WhatsApp)</option>
+                <option value="facebook">فيسبوك (Facebook)</option>
+                <option value="instagram">إنستقرام (Instagram)</option>
+                <option value="tiktok">تيك توك (TikTok)</option>
+                <option value="manual">يدوي (Manual)</option>
+              </select>
+              <p class="text-xs text-text-muted mt-2">يُؤثر المصدر على تقارير الأداء وتتبع القنوات التسويقية.</p>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 shadow-sm overflow-hidden">
+            <div class="px-5 py-4 border-b border-surface-border dark:border-slate-700">
+              <h2 class="text-base font-semibold text-text-primary dark:text-white flex items-center gap-2">
+                <i data-lucide="tag" class="h-4 w-4 text-brand-primary"></i>
+                التصنيفات
+              </h2>
+            </div>
+            <div class="p-5">
+              <p class="text-sm text-text-muted mb-3">اختر التصنيفات المناسبة للعميل</p>
+              <!-- Tag chips -->
+              <div class="flex flex-wrap gap-2 mb-4" id="tags-container">
+                <!-- Active tags -->
+                <button type="button" data-tag="vip" class="tag-chip tag-selected inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 border-2 border-emerald-400 dark:border-emerald-600 transition-all">
+                  <i data-lucide="star" class="h-3 w-3"></i>
+                  عميل VIP
+                  <i data-lucide="check" class="h-3 w-3"></i>
+                </button>
+                <button type="button" data-tag="repeat" class="tag-chip tag-selected inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border-2 border-blue-400 dark:border-blue-600 transition-all">
+                  <i data-lucide="repeat" class="h-3 w-3"></i>
+                  متكرر
+                  <i data-lucide="check" class="h-3 w-3"></i>
+                </button>
+                <button type="button" data-tag="high-value" class="tag-chip tag-selected inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300 border-2 border-violet-400 dark:border-violet-600 transition-all">
+                  <i data-lucide="trending-up" class="h-3 w-3"></i>
+                  عالي القيمة
+                  <i data-lucide="check" class="h-3 w-3"></i>
+                </button>
+                <!-- Inactive tags -->
+                <button type="button" data-tag="at-risk" class="tag-chip inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-surface-muted text-text-secondary dark:bg-slate-700 dark:text-slate-300 border border-surface-border dark:border-slate-600 hover:border-brand-primary hover:text-brand-primary transition-all">
+                  <i data-lucide="alert-triangle" class="h-3 w-3"></i>
+                  معرض للمغادرة
+                </button>
+                <button type="button" data-tag="new" class="tag-chip inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-surface-muted text-text-secondary dark:bg-slate-700 dark:text-slate-300 border border-surface-border dark:border-slate-600 hover:border-brand-primary hover:text-brand-primary transition-all">
+                  <i data-lucide="sparkles" class="h-3 w-3"></i>
+                  جديد
+                </button>
+                <button type="button" data-tag="wholesale" class="tag-chip inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-surface-muted text-text-secondary dark:bg-slate-700 dark:text-slate-300 border border-surface-border dark:border-slate-600 hover:border-brand-primary hover:text-brand-primary transition-all">
+                  <i data-lucide="package" class="h-3 w-3"></i>
+                  جملة
+                </button>
+                <button type="button" data-tag="influencer" class="tag-chip inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-surface-muted text-text-secondary dark:bg-slate-700 dark:text-slate-300 border border-surface-border dark:border-slate-600 hover:border-brand-primary hover:text-brand-primary transition-all">
+                  <i data-lucide="megaphone" class="h-3 w-3"></i>
+                  مؤثر
+                </button>
+              </div>
+              <!-- Free add tag -->
+              <div class="flex gap-2">
+                <input
+                  type="text"
+                  id="custom-tag"
+                  placeholder="إضافة تصنيف مخصص..."
+                  class="flex-1 px-4 py-2 text-sm bg-white dark:bg-slate-700 border border-surface-border dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white placeholder:text-text-muted"
+                />
+                <button type="button" class="px-4 py-2 text-sm font-medium bg-brand-primary/10 text-brand-primary dark:bg-brand-primary/20 rounded-xl hover:bg-brand-primary/20 transition-colors">
+                  إضافة
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 shadow-sm overflow-hidden">
+            <div class="px-5 py-4 border-b border-surface-border dark:border-slate-700">
+              <h2 class="text-base font-semibold text-text-primary dark:text-white flex items-center gap-2">
+                <i data-lucide="file-text" class="h-4 w-4 text-brand-primary"></i>
+                ملاحظات التاجر
+              </h2>
+            </div>
+            <div class="p-5">
+              <textarea
+                id="cust-notes"
+                rows="4"
+                placeholder="أضف ملاحظاتك الخاصة حول هذا العميل..."
+                class="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-700 border border-surface-border dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white placeholder:text-text-muted resize-none"
+              >عميل دائم ومخلص — يفضل التواصل عبر الواتساب. مهتم بالكورسات وبرامج ريادة الأعمال. يجب التواصل معه عند إضافة أي كورس جديد.</textarea>
+              <p class="text-xs text-text-muted mt-2">هذه الملاحظات خاصة بك فقط ولن تُشارك مع العميل.</p>
+            </div>
+          </div>
+
+          <!-- Follow-up -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 shadow-sm overflow-hidden">
+            <div class="px-5 py-4 border-b border-surface-border dark:border-slate-700">
+              <h2 class="text-base font-semibold text-text-primary dark:text-white flex items-center gap-2">
+                <i data-lucide="calendar-check" class="h-4 w-4 text-brand-primary"></i>
+                جدولة المتابعة
+              </h2>
+            </div>
+            <div class="p-5 space-y-4">
+              <!-- Follow-up Status -->
+              <div>
+                <label class="block text-sm font-medium text-text-primary dark:text-white mb-2">حالة المتابعة</label>
+                <div class="grid grid-cols-3 gap-2">
+                  <label class="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border-2 border-brand-primary bg-brand-primary/5 dark:bg-brand-primary/10 text-brand-primary text-sm font-semibold cursor-pointer">
+                    <input type="radio" name="followup-status" value="open" class="sr-only" checked />
+                    <i data-lucide="circle-dot" class="h-4 w-4"></i>
+                    مفتوحة
+                  </label>
+                  <label class="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border border-surface-border dark:border-slate-600 text-text-secondary dark:text-slate-300 text-sm cursor-pointer hover:border-brand-primary hover:text-brand-primary transition-colors">
+                    <input type="radio" name="followup-status" value="inprogress" class="sr-only" />
+                    <i data-lucide="loader" class="h-4 w-4"></i>
+                    جارية
+                  </label>
+                  <label class="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border border-surface-border dark:border-slate-600 text-text-secondary dark:text-slate-300 text-sm cursor-pointer hover:border-brand-primary hover:text-brand-primary transition-colors">
+                    <input type="radio" name="followup-status" value="done" class="sr-only" />
+                    <i data-lucide="check-circle-2" class="h-4 w-4"></i>
+                    منتهية
+                  </label>
+                </div>
+              </div>
+
+              <!-- Follow-up Date -->
+              <div>
+                <label for="followup-date" class="block text-sm font-medium text-text-primary dark:text-white mb-1.5">
+                  تاريخ المتابعة القادمة
+                </label>
+                <div class="relative">
+                  <i data-lucide="calendar" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-text-muted pointer-events-none"></i>
+                  <input
+                    type="date"
+                    id="followup-date"
+                    value="2024-03-20"
+                    class="w-full ps-9 pe-4 py-2.5 text-sm bg-white dark:bg-slate-700 border border-surface-border dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white dark:[color-scheme:dark]"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Danger Zone -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-red-200 dark:border-red-800 shadow-sm p-5">
+            <h2 class="text-base font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 mb-3">
+              <i data-lucide="alert-triangle" class="h-4 w-4"></i>
+              منطقة الخطر
+            </h2>
+            <p class="text-sm text-text-secondary dark:text-slate-400 mb-4">
+              حذف العميل نهائي ولا يمكن التراجع عنه. سيتم حذف جميع بياناته وسجلاته.
+            </p>
+            <button data-modal-trigger data-modal-target="modal-delete-cust" class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl border border-red-300 dark:border-red-700 text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+              <i data-lucide="trash-2" class="h-4 w-4"></i>
+              حذف العميل نهائياً
+            </button>
+          </div>
+        </div>
+
+        <!-- Right sidebar -->
+        <div class="space-y-5">
+
+          <!-- Customer Snapshot -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 shadow-sm p-5">
+            <h2 class="text-sm font-semibold text-text-muted uppercase tracking-wider mb-4">ملخص العميل</h2>
+            <div class="flex items-center gap-3 mb-4">
+              <img src="assets/img/placeholders/avatar.svg" alt="صورة محمد العمري" class="h-12 w-12 rounded-xl object-cover border border-surface-border dark:border-slate-600" />
+              <div>
+                <p class="font-semibold text-text-primary dark:text-white text-sm">محمد العمري</p>
+                <p class="text-xs text-text-muted" dir="ltr">+966 50 234 5678</p>
+              </div>
+            </div>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between py-2 border-b border-surface-border dark:border-slate-700">
+                <span class="text-text-muted">الطلبات</span>
+                <span class="font-semibold text-text-primary dark:text-white">6</span>
+              </div>
+              <div class="flex justify-between py-2 border-b border-surface-border dark:border-slate-700">
+                <span class="text-text-muted">الإجمالي</span>
+                <span class="font-semibold text-emerald-600 dark:text-emerald-400" dir="ltr">3,436 SAR</span>
+              </div>
+              <div class="flex justify-between py-2 border-b border-surface-border dark:border-slate-700">
+                <span class="text-text-muted">آخر طلب</span>
+                <span class="text-text-primary dark:text-white">12 مارس 2024</span>
+              </div>
+              <div class="flex justify-between py-2">
+                <span class="text-text-muted">المصدر</span>
+                <span class="inline-flex items-center gap-1 text-xs font-medium text-indigo-700 dark:text-indigo-300 bg-indigo-100 dark:bg-indigo-900/30 px-2 py-0.5 rounded-lg">
+                  <i data-lucide="handshake" class="h-3 w-3"></i> مسوّق
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 shadow-sm p-5 space-y-2">
+            <h2 class="text-sm font-semibold text-text-muted uppercase tracking-wider mb-3">روابط سريعة</h2>
+            <a href="customer-detail.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="user" class="h-4 w-4 text-brand-primary flex-shrink-0"></i>
+              ملف العميل
+            </a>
+            <a href="orders.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="shopping-cart" class="h-4 w-4 text-brand-primary flex-shrink-0"></i>
+              طلبات العميل
+            </a>
+            <a href="affiliate-detail.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors text-sm text-text-secondary dark:text-slate-300">
+              <i data-lucide="handshake" class="h-4 w-4 text-brand-primary flex-shrink-0"></i>
+              ملف المسوّق المحيل
+            </a>
+          </div>
+
+          <!-- Tips -->
+          <div class="bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-indigo-900/20 dark:to-violet-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800 p-5">
+            <h3 class="text-sm font-semibold text-indigo-800 dark:text-indigo-200 flex items-center gap-2 mb-3">
+              <i data-lucide="lightbulb" class="h-4 w-4"></i>
+              نصائح للبيانات
+            </h3>
+            <ul class="space-y-2 text-xs text-indigo-700 dark:text-indigo-300 leading-relaxed">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check" class="h-3 w-3 mt-0.5 flex-shrink-0 text-emerald-500"></i>
+                أضف تصنيفات دقيقة للعملاء لتسهيل الاستهداف المستقبلي.
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check" class="h-3 w-3 mt-0.5 flex-shrink-0 text-emerald-500"></i>
+                جدوِل متابعة دورية مع العملاء ذوي القيمة العالية.
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check" class="h-3 w-3 mt-0.5 flex-shrink-0 text-emerald-500"></i>
+                وثّق طريقة التواصل المفضلة في ملاحظات العميل.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Sticky footer -->
+    <div class="fixed bottom-0 start-0 end-0 lg:end-0 lg:start-64 z-10 bg-surface-card/95 dark:bg-slate-800/95 backdrop-blur-sm border-t border-surface-border dark:border-slate-700 px-4 lg:px-6 py-4">
+      <div class="flex items-center justify-between gap-4 max-w-4xl">
+        <a href="customer-detail.html" class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-xl border border-surface-border dark:border-slate-600 text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors">
+          <i data-lucide="x" class="h-4 w-4"></i>
+          إلغاء
+        </a>
+        <button type="button" class="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-sm">
+          <i data-lucide="save" class="h-4 w-4"></i>
+          حفظ التغييرات
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
+  <div data-modal="modal-delete-cust" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-xl border border-surface-border dark:border-slate-700 p-6 w-full max-w-sm mx-4">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-10 w-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+          <i data-lucide="trash-2" class="h-5 w-5 text-red-600 dark:text-red-400"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-semibold text-text-primary dark:text-white">حذف العميل</h3>
+          <p class="text-xs text-text-muted">هذا الإجراء لا يمكن التراجع عنه</p>
+        </div>
+      </div>
+      <p class="text-sm text-text-secondary dark:text-slate-300 mb-5">
+        هل أنت متأكد من حذف <strong>محمد العمري</strong>؟ سيتم حذف جميع بياناته وسجلاته بشكل نهائي.
+      </p>
+      <div class="flex gap-3">
+        <button data-modal-close class="flex-1 px-4 py-2.5 text-sm font-medium rounded-xl border border-surface-border dark:border-slate-600 text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors">
+          إلغاء
+        </button>
+        <a href="customers.html" class="flex-1 px-4 py-2.5 text-sm font-semibold rounded-xl bg-red-600 hover:bg-red-700 text-white transition-colors text-center">
+          حذف نهائياً
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 200" fill="none" role="img" aria-label="توزيع الطلبات حسب الحالة">
+  <rect width="280" height="200" rx="12" fill="white"/>
+  <!-- Donut chart segments (simplified arcs using paths) -->
+  <!-- Delivered 42% - emerald -->
+  <path d="M140 100 L140 38 A62 62 0 0 1 194 131 Z" fill="#10b981"/>
+  <!-- Pending 28% - amber -->
+  <path d="M140 100 L194 131 A62 62 0 0 1 102 157 Z" fill="#f59e0b"/>
+  <!-- Processing 18% - blue -->
+  <path d="M140 100 L102 157 A62 62 0 0 1 81 69 Z" fill="#3b82f6"/>
+  <!-- Cancelled 12% - rose -->
+  <path d="M140 100 L81 69 A62 62 0 0 1 140 38 Z" fill="#f43f5e"/>
+  <!-- Inner circle (donut hole) -->
+  <circle cx="140" cy="100" r="36" fill="white"/>
+  <!-- Center text -->
+  <text x="140" y="96" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle" font-family="system-ui">145</text>
+  <text x="140" y="112" font-size="9" fill="#94a3b8" text-anchor="middle" font-family="system-ui">طلب إجمالي</text>
+  <!-- Legend -->
+  <rect x="212" y="52" width="10" height="10" rx="2" fill="#10b981"/>
+  <text x="226" y="61" font-size="9" fill="#64748b" font-family="system-ui">Delivered 42%</text>
+  <rect x="212" y="72" width="10" height="10" rx="2" fill="#f59e0b"/>
+  <text x="226" y="81" font-size="9" fill="#64748b" font-family="system-ui">Pending 28%</text>
+  <rect x="212" y="92" width="10" height="10" rx="2" fill="#3b82f6"/>
+  <text x="226" y="101" font-size="9" fill="#64748b" font-family="system-ui">Processing 18%</text>
+  <rect x="212" y="112" width="10" height="10" rx="2" fill="#f43f5e"/>
+  <text x="226" y="121" font-size="9" fill="#64748b" font-family="system-ui">Cancelled 12%</text>
+</svg>

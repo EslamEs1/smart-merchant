@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" role="img" aria-label="QR للرابط التسويقي">
+  <defs>
+    <linearGradient id="qrg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="10" fill="white"/>
+  <!-- QR border -->
+  <rect x="5" y="5" width="110" height="110" rx="8" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+  <!-- Top-left finder pattern -->
+  <rect x="12" y="12" width="30" height="30" rx="3" fill="url(#qrg)"/>
+  <rect x="17" y="17" width="20" height="20" rx="2" fill="white"/>
+  <rect x="21" y="21" width="12" height="12" rx="1" fill="url(#qrg)"/>
+  <!-- Top-right finder pattern -->
+  <rect x="78" y="12" width="30" height="30" rx="3" fill="url(#qrg)"/>
+  <rect x="83" y="17" width="20" height="20" rx="2" fill="white"/>
+  <rect x="87" y="21" width="12" height="12" rx="1" fill="url(#qrg)"/>
+  <!-- Bottom-left finder pattern -->
+  <rect x="12" y="78" width="30" height="30" rx="3" fill="url(#qrg)"/>
+  <rect x="17" y="83" width="20" height="20" rx="2" fill="white"/>
+  <rect x="21" y="87" width="12" height="12" rx="1" fill="url(#qrg)"/>
+  <!-- Data modules (simulated) -->
+  <rect x="50" y="12" width="6" height="6" rx="1" fill="#6366f1" opacity="0.8"/>
+  <rect x="60" y="12" width="6" height="6" rx="1" fill="#6366f1" opacity="0.6"/>
+  <rect x="50" y="22" width="6" height="6" rx="1" fill="#6366f1" opacity="0.9"/>
+  <rect x="60" y="22" width="6" height="6" rx="1" fill="#6366f1" opacity="0.4"/>
+  <rect x="50" y="32" width="6" height="6" rx="1" fill="#6366f1" opacity="0.7"/>
+  <rect x="12" y="50" width="6" height="6" rx="1" fill="#8b5cf6" opacity="0.8"/>
+  <rect x="22" y="50" width="6" height="6" rx="1" fill="#8b5cf6" opacity="0.5"/>
+  <rect x="32" y="50" width="6" height="6" rx="1" fill="#8b5cf6" opacity="0.9"/>
+  <rect x="50" y="50" width="6" height="6" rx="1" fill="#6366f1" opacity="0.8"/>
+  <rect x="60" y="50" width="6" height="6" rx="1" fill="#6366f1" opacity="0.4"/>
+  <rect x="70" y="50" width="6" height="6" rx="1" fill="#6366f1" opacity="0.7"/>
+  <rect x="80" y="50" width="6" height="6" rx="1" fill="#8b5cf6" opacity="0.6"/>
+  <rect x="90" y="50" width="6" height="6" rx="1" fill="#8b5cf6" opacity="0.9"/>
+  <rect x="100" y="50" width="6" height="6" rx="1" fill="#8b5cf6" opacity="0.5"/>
+  <rect x="12" y="60" width="6" height="6" rx="1" fill="#3b82f6" opacity="0.7"/>
+  <rect x="22" y="60" width="6" height="6" rx="1" fill="#3b82f6" opacity="0.9"/>
+  <rect x="50" y="60" width="6" height="6" rx="1" fill="#6366f1" opacity="0.5"/>
+  <rect x="70" y="60" width="6" height="6" rx="1" fill="#6366f1" opacity="0.8"/>
+  <rect x="90" y="60" width="6" height="6" rx="1" fill="#3b82f6" opacity="0.6"/>
+  <rect x="50" y="80" width="6" height="6" rx="1" fill="#8b5cf6" opacity="0.8"/>
+  <rect x="60" y="90" width="6" height="6" rx="1" fill="#6366f1" opacity="0.7"/>
+  <rect x="70" y="80" width="6" height="6" rx="1" fill="#3b82f6" opacity="0.9"/>
+  <rect x="80" y="90" width="6" height="6" rx="1" fill="#8b5cf6" opacity="0.5"/>
+  <rect x="90" y="80" width="6" height="6" rx="1" fill="#6366f1" opacity="0.6"/>
+  <rect x="100" y="90" width="6" height="6" rx="1" fill="#3b82f6" opacity="0.8"/>
+</svg>

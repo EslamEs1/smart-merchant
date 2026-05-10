@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>طلبات الانضمام للمسوقين | Smart Merchant OS</title>
+  <meta name="description" content="طلبات الانضمام للمسوقين — Smart Merchant OS">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#6366f1',
+            'brand-accent':  '#8b5cf6',
+            'brand-info':    '#3b82f6',
+          },
+          fontFamily: {
+            sans: ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'],
+          },
+          backgroundImage: {
+            'gradient-brand': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%)',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script>
+    try {
+      var t = localStorage.getItem('smos:theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body class="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+
+  <!-- Sidebar overlay (mobile) -->
+  <div data-sidebar-overlay
+       class="fixed inset-0 z-30 bg-black/50 hidden lg:hidden"
+       aria-hidden="true"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar"
+         class="fixed top-0 start-0 z-40 h-screen w-64 bg-slate-900 dark:bg-slate-950 flex flex-col
+                translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out"
+         aria-label="القائمة الجانبية">
+    <div class="flex items-center gap-3 px-5 py-5 border-b border-slate-700/60">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" aria-hidden="true" class="h-9 w-9 shrink-0">
+        <defs>
+          <linearGradient id="sl-g2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6366f1"/>
+            <stop offset="50%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#3b82f6"/>
+          </linearGradient>
+        </defs>
+        <rect x="4" y="12" width="14" height="14" rx="3" fill="url(#sl-g2)" transform="rotate(45 11 19)"/>
+        <rect x="18" y="8" width="10" height="10" rx="2" fill="url(#sl-g2)" opacity="0.72" transform="rotate(45 23 13)"/>
+        <rect x="14" y="22" width="8" height="8" rx="2" fill="url(#sl-g2)" opacity="0.50" transform="rotate(45 18 26)"/>
+      </svg>
+      <div class="leading-tight">
+        <p class="text-xs font-semibold text-white tracking-wide">Smart Merchant OS</p>
+        <p class="text-xs text-slate-400 font-medium">سمارت مرتشانت</p>
+      </div>
+    </div>
+    <nav class="flex-1 overflow-y-auto py-4 px-3" aria-label="روابط التنقل الرئيسية">
+      <ul class="space-y-1" role="list">
+        <li><a href="dashboard.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="layout-dashboard" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>لوحة التحكم</span></a></li>
+        <li><a href="products.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="package" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>المنتجات والخدمات</span></a></li>
+        <li><a href="orders.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="shopping-cart" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>الطلبات</span></a></li>
+        <li><a href="customers.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="users" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>العملاء</span></a></li>
+        <li><a href="affiliates.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="page"><i data-lucide="handshake" class="h-4 w-4 shrink-0 text-indigo-400 transition-colors" aria-hidden="true"></i><span>المسوقون</span></a></li>
+        <li><a href="affiliate-payouts.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="wallet" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>المدفوعات</span></a></li>
+        <li><a href="landing-pages.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="layout-template" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>صفحات الهبوط</span></a></li>
+        <li><a href="analytics.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="bar-chart-3" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>التحليلات</span></a></li>
+        <li><a href="settings.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="settings" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>الإعدادات</span></a></li>
+      </ul>
+    </nav>
+    <div class="border-t border-slate-700/60 px-4 py-4">
+      <div class="flex items-center gap-3">
+        <img src="assets/img/placeholders/avatar.svg" alt="صورة الملف الشخصي" class="h-8 w-8 rounded-full">
+        <div class="min-w-0">
+          <p class="text-xs font-semibold text-white truncate">متجر الأناقة</p>
+          <p class="text-xs text-slate-400 truncate">merchant@smos.example</p>
+        </div>
+        <a href="settings.html" class="ms-auto text-slate-400 hover:text-white transition-colors focus-ring rounded" aria-label="الإعدادات">
+          <i data-lucide="settings" class="h-4 w-4" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main wrapper -->
+  <div class="lg:ps-64 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm
+                   border-b border-slate-200 dark:border-slate-700
+                   flex items-center gap-3 px-4 sm:px-6 h-14">
+      <button type="button" data-sidebar-toggle
+              class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors"
+              aria-label="فتح القائمة الجانبية" aria-expanded="false" aria-controls="sidebar">
+        <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+      </button>
+      <div class="flex-1 max-w-md">
+        <div class="relative">
+          <span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400">
+            <i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i>
+          </span>
+          <input type="search" placeholder="بحث..." aria-label="بحث"
+                 class="w-full ps-9 pe-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-colors">
+        </div>
+      </div>
+      <div class="flex-1"></div>
+      <div class="flex items-center gap-1 sm:gap-2">
+        <button type="button" data-theme-toggle
+                class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors"
+                aria-label="تبديل الوضع الليلي / النهاري">
+          <i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i>
+          <i data-lucide="moon" class="h-4 w-4 hidden dark:block" aria-hidden="true"></i>
+        </button>
+        <a href="notifications.html" class="relative p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors" aria-label="الإشعارات">
+          <i data-lucide="bell" class="h-4 w-4" aria-hidden="true"></i>
+          <span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-rose-500" aria-hidden="true"></span>
+        </a>
+        <div class="relative" data-actions-dropdown="profile-menu">
+          <button type="button" class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors" aria-label="قائمة الملف الشخصي" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-7 w-7 rounded-full ring-2 ring-brand-primary/30">
+            <span class="hidden sm:block text-sm font-medium">متجر الأناقة</span>
+            <i data-lucide="chevron-down" class="hidden sm:block h-3 w-3 text-slate-400" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+            <a href="profile.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" role="menuitem"><i data-lucide="user-circle" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الملف الشخصي</a>
+            <a href="settings.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" role="menuitem"><i data-lucide="settings" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الإعدادات</a>
+            <hr class="my-1 border-slate-200 dark:border-slate-700">
+            <a href="login.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors" role="menuitem"><i data-lucide="log-out" class="h-4 w-4" aria-hidden="true"></i>تسجيل الخروج</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8">
+
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-6" aria-label="مسار التنقل">
+        <a href="affiliates.html" class="hover:text-brand-primary transition-colors">المسوقون</a>
+        <i data-lucide="chevron-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+        <span class="text-slate-900 dark:text-slate-100 font-medium">طلبات الانضمام</span>
+      </nav>
+
+      <!-- Page heading -->
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">طلبات الانضمام للمسوقين</h1>
+          <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">مراجعة وقبول أو رفض طلبات الانضمام الجديدة</p>
+        </div>
+        <div class="sm:ms-auto flex items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-100 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 text-sm font-medium rounded-lg">
+            <i data-lucide="clock" class="h-4 w-4" aria-hidden="true"></i>
+            6 طلبات معلقة
+          </span>
+        </div>
+      </div>
+
+      <!-- Commission rule banner -->
+      <div class="flex items-start gap-3 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 rounded-xl px-4 py-3 mb-6 text-sm text-indigo-800 dark:text-indigo-300">
+        <i data-lucide="info" class="h-4 w-4 shrink-0 mt-0.5" aria-hidden="true"></i>
+        <span>يتم اعتماد العمولة بعد وصول الطلب إلى <strong>Delivered</strong> أو تأكيد الدفع.</span>
+      </div>
+
+      <!-- Applicant cards -->
+      <div class="space-y-4">
+
+        <!-- Applicant 1: Youssef Khaled -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5" id="req-001">
+          <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+            <!-- Avatar + name -->
+            <div class="flex items-start gap-3">
+              <img src="assets/img/placeholders/affiliate-avatar.svg"
+                   alt="صورة المتقدم يوسف خالد"
+                   class="h-12 w-12 rounded-full ring-2 ring-slate-200 dark:ring-slate-700 shrink-0">
+              <div>
+                <h2 class="font-semibold text-slate-900 dark:text-slate-100">يوسف خالد</h2>
+                <div class="flex items-center gap-3 mt-1 flex-wrap">
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="mail" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    youssef.k@example.com
+                  </span>
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="phone" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    +20 100 234 5678
+                  </span>
+                </div>
+              </div>
+            </div>
+            <!-- Date + actions -->
+            <div class="sm:ms-auto flex flex-col sm:items-end gap-2">
+              <span class="text-xs text-slate-400">طلب في: 7 مايو 2024</span>
+              <div class="flex items-center gap-2">
+                <a href="affiliate-detail.html"
+                   class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">
+                  <i data-lucide="eye" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  عرض التفاصيل
+                </a>
+                <button type="button"
+                        data-modal-trigger="modal-reject-001"
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/60 focus-ring transition-colors">
+                  <i data-lucide="x-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  رفض
+                </button>
+                <button type="button"
+                        data-modal-trigger="modal-approve-001"
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-brand-primary rounded-lg hover:bg-indigo-600 focus-ring transition-colors">
+                  <i data-lucide="check-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  قبول
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social links -->
+          <div class="flex items-center gap-3 mt-3 flex-wrap">
+            <a href="#" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-brand-primary transition-colors">
+              <i data-lucide="instagram" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              @youssef_digital
+              <span class="text-slate-400">(48K)</span>
+            </a>
+            <a href="#" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-brand-primary transition-colors">
+              <i data-lucide="youtube" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              يوسف للتسويق
+              <span class="text-slate-400">(22K)</span>
+            </a>
+          </div>
+
+          <!-- Experience -->
+          <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              مسوق رقمي بخبرة 4 سنوات في مجال التجارة الإلكترونية وبيع المنتجات الرقمية. نجحت في تحقيق مبيعات تجاوزت 150,000 جنيه مصري خلال العام الماضي عبر قنواتي على يوتيوب وانستغرام.
+            </p>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-2">
+              أهتم بمجال الكورسات والخدمات الرقمية وأعتقد أن منتجاتكم مناسبة جداً لجمهوري المهتم بالتطوير المهني.
+            </p>
+          </div>
+        </div>
+
+        <!-- Applicant 2: Heba Ibrahim -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5" id="req-002">
+          <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+            <div class="flex items-start gap-3">
+              <img src="assets/img/placeholders/affiliate-avatar.svg"
+                   alt="صورة المتقدمة هبة إبراهيم"
+                   class="h-12 w-12 rounded-full ring-2 ring-slate-200 dark:ring-slate-700 shrink-0">
+              <div>
+                <h2 class="font-semibold text-slate-900 dark:text-slate-100">هبة إبراهيم</h2>
+                <div class="flex items-center gap-3 mt-1 flex-wrap">
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="mail" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    heba.ibrahim@example.com
+                  </span>
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="phone" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    +20 111 345 6789
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="sm:ms-auto flex flex-col sm:items-end gap-2">
+              <span class="text-xs text-slate-400">طلب في: 6 مايو 2024</span>
+              <div class="flex items-center gap-2">
+                <a href="affiliate-detail.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">
+                  <i data-lucide="eye" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  عرض التفاصيل
+                </a>
+                <button type="button" data-modal-trigger="modal-reject-002" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/60 focus-ring transition-colors">
+                  <i data-lucide="x-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  رفض
+                </button>
+                <button type="button" data-modal-trigger="modal-approve-002" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-brand-primary rounded-lg hover:bg-indigo-600 focus-ring transition-colors">
+                  <i data-lucide="check-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  قبول
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-3 flex-wrap">
+            <a href="#" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-brand-primary transition-colors">
+              <i data-lucide="instagram" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              @heba_lifestyle
+              <span class="text-slate-400">(92K)</span>
+            </a>
+            <a href="#" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-brand-primary transition-colors">
+              <i data-lucide="twitter" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              @heba_ibrahim
+              <span class="text-slate-400">(31K)</span>
+            </a>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              مؤثرة في مجال ريادة الأعمال والتجارة الإلكترونية. لدي خبرة 3 سنوات في التسويق بالعمولة وأحقق متوسط تحويل 5% في مجال المنتجات الرقمية والكورسات.
+            </p>
+          </div>
+        </div>
+
+        <!-- Applicant 3: Tariq Nasser -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5" id="req-003">
+          <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+            <div class="flex items-start gap-3">
+              <img src="assets/img/placeholders/affiliate-avatar.svg"
+                   alt="صورة المتقدم طارق ناصر"
+                   class="h-12 w-12 rounded-full ring-2 ring-slate-200 dark:ring-slate-700 shrink-0">
+              <div>
+                <h2 class="font-semibold text-slate-900 dark:text-slate-100">طارق ناصر</h2>
+                <div class="flex items-center gap-3 mt-1 flex-wrap">
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="mail" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    tariq.nasser@example.com
+                  </span>
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="phone" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    +971 55 456 7890
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="sm:ms-auto flex flex-col sm:items-end gap-2">
+              <span class="text-xs text-slate-400">طلب في: 5 مايو 2024</span>
+              <div class="flex items-center gap-2">
+                <a href="affiliate-detail.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">
+                  <i data-lucide="eye" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  عرض التفاصيل
+                </a>
+                <button type="button" data-modal-trigger="modal-reject-003" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/60 focus-ring transition-colors">
+                  <i data-lucide="x-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  رفض
+                </button>
+                <button type="button" data-modal-trigger="modal-approve-003" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-brand-primary rounded-lg hover:bg-indigo-600 focus-ring transition-colors">
+                  <i data-lucide="check-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  قبول
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-3 flex-wrap">
+            <a href="#" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-brand-primary transition-colors">
+              <i data-lucide="instagram" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              @tariq_uae
+              <span class="text-slate-400">(15K)</span>
+            </a>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              مقيم في الإمارات ولدي جمهور نشط في مجال التجارة الإلكترونية والتسوق الإلكتروني. مهتم بتسويق الخدمات الرقمية وباقات إدارة التواصل الاجتماعي.
+            </p>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-2">
+              سبق لي العمل مع متاجر إلكترونية وحققت معدل تحويل جيد في فئة الخدمات.
+            </p>
+          </div>
+        </div>
+
+        <!-- Applicant 4: Mona Al-Harthi -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5" id="req-004">
+          <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+            <div class="flex items-start gap-3">
+              <img src="assets/img/placeholders/affiliate-avatar.svg"
+                   alt="صورة المتقدمة منى الحارثي"
+                   class="h-12 w-12 rounded-full ring-2 ring-slate-200 dark:ring-slate-700 shrink-0">
+              <div>
+                <h2 class="font-semibold text-slate-900 dark:text-slate-100">منى الحارثي</h2>
+                <div class="flex items-center gap-3 mt-1 flex-wrap">
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="mail" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    mona.harthi@example.com
+                  </span>
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="phone" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    +966 55 567 8901
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="sm:ms-auto flex flex-col sm:items-end gap-2">
+              <span class="text-xs text-slate-400">طلب في: 4 مايو 2024</span>
+              <div class="flex items-center gap-2">
+                <a href="affiliate-detail.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">
+                  <i data-lucide="eye" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  عرض التفاصيل
+                </a>
+                <button type="button" data-modal-trigger="modal-reject-004" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/60 focus-ring transition-colors">
+                  <i data-lucide="x-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  رفض
+                </button>
+                <button type="button" data-modal-trigger="modal-approve-004" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-brand-primary rounded-lg hover:bg-indigo-600 focus-ring transition-colors">
+                  <i data-lucide="check-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  قبول
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-3 flex-wrap">
+            <a href="#" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-brand-primary transition-colors">
+              <i data-lucide="instagram" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              @mona_business
+              <span class="text-slate-400">(67K)</span>
+            </a>
+            <a href="#" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-brand-primary transition-colors">
+              <i data-lucide="youtube" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              قناة منى للتجارة
+              <span class="text-slate-400">(18K)</span>
+            </a>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              رائدة أعمال سعودية متخصصة في مجال التجارة الإلكترونية وريادة الأعمال للمرأة. لديّ متابعون مهتمون بتطوير أعمالهم الرقمية وأبحث عن شراكات طويلة الأمد.
+            </p>
+          </div>
+        </div>
+
+        <!-- Applicant 5: Khaled Mansour -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5" id="req-005">
+          <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+            <div class="flex items-start gap-3">
+              <img src="assets/img/placeholders/affiliate-avatar.svg"
+                   alt="صورة المتقدم خالد منصور"
+                   class="h-12 w-12 rounded-full ring-2 ring-slate-200 dark:ring-slate-700 shrink-0">
+              <div>
+                <h2 class="font-semibold text-slate-900 dark:text-slate-100">خالد منصور</h2>
+                <div class="flex items-center gap-3 mt-1 flex-wrap">
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="mail" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    khaled.m@example.com
+                  </span>
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="phone" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    +966 56 678 9012
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="sm:ms-auto flex flex-col sm:items-end gap-2">
+              <span class="text-xs text-slate-400">طلب في: 2 مايو 2024</span>
+              <div class="flex items-center gap-2">
+                <a href="affiliate-detail.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">
+                  <i data-lucide="eye" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  عرض التفاصيل
+                </a>
+                <button type="button" data-modal-trigger="modal-reject-005" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/60 focus-ring transition-colors">
+                  <i data-lucide="x-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  رفض
+                </button>
+                <button type="button" data-modal-trigger="modal-approve-005" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-brand-primary rounded-lg hover:bg-indigo-600 focus-ring transition-colors">
+                  <i data-lucide="check-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  قبول
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-3 flex-wrap">
+            <a href="#" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-brand-primary transition-colors">
+              <i data-lucide="twitter" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              @khaled_marketing
+              <span class="text-slate-400">(12K)</span>
+            </a>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              متخصص في التسويق الرقمي وإدارة إعلانات جوجل وميتا. لديّ خبرة في اختبار الإعلانات المدفوعة وأبحث عن منتجات ذات قيمة عالية لتسويقها لجمهور متخصص.
+            </p>
+          </div>
+        </div>
+
+        <!-- Applicant 6: Amira Saleh -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5" id="req-006">
+          <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+            <div class="flex items-start gap-3">
+              <img src="assets/img/placeholders/affiliate-avatar.svg"
+                   alt="صورة المتقدمة أميرة صالح"
+                   class="h-12 w-12 rounded-full ring-2 ring-slate-200 dark:ring-slate-700 shrink-0">
+              <div>
+                <h2 class="font-semibold text-slate-900 dark:text-slate-100">أميرة صالح</h2>
+                <div class="flex items-center gap-3 mt-1 flex-wrap">
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="mail" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    amira.s@example.com
+                  </span>
+                  <span class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <i data-lucide="phone" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                    +966 59 789 0123
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="sm:ms-auto flex flex-col sm:items-end gap-2">
+              <span class="text-xs text-slate-400">طلب في: 1 مايو 2024</span>
+              <div class="flex items-center gap-2">
+                <a href="affiliate-detail.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">
+                  <i data-lucide="eye" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  عرض التفاصيل
+                </a>
+                <button type="button" data-modal-trigger="modal-reject-006" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/60 focus-ring transition-colors">
+                  <i data-lucide="x-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  رفض
+                </button>
+                <button type="button" data-modal-trigger="modal-approve-006" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-brand-primary rounded-lg hover:bg-indigo-600 focus-ring transition-colors">
+                  <i data-lucide="check-circle" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                  قبول
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-3 flex-wrap">
+            <a href="#" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-brand-primary transition-colors">
+              <i data-lucide="instagram" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              @amira_ecom
+              <span class="text-slate-400">(38K)</span>
+            </a>
+            <a href="#" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-brand-primary transition-colors">
+              <i data-lucide="youtube" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              أميرة كوتش
+              <span class="text-slate-400">(9K)</span>
+            </a>
+            <a href="#" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-brand-primary transition-colors">
+              <i data-lucide="twitter" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              @amira_saleh
+              <span class="text-slate-400">(6K)</span>
+            </a>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              مدربة معتمدة في التجارة الإلكترونية وريادة الأعمال. أقدم كورسات مجانية في مجال التسويق الرقمي وأساعد المبتدئين في إطلاق مشاريعهم الأولى.
+            </p>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-2">
+              أؤمن بقيمة منتجاتكم وأرى أنها ستكون إضافة رائعة لطلابي ومتابعيني.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /cards -->
+
+    </main>
+  </div><!-- /main wrapper -->
+
+  <!-- Modal backdrop -->
+  <div data-modal-backdrop
+       class="fixed inset-0 z-50 bg-black/50 hidden items-center justify-center p-4"
+       aria-hidden="true"></div>
+
+  <!-- Approve modals (one per applicant, shown one at a time) -->
+  <div data-modal="modal-approve-001" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="approve-001-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0">
+          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i>
+        </div>
+        <h3 id="approve-001-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">قبول طلب الانضمام</h3>
+      </div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد قبول طلب <strong>يوسف خالد</strong> كمسوق؟ سيتم إرسال بريد إلكتروني بتفاصيل حسابه ورابط الإحالة.</p>
+      <div class="flex gap-3">
+        <button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button>
+        <button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">قبول</button>
+      </div>
+    </div>
+  </div>
+
+  <div data-modal="modal-reject-001" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="reject-001-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0">
+          <i data-lucide="x-circle" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i>
+        </div>
+        <h3 id="reject-001-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">رفض طلب الانضمام</h3>
+      </div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد رفض طلب <strong>يوسف خالد</strong>؟ سيتم إشعاره بقرار الرفض.</p>
+      <div class="flex gap-3">
+        <button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button>
+        <button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">رفض</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Approve/Reject modals for applicants 2-6 (shared pattern) -->
+  <div data-modal="modal-approve-002" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="approve-002-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0"><i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i></div><h3 id="approve-002-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">قبول طلب الانضمام</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد قبول طلب <strong>هبة إبراهيم</strong> كمسوق؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">قبول</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-reject-002" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="reject-002-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="x-circle" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="reject-002-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">رفض طلب الانضمام</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد رفض طلب <strong>هبة إبراهيم</strong>؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">رفض</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-approve-003" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="approve-003-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0"><i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i></div><h3 id="approve-003-title" class="text-base font-semibold">قبول طلب الانضمام</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد قبول طلب <strong>طارق ناصر</strong> كمسوق؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">قبول</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-reject-003" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="reject-003-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="x-circle" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="reject-003-title" class="text-base font-semibold">رفض طلب الانضمام</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد رفض طلب <strong>طارق ناصر</strong>؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">رفض</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-approve-004" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="approve-004-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0"><i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i></div><h3 id="approve-004-title" class="text-base font-semibold">قبول طلب الانضمام</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد قبول طلب <strong>منى الحارثي</strong> كمسوق؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">قبول</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-reject-004" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="reject-004-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="x-circle" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="reject-004-title" class="text-base font-semibold">رفض طلب الانضمام</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد رفض طلب <strong>منى الحارثي</strong>؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">رفض</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-approve-005" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="approve-005-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0"><i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i></div><h3 id="approve-005-title" class="text-base font-semibold">قبول طلب الانضمام</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد قبول طلب <strong>خالد منصور</strong> كمسوق؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">قبول</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-reject-005" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="reject-005-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="x-circle" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="reject-005-title" class="text-base font-semibold">رفض طلب الانضمام</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد رفض طلب <strong>خالد منصور</strong>؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">رفض</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-approve-006" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="approve-006-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0"><i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i></div><h3 id="approve-006-title" class="text-base font-semibold">قبول طلب الانضمام</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد قبول طلب <strong>أميرة صالح</strong> كمسوق؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">قبول</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-reject-006" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="reject-006-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="x-circle" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="reject-006-title" class="text-base font-semibold">رفض طلب الانضمام</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد رفض طلب <strong>أميرة صالح</strong>؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">رفض</button></div>
+    </div>
+  </div>
+
+  <!-- Copied toast -->
+  <div id="copied-toast" role="status" aria-live="polite">تم النسخ!</div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الإعدادات — Smart Merchant OS</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { 'brand-primary': '#6366f1', 'brand-accent': '#8b5cf6', 'brand-info': '#3b82f6' },
+        fontFamily: { sans: ['Cairo','Tajawal','system-ui','sans-serif'] },
+        backgroundImage: { 'gradient-brand': 'linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#3b82f6 100%)' }
+      }}
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script>try{var t=localStorage.getItem('smos:theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}</script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+
+<!-- Sidebar overlay -->
+<div data-sidebar-overlay class="fixed inset-0 z-30 bg-black/50 hidden lg:hidden" aria-hidden="true"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="fixed top-0 start-0 z-40 h-screen w-64 bg-slate-900 dark:bg-slate-950 flex flex-col translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" aria-label="القائمة الجانبية">
+  <div class="flex items-center gap-3 px-5 py-5 border-b border-slate-700/60">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" aria-hidden="true" class="h-9 w-9 shrink-0">
+      <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="50%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs>
+      <rect x="4" y="12" width="14" height="14" rx="3" fill="url(#sg)" transform="rotate(45 11 19)"/>
+      <rect x="18" y="8" width="10" height="10" rx="2" fill="url(#sg)" opacity=".72" transform="rotate(45 23 13)"/>
+      <rect x="14" y="22" width="8" height="8" rx="2" fill="url(#sg)" opacity=".50" transform="rotate(45 18 26)"/>
+    </svg>
+    <div class="leading-tight"><p class="text-xs font-semibold text-white tracking-wide">Smart Merchant OS</p><p class="text-xs text-slate-400">سمارت مرتشانت</p></div>
+  </div>
+  <nav class="flex-1 overflow-y-auto py-4 px-3"><ul class="space-y-1" role="list">
+    <li><a href="dashboard.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="layout-dashboard" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>لوحة التحكم</span></a></li>
+    <li><a href="products.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="package" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المنتجات والخدمات</span></a></li>
+    <li><a href="orders.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="shopping-cart" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>الطلبات</span></a></li>
+    <li><a href="customers.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="users" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>العملاء</span></a></li>
+    <li><a href="affiliates.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="handshake" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المسوقون</span></a></li>
+    <li><a href="affiliate-payouts.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="wallet" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المدفوعات</span></a></li>
+    <li><a href="landing-pages.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="layout-template" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>صفحات الهبوط</span></a></li>
+    <li><a href="analytics.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="bar-chart-3" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>التحليلات</span></a></li>
+    <li><a href="settings.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium bg-indigo-600/20 text-white transition-colors" aria-current="page"><i data-lucide="settings" class="h-4 w-4 shrink-0 text-indigo-400" aria-hidden="true"></i><span>الإعدادات</span></a></li>
+  </ul></nav>
+  <div class="border-t border-slate-700/60 px-4 py-4">
+    <div class="flex items-center gap-3">
+      <img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-8 w-8 rounded-full">
+      <div class="min-w-0"><p class="text-xs font-semibold text-white truncate">متجر الأناقة</p><p class="text-xs text-slate-400 truncate">merchant@smos.example</p></div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main wrapper -->
+<div class="lg:ps-64 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-700 flex items-center gap-3 px-4 sm:px-6 h-14">
+    <button type="button" data-sidebar-toggle class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="فتح القائمة الجانبية" aria-expanded="false" aria-controls="sidebar"><i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i></button>
+    <div class="flex-1 max-w-md"><div class="relative"><span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400"><i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i></span><input type="search" placeholder="بحث..." class="w-full ps-9 pe-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-colors" aria-label="بحث"></div></div>
+    <div class="flex-1"></div>
+    <div class="flex items-center gap-1 sm:gap-2">
+      <button type="button" data-theme-toggle class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="تبديل الوضع الليلي"><i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i><i data-lucide="moon" class="h-4 w-4 hidden dark:block" aria-hidden="true"></i></button>
+      <a href="notifications.html" class="relative p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="الإشعارات"><i data-lucide="bell" class="h-4 w-4" aria-hidden="true"></i><span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-rose-500" aria-hidden="true"></span></a>
+      <div class="relative" data-actions-dropdown="profile-menu">
+        <button type="button" class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="قائمة الملف الشخصي" aria-expanded="false" aria-haspopup="true"><img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-7 w-7 rounded-full"><span class="hidden sm:block text-sm font-medium text-slate-900 dark:text-slate-100">متجر الأناقة</span></button>
+        <div class="dropdown-panel absolute end-0 top-full mt-1 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+          <a href="profile.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="user-circle" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الملف الشخصي</a>
+          <a href="settings.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="settings" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الإعدادات</a>
+          <hr class="my-1 border-slate-200 dark:border-slate-600">
+          <a href="login.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="log-out" class="h-4 w-4" aria-hidden="true"></i>تسجيل الخروج</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page content -->
+  <main class="flex-1 p-4 sm:p-6 lg:p-8">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-6" aria-label="مسار التنقل">
+      <a href="dashboard.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">لوحة التحكم</a>
+      <i data-lucide="chevron-left" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+      <span class="text-slate-900 dark:text-slate-100 font-medium">الإعدادات</span>
+    </nav>
+
+    <div class="mb-8">
+      <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">الإعدادات</h1>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">إدارة إعدادات نشاطك التجاري والحساب</p>
+    </div>
+
+    <!-- Settings layout: left tabs + right panel -->
+    <div class="flex flex-col lg:flex-row gap-6" data-tabs="settings">
+
+      <!-- Left: Tab nav -->
+      <nav class="lg:w-56 shrink-0" aria-label="أقسام الإعدادات">
+        <!-- Mobile: horizontal scroll tabs -->
+        <div class="flex lg:hidden gap-1 overflow-x-auto pb-1 mb-2 scrollbar-none">
+          <button type="button" data-tab="business-info" aria-selected="true" class="tab-active inline-flex items-center gap-2 whitespace-nowrap px-3.5 py-2 text-sm font-medium rounded-lg transition-colors">
+            <i data-lucide="store" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+            معلومات النشاط
+          </button>
+          <button type="button" data-tab="branding" aria-selected="false" class="inline-flex items-center gap-2 whitespace-nowrap px-3.5 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+            <i data-lucide="palette" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+            الهوية البصرية
+          </button>
+          <button type="button" data-tab="payment" aria-selected="false" class="inline-flex items-center gap-2 whitespace-nowrap px-3.5 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+            <i data-lucide="credit-card" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+            إعدادات الدفع
+          </button>
+          <button type="button" data-tab="affiliate-commission" aria-selected="false" class="inline-flex items-center gap-2 whitespace-nowrap px-3.5 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+            <i data-lucide="percent" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+            عمولة المسوقين
+          </button>
+          <button type="button" data-tab="notif-settings" aria-selected="false" class="inline-flex items-center gap-2 whitespace-nowrap px-3.5 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+            <i data-lucide="bell" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+            الإشعارات
+          </button>
+          <button type="button" data-tab="security" aria-selected="false" class="inline-flex items-center gap-2 whitespace-nowrap px-3.5 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+            <i data-lucide="shield" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+            الأمان
+          </button>
+        </div>
+
+        <!-- Desktop: vertical tabs -->
+        <ul class="hidden lg:flex flex-col gap-0.5 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-2" role="list">
+          <li>
+            <button type="button" data-tab="business-info" aria-selected="true" class="tab-active w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-xl transition-colors text-start">
+              <i data-lucide="store" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+              معلومات النشاط
+            </button>
+          </li>
+          <li>
+            <button type="button" data-tab="branding" aria-selected="false" class="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors text-start">
+              <i data-lucide="palette" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+              الهوية البصرية
+            </button>
+          </li>
+          <li>
+            <button type="button" data-tab="payment" aria-selected="false" class="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors text-start">
+              <i data-lucide="credit-card" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+              إعدادات الدفع
+            </button>
+          </li>
+          <li>
+            <button type="button" data-tab="affiliate-commission" aria-selected="false" class="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors text-start">
+              <i data-lucide="percent" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+              عمولة المسوقين
+            </button>
+          </li>
+          <li>
+            <button type="button" data-tab="notif-settings" aria-selected="false" class="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors text-start">
+              <i data-lucide="bell" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+              إعدادات الإشعارات
+            </button>
+          </li>
+          <li>
+            <button type="button" data-tab="security" aria-selected="false" class="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors text-start">
+              <i data-lucide="shield" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+              الأمان
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Right: Panels -->
+      <div class="flex-1 min-w-0">
+
+        <!-- ── Panel 1: Business Info ── -->
+        <div data-tab-panel="business-info" data-tab-group="settings">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+            <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700">
+              <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">معلومات النشاط التجاري</h2>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">البيانات الأساسية التي تظهر للعملاء والمسوقين</p>
+            </div>
+            <form class="p-6 space-y-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">اسم النشاط التجاري <span class="text-rose-500">*</span></label>
+                  <input type="text" value="متجر الأناقة" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">رقم هاتف التاجر</label>
+                  <input type="tel" value="+966 50 234 5678" dir="ltr" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100">
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">عنوان النشاط</label>
+                <textarea rows="2" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100 resize-none">الرياض، المملكة العربية السعودية — حي العليا، شارع الملك فهد</textarea>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">الرقم الضريبي (VAT)</label>
+                  <input type="text" value="310012345600003" dir="ltr" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100" placeholder="15 رقماً">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">البريد الإلكتروني للنشاط</label>
+                  <input type="email" value="contact@elegance-store.sa" dir="ltr" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100">
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">الوصف المختصر للنشاط</label>
+                <textarea rows="3" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100 resize-none" placeholder="وصف مختصر يظهر في صفحات الهبوط والفواتير...">متجر متخصص في المنتجات والخدمات عالية الجودة، نقدم تجربة تسوق استثنائية مع دعم مستمر.</textarea>
+              </div>
+              <div class="flex justify-end pt-2">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-brand text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity">
+                  <i data-lucide="save" class="h-4 w-4" aria-hidden="true"></i>
+                  حفظ التغييرات
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ── Panel 2: Branding ── -->
+        <div data-tab-panel="branding" data-tab-group="settings" class="hidden">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+            <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700">
+              <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">الهوية البصرية</h2>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">الألوان والشعار التي تظهر على صفحات الهبوط والفواتير</p>
+            </div>
+            <form class="p-6 space-y-6">
+              <!-- Colors -->
+              <div>
+                <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-4">الألوان الأساسية</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">اللون الرئيسي</label>
+                    <div class="flex items-center gap-3">
+                      <input type="color" value="#6366f1" class="h-10 w-16 rounded-lg border border-slate-300 dark:border-slate-600 cursor-pointer bg-transparent">
+                      <input type="text" value="#6366f1" dir="ltr" class="flex-1 px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100 font-mono">
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">اللون الثانوي</label>
+                    <div class="flex items-center gap-3">
+                      <input type="color" value="#8b5cf6" class="h-10 w-16 rounded-lg border border-slate-300 dark:border-slate-600 cursor-pointer bg-transparent">
+                      <input type="text" value="#8b5cf6" dir="ltr" class="flex-1 px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100 font-mono">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Logo upload -->
+              <div>
+                <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-4">الشعار والأيقونة</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">شعار النشاط (Logo)</label>
+                    <div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-700/40 rounded-xl border border-dashed border-slate-300 dark:border-slate-600">
+                      <img src="assets/img/placeholders/product.svg" alt="الشعار الحالي" class="h-12 w-12 rounded-lg object-contain bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 p-1">
+                      <div>
+                        <button type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 rounded-lg transition-colors">
+                          <i data-lucide="upload" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                          رفع شعار
+                        </button>
+                        <p class="text-xs text-slate-400 mt-1">PNG أو SVG — حد أقصى 2MB</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">أيقونة المتصفح (Favicon)</label>
+                    <div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-700/40 rounded-xl border border-dashed border-slate-300 dark:border-slate-600">
+                      <div class="h-12 w-12 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 flex items-center justify-center">
+                        <i data-lucide="image" class="h-6 w-6 text-slate-300" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <button type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 rounded-lg transition-colors">
+                          <i data-lucide="upload" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                          رفع أيقونة
+                        </button>
+                        <p class="text-xs text-slate-400 mt-1">ICO أو PNG 32×32px</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-end pt-2">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-brand text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity">
+                  <i data-lucide="save" class="h-4 w-4" aria-hidden="true"></i>
+                  حفظ التغييرات
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ── Panel 3: Payment ── -->
+        <div data-tab-panel="payment" data-tab-group="settings" class="hidden">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+            <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700">
+              <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">إعدادات الدفع</h2>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">بيانات الحسابات التي يتم تحويل المدفوعات إليها</p>
+            </div>
+            <form class="p-6 space-y-6">
+              <!-- Bank -->
+              <div>
+                <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-2">
+                  <i data-lucide="building-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>
+                  حساب البنك
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">اسم البنك</label>
+                    <input type="text" value="بنك الراجحي" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">رقم الآيبان (IBAN)</label>
+                    <input type="text" value="SA44 2000 0001 2345 6789 1234" dir="ltr" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100 font-mono text-sm" placeholder="SA XX XXXX...">
+                  </div>
+                </div>
+              </div>
+              <!-- Digital wallets -->
+              <div>
+                <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-2">
+                  <i data-lucide="smartphone" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>
+                  المحافظ الرقمية
+                </h3>
+                <div class="space-y-4">
+                  <div class="flex items-center gap-4">
+                    <div class="h-9 w-9 rounded-lg bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0">
+                      <i data-lucide="smartphone" class="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i>
+                    </div>
+                    <div class="flex-1">
+                      <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">InstaPay</label>
+                      <input type="text" value="merchant@instapay" dir="ltr" class="w-full px-3.5 py-2 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100" placeholder="معرّف InstaPay">
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <div class="h-9 w-9 rounded-lg bg-indigo-100 dark:bg-indigo-950/40 flex items-center justify-center shrink-0">
+                      <i data-lucide="smartphone" class="h-4 w-4 text-indigo-600 dark:text-indigo-400" aria-hidden="true"></i>
+                    </div>
+                    <div class="flex-1">
+                      <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">STC Pay</label>
+                      <input type="tel" value="+966 50 234 5678" dir="ltr" class="w-full px-3.5 py-2 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100" placeholder="رقم هاتف STC Pay">
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <div class="h-9 w-9 rounded-lg bg-blue-100 dark:bg-blue-950/40 flex items-center justify-center shrink-0">
+                      <i data-lucide="globe" class="h-4 w-4 text-blue-600 dark:text-blue-400" aria-hidden="true"></i>
+                    </div>
+                    <div class="flex-1">
+                      <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">PayPal</label>
+                      <input type="email" value="" dir="ltr" class="w-full px-3.5 py-2 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100" placeholder="البريد الإلكتروني لـ PayPal">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Withdrawal threshold -->
+              <div>
+                <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-2">
+                  <i data-lucide="arrow-up-from-line" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>
+                  حد السحب
+                </h3>
+                <div class="flex items-center gap-4">
+                  <div class="flex-1">
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">الحد الأدنى للسحب</label>
+                    <div class="flex items-center gap-2">
+                      <input type="number" value="200" min="50" step="50" class="flex-1 px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100">
+                      <span class="text-sm text-slate-500 dark:text-slate-400 shrink-0">SAR</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-end pt-2">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-brand text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity">
+                  <i data-lucide="save" class="h-4 w-4" aria-hidden="true"></i>
+                  حفظ التغييرات
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ── Panel 4: Affiliate Commission ── -->
+        <div data-tab-panel="affiliate-commission" data-tab-group="settings" class="hidden">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+            <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700">
+              <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">إعدادات عمولة المسوقين</h2>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">تحكّم في النسب ومدة الكوكيز لكل مستوى</p>
+            </div>
+            <form class="p-6 space-y-6">
+              <!-- Default rate -->
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">نسبة العمولة الافتراضية</label>
+                <div class="flex items-center gap-3">
+                  <input type="number" value="10" min="1" max="80" step="0.5" class="w-32 px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100">
+                  <span class="text-slate-500 dark:text-slate-400 font-medium">%</span>
+                  <p class="text-xs text-slate-400">تُطبَّق على المسوقين الجدد الذين لم يُعيَّن لهم مستوى</p>
+                </div>
+              </div>
+
+              <!-- Level overrides -->
+              <div>
+                <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-3">نسب العمولة حسب المستوى</h3>
+                <div class="table-responsive rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+                  <table class="w-full text-sm">
+                    <thead>
+                      <tr class="bg-slate-50 dark:bg-slate-700/30">
+                        <th class="text-start px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">المستوى</th>
+                        <th class="text-start px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">نسبة العمولة %</th>
+                        <th class="text-start px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">حد الترقية (SAR)</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+                      <tr>
+                        <td class="px-4 py-3"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300"><span class="h-2 w-2 rounded-full bg-amber-600"></span>Bronze</span></td>
+                        <td class="px-4 py-3"><input type="number" value="8" min="1" max="80" class="w-20 px-3 py-1.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100"></td>
+                        <td class="px-4 py-3 text-slate-500 dark:text-slate-400 text-xs">المستوى الابتدائي</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300"><span class="h-2 w-2 rounded-full bg-slate-500"></span>Silver</span></td>
+                        <td class="px-4 py-3"><input type="number" value="12" min="1" max="80" class="w-20 px-3 py-1.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100"></td>
+                        <td class="px-4 py-3"><input type="number" value="5000" class="w-28 px-3 py-1.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100"></td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-950/40 text-yellow-700 dark:text-yellow-300"><span class="h-2 w-2 rounded-full bg-yellow-500"></span>Gold</span></td>
+                        <td class="px-4 py-3"><input type="number" value="15" min="1" max="80" class="w-20 px-3 py-1.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100"></td>
+                        <td class="px-4 py-3"><input type="number" value="20000" class="w-28 px-3 py-1.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100"></td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-violet-100 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300"><span class="h-2 w-2 rounded-full bg-violet-500"></span>Platinum</span></td>
+                        <td class="px-4 py-3"><input type="number" value="20" min="1" max="80" class="w-20 px-3 py-1.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100"></td>
+                        <td class="px-4 py-3"><input type="number" value="60000" class="w-28 px-3 py-1.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Cookie window -->
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">مدة صلاحية الكوكيز (Cookie Window)</label>
+                <div class="flex items-center gap-3">
+                  <input type="number" value="30" min="1" max="365" class="w-28 px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100">
+                  <span class="text-slate-500 dark:text-slate-400">يوم</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-1">تُنسب عملية الشراء للمسوّق إذا تمت خلال هذه المدة من أول نقرة على رابطه</p>
+              </div>
+
+              <!-- Commission trigger -->
+              <div class="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4">
+                <div class="flex items-start gap-3">
+                  <i data-lucide="info" class="h-4 w-4 text-amber-600 dark:text-amber-400 mt-0.5 shrink-0" aria-hidden="true"></i>
+                  <p class="text-sm text-amber-700 dark:text-amber-300">يتم اعتماد العمولة بعد وصول الطلب إلى <strong>Delivered</strong> أو تأكيد الدفع.</p>
+                </div>
+              </div>
+
+              <div class="flex justify-end pt-2">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-brand text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity">
+                  <i data-lucide="save" class="h-4 w-4" aria-hidden="true"></i>
+                  حفظ التغييرات
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ── Panel 5: Notification Settings ── -->
+        <div data-tab-panel="notif-settings" data-tab-group="settings" class="hidden">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+            <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700">
+              <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">إعدادات الإشعارات</h2>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">تحكّم في القنوات التي تتلقى عليها الإشعارات</p>
+            </div>
+            <form class="p-6 space-y-4">
+
+              <!-- Toggle row helper macro via repeated HTML -->
+              <div class="space-y-1">
+                <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3">إشعارات البريد الإلكتروني</h3>
+
+                <div class="flex items-center justify-between py-3.5 border-b border-slate-100 dark:border-slate-700">
+                  <div>
+                    <p class="text-sm font-medium text-slate-900 dark:text-slate-100">طلب جديد</p>
+                    <p class="text-xs text-slate-400 mt-0.5">إشعار فوري عند وصول أي طلب جديد</p>
+                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer" aria-label="تفعيل إشعار البريد للطلبات الجديدة">
+                    <input type="checkbox" class="sr-only peer" checked>
+                    <div class="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:ring-2 peer-focus:ring-indigo-500/50 rounded-full peer peer-checked:bg-indigo-600 transition-colors after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5 rtl:peer-checked:after:-translate-x-5"></div>
+                  </label>
+                </div>
+
+                <div class="flex items-center justify-between py-3.5 border-b border-slate-100 dark:border-slate-700">
+                  <div>
+                    <p class="text-sm font-medium text-slate-900 dark:text-slate-100">طلب انضمام مسوّق</p>
+                    <p class="text-xs text-slate-400 mt-0.5">عند تسجيل مسوّق جديد وانتظاره الموافقة</p>
+                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer" aria-label="تفعيل إشعار البريد لطلبات المسوقين">
+                    <input type="checkbox" class="sr-only peer" checked>
+                    <div class="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:ring-2 peer-focus:ring-indigo-500/50 rounded-full peer peer-checked:bg-indigo-600 transition-colors after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5 rtl:peer-checked:after:-translate-x-5"></div>
+                  </label>
+                </div>
+
+                <div class="flex items-center justify-between py-3.5 border-b border-slate-100 dark:border-slate-700">
+                  <div>
+                    <p class="text-sm font-medium text-slate-900 dark:text-slate-100">تحديثات الدفع</p>
+                    <p class="text-xs text-slate-400 mt-0.5">عمليات الدفع والمبالغ المُستردة</p>
+                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer" aria-label="تفعيل إشعار البريد لتحديثات الدفع">
+                    <input type="checkbox" class="sr-only peer" checked>
+                    <div class="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:ring-2 peer-focus:ring-indigo-500/50 rounded-full peer peer-checked:bg-indigo-600 transition-colors after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5 rtl:peer-checked:after:-translate-x-5"></div>
+                  </label>
+                </div>
+
+                <div class="flex items-center justify-between py-3.5">
+                  <div>
+                    <p class="text-sm font-medium text-slate-900 dark:text-slate-100">تنبيه المخزون المنخفض</p>
+                    <p class="text-xs text-slate-400 mt-0.5">حين تنخفض كمية منتج عن الحد المحدد</p>
+                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer" aria-label="تفعيل إشعار المخزون المنخفض">
+                    <input type="checkbox" class="sr-only peer">
+                    <div class="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:ring-2 peer-focus:ring-indigo-500/50 rounded-full peer peer-checked:bg-indigo-600 transition-colors after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5 rtl:peer-checked:after:-translate-x-5"></div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="space-y-1 pt-2">
+                <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3">قنوات أخرى</h3>
+
+                <div class="flex items-center justify-between py-3.5 border-b border-slate-100 dark:border-slate-700">
+                  <div class="flex items-center gap-3">
+                    <div class="h-8 w-8 rounded-lg bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0">
+                      <i data-lucide="message-circle" class="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                      <p class="text-sm font-medium text-slate-900 dark:text-slate-100">WhatsApp</p>
+                      <p class="text-xs text-slate-400 mt-0.5">إشعارات الطلبات عبر WhatsApp Business</p>
+                    </div>
+                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer" aria-label="تفعيل إشعارات WhatsApp">
+                    <input type="checkbox" class="sr-only peer" checked>
+                    <div class="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:ring-2 peer-focus:ring-indigo-500/50 rounded-full peer peer-checked:bg-indigo-600 transition-colors after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5 rtl:peer-checked:after:-translate-x-5"></div>
+                  </label>
+                </div>
+
+                <div class="flex items-center justify-between py-3.5">
+                  <div class="flex items-center gap-3">
+                    <div class="h-8 w-8 rounded-lg bg-blue-100 dark:bg-blue-950/40 flex items-center justify-center shrink-0">
+                      <i data-lucide="phone" class="h-4 w-4 text-blue-600 dark:text-blue-400" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                      <p class="text-sm font-medium text-slate-900 dark:text-slate-100">SMS</p>
+                      <p class="text-xs text-slate-400 mt-0.5">رسائل نصية للأحداث الحرجة فقط</p>
+                    </div>
+                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer" aria-label="تفعيل إشعارات SMS">
+                    <input type="checkbox" class="sr-only peer">
+                    <div class="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:ring-2 peer-focus:ring-indigo-500/50 rounded-full peer peer-checked:bg-indigo-600 transition-colors after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5 rtl:peer-checked:after:-translate-x-5"></div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flex justify-end pt-2">
+                <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-brand text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity">
+                  <i data-lucide="save" class="h-4 w-4" aria-hidden="true"></i>
+                  حفظ التغييرات
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ── Panel 6: Security ── -->
+        <div data-tab-panel="security" data-tab-group="settings" class="hidden">
+          <div class="space-y-5">
+            <!-- Change password -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+              <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700">
+                <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">تغيير كلمة المرور</h2>
+              </div>
+              <form class="p-6 space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">كلمة المرور الحالية</label>
+                  <input type="password" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100" placeholder="••••••••">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">كلمة المرور الجديدة</label>
+                    <input type="password" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100" placeholder="8 أحرف على الأقل">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">تأكيد كلمة المرور</label>
+                    <input type="password" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100" placeholder="أعد كتابة كلمة المرور">
+                  </div>
+                </div>
+                <div class="flex justify-end">
+                  <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-brand text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity">تحديث كلمة المرور</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- 2FA -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
+              <div class="flex items-center justify-between gap-4">
+                <div>
+                  <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100">المصادقة الثنائية (2FA)</h3>
+                  <p class="text-xs text-slate-400 mt-0.5">حماية إضافية عبر تطبيق Authenticator أو SMS</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer" aria-label="تفعيل المصادقة الثنائية">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:ring-2 peer-focus:ring-indigo-500/50 rounded-full peer peer-checked:bg-indigo-600 transition-colors after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5 rtl:peer-checked:after:-translate-x-5"></div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Active sessions -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+              <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                <div>
+                  <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100">الجلسات النشطة</h3>
+                  <p class="text-xs text-slate-400 mt-0.5">الأجهزة المسجلة على حسابك</p>
+                </div>
+                <button type="button" class="text-xs font-medium text-rose-600 hover:text-rose-700 transition-colors">إنهاء كل الجلسات الأخرى</button>
+              </div>
+              <ul class="divide-y divide-slate-100 dark:divide-slate-700">
+                <li class="flex items-center justify-between gap-4 px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="h-9 w-9 rounded-xl bg-indigo-100 dark:bg-indigo-950/40 flex items-center justify-center shrink-0"><i data-lucide="monitor" class="h-4 w-4 text-indigo-600 dark:text-indigo-400" aria-hidden="true"></i></div>
+                    <div>
+                      <p class="text-sm font-medium text-slate-900 dark:text-slate-100">Chrome على Windows — الرياض</p>
+                      <p class="text-xs text-slate-400">الجلسة الحالية • منذ 2 ساعة</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 text-xs font-medium"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>نشط</span>
+                </li>
+                <li class="flex items-center justify-between gap-4 px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="h-9 w-9 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center shrink-0"><i data-lucide="smartphone" class="h-4 w-4 text-slate-500" aria-hidden="true"></i></div>
+                    <div>
+                      <p class="text-sm font-medium text-slate-900 dark:text-slate-100">Safari على iPhone — جدة</p>
+                      <p class="text-xs text-slate-400">آخر نشاط: أمس الساعة 9:30م</p>
+                    </div>
+                  </div>
+                  <button type="button" class="text-xs font-medium text-rose-600 hover:text-rose-700 transition-colors">إنهاء</button>
+                </li>
+                <li class="flex items-center justify-between gap-4 px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="h-9 w-9 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center shrink-0"><i data-lucide="tablet" class="h-4 w-4 text-slate-500" aria-hidden="true"></i></div>
+                    <div>
+                      <p class="text-sm font-medium text-slate-900 dark:text-slate-100">Firefox على iPad — الدمام</p>
+                      <p class="text-xs text-slate-400">آخر نشاط: قبل 3 أيام</p>
+                    </div>
+                  </div>
+                  <button type="button" class="text-xs font-medium text-rose-600 hover:text-rose-700 transition-colors">إنهاء</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /right panel -->
+    </div><!-- /settings layout -->
+
+  </main>
+</div>
+
+<div id="copied-toast" class="fixed bottom-6 start-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm px-4 py-2.5 rounded-xl shadow-lg hidden z-50 pointer-events-none" aria-live="polite">تم نسخ الرابط</div>
+
+<script src="assets/js/main.js" defer></script>
+<script>document.addEventListener('DOMContentLoaded', function(){ if(window.lucide) lucide.createIcons(); });</script>
+</body>
+</html>

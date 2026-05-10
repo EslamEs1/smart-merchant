@@ -1,0 +1,216 @@
+/* Smart Merchant OS — app.css
+   Raw CSS only — no @apply (Tailwind Play CDN does not process @apply in external files).
+   Badge dark-mode handled via .dark selector. */
+
+/* ─── Base font ──────────────────────────────────────────────────────────────
+   Fallback if Tailwind config doesn't pick up font-family for some reason. */
+html { font-family: 'Cairo', 'Tajawal', system-ui, sans-serif; }
+
+/* ─── Status Badges ──────────────────────────────────────────────────────────
+   Usage: <span class="badge badge-delivered">Delivered</span> */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  white-space: nowrap;
+}
+
+/* Order statuses */
+.badge-pending      { background: #fef3c7; color: #92400e; }
+.badge-confirmed    { background: #dbeafe; color: #1e40af; }
+.badge-processing   { background: #dbeafe; color: #1e40af; }
+.badge-shipped      { background: #e0e7ff; color: #3730a3; }
+.badge-delivered    { background: #d1fae5; color: #065f46; }
+.badge-cancelled    { background: #ffe4e6; color: #9f1239; }
+
+/* Payment statuses */
+.badge-paid         { background: #d1fae5; color: #065f46; }
+.badge-unpaid       { background: #fef3c7; color: #92400e; }
+.badge-partially-paid { background: #e0e7ff; color: #3730a3; }
+.badge-refunded     { background: #e2e8f0; color: #1e293b; }
+
+/* Shipping statuses */
+.badge-not-shipped  { background: #fef3c7; color: #92400e; }
+.badge-preparing    { background: #dbeafe; color: #1e40af; }
+.badge-returned     { background: #e2e8f0; color: #1e293b; }
+
+/* Affiliate / account statuses */
+.badge-active       { background: #d1fae5; color: #065f46; }
+.badge-suspended    { background: #ffe4e6; color: #9f1239; }
+.badge-rejected     { background: #ffe4e6; color: #9f1239; }
+
+/* Landing page / product status */
+.badge-published    { background: #d1fae5; color: #065f46; }
+.badge-draft        { background: #e2e8f0; color: #475569; }
+.badge-disabled     { background: #ffe4e6; color: #9f1239; }
+
+/* Affiliate levels */
+.badge-bronze       { background: rgba(253,224,71,0.35);  color: #78350f; }
+.badge-silver       { background: rgba(203,213,225,0.6);  color: #1e293b; }
+.badge-gold         { background: rgba(251,191,36,0.3);   color: #713f12; }
+.badge-platinum     { background: rgba(196,181,253,0.5);  color: #4c1d95; }
+
+/* Dark mode badges */
+.dark .badge-pending      { background: rgba(120,53,15,0.4);   color: #fde68a; }
+.dark .badge-confirmed    { background: rgba(30,58,138,0.4);   color: #bfdbfe; }
+.dark .badge-processing   { background: rgba(30,58,138,0.4);   color: #bfdbfe; }
+.dark .badge-shipped      { background: rgba(55,48,163,0.4);   color: #c7d2fe; }
+.dark .badge-delivered    { background: rgba(6,78,59,0.4);     color: #a7f3d0; }
+.dark .badge-cancelled    { background: rgba(136,19,55,0.4);   color: #fecdd3; }
+.dark .badge-paid         { background: rgba(6,78,59,0.4);     color: #a7f3d0; }
+.dark .badge-unpaid       { background: rgba(120,53,15,0.4);   color: #fde68a; }
+.dark .badge-partially-paid { background: rgba(55,48,163,0.4); color: #c7d2fe; }
+.dark .badge-refunded     { background: #334155;               color: #e2e8f0; }
+.dark .badge-not-shipped  { background: rgba(120,53,15,0.4);   color: #fde68a; }
+.dark .badge-preparing    { background: rgba(30,58,138,0.4);   color: #bfdbfe; }
+.dark .badge-returned     { background: #334155;               color: #e2e8f0; }
+.dark .badge-active       { background: rgba(6,78,59,0.4);     color: #a7f3d0; }
+.dark .badge-suspended    { background: rgba(136,19,55,0.4);   color: #fecdd3; }
+.dark .badge-rejected     { background: rgba(136,19,55,0.4);   color: #fecdd3; }
+.dark .badge-published    { background: rgba(6,78,59,0.4);     color: #a7f3d0; }
+.dark .badge-draft        { background: #334155;               color: #cbd5e1; }
+.dark .badge-disabled     { background: rgba(136,19,55,0.4);   color: #fecdd3; }
+.dark .badge-bronze       { background: rgba(120,53,15,0.3);   color: #fcd34d; }
+.dark .badge-silver       { background: rgba(71,85,105,0.4);   color: #e2e8f0; }
+.dark .badge-gold         { background: rgba(113,63,18,0.3);   color: #fcd34d; }
+.dark .badge-platinum     { background: rgba(76,29,149,0.3);   color: #ddd6fe; }
+
+/* ─── Focus ring ─────────────────────────────────────────────────────────────
+   Applied with class="focus-ring" on interactive elements. */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #6366f1;
+}
+.dark .focus-ring:focus-visible {
+  box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #6366f1;
+}
+
+/* ─── Brand gradient text utility ────────────────────────────────────────────
+   Usage: <span class="gradient-brand-text">text</span> */
+.gradient-brand-text {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Sidebar active state ────────────────────────────────────────────────── */
+.sidebar-link[aria-current="page"] {
+  background: rgba(99,102,241,0.2);
+  color: #ffffff;
+}
+.sidebar-link[aria-current="page"] [data-lucide] {
+  color: #818cf8;
+}
+
+/* ─── Table Responsive ───────────────────────────────────────────────────────
+   Wraps any <table> to scroll horizontally on small viewports.
+   Approach: overflow-x-auto at all sizes + sticky first column at ≥640px.
+   This is the consistent approach used across every list page (FR-040). */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0.75rem;
+}
+@media (min-width: 640px) {
+  .table-responsive thead th:first-child,
+  .table-responsive tbody td:first-child {
+    position: sticky;
+    inset-inline-start: 0;
+    background: inherit;
+    z-index: 1;
+  }
+}
+
+/* ─── Copied Toast ───────────────────────────────────────────────────────────
+   Injected and shown by main.js copy handler. */
+#copied-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  inset-inline-end: 1.5rem;
+  z-index: 9999;
+  background: #1e293b;
+  color: #f1f5f9;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-family: 'Cairo', 'Tajawal', system-ui, sans-serif;
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+#copied-toast.show { opacity: 1; transform: translateY(0); }
+
+/* ─── Sidebar transition ─────────────────────────────────────────────────────
+   Defined on element via Tailwind; this is just the fallback. */
+#sidebar {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Modal backdrop ─────────────────────────────────────────────────────────
+   main.js toggles hidden/flex; transition added here for smooth fade. */
+[data-modal-backdrop] {
+  transition: opacity 0.2s ease;
+}
+[data-modal-backdrop].flex { display: flex !important; }
+
+/* ─── Print: invoice area ────────────────────────────────────────────────────
+   Only the invoice card prints; everything else is hidden. */
+@media print {
+  body > *:not([data-print-area="invoice"]) { display: none !important; }
+  [data-print-area="invoice"] {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ─── RTL directional icon fix ───────────────────────────────────────────────
+   Lucide chevron-right/arrow-right should point ← in RTL "forward" context. */
+[dir="rtl"] [data-lucide="chevron-right"],
+[dir="rtl"] [data-lucide="arrow-right"] {
+  transform: scaleX(-1);
+}
+
+/* ─── Sidebar scrollbar ──────────────────────────────────────────────────────
+   Thin, brand-tinted scrollbar for sidebar overflow on webkit browsers. */
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-track { background: transparent; }
+#sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+#sidebar::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+
+/* ─── Date-range popover ─────────────────────────────────────────────────────
+   Visual-only popover opened/closed by main.js. */
+[data-date-popover] {
+  position: absolute;
+  z-index: 50;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,.12);
+  padding: 1rem;
+  min-width: 260px;
+}
+.dark [data-date-popover] {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+/* ─── Tab active state ───────────────────────────────────────────────────────
+   .tab-active is toggled by main.js tab switcher. */
+.tab-active {
+  color: #6366f1;
+  border-bottom-color: #6366f1;
+  font-weight: 600;
+}
+.dark .tab-active {
+  color: #818cf8;
+  border-bottom-color: #818cf8;
+}

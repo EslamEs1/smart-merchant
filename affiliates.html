@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المسوقون — Smart Merchant OS</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { 'brand-primary': '#6366f1', 'brand-accent': '#8b5cf6', 'brand-info': '#3b82f6' },
+        fontFamily: { sans: ['Cairo','Tajawal','system-ui','sans-serif'] },
+        backgroundImage: { 'gradient-brand': 'linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#3b82f6 100%)' }
+      }}
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script>try{var t=localStorage.getItem('smos:theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}</script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+
+<!-- Sidebar overlay -->
+<div data-sidebar-overlay class="fixed inset-0 z-30 bg-black/50 hidden lg:hidden" aria-hidden="true"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="fixed top-0 start-0 z-40 h-screen w-64 bg-slate-900 dark:bg-slate-950 flex flex-col translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" aria-label="القائمة الجانبية">
+  <div class="flex items-center gap-3 px-5 py-5 border-b border-slate-700/60">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" aria-hidden="true" class="h-9 w-9 shrink-0">
+      <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="50%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs>
+      <rect x="4" y="12" width="14" height="14" rx="3" fill="url(#sg)" transform="rotate(45 11 19)"/>
+      <rect x="18" y="8" width="10" height="10" rx="2" fill="url(#sg)" opacity=".72" transform="rotate(45 23 13)"/>
+      <rect x="14" y="22" width="8" height="8" rx="2" fill="url(#sg)" opacity=".50" transform="rotate(45 18 26)"/>
+    </svg>
+    <div class="leading-tight"><p class="text-xs font-semibold text-white tracking-wide">Smart Merchant OS</p><p class="text-xs text-slate-400">سمارت مرتشانت</p></div>
+  </div>
+  <nav class="flex-1 overflow-y-auto py-4 px-3"><ul class="space-y-1" role="list">
+    <li><a href="dashboard.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="layout-dashboard" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>لوحة التحكم</span></a></li>
+    <li><a href="products.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="package" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المنتجات والخدمات</span></a></li>
+    <li><a href="orders.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="shopping-cart" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>الطلبات</span></a></li>
+    <li><a href="customers.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="users" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>العملاء</span></a></li>
+    <li><a href="affiliates.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white transition-colors" aria-current="page"><i data-lucide="handshake" class="h-4 w-4 shrink-0 text-indigo-400" aria-hidden="true"></i><span>المسوقون</span></a></li>
+    <li><a href="affiliate-payouts.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="wallet" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المدفوعات</span></a></li>
+    <li><a href="landing-pages.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="layout-template" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>صفحات الهبوط</span></a></li>
+    <li><a href="analytics.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="bar-chart-3" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>التحليلات</span></a></li>
+    <li><a href="settings.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="settings" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>الإعدادات</span></a></li>
+  </ul></nav>
+  <div class="border-t border-slate-700/60 px-4 py-4">
+    <div class="flex items-center gap-3">
+      <img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-8 w-8 rounded-full">
+      <div class="min-w-0"><p class="text-xs font-semibold text-white truncate">متجر الأناقة</p><p class="text-xs text-slate-400 truncate">merchant@smos.example</p></div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main wrapper -->
+<div class="lg:ps-64 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-700 flex items-center gap-3 px-4 sm:px-6 h-14">
+    <button type="button" data-sidebar-toggle class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="فتح القائمة الجانبية" aria-expanded="false" aria-controls="sidebar"><i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i></button>
+    <div class="flex-1 max-w-md"><div class="relative"><span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400"><i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i></span><input type="search" placeholder="بحث في المسوقين..." class="w-full ps-9 pe-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-colors" aria-label="بحث في المسوقين"></div></div>
+    <div class="flex-1"></div>
+    <div class="flex items-center gap-1 sm:gap-2">
+      <button type="button" data-theme-toggle class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="تبديل الوضع الليلي"><i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i><i data-lucide="moon" class="h-4 w-4 hidden dark:block" aria-hidden="true"></i></button>
+      <a href="notifications.html" class="relative p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="الإشعارات"><i data-lucide="bell" class="h-4 w-4" aria-hidden="true"></i><span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-rose-500" aria-hidden="true"></span></a>
+      <div class="relative" data-actions-dropdown="profile-menu">
+        <button type="button" class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="قائمة الملف الشخصي" aria-expanded="false" aria-haspopup="true"><img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-7 w-7 rounded-full"><span class="hidden sm:block text-sm font-medium text-slate-900 dark:text-slate-100">متجر الأناقة</span></button>
+        <div class="dropdown-panel absolute end-0 top-full mt-1 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+          <a href="profile.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="user-circle" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الملف الشخصي</a>
+          <a href="settings.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="settings" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الإعدادات</a>
+          <hr class="my-1 border-slate-200 dark:border-slate-600">
+          <a href="login.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="log-out" class="h-4 w-4" aria-hidden="true"></i>تسجيل الخروج</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page content -->
+  <main class="flex-1 p-4 sm:p-6 lg:p-8">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-6" aria-label="مسار التنقل">
+      <a href="dashboard.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">لوحة التحكم</a>
+      <i data-lucide="chevron-left" class="h-4 w-4" aria-hidden="true"></i>
+      <span class="text-slate-900 dark:text-slate-100 font-medium">المسوقون</span>
+    </nav>
+
+    <!-- Page header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900 dark:text-white">نظام المسوقين</h1>
+        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">إدارة المسوقين، الموافقة على الطلبات، وتتبع العمولات</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="affiliate-requests.html" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-900/30 transition-colors">
+          <i data-lucide="user-plus" class="h-4 w-4" aria-hidden="true"></i>طلبات الانضمام <span class="inline-flex items-center justify-center h-5 w-5 text-xs font-bold bg-indigo-600 text-white rounded-full">6</span>
+        </a>
+        <a href="affiliate-payouts.html" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors">
+          <i data-lucide="wallet" class="h-4 w-4" aria-hidden="true"></i>المدفوعات
+        </a>
+      </div>
+    </div>
+
+    <!-- Commission rule banner (FR-026) -->
+    <div class="rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/30 p-4 mb-6 flex items-start gap-3">
+      <i data-lucide="info" class="h-5 w-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" aria-hidden="true"></i>
+      <p class="text-sm text-amber-800 dark:text-amber-200">يتم اعتماد العمولة بعد وصول الطلب إلى <strong>Delivered</strong> أو تأكيد الدفع.</p>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 mb-4 flex flex-wrap items-center gap-3">
+      <div class="flex-1 min-w-[200px] relative">
+        <span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400"><i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i></span>
+        <input type="search" placeholder="بحث بالاسم أو الكود..." class="w-full ps-9 pe-4 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40" aria-label="بحث في المسوقين">
+      </div>
+      <select class="px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/40" aria-label="فلتر الحالة">
+        <option value="">كل الحالات</option>
+        <option value="active">Active</option>
+        <option value="pending">Pending</option>
+        <option value="suspended">Suspended</option>
+        <option value="rejected">Rejected</option>
+      </select>
+      <select class="px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/40" aria-label="فلتر المستوى">
+        <option value="">كل المستويات</option>
+        <option value="bronze">Bronze</option>
+        <option value="silver">Silver</option>
+        <option value="gold">Gold</option>
+        <option value="platinum">Platinum</option>
+      </select>
+      <button class="inline-flex items-center gap-2 px-3 py-2 text-sm text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+        <i data-lucide="sliders-horizontal" class="h-4 w-4" aria-hidden="true"></i>فلاتر إضافية
+      </button>
+    </div>
+
+    <!-- Affiliates table -->
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm">
+      <div class="table-responsive">
+        <table class="w-full text-sm" role="grid" aria-label="قائمة المسوقين">
+          <thead>
+            <tr class="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+              <th scope="col" class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">المسوق</th>
+              <th scope="col" class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">المستوى</th>
+              <th scope="col" class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">كود الإحالة</th>
+              <th scope="col" class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">الطلبات</th>
+              <th scope="col" class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">المبيعات</th>
+              <th scope="col" class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">عمولة معلقة</th>
+              <th scope="col" class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">عمولة مدفوعة</th>
+              <th scope="col" class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">معدل التحويل</th>
+              <th scope="col" class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">الحالة</th>
+              <th scope="col" class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider"><span class="sr-only">إجراءات</span></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+
+            <!-- Row 1: أحمد الشمري — Gold — Active (CANONICAL: AFF-001) -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-white dark:bg-slate-900">
+              <td class="px-4 py-3">
+                <div class="flex items-center gap-3">
+                  <img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة أحمد الشمري" class="h-9 w-9 rounded-full">
+                  <div><p class="font-semibold text-slate-900 dark:text-white">أحمد الشمري</p><p class="text-xs text-slate-400">AFF-001 • ahmed@example.com</p></div>
+                </div>
+              </td>
+              <td class="px-4 py-3"><span class="badge badge-gold">Gold</span></td>
+              <td class="px-4 py-3"><code class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-indigo-600 dark:text-indigo-400">AHMAD20</code></td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">47</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">28,400 SAR</td>
+              <td class="px-4 py-3 text-end font-semibold text-amber-600 dark:text-amber-400">1,420 SAR</td>
+              <td class="px-4 py-3 text-end font-medium text-emerald-600 dark:text-emerald-400">12,800 SAR</td>
+              <td class="px-4 py-3 text-end text-slate-700 dark:text-slate-300">8.2%</td>
+              <td class="px-4 py-3"><span class="badge badge-active">Active</span></td>
+              <td class="px-4 py-3">
+                <div class="relative" data-actions-dropdown="aff-001-actions">
+                  <button type="button" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-700 dark:hover:text-slate-200 focus-ring transition-colors" aria-label="إجراءات أحمد الشمري" aria-expanded="false" aria-haspopup="true"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button>
+                  <div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+                    <a href="affiliate-detail.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الملف</a>
+                    <button type="button" data-modal-trigger="modal-approve" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/30" role="menuitem"><i data-lucide="check-circle-2" class="h-4 w-4" aria-hidden="true"></i>موافقة</button>
+                    <button type="button" data-modal-trigger="modal-suspend" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30" role="menuitem"><i data-lucide="pause-circle" class="h-4 w-4" aria-hidden="true"></i>تعليق</button>
+                    <button type="button" data-modal-trigger="modal-change-level" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="award" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تغيير المستوى</button>
+                    <a href="orders.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="shopping-cart" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الطلبات</a>
+                    <button type="button" data-modal-trigger="modal-pay-commission" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30" role="menuitem"><i data-lucide="banknote" class="h-4 w-4" aria-hidden="true"></i>دفع عمولة</button>
+                    <hr class="my-1 border-slate-200 dark:border-slate-600">
+                    <button type="button" data-copy="https://smartmerchant.os/r/AHMAD20" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>نسخ رابط الإحالة</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 2: سارة الخالدي — Silver — Active (CANONICAL: AFF-002) -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-white dark:bg-slate-900">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة سارة الخالدي" class="h-9 w-9 rounded-full"><div><p class="font-semibold text-slate-900 dark:text-white">سارة الخالدي</p><p class="text-xs text-slate-400">AFF-002 • sara@example.com</p></div></div></td>
+              <td class="px-4 py-3"><span class="badge badge-silver">Silver</span></td>
+              <td class="px-4 py-3"><code class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-indigo-600 dark:text-indigo-400">SARA15</code></td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">23</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">9,800 SAR</td>
+              <td class="px-4 py-3 text-end font-semibold text-amber-600 dark:text-amber-400">490 SAR</td>
+              <td class="px-4 py-3 text-end font-medium text-emerald-600 dark:text-emerald-400">3,500 SAR</td>
+              <td class="px-4 py-3 text-end text-slate-700 dark:text-slate-300">6.5%</td>
+              <td class="px-4 py-3"><span class="badge badge-active">Active</span></td>
+              <td class="px-4 py-3"><div class="relative" data-actions-dropdown="aff-002-actions"><button type="button" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-700 focus-ring" aria-label="إجراءات سارة الخالدي" aria-expanded="false" aria-haspopup="true"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button><div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu"><a href="affiliate-detail.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الملف</a><button type="button" data-modal-trigger="modal-approve" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/30" role="menuitem"><i data-lucide="check-circle-2" class="h-4 w-4" aria-hidden="true"></i>موافقة</button><button type="button" data-modal-trigger="modal-suspend" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30" role="menuitem"><i data-lucide="pause-circle" class="h-4 w-4" aria-hidden="true"></i>تعليق</button><button type="button" data-modal-trigger="modal-change-level" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="award" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تغيير المستوى</button><a href="orders.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="shopping-cart" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الطلبات</a><button type="button" data-modal-trigger="modal-pay-commission" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30" role="menuitem"><i data-lucide="banknote" class="h-4 w-4" aria-hidden="true"></i>دفع عمولة</button><hr class="my-1 border-slate-200 dark:border-slate-600"><button type="button" data-copy="https://smartmerchant.os/r/SARA15" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>نسخ رابط الإحالة</button></div></div></td>
+            </tr>
+
+            <!-- Row 3: Omar Khalil — Bronze — Pending (CANONICAL: AFF-003) -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-white dark:bg-slate-900">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة Omar Khalil" class="h-9 w-9 rounded-full"><div><p class="font-semibold text-slate-900 dark:text-white">Omar Khalil</p><p class="text-xs text-slate-400">AFF-003 • omar@example.com</p></div></div></td>
+              <td class="px-4 py-3"><span class="badge badge-bronze">Bronze</span></td>
+              <td class="px-4 py-3"><code class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-indigo-600 dark:text-indigo-400">OMAR10</code></td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">8</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">2,950 EGP</td>
+              <td class="px-4 py-3 text-end font-semibold text-amber-600 dark:text-amber-400">295 EGP</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-400">0 EGP</td>
+              <td class="px-4 py-3 text-end text-slate-700 dark:text-slate-300">4.1%</td>
+              <td class="px-4 py-3"><span class="badge badge-pending">Pending</span></td>
+              <td class="px-4 py-3"><div class="relative" data-actions-dropdown="aff-003-actions"><button type="button" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-700 focus-ring" aria-label="إجراءات Omar Khalil" aria-expanded="false" aria-haspopup="true"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button><div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu"><a href="affiliate-detail.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الملف</a><button type="button" data-modal-trigger="modal-approve" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/30" role="menuitem"><i data-lucide="check-circle-2" class="h-4 w-4" aria-hidden="true"></i>موافقة</button><button type="button" data-modal-trigger="modal-suspend" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30" role="menuitem"><i data-lucide="pause-circle" class="h-4 w-4" aria-hidden="true"></i>تعليق</button><button type="button" data-modal-trigger="modal-change-level" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="award" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تغيير المستوى</button><a href="orders.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="shopping-cart" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الطلبات</a><button type="button" data-modal-trigger="modal-pay-commission" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30" role="menuitem"><i data-lucide="banknote" class="h-4 w-4" aria-hidden="true"></i>دفع عمولة</button><hr class="my-1 border-slate-200 dark:border-slate-600"><button type="button" data-copy="https://smartmerchant.os/r/OMAR10" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>نسخ رابط الإحالة</button></div></div></td>
+            </tr>
+
+            <!-- Row 4: فهد العتيبي — Platinum — Active -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-white dark:bg-slate-900">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة فهد العتيبي" class="h-9 w-9 rounded-full"><div><p class="font-semibold text-slate-900 dark:text-white">فهد العتيبي</p><p class="text-xs text-slate-400">AFF-004 • fahad@example.com</p></div></div></td>
+              <td class="px-4 py-3"><span class="badge badge-platinum">Platinum</span></td>
+              <td class="px-4 py-3"><code class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-indigo-600 dark:text-indigo-400">FAHAD25</code></td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">85</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">52,000 SAR</td>
+              <td class="px-4 py-3 text-end font-semibold text-amber-600 dark:text-amber-400">2,600 SAR</td>
+              <td class="px-4 py-3 text-end font-medium text-emerald-600 dark:text-emerald-400">28,400 SAR</td>
+              <td class="px-4 py-3 text-end text-slate-700 dark:text-slate-300">12.4%</td>
+              <td class="px-4 py-3"><span class="badge badge-active">Active</span></td>
+              <td class="px-4 py-3"><div class="relative" data-actions-dropdown="aff-004-actions"><button type="button" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-700 focus-ring" aria-label="إجراءات فهد العتيبي" aria-expanded="false" aria-haspopup="true"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button><div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu"><a href="affiliate-detail.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الملف</a><button type="button" data-modal-trigger="modal-approve" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50" role="menuitem"><i data-lucide="check-circle-2" class="h-4 w-4" aria-hidden="true"></i>موافقة</button><button type="button" data-modal-trigger="modal-suspend" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-amber-600 hover:bg-amber-50" role="menuitem"><i data-lucide="pause-circle" class="h-4 w-4" aria-hidden="true"></i>تعليق</button><button type="button" data-modal-trigger="modal-change-level" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="award" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تغيير المستوى</button><a href="orders.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="shopping-cart" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الطلبات</a><button type="button" data-modal-trigger="modal-pay-commission" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-indigo-600 hover:bg-indigo-50" role="menuitem"><i data-lucide="banknote" class="h-4 w-4" aria-hidden="true"></i>دفع عمولة</button><hr class="my-1 border-slate-200 dark:border-slate-600"><button type="button" data-copy="https://smartmerchant.os/r/FAHAD25" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>نسخ رابط الإحالة</button></div></div></td>
+            </tr>
+
+            <!-- Row 5: نورة المطيري — Gold — Active -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-white dark:bg-slate-900">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة نورة المطيري" class="h-9 w-9 rounded-full"><div><p class="font-semibold text-slate-900 dark:text-white">نورة المطيري</p><p class="text-xs text-slate-400">AFF-005 • noura@example.com</p></div></div></td>
+              <td class="px-4 py-3"><span class="badge badge-gold">Gold</span></td>
+              <td class="px-4 py-3"><code class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-indigo-600 dark:text-indigo-400">NOURA20</code></td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">34</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">18,200 SAR</td>
+              <td class="px-4 py-3 text-end font-semibold text-amber-600 dark:text-amber-400">910 SAR</td>
+              <td class="px-4 py-3 text-end font-medium text-emerald-600 dark:text-emerald-400">7,200 SAR</td>
+              <td class="px-4 py-3 text-end text-slate-700 dark:text-slate-300">9.1%</td>
+              <td class="px-4 py-3"><span class="badge badge-active">Active</span></td>
+              <td class="px-4 py-3"><div class="relative" data-actions-dropdown="aff-005-actions"><button type="button" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring" aria-label="إجراءات نورة المطيري" aria-expanded="false" aria-haspopup="true"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button><div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu"><a href="affiliate-detail.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الملف</a><button type="button" data-modal-trigger="modal-approve" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50" role="menuitem"><i data-lucide="check-circle-2" class="h-4 w-4" aria-hidden="true"></i>موافقة</button><button type="button" data-modal-trigger="modal-suspend" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-amber-600 hover:bg-amber-50" role="menuitem"><i data-lucide="pause-circle" class="h-4 w-4" aria-hidden="true"></i>تعليق</button><button type="button" data-modal-trigger="modal-change-level" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="award" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تغيير المستوى</button><a href="orders.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="shopping-cart" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الطلبات</a><button type="button" data-modal-trigger="modal-pay-commission" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-indigo-600 hover:bg-indigo-50" role="menuitem"><i data-lucide="banknote" class="h-4 w-4" aria-hidden="true"></i>دفع عمولة</button><hr class="my-1 border-slate-200 dark:border-slate-600"><button type="button" data-copy="https://smartmerchant.os/r/NOURA20" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>نسخ رابط الإحالة</button></div></div></td>
+            </tr>
+
+            <!-- Row 6: Layla Nasser — Silver — Active -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-white dark:bg-slate-900">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة Layla Nasser" class="h-9 w-9 rounded-full"><div><p class="font-semibold text-slate-900 dark:text-white">Layla Nasser</p><p class="text-xs text-slate-400">AFF-006 • layla@example.com</p></div></div></td>
+              <td class="px-4 py-3"><span class="badge badge-silver">Silver</span></td>
+              <td class="px-4 py-3"><code class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-indigo-600 dark:text-indigo-400">LAYLA15</code></td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">19</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">7,400 AED</td>
+              <td class="px-4 py-3 text-end font-semibold text-amber-600 dark:text-amber-400">370 AED</td>
+              <td class="px-4 py-3 text-end font-medium text-emerald-600 dark:text-emerald-400">1,850 AED</td>
+              <td class="px-4 py-3 text-end text-slate-700 dark:text-slate-300">5.8%</td>
+              <td class="px-4 py-3"><span class="badge badge-active">Active</span></td>
+              <td class="px-4 py-3"><div class="relative" data-actions-dropdown="aff-006-actions"><button type="button" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring" aria-label="إجراءات Layla Nasser" aria-expanded="false" aria-haspopup="true"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button><div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu"><a href="affiliate-detail.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الملف</a><button type="button" data-modal-trigger="modal-approve" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50" role="menuitem"><i data-lucide="check-circle-2" class="h-4 w-4" aria-hidden="true"></i>موافقة</button><button type="button" data-modal-trigger="modal-suspend" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-amber-600 hover:bg-amber-50" role="menuitem"><i data-lucide="pause-circle" class="h-4 w-4" aria-hidden="true"></i>تعليق</button><button type="button" data-modal-trigger="modal-change-level" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="award" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تغيير المستوى</button><a href="orders.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="shopping-cart" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الطلبات</a><button type="button" data-modal-trigger="modal-pay-commission" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-indigo-600 hover:bg-indigo-50" role="menuitem"><i data-lucide="banknote" class="h-4 w-4" aria-hidden="true"></i>دفع عمولة</button><hr class="my-1 border-slate-200 dark:border-slate-600"><button type="button" data-copy="https://smartmerchant.os/r/LAYLA15" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>نسخ رابط الإحالة</button></div></div></td>
+            </tr>
+
+            <!-- Row 7: خالد الرشيدي — Bronze — Pending -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-white dark:bg-slate-900">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة خالد الرشيدي" class="h-9 w-9 rounded-full"><div><p class="font-semibold text-slate-900 dark:text-white">خالد الرشيدي</p><p class="text-xs text-slate-400">AFF-007 • khalid@example.com</p></div></div></td>
+              <td class="px-4 py-3"><span class="badge badge-bronze">Bronze</span></td>
+              <td class="px-4 py-3"><code class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-indigo-600 dark:text-indigo-400">KHALID10</code></td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">5</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">1,800 SAR</td>
+              <td class="px-4 py-3 text-end font-semibold text-amber-600 dark:text-amber-400">180 SAR</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-400">0 SAR</td>
+              <td class="px-4 py-3 text-end text-slate-700 dark:text-slate-300">3.2%</td>
+              <td class="px-4 py-3"><span class="badge badge-pending">Pending</span></td>
+              <td class="px-4 py-3"><div class="relative" data-actions-dropdown="aff-007-actions"><button type="button" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring" aria-label="إجراءات خالد الرشيدي" aria-expanded="false" aria-haspopup="true"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button><div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu"><a href="affiliate-detail.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الملف</a><button type="button" data-modal-trigger="modal-approve" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50" role="menuitem"><i data-lucide="check-circle-2" class="h-4 w-4" aria-hidden="true"></i>موافقة</button><button type="button" data-modal-trigger="modal-suspend" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-amber-600 hover:bg-amber-50" role="menuitem"><i data-lucide="pause-circle" class="h-4 w-4" aria-hidden="true"></i>تعليق</button><button type="button" data-modal-trigger="modal-change-level" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="award" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تغيير المستوى</button><a href="orders.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="shopping-cart" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الطلبات</a><button type="button" data-modal-trigger="modal-pay-commission" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-indigo-600 hover:bg-indigo-50" role="menuitem"><i data-lucide="banknote" class="h-4 w-4" aria-hidden="true"></i>دفع عمولة</button><hr class="my-1 border-slate-200 dark:border-slate-600"><button type="button" data-copy="https://smartmerchant.os/r/KHALID10" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>نسخ رابط الإحالة</button></div></div></td>
+            </tr>
+
+            <!-- Row 8: ريم السبيعي — Silver — Active -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-white dark:bg-slate-900">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة ريم السبيعي" class="h-9 w-9 rounded-full"><div><p class="font-semibold text-slate-900 dark:text-white">ريم السبيعي</p><p class="text-xs text-slate-400">AFF-008 • reem@example.com</p></div></div></td>
+              <td class="px-4 py-3"><span class="badge badge-silver">Silver</span></td>
+              <td class="px-4 py-3"><code class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-indigo-600 dark:text-indigo-400">REEM15</code></td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">27</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">11,500 EGP</td>
+              <td class="px-4 py-3 text-end font-semibold text-amber-600 dark:text-amber-400">575 EGP</td>
+              <td class="px-4 py-3 text-end font-medium text-emerald-600 dark:text-emerald-400">4,200 EGP</td>
+              <td class="px-4 py-3 text-end text-slate-700 dark:text-slate-300">7.3%</td>
+              <td class="px-4 py-3"><span class="badge badge-active">Active</span></td>
+              <td class="px-4 py-3"><div class="relative" data-actions-dropdown="aff-008-actions"><button type="button" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring" aria-label="إجراءات ريم السبيعي" aria-expanded="false" aria-haspopup="true"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button><div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu"><a href="affiliate-detail.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الملف</a><button type="button" data-modal-trigger="modal-approve" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50" role="menuitem"><i data-lucide="check-circle-2" class="h-4 w-4" aria-hidden="true"></i>موافقة</button><button type="button" data-modal-trigger="modal-suspend" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-amber-600 hover:bg-amber-50" role="menuitem"><i data-lucide="pause-circle" class="h-4 w-4" aria-hidden="true"></i>تعليق</button><button type="button" data-modal-trigger="modal-change-level" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="award" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تغيير المستوى</button><a href="orders.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="shopping-cart" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الطلبات</a><button type="button" data-modal-trigger="modal-pay-commission" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-indigo-600 hover:bg-indigo-50" role="menuitem"><i data-lucide="banknote" class="h-4 w-4" aria-hidden="true"></i>دفع عمولة</button><hr class="my-1 border-slate-200 dark:border-slate-600"><button type="button" data-copy="https://smartmerchant.os/r/REEM15" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>نسخ رابط الإحالة</button></div></div></td>
+            </tr>
+
+            <!-- Row 9: سامي الزهراني — Gold — Suspended -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-white dark:bg-slate-900">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة سامي الزهراني" class="h-9 w-9 rounded-full"><div><p class="font-semibold text-slate-900 dark:text-white">سامي الزهراني</p><p class="text-xs text-slate-400">AFF-009 • sami@example.com</p></div></div></td>
+              <td class="px-4 py-3"><span class="badge badge-gold">Gold</span></td>
+              <td class="px-4 py-3"><code class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-indigo-600 dark:text-indigo-400">SAMI20</code></td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">12</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">5,800 KWD</td>
+              <td class="px-4 py-3 text-end font-semibold text-amber-600 dark:text-amber-400">290 KWD</td>
+              <td class="px-4 py-3 text-end font-medium text-emerald-600 dark:text-emerald-400">800 KWD</td>
+              <td class="px-4 py-3 text-end text-slate-700 dark:text-slate-300">4.8%</td>
+              <td class="px-4 py-3"><span class="badge badge-suspended">Suspended</span></td>
+              <td class="px-4 py-3"><div class="relative" data-actions-dropdown="aff-009-actions"><button type="button" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring" aria-label="إجراءات سامي الزهراني" aria-expanded="false" aria-haspopup="true"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button><div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu"><a href="affiliate-detail.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الملف</a><button type="button" data-modal-trigger="modal-approve" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50" role="menuitem"><i data-lucide="check-circle-2" class="h-4 w-4" aria-hidden="true"></i>موافقة</button><button type="button" data-modal-trigger="modal-suspend" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-amber-600 hover:bg-amber-50" role="menuitem"><i data-lucide="pause-circle" class="h-4 w-4" aria-hidden="true"></i>تعليق</button><button type="button" data-modal-trigger="modal-change-level" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="award" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تغيير المستوى</button><a href="orders.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="shopping-cart" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الطلبات</a><button type="button" data-modal-trigger="modal-pay-commission" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-indigo-600 hover:bg-indigo-50" role="menuitem"><i data-lucide="banknote" class="h-4 w-4" aria-hidden="true"></i>دفع عمولة</button><hr class="my-1 border-slate-200 dark:border-slate-600"><button type="button" data-copy="https://smartmerchant.os/r/SAMI20" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>نسخ رابط الإحالة</button></div></div></td>
+            </tr>
+
+            <!-- Row 10: هناء الجابري — Platinum — Rejected -->
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-white dark:bg-slate-900">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة هناء الجابري" class="h-9 w-9 rounded-full"><div><p class="font-semibold text-slate-900 dark:text-white">هناء الجابري</p><p class="text-xs text-slate-400">AFF-010 • hanaa@example.com</p></div></div></td>
+              <td class="px-4 py-3"><span class="badge badge-platinum">Platinum</span></td>
+              <td class="px-4 py-3"><code class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-indigo-600 dark:text-indigo-400">HANAA25</code></td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">62</td>
+              <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">38,900 AED</td>
+              <td class="px-4 py-3 text-end font-semibold text-amber-600 dark:text-amber-400">1,945 AED</td>
+              <td class="px-4 py-3 text-end font-medium text-emerald-600 dark:text-emerald-400">15,600 AED</td>
+              <td class="px-4 py-3 text-end text-slate-700 dark:text-slate-300">11.2%</td>
+              <td class="px-4 py-3"><span class="badge badge-rejected">Rejected</span></td>
+              <td class="px-4 py-3"><div class="relative" data-actions-dropdown="aff-010-actions"><button type="button" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring" aria-label="إجراءات هناء الجابري" aria-expanded="false" aria-haspopup="true"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button><div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu"><a href="affiliate-detail.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الملف</a><button type="button" data-modal-trigger="modal-approve" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50" role="menuitem"><i data-lucide="check-circle-2" class="h-4 w-4" aria-hidden="true"></i>موافقة</button><button type="button" data-modal-trigger="modal-suspend" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-amber-600 hover:bg-amber-50" role="menuitem"><i data-lucide="pause-circle" class="h-4 w-4" aria-hidden="true"></i>تعليق</button><button type="button" data-modal-trigger="modal-change-level" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="award" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تغيير المستوى</button><a href="orders.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="shopping-cart" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الطلبات</a><button type="button" data-modal-trigger="modal-pay-commission" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-indigo-600 hover:bg-indigo-50" role="menuitem"><i data-lucide="banknote" class="h-4 w-4" aria-hidden="true"></i>دفع عمولة</button><hr class="my-1 border-slate-200 dark:border-slate-600"><button type="button" data-copy="https://smartmerchant.os/r/HANAA25" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>نسخ رابط الإحالة</button></div></div></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex items-center justify-between px-4 py-4 border-t border-slate-200 dark:border-slate-700">
+        <p class="text-sm text-slate-500 dark:text-slate-400">عرض <span class="font-medium text-slate-700 dark:text-slate-300">1–10</span> من <span class="font-medium text-slate-700 dark:text-slate-300">10</span> مسوق</p>
+        <div class="flex items-center gap-1">
+          <button type="button" class="p-2 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-40 focus-ring" disabled aria-label="الصفحة السابقة"><i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i></button>
+          <button type="button" class="min-w-[2rem] h-8 px-2 rounded-lg text-sm font-medium bg-indigo-600 text-white focus-ring" aria-current="page" aria-label="الصفحة 1">1</button>
+          <button type="button" class="p-2 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-40 focus-ring" disabled aria-label="الصفحة التالية"><i data-lucide="chevron-left" class="h-4 w-4" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty state (hidden — shown when no affiliates) -->
+    <div class="hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-12 text-center" aria-hidden="true">
+      <i data-lucide="handshake" class="mx-auto h-12 w-12 text-slate-300 dark:text-slate-600 mb-4" aria-hidden="true"></i>
+      <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">لا يوجد مسوقون بعد</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto">لم ينضم أي مسوق إلى نظامك بعد. يمكنك مشاركة رابط الانضمام مع المسوقين المهتمين.</p>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal backdrop -->
+<div data-modal-backdrop class="fixed inset-0 z-50 bg-black/50 hidden items-center justify-center p-4" aria-hidden="true">
+
+  <!-- Modal: Approve affiliate -->
+  <div id="modal-approve" class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md p-6 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-approve-title">
+    <div class="flex items-start justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center shrink-0">
+          <i data-lucide="check-circle-2" class="h-5 w-5 text-emerald-600" aria-hidden="true"></i>
+        </div>
+        <div><h2 id="modal-approve-title" class="text-base font-semibold text-slate-900 dark:text-white">الموافقة على المسوق</h2><p class="text-sm text-slate-500 dark:text-slate-400">تفعيل حساب المسوق</p></div>
+      </div>
+      <button type="button" data-modal-close class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring"><i data-lucide="x" class="h-4 w-4" aria-hidden="true"></i></button>
+    </div>
+    <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">هل أنت متأكد من الموافقة على <strong class="text-slate-900 dark:text-white">أحمد الشمري</strong>؟ سيتمكن المسوق من إنشاء روابط إحالة والحصول على عمولات بعد الموافقة.</p>
+    <div class="flex items-center gap-3 justify-end">
+      <button type="button" data-modal-close class="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors focus-ring">إلغاء</button>
+      <button type="button" data-modal-close class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors focus-ring">موافقة</button>
+    </div>
+  </div>
+
+  <!-- Modal: Suspend affiliate -->
+  <div id="modal-suspend" class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md p-6 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-suspend-title">
+    <div class="flex items-start justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center shrink-0"><i data-lucide="alert-triangle" class="h-5 w-5 text-amber-600" aria-hidden="true"></i></div>
+        <div><h2 id="modal-suspend-title" class="text-base font-semibold text-slate-900 dark:text-white">تعليق حساب المسوق</h2><p class="text-sm text-slate-500 dark:text-slate-400">إيقاف نشاط المسوق مؤقتاً</p></div>
+      </div>
+      <button type="button" data-modal-close class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring"><i data-lucide="x" class="h-4 w-4" aria-hidden="true"></i></button>
+    </div>
+    <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">سيتم تعليق حساب <strong class="text-slate-900 dark:text-white">أحمد الشمري</strong> مؤقتاً. لن تُسجَّل أي طلبات عبر رابطه حتى تعيد تفعيله.</p>
+    <div class="flex items-center gap-3 justify-end">
+      <button type="button" data-modal-close class="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 rounded-lg transition-colors focus-ring">إلغاء</button>
+      <button type="button" data-modal-close class="px-4 py-2 text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 rounded-lg transition-colors focus-ring">تعليق الحساب</button>
+    </div>
+  </div>
+
+  <!-- Modal: Change level -->
+  <div id="modal-change-level" class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md p-6 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-change-level-title">
+    <div class="flex items-start justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center shrink-0"><i data-lucide="award" class="h-5 w-5 text-indigo-600" aria-hidden="true"></i></div>
+        <div><h2 id="modal-change-level-title" class="text-base font-semibold text-slate-900 dark:text-white">تغيير مستوى المسوق</h2><p class="text-sm text-slate-500 dark:text-slate-400">أحمد الشمري — المستوى الحالي: Gold</p></div>
+      </div>
+      <button type="button" data-modal-close class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring"><i data-lucide="x" class="h-4 w-4" aria-hidden="true"></i></button>
+    </div>
+    <fieldset class="mb-6">
+      <legend class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">اختر المستوى الجديد</legend>
+      <div class="grid grid-cols-2 gap-2">
+        <label class="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700"><input type="radio" name="level" value="bronze" class="text-indigo-600"><span class="badge badge-bronze text-xs">Bronze</span><span class="text-sm text-slate-600 dark:text-slate-400">5%</span></label>
+        <label class="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700"><input type="radio" name="level" value="silver" class="text-indigo-600"><span class="badge badge-silver text-xs">Silver</span><span class="text-sm text-slate-600 dark:text-slate-400">10%</span></label>
+        <label class="flex items-center gap-2 p-3 rounded-lg border border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-900/20 cursor-pointer"><input type="radio" name="level" value="gold" checked class="text-indigo-600"><span class="badge badge-gold text-xs">Gold</span><span class="text-sm text-slate-600 dark:text-slate-400">15%</span></label>
+        <label class="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700"><input type="radio" name="level" value="platinum" class="text-indigo-600"><span class="badge badge-platinum text-xs">Platinum</span><span class="text-sm text-slate-600 dark:text-slate-400">20%</span></label>
+      </div>
+    </fieldset>
+    <div class="flex items-center gap-3 justify-end">
+      <button type="button" data-modal-close class="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 rounded-lg transition-colors focus-ring">إلغاء</button>
+      <button type="button" data-modal-close class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors focus-ring">حفظ التغيير</button>
+    </div>
+  </div>
+
+  <!-- Modal: Pay commission -->
+  <div id="modal-pay-commission" class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md p-6 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-pay-title">
+    <div class="flex items-start justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center shrink-0"><i data-lucide="banknote" class="h-5 w-5 text-emerald-600" aria-hidden="true"></i></div>
+        <div><h2 id="modal-pay-title" class="text-base font-semibold text-slate-900 dark:text-white">دفع العمولة</h2><p class="text-sm text-slate-500 dark:text-slate-400">أحمد الشمري • عمولة معلقة: 1,420 SAR</p></div>
+      </div>
+      <button type="button" data-modal-close class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring"><i data-lucide="x" class="h-4 w-4" aria-hidden="true"></i></button>
+    </div>
+    <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">سيتم تسجيل دفع عمولة <strong>1,420 SAR</strong> لـ <strong class="text-slate-900 dark:text-white">أحمد الشمري</strong> وتحويل الرصيد إلى قائمة الدفعات المكتملة.</p>
+    <div class="flex items-center gap-3 justify-end">
+      <button type="button" data-modal-close class="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 rounded-lg transition-colors focus-ring">إلغاء</button>
+      <button type="button" data-modal-close class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors focus-ring">تأكيد الدفع</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans bg-surface-base text-text-primary">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الطلبات — Smart Merchant OS</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#6366f1',
+            'brand-accent': '#8b5cf6',
+            'brand-info': '#3b82f6',
+            'surface-base': '#f8fafc',
+            'surface-card': '#ffffff',
+            'surface-muted': '#f1f5f9',
+            'surface-border': '#e2e8f0',
+            'text-primary': '#0f172a',
+            'text-secondary': '#475569',
+            'text-muted': '#94a3b8',
+          },
+          fontFamily: { sans: ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'] },
+          backgroundImage: { 'gradient-brand': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%)' },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css" />
+  <script>(function(){var t=localStorage.getItem('smos:theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}})();</script>
+</head>
+<body class="bg-surface-base dark:bg-slate-900 text-text-primary dark:text-slate-100 min-h-screen">
+
+  <div data-sidebar-overlay class="fixed inset-0 bg-black/50 z-30 lg:hidden hidden"></div>
+
+  <aside data-sidebar class="fixed top-0 start-0 h-full w-64 bg-surface-card dark:bg-slate-800 border-e border-surface-border dark:border-slate-700 z-40 flex flex-col transform translate-x-full lg:translate-x-0 transition-transform duration-300">
+    <div class="flex items-center gap-3 px-5 py-4 border-b border-surface-border dark:border-slate-700">
+      <div class="h-8 w-8 rounded-lg bg-gradient-brand flex items-center justify-center flex-shrink-0">
+        <svg class="h-5 w-5 text-white" viewBox="0 0 32 32" fill="none"><path d="M6 26 L16 6 L26 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 19.5 H22.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="16" cy="6" r="2" fill="currentColor"/></svg>
+      </div>
+      <div class="leading-tight">
+        <p class="text-sm font-bold dark:text-white">Smart Merchant</p>
+        <p class="text-xs text-text-muted dark:text-slate-400">سمارت مرتشانت</p>
+      </div>
+    </div>
+    <nav class="flex-1 overflow-y-auto py-3 px-3 space-y-0.5">
+      <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="layout-dashboard" class="h-4 w-4 flex-shrink-0"></i><span>لوحة التحكم</span></a>
+      <a href="products.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="package" class="h-4 w-4 flex-shrink-0"></i><span>المنتجات والخدمات</span></a>
+      <a href="orders.html" aria-current="page" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-semibold text-brand-primary bg-indigo-50 dark:bg-indigo-900/30 border-e-2 border-brand-primary"><i data-lucide="shopping-cart" class="h-4 w-4 flex-shrink-0"></i><span>الطلبات</span></a>
+      <a href="customers.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="users" class="h-4 w-4 flex-shrink-0"></i><span>العملاء</span></a>
+      <a href="affiliates.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="handshake" class="h-4 w-4 flex-shrink-0"></i><span>المسوقون</span></a>
+      <a href="affiliate-payouts.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="wallet" class="h-4 w-4 flex-shrink-0"></i><span>المدفوعات</span></a>
+      <a href="landing-pages.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="layout-template" class="h-4 w-4 flex-shrink-0"></i><span>الصفحات التسويقية</span></a>
+      <a href="analytics.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="bar-chart-3" class="h-4 w-4 flex-shrink-0"></i><span>التقارير</span></a>
+      <a href="settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="settings" class="h-4 w-4 flex-shrink-0"></i><span>الإعدادات</span></a>
+    </nav>
+    <div class="px-4 py-3 border-t border-surface-border dark:border-slate-700">
+      <div class="flex items-center gap-3">
+        <img src="assets/img/placeholders/avatar.svg" alt="صورة التاجر" class="h-8 w-8 rounded-full" />
+        <div class="leading-tight min-w-0">
+          <p class="text-xs font-semibold truncate dark:text-white">متجر النجاح</p>
+          <p class="text-xs text-text-muted truncate">merchant@smos.sa</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="lg:ps-64 flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-20 bg-surface-card/90 dark:bg-slate-800/90 backdrop-blur border-b border-surface-border dark:border-slate-700 px-4 py-3 flex items-center gap-3">
+      <button data-sidebar-toggle class="lg:hidden p-2 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors" aria-label="فتح القائمة"><i data-lucide="menu" class="h-5 w-5"></i></button>
+      <div class="flex-1 max-w-sm">
+        <div class="relative">
+          <i data-lucide="search" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-text-muted pointer-events-none"></i>
+          <input type="search" placeholder="بحث..." class="w-full ps-9 pe-4 py-2 text-sm rounded-lg border border-surface-border dark:border-slate-600 bg-surface-muted dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary" />
+        </div>
+      </div>
+      <div class="flex items-center gap-2 ms-auto">
+        <button data-theme-toggle class="p-2 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="sun" class="h-5 w-5 dark:hidden"></i><i data-lucide="moon" class="h-5 w-5 hidden dark:block"></i></button>
+        <a href="notifications.html" class="relative p-2 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="bell" class="h-5 w-5"></i><span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-red-500"></span></a>
+        <div class="relative">
+          <button data-profile-menu class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors">
+            <img src="assets/img/placeholders/avatar.svg" alt="صورة الحساب" class="h-7 w-7 rounded-full" />
+            <i data-lucide="chevron-down" class="h-4 w-4 text-text-muted"></i>
+          </button>
+          <div data-profile-dropdown class="hidden absolute end-0 top-full mt-1 w-48 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-50">
+            <a href="profile.html" class="flex items-center gap-2 px-4 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="user" class="h-4 w-4"></i> الملف الشخصي</a>
+            <a href="settings.html" class="flex items-center gap-2 px-4 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="settings" class="h-4 w-4"></i> الإعدادات</a>
+            <hr class="my-1 border-surface-border dark:border-slate-700" />
+            <a href="login.html" class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"><i data-lucide="log-out" class="h-4 w-4"></i> تسجيل الخروج</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 p-4 lg:p-6">
+
+      <!-- Page Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h1 class="text-2xl font-bold dark:text-white">الطلبات</h1>
+          <p class="text-sm text-text-secondary dark:text-slate-400 mt-0.5">إجمالي ١٤ طلب</p>
+        </div>
+        <button class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-sm">
+          <i data-lucide="plus" class="h-4 w-4"></i>
+          طلب جديد
+        </button>
+      </div>
+
+      <!-- Filters -->
+      <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-4 mb-4">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div class="col-span-2 sm:col-span-3 lg:col-span-1 relative">
+            <i data-lucide="search" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-text-muted pointer-events-none"></i>
+            <input type="search" placeholder="رقم الطلب أو العميل..." class="w-full ps-9 pe-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white" />
+          </div>
+          <select class="px-3 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white">
+            <option value="">حالة الطلب</option>
+            <option>Pending</option>
+            <option>Confirmed</option>
+            <option>Processing</option>
+            <option>Shipped</option>
+            <option>Delivered</option>
+            <option>Cancelled</option>
+          </select>
+          <select class="px-3 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white">
+            <option value="">حالة الدفع</option>
+            <option>Unpaid</option>
+            <option>Paid</option>
+            <option>Partially Paid</option>
+            <option>Refunded</option>
+          </select>
+          <select class="px-3 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white">
+            <option value="">المسوّق</option>
+            <option>أحمد الشمري</option>
+            <option>فهد العتيبي</option>
+            <option>هناء الجابري</option>
+            <option>سارة الخالدي</option>
+            <option>نورة المطيري</option>
+          </select>
+          <div class="relative">
+            <i data-lucide="calendar" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-text-muted pointer-events-none"></i>
+            <input type="date" class="w-full ps-9 pe-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 overflow-hidden">
+        <div class="table-responsive">
+          <table class="w-full text-sm">
+            <thead class="bg-surface-muted dark:bg-slate-700/50 border-b border-surface-border dark:border-slate-700">
+              <tr>
+                <th class="text-start py-3 px-4 text-xs font-semibold text-text-muted uppercase whitespace-nowrap">رقم الطلب</th>
+                <th class="text-start py-3 px-4 text-xs font-semibold text-text-muted uppercase whitespace-nowrap">العميل</th>
+                <th class="text-start py-3 px-4 text-xs font-semibold text-text-muted uppercase whitespace-nowrap">المنتج</th>
+                <th class="text-start py-3 px-4 text-xs font-semibold text-text-muted uppercase whitespace-nowrap">المسوّق</th>
+                <th class="text-start py-3 px-4 text-xs font-semibold text-text-muted uppercase whitespace-nowrap">الإجمالي</th>
+                <th class="text-start py-3 px-4 text-xs font-semibold text-text-muted uppercase whitespace-nowrap">العمولة</th>
+                <th class="text-start py-3 px-4 text-xs font-semibold text-text-muted uppercase whitespace-nowrap">الطلب</th>
+                <th class="text-start py-3 px-4 text-xs font-semibold text-text-muted uppercase whitespace-nowrap">الدفع</th>
+                <th class="text-start py-3 px-4 text-xs font-semibold text-text-muted uppercase whitespace-nowrap">الشحن</th>
+                <th class="text-start py-3 px-4 text-xs font-semibold text-text-muted uppercase whitespace-nowrap">التاريخ</th>
+                <th class="text-start py-3 px-4 text-xs font-semibold text-text-muted uppercase whitespace-nowrap"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-surface-border dark:divide-slate-700">
+
+              <!-- Row 1: Delivered/Paid/Delivered – SAR – with affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0094</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">محمد العمري</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">كورس التسويق الرقمي الشامل</p></td>
+                <td class="py-3 px-4 whitespace-nowrap"><a href="affiliate-detail.html" class="text-brand-primary hover:underline text-xs">أحمد الشمري</a></td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">499 SAR</td>
+                <td class="py-3 px-4 whitespace-nowrap text-emerald-600 font-medium">75 SAR</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">١٨ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button data-modal-trigger data-modal-target="modal-confirm-0094" class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button data-modal-trigger data-modal-target="modal-ship-0094" class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button data-modal-trigger data-modal-target="modal-deliver-0094" class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button data-modal-trigger data-modal-target="modal-cancel-0094" class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 2: Delivered/Paid/Delivered – EGP – no affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0093</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">سمر إبراهيم</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">خدمة كتابة المحتوى الاحترافي</p></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">800 EGP</td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">١٧ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 3: Shipped/Paid/Shipped – AED – with affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0092</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">رياض الحمدان</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">قالب متجر إلكتروني احترافي</p></td>
+                <td class="py-3 px-4 whitespace-nowrap"><a href="affiliate-detail.html" class="text-brand-primary hover:underline text-xs">فهد العتيبي</a></td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">149 AED</td>
+                <td class="py-3 px-4 whitespace-nowrap text-emerald-600 font-medium">22 AED</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-shipped">Shipped</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-shipped">Shipped</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">١٦ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button data-modal-trigger data-modal-target="modal-deliver-0092" class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 4: Delivered/Paid/Delivered – SAR – no affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0091</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">فاطمة الزهراني</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">باقة إدارة التواصل الاجتماعي</p></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">1,200 SAR</td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">١٥ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 5: Processing/Partially Paid/Preparing – SAR – with affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0090</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">علي المنصوري</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">خدمة تصميم هوية بصرية</p></td>
+                <td class="py-3 px-4 whitespace-nowrap"><a href="affiliate-detail.html" class="text-brand-primary hover:underline text-xs">هناء الجابري</a></td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">2,500 SAR</td>
+                <td class="py-3 px-4 whitespace-nowrap text-amber-600 font-medium text-xs">معلّقة</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-processing">Processing</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-partially-paid">Partially Paid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-preparing">Preparing</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">١٤ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button data-modal-trigger data-modal-target="modal-cancel-0090" class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 6: Processing/Paid/Not Shipped – EGP – with affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0089</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">فيصل الأحمدي</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">كتاب إلكتروني: أسرار التجارة</p></td>
+                <td class="py-3 px-4 whitespace-nowrap"><a href="affiliate-detail.html" class="text-brand-primary hover:underline text-xs">فهد العتيبي</a></td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">49 EGP</td>
+                <td class="py-3 px-4 whitespace-nowrap text-emerald-600 font-medium">7 EGP</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-processing">Processing</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-not-shipped">Not Shipped</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">١٣ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 7: Confirmed/Unpaid/Not Shipped – SAR – no affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0088</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">وليد الحارثي</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">اشتراك أدوات التسويق الشهري</p></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">199 SAR</td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-confirmed">Confirmed</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-unpaid">Unpaid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-not-shipped">Not Shipped</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">١٢ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 8: Pending/Unpaid/Not Shipped – SAR – with affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0087</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">Omar Khalil</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">قميص برنتد مخصص</p></td>
+                <td class="py-3 px-4 whitespace-nowrap"><a href="affiliate-detail.html" class="text-brand-primary hover:underline text-xs">سارة الخالدي</a></td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">89 SAR</td>
+                <td class="py-3 px-4 whitespace-nowrap text-amber-600 font-medium text-xs">معلّقة</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-pending">Pending</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-unpaid">Unpaid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-not-shipped">Not Shipped</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">١١ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button data-modal-trigger data-modal-target="modal-confirm-0087" class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button data-modal-trigger data-modal-target="modal-cancel-0087" class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 9: Shipped/Paid/Shipped – SAR – no affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0086</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">نوف القرني</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">حقيبة جلدية فاخرة</p></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">380 SAR</td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-shipped">Shipped</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-shipped">Shipped</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">١٠ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button data-modal-trigger data-modal-target="modal-deliver-0086" class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 10: Delivered/Paid/Delivered – SAR – with affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0085</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">فيصل العمري</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">كورس التسويق الرقمي الشامل</p></td>
+                <td class="py-3 px-4 whitespace-nowrap"><a href="affiliate-detail.html" class="text-brand-primary hover:underline text-xs">أحمد الشمري</a></td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">499 SAR</td>
+                <td class="py-3 px-4 whitespace-nowrap text-emerald-600 font-medium">75 SAR</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">٨ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 11: Cancelled/Refunded/Returned – EGP – with affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0084</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">Layla Hassan</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">خدمة كتابة المحتوى الاحترافي</p></td>
+                <td class="py-3 px-4 whitespace-nowrap"><a href="affiliate-detail.html" class="text-brand-primary hover:underline text-xs">نورة المطيري</a></td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">800 EGP</td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted line-through text-xs">120 EGP</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-cancelled">Cancelled</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-refunded">Refunded</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-returned">Returned</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">٦ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 12: Delivered/Paid/Delivered – AED – no affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0083</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">Mahmoud Faris</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">قالب متجر إلكتروني احترافي</p></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">149 AED</td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-delivered">Delivered</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">٤ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 13: Confirmed/Unpaid/Not Shipped – EGP – with affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0082</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">دانة الأحمدي</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">كورس إدارة الإعلانات الرقمية</p></td>
+                <td class="py-3 px-4 whitespace-nowrap"><a href="affiliate-detail.html" class="text-brand-primary hover:underline text-xs">هناء الجابري</a></td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">299 SAR</td>
+                <td class="py-3 px-4 whitespace-nowrap text-amber-600 font-medium text-xs">معلّقة</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-confirmed">Confirmed</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-unpaid">Unpaid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-not-shipped">Not Shipped</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">٢ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 14: Pending/Unpaid/Not Shipped – KWD – no affiliate -->
+              <tr class="hover:bg-surface-muted dark:hover:bg-slate-700/40 transition-colors">
+                <td class="py-3 px-4 whitespace-nowrap"><a href="order-detail.html" class="font-mono text-sm font-semibold text-brand-primary hover:underline">#ORD-2024-0081</a></td>
+                <td class="py-3 px-4 whitespace-nowrap dark:text-slate-300">سعد الدوسري</td>
+                <td class="py-3 px-4 max-w-[160px]"><p class="truncate text-text-secondary dark:text-slate-400">خدمة تصميم هوية بصرية</p></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap font-semibold dark:text-white">65 KWD</td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted">—</td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-pending">Pending</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-unpaid">Unpaid</span></td>
+                <td class="py-3 px-4 whitespace-nowrap"><span class="badge badge-not-shipped">Not Shipped</span></td>
+                <td class="py-3 px-4 whitespace-nowrap text-text-muted text-xs">١ أبريل ٢٠٢٤</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                  <div class="relative" data-actions-dropdown>
+                    <button class="p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-600 transition-colors" aria-expanded="false" aria-label="إجراءات"><i data-lucide="more-horizontal" class="h-4 w-4"></i></button>
+                    <div class="hidden absolute end-0 top-full mt-1 w-44 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-20">
+                      <a href="order-detail.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="eye" class="h-3.5 w-3.5"></i> عرض التفاصيل</a>
+                      <a href="order-edit.html" class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="pencil" class="h-3.5 w-3.5"></i> تعديل الطلب</a>
+                      <button data-modal-trigger data-modal-target="modal-confirm-0081" class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="check-circle" class="h-3.5 w-3.5"></i> تأكيد الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="truck" class="h-3.5 w-3.5"></i> تحديد كـ Shipped</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="package-check" class="h-3.5 w-3.5"></i> تحديد كـ Delivered</button>
+                      <button data-modal-trigger data-modal-target="modal-cancel-0081" class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-start"><i data-lucide="x-circle" class="h-3.5 w-3.5"></i> إلغاء الطلب</button>
+                      <button class="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700 text-start"><i data-lucide="printer" class="h-3.5 w-3.5"></i> طباعة الفاتورة</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex items-center justify-between px-4 py-3 border-t border-surface-border dark:border-slate-700">
+          <p class="text-xs text-text-muted">عرض ١–١٤ من ١٤ طلب</p>
+          <div class="flex items-center gap-1">
+            <button class="p-1.5 rounded-lg text-text-muted hover:bg-surface-muted dark:hover:bg-slate-700 disabled:opacity-40" disabled><i data-lucide="chevron-right" class="h-4 w-4"></i></button>
+            <button class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-primary text-white">١</button>
+            <button class="p-1.5 rounded-lg text-text-muted hover:bg-surface-muted dark:hover:bg-slate-700 disabled:opacity-40" disabled><i data-lucide="chevron-left" class="h-4 w-4"></i></button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Confirm modals -->
+  <div data-modal="modal-confirm-0094" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">تأكيد الطلب #ORD-2024-0094</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل تريد تأكيد هذا الطلب وتغيير حالته إلى Confirmed؟</p>
+      <div class="flex gap-3"><button data-modal-close class="flex-1 px-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button><button class="flex-1 px-4 py-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">تأكيد</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-ship-0094" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">تحديد كـ Shipped</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل تريد تغيير حالة الشحن لـ #ORD-2024-0094 إلى Shipped؟</p>
+      <div class="flex gap-3"><button data-modal-close class="flex-1 px-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button><button class="flex-1 px-4 py-2 text-sm font-semibold rounded-xl bg-blue-600 text-white hover:bg-blue-700">تأكيد</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-deliver-0094" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">تحديد كـ Delivered</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل تريد تأكيد استلام العميل للطلب #ORD-2024-0094؟ سيتم اعتماد عمولة المسوّق.</p>
+      <div class="flex gap-3"><button data-modal-close class="flex-1 px-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button><button class="flex-1 px-4 py-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">تأكيد الاستلام</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-cancel-0094" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">إلغاء الطلب #ORD-2024-0094</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل أنت متأكد من إلغاء هذا الطلب؟ لن يتم اعتماد عمولة المسوّق.</p>
+      <div class="flex gap-3"><button data-modal-close class="flex-1 px-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button><button class="flex-1 px-4 py-2 text-sm font-semibold rounded-xl bg-red-600 text-white hover:bg-red-700">إلغاء الطلب</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-deliver-0092" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">تحديد كـ Delivered</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل تريد تأكيد استلام الطلب #ORD-2024-0092؟ سيتم اعتماد عمولة فهد العتيبي (22 AED).</p>
+      <div class="flex gap-3"><button data-modal-close class="flex-1 px-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button><button class="flex-1 px-4 py-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">تأكيد الاستلام</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-cancel-0090" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">إلغاء الطلب #ORD-2024-0090</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل أنت متأكد من إلغاء هذا الطلب؟ الدفع الجزئي يحتاج إلى مراجعة الاسترداد.</p>
+      <div class="flex gap-3"><button data-modal-close class="flex-1 px-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button><button class="flex-1 px-4 py-2 text-sm font-semibold rounded-xl bg-red-600 text-white hover:bg-red-700">إلغاء الطلب</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-confirm-0087" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">تأكيد الطلب #ORD-2024-0087</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل تريد تأكيد هذا الطلب وتغيير حالته إلى Confirmed؟</p>
+      <div class="flex gap-3"><button data-modal-close class="flex-1 px-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button><button class="flex-1 px-4 py-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">تأكيد</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-cancel-0087" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">إلغاء الطلب #ORD-2024-0087</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل أنت متأكد من إلغاء طلب Omar Khalil؟</p>
+      <div class="flex gap-3"><button data-modal-close class="flex-1 px-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button><button class="flex-1 px-4 py-2 text-sm font-semibold rounded-xl bg-red-600 text-white hover:bg-red-700">إلغاء الطلب</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-deliver-0086" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">تحديد كـ Delivered</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل تريد تأكيد استلام نوف القرني للطلب #ORD-2024-0086؟</p>
+      <div class="flex gap-3"><button data-modal-close class="flex-1 px-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button><button class="flex-1 px-4 py-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">تأكيد الاستلام</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-confirm-0081" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">تأكيد الطلب #ORD-2024-0081</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل تريد تأكيد طلب سعد الدوسري (65 KWD)؟</p>
+      <div class="flex gap-3"><button data-modal-close class="flex-1 px-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button><button class="flex-1 px-4 py-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">تأكيد</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-cancel-0081" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">إلغاء الطلب #ORD-2024-0081</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل أنت متأكد من إلغاء طلب سعد الدوسري؟</p>
+      <div class="flex gap-3"><button data-modal-close class="flex-1 px-4 py-2 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button><button class="flex-1 px-4 py-2 text-sm font-semibold rounded-xl bg-red-600 text-white hover:bg-red-700">إلغاء الطلب</button></div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

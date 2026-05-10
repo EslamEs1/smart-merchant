@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الملف الشخصي — Smart Merchant OS</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { 'brand-primary': '#6366f1', 'brand-accent': '#8b5cf6', 'brand-info': '#3b82f6' },
+        fontFamily: { sans: ['Cairo','Tajawal','system-ui','sans-serif'] },
+        backgroundImage: { 'gradient-brand': 'linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#3b82f6 100%)' }
+      }}
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script>try{var t=localStorage.getItem('smos:theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}</script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+
+<!-- Sidebar overlay -->
+<div data-sidebar-overlay class="fixed inset-0 z-30 bg-black/50 hidden lg:hidden" aria-hidden="true"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="fixed top-0 start-0 z-40 h-screen w-64 bg-slate-900 dark:bg-slate-950 flex flex-col translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" aria-label="القائمة الجانبية">
+  <div class="flex items-center gap-3 px-5 py-5 border-b border-slate-700/60">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" aria-hidden="true" class="h-9 w-9 shrink-0">
+      <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="50%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs>
+      <rect x="4" y="12" width="14" height="14" rx="3" fill="url(#sg)" transform="rotate(45 11 19)"/>
+      <rect x="18" y="8" width="10" height="10" rx="2" fill="url(#sg)" opacity=".72" transform="rotate(45 23 13)"/>
+      <rect x="14" y="22" width="8" height="8" rx="2" fill="url(#sg)" opacity=".50" transform="rotate(45 18 26)"/>
+    </svg>
+    <div class="leading-tight"><p class="text-xs font-semibold text-white tracking-wide">Smart Merchant OS</p><p class="text-xs text-slate-400">سمارت مرتشانت</p></div>
+  </div>
+  <nav class="flex-1 overflow-y-auto py-4 px-3"><ul class="space-y-1" role="list">
+    <li><a href="dashboard.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="layout-dashboard" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>لوحة التحكم</span></a></li>
+    <li><a href="products.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="package" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المنتجات والخدمات</span></a></li>
+    <li><a href="orders.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="shopping-cart" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>الطلبات</span></a></li>
+    <li><a href="customers.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="users" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>العملاء</span></a></li>
+    <li><a href="affiliates.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="handshake" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المسوقون</span></a></li>
+    <li><a href="affiliate-payouts.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="wallet" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>المدفوعات</span></a></li>
+    <li><a href="landing-pages.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="layout-template" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>صفحات الهبوط</span></a></li>
+    <li><a href="analytics.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="bar-chart-3" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>التحليلات</span></a></li>
+    <li><a href="settings.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"><i data-lucide="settings" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400" aria-hidden="true"></i><span>الإعدادات</span></a></li>
+  </ul></nav>
+  <div class="border-t border-slate-700/60 px-4 py-4">
+    <div class="flex items-center gap-3">
+      <img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-8 w-8 rounded-full">
+      <div class="min-w-0"><p class="text-xs font-semibold text-white truncate">متجر الأناقة</p><p class="text-xs text-slate-400 truncate">merchant@smos.example</p></div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main wrapper -->
+<div class="lg:ps-64 min-h-screen flex flex-col pb-20">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-700 flex items-center gap-3 px-4 sm:px-6 h-14">
+    <button type="button" data-sidebar-toggle class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="فتح القائمة الجانبية" aria-expanded="false" aria-controls="sidebar"><i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i></button>
+    <div class="flex-1 max-w-md"><div class="relative"><span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400"><i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i></span><input type="search" placeholder="بحث..." class="w-full ps-9 pe-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-colors" aria-label="بحث"></div></div>
+    <div class="flex-1"></div>
+    <div class="flex items-center gap-1 sm:gap-2">
+      <button type="button" data-theme-toggle class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="تبديل الوضع الليلي"><i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i><i data-lucide="moon" class="h-4 w-4 hidden dark:block" aria-hidden="true"></i></button>
+      <a href="notifications.html" class="relative p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="الإشعارات"><i data-lucide="bell" class="h-4 w-4" aria-hidden="true"></i><span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-rose-500" aria-hidden="true"></span></a>
+      <div class="relative" data-actions-dropdown="profile-menu">
+        <button type="button" class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring" aria-label="قائمة الملف الشخصي" aria-expanded="false" aria-haspopup="true"><img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-7 w-7 rounded-full"><span class="hidden sm:block text-sm font-medium text-slate-900 dark:text-slate-100">متجر الأناقة</span></button>
+        <div class="dropdown-panel absolute end-0 top-full mt-1 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+          <a href="profile.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="user-circle" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الملف الشخصي</a>
+          <a href="settings.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="settings" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الإعدادات</a>
+          <hr class="my-1 border-slate-200 dark:border-slate-600">
+          <a href="login.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30" role="menuitem"><i data-lucide="log-out" class="h-4 w-4" aria-hidden="true"></i>تسجيل الخروج</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page content -->
+  <main class="flex-1 p-4 sm:p-6 lg:p-8">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-6" aria-label="مسار التنقل">
+      <a href="dashboard.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">لوحة التحكم</a>
+      <i data-lucide="chevron-left" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+      <span class="text-slate-900 dark:text-slate-100 font-medium">الملف الشخصي</span>
+    </nav>
+
+    <div class="mb-8">
+      <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">الملف الشخصي</h1>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">إدارة بيانات حسابك الشخصية</p>
+    </div>
+
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+      <!-- Left: Avatar card + quick links -->
+      <div class="xl:col-span-1 space-y-4">
+
+        <!-- Avatar card -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 text-center">
+          <div class="relative inline-block mb-4">
+            <img src="assets/img/placeholders/avatar.svg" alt="صورة الحساب" class="h-24 w-24 rounded-2xl border-4 border-white dark:border-slate-700 shadow-md">
+            <button type="button" class="absolute -bottom-2 -end-2 h-8 w-8 rounded-full bg-gradient-brand text-white flex items-center justify-center shadow-md hover:opacity-90 transition-opacity" aria-label="تغيير الصورة">
+              <i data-lucide="camera" class="h-3.5 w-3.5" aria-hidden="true"></i>
+            </button>
+          </div>
+          <h2 class="text-base font-bold text-slate-900 dark:text-slate-100">أحمد السعيد</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400">merchant@smos.example</p>
+          <p class="text-xs text-slate-400 mt-1">عضو منذ يناير 2025</p>
+
+          <button type="button" class="mt-4 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 dark:hover:bg-indigo-950/60 rounded-xl border border-indigo-200 dark:border-indigo-800 transition-colors">
+            <i data-lucide="upload" class="h-4 w-4" aria-hidden="true"></i>
+            تغيير الصورة
+          </button>
+          <p class="text-xs text-slate-400 mt-2">PNG أو JPG — حد أقصى 2MB</p>
+        </div>
+
+        <!-- Account summary -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-5 space-y-3">
+          <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100">ملخص الحساب</h3>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-slate-500 dark:text-slate-400">المتجر</span>
+            <span class="font-medium text-slate-900 dark:text-slate-100">متجر الأناقة</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-slate-500 dark:text-slate-400">الخطة</span>
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 text-xs font-medium">Growth</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-slate-500 dark:text-slate-400">تاريخ التجديد</span>
+            <span class="font-medium text-slate-900 dark:text-slate-100">1 يونيو 2026</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-slate-500 dark:text-slate-400">حالة الحساب</span>
+            <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-medium"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>نشط</span>
+          </div>
+        </div>
+
+        <!-- Quick links -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-5 space-y-1">
+          <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-3">روابط سريعة</h3>
+          <a href="settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+            <i data-lucide="settings" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>
+            الإعدادات
+          </a>
+          <a href="notifications.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+            <i data-lucide="bell" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>
+            الإشعارات
+          </a>
+          <a href="login.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors">
+            <i data-lucide="log-out" class="h-4 w-4" aria-hidden="true"></i>
+            تسجيل الخروج
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Profile form -->
+      <div class="xl:col-span-2 space-y-5">
+
+        <!-- Personal info -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+          <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex items-center gap-3">
+            <div class="h-8 w-8 rounded-lg bg-indigo-100 dark:bg-indigo-950/40 flex items-center justify-center shrink-0">
+              <i data-lucide="user" class="h-4 w-4 text-indigo-600 dark:text-indigo-400" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 dark:text-slate-100">المعلومات الشخصية</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">الاسم وبيانات التواصل</p>
+            </div>
+          </div>
+          <form id="profile-form" class="p-6 space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="profile-fname" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">الاسم الأول <span class="text-rose-500">*</span></label>
+                <input id="profile-fname" type="text" value="أحمد" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100">
+              </div>
+              <div>
+                <label for="profile-lname" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">اسم العائلة <span class="text-rose-500">*</span></label>
+                <input id="profile-lname" type="text" value="السعيد" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100">
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="profile-email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">البريد الإلكتروني <span class="text-rose-500">*</span></label>
+                <input id="profile-email" type="email" value="merchant@smos.example" dir="ltr" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100">
+              </div>
+              <div>
+                <label for="profile-phone" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">رقم الهاتف</label>
+                <input id="profile-phone" type="tel" value="+966 50 234 5678" dir="ltr" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Password change -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+          <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex items-center gap-3">
+            <div class="h-8 w-8 rounded-lg bg-amber-100 dark:bg-amber-950/40 flex items-center justify-center shrink-0">
+              <i data-lucide="lock" class="h-4 w-4 text-amber-600 dark:text-amber-400" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h2 class="text-sm font-semibold text-slate-900 dark:text-slate-100">تغيير كلمة المرور</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">اتركها فارغة إذا لم تريد تغييرها</p>
+            </div>
+          </div>
+          <div class="p-6 space-y-5">
+            <div>
+              <label for="pwd-current" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">كلمة المرور الحالية</label>
+              <div class="relative">
+                <input id="pwd-current" type="password" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100 pe-12" placeholder="••••••••">
+                <button type="button" id="toggle-pwd-current" class="absolute inset-y-0 end-0 flex items-center pe-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300" aria-label="إظهار كلمة المرور">
+                  <i id="eye-current" data-lucide="eye" class="h-4 w-4" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="pwd-new" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">كلمة المرور الجديدة</label>
+                <div class="relative">
+                  <input id="pwd-new" type="password" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100 pe-12" placeholder="8 أحرف على الأقل">
+                  <button type="button" id="toggle-pwd-new" class="absolute inset-y-0 end-0 flex items-center pe-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300" aria-label="إظهار كلمة المرور">
+                    <i id="eye-new" data-lucide="eye" class="h-4 w-4" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <!-- Strength meter -->
+                <div class="mt-2 flex gap-1">
+                  <div class="h-1 flex-1 rounded-full bg-slate-200 dark:bg-slate-600" id="str1"></div>
+                  <div class="h-1 flex-1 rounded-full bg-slate-200 dark:bg-slate-600" id="str2"></div>
+                  <div class="h-1 flex-1 rounded-full bg-slate-200 dark:bg-slate-600" id="str3"></div>
+                  <div class="h-1 flex-1 rounded-full bg-slate-200 dark:bg-slate-600" id="str4"></div>
+                </div>
+              </div>
+              <div>
+                <label for="pwd-confirm" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">تأكيد كلمة المرور الجديدة</label>
+                <div class="relative">
+                  <input id="pwd-confirm" type="password" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:text-slate-100 pe-12" placeholder="أعد كتابة كلمة المرور">
+                  <button type="button" id="toggle-pwd-confirm" class="absolute inset-y-0 end-0 flex items-center pe-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300" aria-label="إظهار كلمة المرور">
+                    <i id="eye-confirm" data-lucide="eye" class="h-4 w-4" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danger zone -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-rose-200 dark:border-rose-900/50 shadow-sm overflow-hidden">
+          <div class="px-6 py-5 border-b border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/20">
+            <h2 class="text-sm font-semibold text-rose-700 dark:text-rose-400 flex items-center gap-2">
+              <i data-lucide="alert-triangle" class="h-4 w-4" aria-hidden="true"></i>
+              منطقة الخطر
+            </h2>
+          </div>
+          <div class="p-6 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p class="text-sm font-medium text-slate-900 dark:text-slate-100">حذف الحساب</p>
+              <p class="text-xs text-slate-400 mt-0.5">سيتم حذف جميع بيانات المتجر والطلبات والمسوقين بشكل دائم</p>
+            </div>
+            <button type="button" data-modal-open="modal-delete-account" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-rose-600 border border-rose-300 dark:border-rose-700 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors">
+              <i data-lucide="trash-2" class="h-4 w-4" aria-hidden="true"></i>
+              حذف الحساب
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Sticky footer -->
+<div class="fixed bottom-0 start-0 end-0 lg:start-64 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 px-6 py-3 flex items-center justify-between gap-4 z-10">
+  <a href="dashboard.html" class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+    إلغاء
+  </a>
+  <button type="submit" form="profile-form" class="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-brand text-white text-sm font-semibold rounded-xl shadow-sm hover:opacity-90 transition-opacity">
+    <i data-lucide="save" class="h-4 w-4" aria-hidden="true"></i>
+    حفظ التغييرات
+  </button>
+</div>
+
+<!-- Delete account modal -->
+<div data-modal="modal-delete-account" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modal-delete-account-title">
+  <div class="relative bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-6 w-full max-w-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="trash-2" class="h-5 w-5 text-rose-600" aria-hidden="true"></i></div>
+      <h3 id="modal-delete-account-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">حذف الحساب نهائياً</h3>
+    </div>
+    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">هذا الإجراء لا يمكن التراجع عنه. سيتم حذف جميع البيانات نهائياً بما فيها المنتجات والطلبات والعملاء والمسوقين.</p>
+    <div class="mb-5">
+      <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">اكتب "احذف حسابي" للتأكيد</label>
+      <input type="text" dir="rtl" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500/50 dark:text-slate-100" placeholder="احذف حسابي">
+    </div>
+    <div class="flex gap-3">
+      <button type="button" data-modal-close class="flex-1 px-4 py-2.5 text-sm font-medium rounded-xl border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">إلغاء</button>
+      <button type="button" class="flex-1 px-4 py-2.5 text-sm font-semibold rounded-xl bg-rose-600 text-white hover:bg-rose-700 transition-colors">حذف الحساب</button>
+    </div>
+  </div>
+</div>
+
+<div id="copied-toast" class="fixed bottom-6 start-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm px-4 py-2.5 rounded-xl shadow-lg hidden z-50 pointer-events-none" aria-live="polite">تم نسخ الرابط</div>
+
+<script src="assets/js/main.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.lucide) lucide.createIcons();
+
+  function togglePwd(inputId, iconId) {
+    var input = document.getElementById(inputId);
+    var icon = document.getElementById(iconId);
+    if (!input || !icon) return;
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.setAttribute('data-lucide', 'eye-off');
+    } else {
+      input.type = 'password';
+      icon.setAttribute('data-lucide', 'eye');
+    }
+    if (window.lucide) lucide.createIcons();
+  }
+
+  document.getElementById('toggle-pwd-current')?.addEventListener('click', function() { togglePwd('pwd-current', 'eye-current'); });
+  document.getElementById('toggle-pwd-new')?.addEventListener('click', function() { togglePwd('pwd-new', 'eye-new'); });
+  document.getElementById('toggle-pwd-confirm')?.addEventListener('click', function() { togglePwd('pwd-confirm', 'eye-confirm'); });
+
+  // Strength meter
+  document.getElementById('pwd-new')?.addEventListener('input', function() {
+    var v = this.value;
+    var score = 0;
+    if (v.length >= 8) score++;
+    if (/[A-Z]/.test(v) || /[؀-ۿ]/.test(v)) score++;
+    if (/[0-9]/.test(v)) score++;
+    if (/[^A-Za-z0-9؀-ۿ]/.test(v)) score++;
+    var colors = ['bg-rose-500', 'bg-amber-500', 'bg-yellow-500', 'bg-emerald-500'];
+    for (var i = 1; i <= 4; i++) {
+      var el = document.getElementById('str' + i);
+      el.className = 'h-1 flex-1 rounded-full ' + (i <= score ? colors[score - 1] : 'bg-slate-200 dark:bg-slate-600');
+    }
+  });
+});
+</script>
+</body>
+</html>

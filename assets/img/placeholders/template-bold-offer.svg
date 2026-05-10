@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" fill="none" role="img" aria-label="قالب Bold Offer">
+  <defs>
+    <linearGradient id="tbo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="140" rx="8" fill="#0f172a"/>
+  <!-- Bold headline area -->
+  <rect x="12" y="14" width="100" height="12" rx="4" fill="url(#tbo)"/>
+  <rect x="12" y="30" width="140" height="8" rx="4" fill="white" opacity="0.8"/>
+  <rect x="12" y="42" width="110" height="8" rx="4" fill="white" opacity="0.5"/>
+  <!-- Price badge -->
+  <rect x="12" y="58" width="80" height="28" rx="8" fill="url(#tbo)" opacity="0.9"/>
+  <rect x="20" y="62" width="64" height="12" rx="4" fill="white" opacity="0.9"/>
+  <rect x="20" y="77" width="36" height="4" rx="2" fill="white" opacity="0.5"/>
+  <!-- CTA button -->
+  <rect x="12" y="94" width="176" height="24" rx="8" fill="url(#tbo)"/>
+  <rect x="60" y="100" width="80" height="12" rx="4" fill="white"/>
+  <!-- Small text -->
+  <rect x="40" y="122" width="120" height="5" rx="2.5" fill="#64748b"/>
+</svg>

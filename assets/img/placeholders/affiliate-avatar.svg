@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" role="img" aria-label="صورة المسوق">
+  <defs>
+    <linearGradient id="aabg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdf4ff"/>
+      <stop offset="100%" stop-color="#ede9fe"/>
+    </linearGradient>
+    <linearGradient id="aafg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="80" height="80" rx="40" fill="url(#aabg)"/>
+  <circle cx="40" cy="30" r="14" fill="url(#aafg)" opacity="0.75"/>
+  <ellipse cx="40" cy="68" rx="22" ry="16" fill="url(#aafg)" opacity="0.55"/>
+  <!-- Small star badge -->
+  <circle cx="58" cy="22" r="10" fill="#f59e0b"/>
+  <polygon points="58,15 60,20 65,20 61,23 63,28 58,25 53,28 55,23 51,20 56,20" fill="white"/>
+</svg>

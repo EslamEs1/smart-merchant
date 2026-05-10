@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans bg-surface-base text-text-primary">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>طلب #ORD-2024-0094 — Smart Merchant OS</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#6366f1',
+            'brand-accent': '#8b5cf6',
+            'brand-info': '#3b82f6',
+            'surface-base': '#f8fafc',
+            'surface-card': '#ffffff',
+            'surface-muted': '#f1f5f9',
+            'surface-border': '#e2e8f0',
+            'text-primary': '#0f172a',
+            'text-secondary': '#475569',
+            'text-muted': '#94a3b8',
+          },
+          fontFamily: { sans: ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'] },
+          backgroundImage: { 'gradient-brand': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%)' },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css" />
+  <script>(function(){var t=localStorage.getItem('smos:theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}})();</script>
+  <style>
+    @media print {
+      body > *:not([data-print-area="invoice"]) { display: none !important; }
+      [data-print-area="invoice"] { display: block !important; }
+    }
+  </style>
+</head>
+<body class="bg-surface-base dark:bg-slate-900 text-text-primary dark:text-slate-100 min-h-screen">
+
+  <div data-sidebar-overlay class="fixed inset-0 bg-black/50 z-30 lg:hidden hidden"></div>
+
+  <aside data-sidebar class="fixed top-0 start-0 h-full w-64 bg-surface-card dark:bg-slate-800 border-e border-surface-border dark:border-slate-700 z-40 flex flex-col transform translate-x-full lg:translate-x-0 transition-transform duration-300">
+    <div class="flex items-center gap-3 px-5 py-4 border-b border-surface-border dark:border-slate-700">
+      <div class="h-8 w-8 rounded-lg bg-gradient-brand flex items-center justify-center flex-shrink-0">
+        <svg class="h-5 w-5 text-white" viewBox="0 0 32 32" fill="none"><path d="M6 26 L16 6 L26 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 19.5 H22.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="16" cy="6" r="2" fill="currentColor"/></svg>
+      </div>
+      <div class="leading-tight">
+        <p class="text-sm font-bold dark:text-white">Smart Merchant</p>
+        <p class="text-xs text-text-muted dark:text-slate-400">سمارت مرتشانت</p>
+      </div>
+    </div>
+    <nav class="flex-1 overflow-y-auto py-3 px-3 space-y-0.5">
+      <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="layout-dashboard" class="h-4 w-4 flex-shrink-0"></i><span>لوحة التحكم</span></a>
+      <a href="products.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="package" class="h-4 w-4 flex-shrink-0"></i><span>المنتجات والخدمات</span></a>
+      <a href="orders.html" aria-current="page" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-semibold text-brand-primary bg-indigo-50 dark:bg-indigo-900/30 border-e-2 border-brand-primary"><i data-lucide="shopping-cart" class="h-4 w-4 flex-shrink-0"></i><span>الطلبات</span></a>
+      <a href="customers.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="users" class="h-4 w-4 flex-shrink-0"></i><span>العملاء</span></a>
+      <a href="affiliates.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="handshake" class="h-4 w-4 flex-shrink-0"></i><span>المسوقون</span></a>
+      <a href="affiliate-payouts.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="wallet" class="h-4 w-4 flex-shrink-0"></i><span>المدفوعات</span></a>
+      <a href="landing-pages.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="layout-template" class="h-4 w-4 flex-shrink-0"></i><span>الصفحات التسويقية</span></a>
+      <a href="analytics.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="bar-chart-3" class="h-4 w-4 flex-shrink-0"></i><span>التقارير</span></a>
+      <a href="settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="settings" class="h-4 w-4 flex-shrink-0"></i><span>الإعدادات</span></a>
+    </nav>
+    <div class="px-4 py-3 border-t border-surface-border dark:border-slate-700">
+      <div class="flex items-center gap-3">
+        <img src="assets/img/placeholders/avatar.svg" alt="صورة التاجر" class="h-8 w-8 rounded-full" />
+        <div class="leading-tight min-w-0">
+          <p class="text-xs font-semibold truncate dark:text-white">متجر النجاح</p>
+          <p class="text-xs text-text-muted truncate">merchant@smos.sa</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="lg:ps-64 flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-20 bg-surface-card/90 dark:bg-slate-800/90 backdrop-blur border-b border-surface-border dark:border-slate-700 px-4 py-3 flex items-center gap-3">
+      <button data-sidebar-toggle class="lg:hidden p-2 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="menu" class="h-5 w-5"></i></button>
+      <div class="flex-1 max-w-sm">
+        <div class="relative">
+          <i data-lucide="search" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-text-muted pointer-events-none"></i>
+          <input type="search" placeholder="بحث..." class="w-full ps-9 pe-4 py-2 text-sm rounded-lg border border-surface-border dark:border-slate-600 bg-surface-muted dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary" />
+        </div>
+      </div>
+      <div class="flex items-center gap-2 ms-auto">
+        <button data-theme-toggle class="p-2 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="sun" class="h-5 w-5 dark:hidden"></i><i data-lucide="moon" class="h-5 w-5 hidden dark:block"></i></button>
+        <a href="notifications.html" class="relative p-2 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="bell" class="h-5 w-5"></i><span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-red-500"></span></a>
+        <div class="relative">
+          <button data-profile-menu class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors">
+            <img src="assets/img/placeholders/avatar.svg" alt="صورة الحساب" class="h-7 w-7 rounded-full" />
+            <i data-lucide="chevron-down" class="h-4 w-4 text-text-muted"></i>
+          </button>
+          <div data-profile-dropdown class="hidden absolute end-0 top-full mt-1 w-48 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-50">
+            <a href="profile.html" class="flex items-center gap-2 px-4 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="user" class="h-4 w-4"></i> الملف الشخصي</a>
+            <a href="settings.html" class="flex items-center gap-2 px-4 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="settings" class="h-4 w-4"></i> الإعدادات</a>
+            <hr class="my-1 border-surface-border dark:border-slate-700" />
+            <a href="login.html" class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"><i data-lucide="log-out" class="h-4 w-4"></i> تسجيل الخروج</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 p-4 lg:p-6">
+
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm text-text-muted dark:text-slate-400 mb-6">
+        <a href="dashboard.html" class="hover:text-brand-primary transition-colors">لوحة التحكم</a>
+        <i data-lucide="chevron-left" class="h-4 w-4 rtl:rotate-180"></i>
+        <a href="orders.html" class="hover:text-brand-primary transition-colors">الطلبات</a>
+        <i data-lucide="chevron-left" class="h-4 w-4 rtl:rotate-180"></i>
+        <span class="text-text-primary dark:text-white font-medium">#ORD-2024-0094</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h1 class="text-2xl font-bold dark:text-white">#ORD-2024-0094</h1>
+            <span class="badge badge-delivered">Delivered</span>
+            <span class="badge badge-paid">Paid</span>
+            <span class="badge badge-delivered text-xs">Delivered (شحن)</span>
+          </div>
+          <p class="text-sm text-text-muted">١٨ أبريل ٢٠٢٤ — ٢:١٤ م</p>
+        </div>
+        <div class="flex gap-2">
+          <a href="order-edit.html" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors dark:text-slate-200">
+            <i data-lucide="pencil" class="h-4 w-4"></i> تعديل
+          </a>
+          <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-sm">
+            <i data-lucide="printer" class="h-4 w-4"></i> طباعة الفاتورة
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Grid -->
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+        <!-- Left Column -->
+        <div class="xl:col-span-2 space-y-6">
+
+          <!-- Order Summary -->
+          <section class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <h2 class="text-sm font-semibold mb-4 dark:text-white flex items-center gap-2">
+              <i data-lucide="file-text" class="h-4 w-4 text-brand-primary"></i> ملخص الطلب
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div>
+                <p class="text-xs text-text-muted mb-0.5">رقم الطلب</p>
+                <p class="text-sm font-mono font-semibold dark:text-white">#ORD-2024-0094</p>
+              </div>
+              <div>
+                <p class="text-xs text-text-muted mb-0.5">تاريخ الطلب</p>
+                <p class="text-sm dark:text-slate-300">١٨ أبريل ٢٠٢٤</p>
+              </div>
+              <div>
+                <p class="text-xs text-text-muted mb-0.5">المبلغ الإجمالي</p>
+                <p class="text-sm font-semibold text-brand-primary">499 SAR</p>
+              </div>
+              <div>
+                <p class="text-xs text-text-muted mb-0.5">طريقة الدفع</p>
+                <p class="text-sm dark:text-slate-300">بطاقة ائتمانية</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Customer Info -->
+          <section class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <h2 class="text-sm font-semibold mb-4 dark:text-white flex items-center gap-2">
+              <i data-lucide="user" class="h-4 w-4 text-brand-primary"></i> معلومات العميل
+            </h2>
+            <div class="flex items-start gap-3">
+              <img src="assets/img/placeholders/avatar.svg" alt="صورة العميل محمد العمري" class="h-10 w-10 rounded-full flex-shrink-0" />
+              <div class="flex-1">
+                <a href="customer-detail.html" class="text-sm font-semibold hover:text-brand-primary transition-colors dark:text-white">محمد العمري</a>
+                <div class="mt-1 space-y-0.5 text-xs text-text-secondary dark:text-slate-400">
+                  <p class="flex items-center gap-1"><i data-lucide="phone" class="h-3 w-3"></i> +966 50 123 4567</p>
+                  <p class="flex items-center gap-1"><i data-lucide="mail" class="h-3 w-3"></i> m.aomari@email.com</p>
+                  <p class="flex items-center gap-1"><i data-lucide="map-pin" class="h-3 w-3"></i> الرياض، المملكة العربية السعودية</p>
+                </div>
+              </div>
+              <a href="customer-detail.html" class="text-xs text-brand-primary hover:underline">عرض الملف</a>
+            </div>
+          </section>
+
+          <!-- Product Info -->
+          <section class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <h2 class="text-sm font-semibold mb-4 dark:text-white flex items-center gap-2">
+              <i data-lucide="package" class="h-4 w-4 text-brand-primary"></i> المنتج المطلوب
+            </h2>
+            <div class="flex items-start gap-3">
+              <img src="assets/img/placeholders/product.svg" alt="غلاف كورس التسويق الرقمي الشامل" class="h-14 w-14 rounded-xl object-cover flex-shrink-0 border border-surface-border dark:border-slate-600" />
+              <div class="flex-1 min-w-0">
+                <a href="product-detail.html" class="text-sm font-semibold hover:text-brand-primary transition-colors dark:text-white block truncate">كورس التسويق الرقمي الشامل</a>
+                <p class="text-xs text-text-muted mt-0.5">كورس · الكمية: ١</p>
+                <div class="flex items-center gap-3 mt-2">
+                  <span class="text-sm font-semibold dark:text-white">499 SAR</span>
+                  <span class="text-xs text-text-muted line-through">599 SAR</span>
+                  <span class="badge badge-active text-xs">وفّر 100 SAR</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Affiliate Attribution -->
+          <section class="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800 p-5">
+            <h2 class="text-sm font-semibold mb-4 text-indigo-800 dark:text-indigo-300 flex items-center gap-2">
+              <i data-lucide="handshake" class="h-4 w-4"></i> نسب المسوّق
+            </h2>
+            <div class="flex items-start gap-3">
+              <img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة المسوق أحمد الشمري" class="h-10 w-10 rounded-full flex-shrink-0" />
+              <div class="flex-1">
+                <a href="affiliate-detail.html" class="text-sm font-semibold hover:text-brand-primary transition-colors dark:text-white">أحمد الشمري</a>
+                <p class="text-xs text-text-muted mt-0.5">Gold · كود: AHMAD20</p>
+                <div class="flex items-center gap-3 mt-2">
+                  <div class="text-xs text-indigo-700 dark:text-indigo-400 bg-indigo-100 dark:bg-indigo-900/40 rounded-lg px-2 py-1">
+                    رابط إحالة: <span class="font-mono">smrt.os/r/AHMAD20</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Commission Info -->
+            <div class="mt-4 grid grid-cols-3 gap-3">
+              <div class="bg-white/60 dark:bg-slate-800/60 rounded-xl p-3 text-center">
+                <p class="text-lg font-bold text-indigo-700 dark:text-indigo-300">15%</p>
+                <p class="text-xs text-indigo-600 dark:text-indigo-400">نسبة العمولة</p>
+              </div>
+              <div class="bg-white/60 dark:bg-slate-800/60 rounded-xl p-3 text-center">
+                <p class="text-lg font-bold text-indigo-700 dark:text-indigo-300">75 SAR</p>
+                <p class="text-xs text-indigo-600 dark:text-indigo-400">قيمة العمولة</p>
+              </div>
+              <div class="bg-white/60 dark:bg-slate-800/60 rounded-xl p-3 text-center">
+                <span class="badge badge-paid text-xs">مُعتمدة</span>
+                <p class="text-xs text-indigo-600 dark:text-indigo-400 mt-1">الحالة</p>
+              </div>
+            </div>
+            <p class="text-xs text-indigo-600 dark:text-indigo-400 mt-3 flex items-center gap-1">
+              <i data-lucide="info" class="h-3 w-3"></i>
+              يتم اعتماد العمولة بعد وصول الطلب إلى Delivered أو تأكيد الدفع.
+            </p>
+          </section>
+
+          <!-- Payment Status -->
+          <section class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <h2 class="text-sm font-semibold mb-4 dark:text-white flex items-center gap-2">
+              <i data-lucide="banknote" class="h-4 w-4 text-brand-primary"></i> حالة الدفع
+            </h2>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm text-text-secondary dark:text-slate-400">الحالة الحالية</span>
+              <span class="badge badge-paid">Paid</span>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm text-text-secondary dark:text-slate-400">المبلغ المدفوع</span>
+              <span class="text-sm font-semibold text-emerald-600">499 SAR</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-text-secondary dark:text-slate-400">تاريخ الدفع</span>
+              <span class="text-sm dark:text-slate-300">١٨ أبريل ٢٠٢٤</span>
+            </div>
+          </section>
+
+          <!-- Shipping Status -->
+          <section class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <h2 class="text-sm font-semibold mb-4 dark:text-white flex items-center gap-2">
+              <i data-lucide="truck" class="h-4 w-4 text-brand-primary"></i> حالة الشحن
+            </h2>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm text-text-secondary dark:text-slate-400">الحالة الحالية</span>
+              <span class="badge badge-delivered">Delivered</span>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm text-text-secondary dark:text-slate-400">شركة الشحن</span>
+              <span class="text-sm dark:text-slate-300">أرامكس</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-text-secondary dark:text-slate-400">رقم التتبع</span>
+              <span class="font-mono text-xs text-brand-primary">ARX-0000-394810</span>
+            </div>
+          </section>
+
+          <!-- Timeline -->
+          <section class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <h2 class="text-sm font-semibold mb-5 dark:text-white flex items-center gap-2">
+              <i data-lucide="activity" class="h-4 w-4 text-brand-primary"></i> مسار الطلب
+            </h2>
+            <div class="relative ps-6">
+              <div class="absolute start-2 top-0 bottom-0 w-0.5 bg-surface-border dark:bg-slate-700"></div>
+              <div class="relative mb-4">
+                <div class="absolute -start-4 top-0.5 h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-surface-card dark:ring-slate-800"></div>
+                <p class="text-sm font-medium dark:text-slate-200">تم التوصيل <span class="badge badge-delivered ms-1">Delivered</span></p>
+                <p class="text-xs text-text-muted mt-0.5">١٨ أبريل ٢٠٢٤ · ٢:١٤ م — تم استلام الكورس بنجاح</p>
+              </div>
+              <div class="relative mb-4">
+                <div class="absolute -start-4 top-0.5 h-3 w-3 rounded-full bg-blue-500 ring-2 ring-surface-card dark:ring-slate-800"></div>
+                <p class="text-sm font-medium dark:text-slate-200">تم الشحن <span class="badge badge-shipped ms-1">Shipped</span></p>
+                <p class="text-xs text-text-muted mt-0.5">١٧ أبريل ٢٠٢٤ · ١٠:٠٠ ص — تم إرسال رابط الكورس للعميل</p>
+              </div>
+              <div class="relative mb-4">
+                <div class="absolute -start-4 top-0.5 h-3 w-3 rounded-full bg-violet-500 ring-2 ring-surface-card dark:ring-slate-800"></div>
+                <p class="text-sm font-medium dark:text-slate-200">قيد التجهيز <span class="badge badge-processing ms-1">Processing</span></p>
+                <p class="text-xs text-text-muted mt-0.5">١٨ أبريل ٢٠٢٤ · ٩:٤٥ ص — جارٍ تجهيز بيانات الوصول</p>
+              </div>
+              <div class="relative mb-4">
+                <div class="absolute -start-4 top-0.5 h-3 w-3 rounded-full bg-indigo-500 ring-2 ring-surface-card dark:ring-slate-800"></div>
+                <p class="text-sm font-medium dark:text-slate-200">تم التأكيد <span class="badge badge-confirmed ms-1">Confirmed</span></p>
+                <p class="text-xs text-text-muted mt-0.5">١٨ أبريل ٢٠٢٤ · ٩:٣٠ ص — تم التحقق من الدفع</p>
+              </div>
+              <div class="relative mb-4">
+                <div class="absolute -start-4 top-0.5 h-3 w-3 rounded-full bg-emerald-400 ring-2 ring-surface-card dark:ring-slate-800"></div>
+                <p class="text-sm font-medium dark:text-slate-200">تم الدفع <span class="badge badge-paid ms-1">Paid</span></p>
+                <p class="text-xs text-text-muted mt-0.5">١٨ أبريل ٢٠٢٤ · ٩:١٨ ص — دفع ببطاقة ائتمانية عبر Stripe</p>
+              </div>
+              <div class="relative mb-0">
+                <div class="absolute -start-4 top-0.5 h-3 w-3 rounded-full bg-amber-400 ring-2 ring-surface-card dark:ring-slate-800"></div>
+                <p class="text-sm font-medium dark:text-slate-200">تم إنشاء الطلب <span class="badge badge-pending ms-1">Pending</span></p>
+                <p class="text-xs text-text-muted mt-0.5">١٨ أبريل ٢٠٢٤ · ٩:١٠ ص — أُنشئ من رابط إحالة أحمد الشمري</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Notes -->
+          <section class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <h2 class="text-sm font-semibold mb-3 dark:text-white flex items-center gap-2">
+              <i data-lucide="sticky-note" class="h-4 w-4 text-brand-primary"></i> ملاحظات التاجر
+            </h2>
+            <div class="p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 text-sm text-amber-800 dark:text-amber-300">
+              العميل طلب نسخة عربية من المواد التعليمية — تم التأكيد.
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Right Column -->
+        <div class="space-y-6">
+
+          <!-- Invoice Preview -->
+          <div data-print-area="invoice" class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-sm font-semibold dark:text-white flex items-center gap-2">
+                <i data-lucide="receipt" class="h-4 w-4 text-brand-primary"></i> الفاتورة
+              </h3>
+              <span class="text-xs text-text-muted font-mono">#INV-2024-0094</span>
+            </div>
+
+            <!-- Invoice Header -->
+            <div class="mb-4 pb-3 border-b border-surface-border dark:border-slate-700">
+              <div class="flex items-center gap-2 mb-2">
+                <div class="h-7 w-7 rounded-lg bg-gradient-brand flex items-center justify-center">
+                  <svg class="h-4 w-4 text-white" viewBox="0 0 32 32" fill="none"><path d="M6 26 L16 6 L26 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 19.5 H22.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                </div>
+                <span class="text-xs font-bold dark:text-white">Smart Merchant OS</span>
+              </div>
+              <p class="text-xs text-text-muted">متجر النجاح · الرياض، السعودية</p>
+            </div>
+
+            <!-- Line Items -->
+            <div class="space-y-2 mb-4">
+              <div class="flex justify-between text-xs">
+                <span class="text-text-secondary dark:text-slate-400 flex-1">كورس التسويق الرقمي الشامل × ١</span>
+                <span class="font-medium dark:text-slate-200 ms-2">599 SAR</span>
+              </div>
+              <div class="flex justify-between text-xs text-emerald-600">
+                <span>خصم ترويجي</span>
+                <span>- 100 SAR</span>
+              </div>
+            </div>
+
+            <div class="border-t border-surface-border dark:border-slate-700 pt-3 space-y-1.5">
+              <div class="flex justify-between text-xs text-text-muted">
+                <span>المجموع الفرعي</span><span>599 SAR</span>
+              </div>
+              <div class="flex justify-between text-xs text-emerald-600">
+                <span>الخصم</span><span>- 100 SAR</span>
+              </div>
+              <div class="flex justify-between text-xs text-text-muted">
+                <span>ضريبة القيمة المضافة (15%)</span><span>0 SAR</span>
+              </div>
+              <div class="flex justify-between text-sm font-bold dark:text-white border-t border-surface-border dark:border-slate-700 pt-2 mt-2">
+                <span>الإجمالي</span><span class="text-brand-primary">499 SAR</span>
+              </div>
+            </div>
+
+            <button onclick="window.print()" class="mt-4 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors dark:text-slate-300">
+              <i data-lucide="printer" class="h-4 w-4"></i> طباعة الفاتورة
+            </button>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <h3 class="text-sm font-semibold mb-3 dark:text-white">إجراءات سريعة</h3>
+            <div class="space-y-1.5">
+              <a href="order-edit.html" class="flex items-center gap-2 p-2.5 rounded-xl text-sm hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors dark:text-slate-300">
+                <i data-lucide="pencil" class="h-4 w-4 text-brand-primary"></i> تعديل الطلب
+              </a>
+              <button class="w-full flex items-center gap-2 p-2.5 rounded-xl text-sm hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors dark:text-slate-300 text-start">
+                <i data-lucide="check-circle" class="h-4 w-4 text-emerald-500"></i> تحديد كـ Confirmed
+              </button>
+              <button class="w-full flex items-center gap-2 p-2.5 rounded-xl text-sm hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors dark:text-slate-300 text-start">
+                <i data-lucide="truck" class="h-4 w-4 text-blue-500"></i> تحديد كـ Shipped
+              </button>
+              <button class="w-full flex items-center gap-2 p-2.5 rounded-xl text-sm hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors dark:text-slate-300 text-start">
+                <i data-lucide="package-check" class="h-4 w-4 text-emerald-600"></i> تحديد كـ Delivered
+              </button>
+              <hr class="border-surface-border dark:border-slate-700" />
+              <button data-modal-trigger data-modal-target="modal-cancel-detail" class="w-full flex items-center gap-2 p-2.5 rounded-xl text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-start">
+                <i data-lucide="x-circle" class="h-4 w-4"></i> إلغاء الطلب
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Cancel Modal -->
+  <div data-modal="modal-cancel-detail" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-surface-card dark:bg-slate-800 rounded-2xl shadow-2xl max-w-sm w-full p-6">
+      <h3 class="font-semibold mb-2 dark:text-white">إلغاء الطلب #ORD-2024-0094</h3>
+      <p class="text-sm text-text-secondary dark:text-slate-400 mb-5">هل أنت متأكد من إلغاء هذا الطلب؟ لن يتم اعتماد عمولة أحمد الشمري.</p>
+      <div class="flex gap-3">
+        <button data-modal-close class="flex-1 px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 hover:bg-surface-muted dark:hover:bg-slate-700 dark:text-slate-300">إلغاء</button>
+        <button class="flex-1 px-4 py-2.5 text-sm font-semibold rounded-xl bg-red-600 text-white hover:bg-red-700">إلغاء الطلب</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

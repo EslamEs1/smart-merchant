@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans bg-surface-base text-text-primary">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تعديل الطلب #ORD-2024-0094 — Smart Merchant OS</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#6366f1',
+            'brand-accent': '#8b5cf6',
+            'brand-info': '#3b82f6',
+            'surface-base': '#f8fafc',
+            'surface-card': '#ffffff',
+            'surface-muted': '#f1f5f9',
+            'surface-border': '#e2e8f0',
+            'text-primary': '#0f172a',
+            'text-secondary': '#475569',
+            'text-muted': '#94a3b8',
+          },
+          fontFamily: { sans: ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'] },
+          backgroundImage: { 'gradient-brand': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%)' },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css" />
+  <script>(function(){var t=localStorage.getItem('smos:theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}})();</script>
+</head>
+<body class="bg-surface-base dark:bg-slate-900 text-text-primary dark:text-slate-100 min-h-screen">
+
+  <div data-sidebar-overlay class="fixed inset-0 bg-black/50 z-30 lg:hidden hidden"></div>
+
+  <aside data-sidebar class="fixed top-0 start-0 h-full w-64 bg-surface-card dark:bg-slate-800 border-e border-surface-border dark:border-slate-700 z-40 flex flex-col transform translate-x-full lg:translate-x-0 transition-transform duration-300">
+    <div class="flex items-center gap-3 px-5 py-4 border-b border-surface-border dark:border-slate-700">
+      <div class="h-8 w-8 rounded-lg bg-gradient-brand flex items-center justify-center flex-shrink-0">
+        <svg class="h-5 w-5 text-white" viewBox="0 0 32 32" fill="none"><path d="M6 26 L16 6 L26 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 19.5 H22.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="16" cy="6" r="2" fill="currentColor"/></svg>
+      </div>
+      <div class="leading-tight">
+        <p class="text-sm font-bold dark:text-white">Smart Merchant</p>
+        <p class="text-xs text-text-muted dark:text-slate-400">سمارت مرتشانت</p>
+      </div>
+    </div>
+    <nav class="flex-1 overflow-y-auto py-3 px-3 space-y-0.5">
+      <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="layout-dashboard" class="h-4 w-4 flex-shrink-0"></i><span>لوحة التحكم</span></a>
+      <a href="products.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="package" class="h-4 w-4 flex-shrink-0"></i><span>المنتجات والخدمات</span></a>
+      <a href="orders.html" aria-current="page" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-semibold text-brand-primary bg-indigo-50 dark:bg-indigo-900/30 border-e-2 border-brand-primary"><i data-lucide="shopping-cart" class="h-4 w-4 flex-shrink-0"></i><span>الطلبات</span></a>
+      <a href="customers.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="users" class="h-4 w-4 flex-shrink-0"></i><span>العملاء</span></a>
+      <a href="affiliates.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="handshake" class="h-4 w-4 flex-shrink-0"></i><span>المسوقون</span></a>
+      <a href="affiliate-payouts.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="wallet" class="h-4 w-4 flex-shrink-0"></i><span>المدفوعات</span></a>
+      <a href="landing-pages.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="layout-template" class="h-4 w-4 flex-shrink-0"></i><span>الصفحات التسويقية</span></a>
+      <a href="analytics.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="bar-chart-3" class="h-4 w-4 flex-shrink-0"></i><span>التقارير</span></a>
+      <a href="settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="settings" class="h-4 w-4 flex-shrink-0"></i><span>الإعدادات</span></a>
+    </nav>
+    <div class="px-4 py-3 border-t border-surface-border dark:border-slate-700">
+      <div class="flex items-center gap-3">
+        <img src="assets/img/placeholders/avatar.svg" alt="صورة التاجر" class="h-8 w-8 rounded-full" />
+        <div class="leading-tight min-w-0">
+          <p class="text-xs font-semibold truncate dark:text-white">متجر النجاح</p>
+          <p class="text-xs text-text-muted truncate">merchant@smos.sa</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="lg:ps-64 flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-20 bg-surface-card/90 dark:bg-slate-800/90 backdrop-blur border-b border-surface-border dark:border-slate-700 px-4 py-3 flex items-center gap-3">
+      <button data-sidebar-toggle class="lg:hidden p-2 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="menu" class="h-5 w-5"></i></button>
+      <div class="flex-1 max-w-sm">
+        <div class="relative">
+          <i data-lucide="search" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-text-muted pointer-events-none"></i>
+          <input type="search" placeholder="بحث..." class="w-full ps-9 pe-4 py-2 text-sm rounded-lg border border-surface-border dark:border-slate-600 bg-surface-muted dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary" />
+        </div>
+      </div>
+      <div class="flex items-center gap-2 ms-auto">
+        <button data-theme-toggle class="p-2 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="sun" class="h-5 w-5 dark:hidden"></i><i data-lucide="moon" class="h-5 w-5 hidden dark:block"></i></button>
+        <a href="notifications.html" class="relative p-2 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors"><i data-lucide="bell" class="h-5 w-5"></i><span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-red-500"></span></a>
+        <div class="relative">
+          <button data-profile-menu class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors">
+            <img src="assets/img/placeholders/avatar.svg" alt="صورة الحساب" class="h-7 w-7 rounded-full" />
+            <i data-lucide="chevron-down" class="h-4 w-4 text-text-muted"></i>
+          </button>
+          <div data-profile-dropdown class="hidden absolute end-0 top-full mt-1 w-48 bg-surface-card dark:bg-slate-800 rounded-xl shadow-lg border border-surface-border dark:border-slate-700 py-1 z-50">
+            <a href="profile.html" class="flex items-center gap-2 px-4 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="user" class="h-4 w-4"></i> الملف الشخصي</a>
+            <a href="settings.html" class="flex items-center gap-2 px-4 py-2 text-sm hover:bg-surface-muted dark:hover:bg-slate-700"><i data-lucide="settings" class="h-4 w-4"></i> الإعدادات</a>
+            <hr class="my-1 border-surface-border dark:border-slate-700" />
+            <a href="login.html" class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"><i data-lucide="log-out" class="h-4 w-4"></i> تسجيل الخروج</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 p-4 lg:p-6">
+
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm text-text-muted dark:text-slate-400 mb-6">
+        <a href="dashboard.html" class="hover:text-brand-primary transition-colors">لوحة التحكم</a>
+        <i data-lucide="chevron-left" class="h-4 w-4 rtl:rotate-180"></i>
+        <a href="orders.html" class="hover:text-brand-primary transition-colors">الطلبات</a>
+        <i data-lucide="chevron-left" class="h-4 w-4 rtl:rotate-180"></i>
+        <a href="order-detail.html" class="hover:text-brand-primary transition-colors">#ORD-2024-0094</a>
+        <i data-lucide="chevron-left" class="h-4 w-4 rtl:rotate-180"></i>
+        <span class="text-text-primary dark:text-white font-medium">تعديل</span>
+      </nav>
+
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold dark:text-white">تعديل الطلب #ORD-2024-0094</h1>
+        <p class="text-sm text-text-secondary dark:text-slate-400 mt-1">محمد العمري · ١٨ أبريل ٢٠٢٤ · 499 SAR</p>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+        <!-- Form -->
+        <div class="xl:col-span-2 space-y-6">
+
+          <!-- Status Fields -->
+          <section class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-6">
+            <h2 class="text-base font-semibold mb-5 dark:text-white flex items-center gap-2">
+              <i data-lucide="sliders-horizontal" class="h-5 w-5 text-brand-primary"></i>
+              حالات الطلب
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1.5 dark:text-slate-200">حالة الطلب</label>
+                <select class="w-full px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white">
+                  <option>Pending</option>
+                  <option>Confirmed</option>
+                  <option>Processing</option>
+                  <option>Shipped</option>
+                  <option selected>Delivered</option>
+                  <option>Cancelled</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1.5 dark:text-slate-200">حالة الدفع</label>
+                <select class="w-full px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white">
+                  <option>Unpaid</option>
+                  <option selected>Paid</option>
+                  <option>Partially Paid</option>
+                  <option>Refunded</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1.5 dark:text-slate-200">حالة الشحن</label>
+                <select class="w-full px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white">
+                  <option>Not Shipped</option>
+                  <option>Preparing</option>
+                  <option>Shipped</option>
+                  <option selected>Delivered</option>
+                  <option>Returned</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <!-- Customer Info -->
+          <section class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-6">
+            <h2 class="text-base font-semibold mb-5 dark:text-white flex items-center gap-2">
+              <i data-lucide="user" class="h-5 w-5 text-brand-primary"></i>
+              بيانات العميل
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1.5 dark:text-slate-200">الاسم</label>
+                <input type="text" value="محمد العمري" class="w-full px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1.5 dark:text-slate-200">رقم الجوال</label>
+                <input type="tel" value="+966 50 123 4567" class="w-full px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1.5 dark:text-slate-200">البريد الإلكتروني</label>
+                <input type="email" value="m.aomari@email.com" class="w-full px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1.5 dark:text-slate-200">المدينة</label>
+                <input type="text" value="الرياض، المملكة العربية السعودية" class="w-full px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-sm font-medium mb-1.5 dark:text-slate-200">العنوان التفصيلي</label>
+                <textarea rows="2" class="w-full px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white resize-none">حي النزهة، شارع الأمير سلطان، مبنى ٤٥، شقة ٣</textarea>
+              </div>
+            </div>
+          </section>
+
+          <!-- Affiliate Attribution -->
+          <section class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-6">
+            <h2 class="text-base font-semibold mb-5 dark:text-white flex items-center gap-2">
+              <i data-lucide="handshake" class="h-5 w-5 text-brand-primary"></i>
+              نسب المسوّق
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1.5 dark:text-slate-200">المسوّق المنسوب إليه</label>
+                <select class="w-full px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white">
+                  <option value="">بدون مسوّق</option>
+                  <option selected>أحمد الشمري (AHMAD20)</option>
+                  <option>فهد العتيبي (FAHAD10)</option>
+                  <option>هناء الجابري (HANAA15)</option>
+                  <option>سارة الخالدي (SARAH12)</option>
+                  <option>نورة المطيري (NOURA18)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1.5 dark:text-slate-200">قيمة العمولة</label>
+                <div class="flex gap-2">
+                  <input type="number" value="75" min="0" step="0.01" class="flex-1 px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white" />
+                  <select class="w-20 px-2 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white">
+                    <option selected>SAR</option>
+                    <option>EGP</option>
+                    <option>AED</option>
+                    <option>KWD</option>
+                    <option>USD</option>
+                  </select>
+                </div>
+                <p class="text-xs text-text-muted mt-1">محسوبة تلقائياً — يمكنك التعديل اليدوي</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Notes -->
+          <section class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-6">
+            <h2 class="text-base font-semibold mb-4 dark:text-white flex items-center gap-2">
+              <i data-lucide="sticky-note" class="h-5 w-5 text-brand-primary"></i>
+              ملاحظات الطلب
+            </h2>
+            <textarea rows="3" class="w-full px-4 py-2.5 text-sm rounded-xl border border-surface-border dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white resize-none">العميل طلب نسخة عربية من المواد التعليمية — تم التأكيد.</textarea>
+          </section>
+
+        </div>
+
+        <!-- Right Column -->
+        <div class="space-y-6">
+
+          <!-- Order Summary Card -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <h3 class="text-sm font-semibold mb-4 dark:text-white flex items-center gap-2">
+              <i data-lucide="receipt" class="h-4 w-4 text-brand-primary"></i>
+              ملخص الطلب الحالي
+            </h3>
+            <div class="space-y-3">
+              <div class="flex items-center gap-2">
+                <img src="assets/img/placeholders/product.svg" alt="صورة كورس التسويق الرقمي الشامل" class="h-10 w-10 rounded-lg object-cover flex-shrink-0 border border-surface-border dark:border-slate-600" />
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs font-medium truncate dark:text-slate-200">كورس التسويق الرقمي الشامل</p>
+                  <p class="text-xs text-text-muted">كورس × ١</p>
+                </div>
+                <span class="text-sm font-semibold dark:text-white flex-shrink-0">499 SAR</span>
+              </div>
+              <hr class="border-surface-border dark:border-slate-700" />
+              <div class="flex justify-between text-xs text-text-muted">
+                <span>المجموع الفرعي</span><span>599 SAR</span>
+              </div>
+              <div class="flex justify-between text-xs text-emerald-600">
+                <span>الخصم</span><span>- 100 SAR</span>
+              </div>
+              <div class="flex justify-between text-sm font-bold dark:text-white">
+                <span>الإجمالي</span><span class="text-brand-primary">499 SAR</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Audit Info -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <h3 class="text-sm font-semibold mb-3 dark:text-white flex items-center gap-2">
+              <i data-lucide="clock" class="h-4 w-4 text-brand-primary"></i>
+              معلومات المراجعة
+            </h3>
+            <div class="space-y-2 text-xs text-text-secondary dark:text-slate-400">
+              <div class="flex justify-between">
+                <span>أُنشئ في</span>
+                <span class="dark:text-slate-300">١٨ أبريل ٢٠٢٤ · ٩:١٠ ص</span>
+              </div>
+              <div class="flex justify-between">
+                <span>آخر تعديل</span>
+                <span class="dark:text-slate-300">١٨ أبريل ٢٠٢٤ · ٢:١٤ م</span>
+              </div>
+              <div class="flex justify-between">
+                <span>عدد التعديلات</span>
+                <span class="dark:text-slate-300">٢</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Links -->
+          <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-5">
+            <h3 class="text-sm font-semibold mb-3 dark:text-white">روابط سريعة</h3>
+            <div class="space-y-1.5">
+              <a href="order-detail.html" class="flex items-center gap-2 p-2 rounded-xl text-sm hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors dark:text-slate-300">
+                <i data-lucide="eye" class="h-4 w-4 text-brand-primary"></i> عرض تفاصيل الطلب
+              </a>
+              <a href="customer-detail.html" class="flex items-center gap-2 p-2 rounded-xl text-sm hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors dark:text-slate-300">
+                <i data-lucide="user" class="h-4 w-4 text-brand-primary"></i> ملف العميل
+              </a>
+              <a href="affiliate-detail.html" class="flex items-center gap-2 p-2 rounded-xl text-sm hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors dark:text-slate-300">
+                <i data-lucide="handshake" class="h-4 w-4 text-brand-primary"></i> ملف المسوّق
+              </a>
+              <a href="product-detail.html" class="flex items-center gap-2 p-2 rounded-xl text-sm hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors dark:text-slate-300">
+                <i data-lucide="package" class="h-4 w-4 text-brand-primary"></i> تفاصيل المنتج
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="sticky bottom-0 z-10 bg-surface-card dark:bg-slate-800 border-t border-surface-border dark:border-slate-700 px-4 lg:px-6 py-3">
+      <div class="max-w-5xl mx-auto flex items-center justify-between gap-3">
+        <a href="order-detail.html" class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-xl border border-surface-border dark:border-slate-600 text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors">
+          <i data-lucide="x" class="h-4 w-4"></i> إلغاء
+        </a>
+        <button type="button" class="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-sm">
+          <i data-lucide="check" class="h-4 w-4"></i> حفظ التعديلات
+        </button>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>طلبات السحب والعمولات | Smart Merchant OS</title>
+  <meta name="description" content="إدارة طلبات السحب والعمولات — Smart Merchant OS">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#6366f1',
+            'brand-accent':  '#8b5cf6',
+            'brand-info':    '#3b82f6',
+          },
+          fontFamily: {
+            sans: ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'],
+          },
+          backgroundImage: {
+            'gradient-brand': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%)',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script>
+    try {
+      var t = localStorage.getItem('smos:theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body class="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+
+  <!-- Sidebar overlay (mobile) -->
+  <div data-sidebar-overlay
+       class="fixed inset-0 z-30 bg-black/50 hidden lg:hidden"
+       aria-hidden="true"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar"
+         class="fixed top-0 start-0 z-40 h-screen w-64 bg-slate-900 dark:bg-slate-950 flex flex-col
+                translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out"
+         aria-label="القائمة الجانبية">
+    <div class="flex items-center gap-3 px-5 py-5 border-b border-slate-700/60">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" aria-hidden="true" class="h-9 w-9 shrink-0">
+        <defs>
+          <linearGradient id="sl-g3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6366f1"/>
+            <stop offset="50%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#3b82f6"/>
+          </linearGradient>
+        </defs>
+        <rect x="4" y="12" width="14" height="14" rx="3" fill="url(#sl-g3)" transform="rotate(45 11 19)"/>
+        <rect x="18" y="8" width="10" height="10" rx="2" fill="url(#sl-g3)" opacity="0.72" transform="rotate(45 23 13)"/>
+        <rect x="14" y="22" width="8" height="8" rx="2" fill="url(#sl-g3)" opacity="0.50" transform="rotate(45 18 26)"/>
+      </svg>
+      <div class="leading-tight">
+        <p class="text-xs font-semibold text-white tracking-wide">Smart Merchant OS</p>
+        <p class="text-xs text-slate-400 font-medium">سمارت مرتشانت</p>
+      </div>
+    </div>
+    <nav class="flex-1 overflow-y-auto py-4 px-3" aria-label="روابط التنقل الرئيسية">
+      <ul class="space-y-1" role="list">
+        <li><a href="dashboard.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="layout-dashboard" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>لوحة التحكم</span></a></li>
+        <li><a href="products.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="package" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>المنتجات والخدمات</span></a></li>
+        <li><a href="orders.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="shopping-cart" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>الطلبات</span></a></li>
+        <li><a href="customers.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="users" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>العملاء</span></a></li>
+        <li><a href="affiliates.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="handshake" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>المسوقون</span></a></li>
+        <li><a href="affiliate-payouts.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="page"><i data-lucide="wallet" class="h-4 w-4 shrink-0 text-indigo-400 transition-colors" aria-hidden="true"></i><span>المدفوعات</span></a></li>
+        <li><a href="landing-pages.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="layout-template" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>صفحات الهبوط</span></a></li>
+        <li><a href="analytics.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="bar-chart-3" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>التحليلات</span></a></li>
+        <li><a href="settings.html" class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="false"><i data-lucide="settings" class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-indigo-400 transition-colors" aria-hidden="true"></i><span>الإعدادات</span></a></li>
+      </ul>
+    </nav>
+    <div class="border-t border-slate-700/60 px-4 py-4">
+      <div class="flex items-center gap-3">
+        <img src="assets/img/placeholders/avatar.svg" alt="صورة الملف الشخصي" class="h-8 w-8 rounded-full">
+        <div class="min-w-0">
+          <p class="text-xs font-semibold text-white truncate">متجر الأناقة</p>
+          <p class="text-xs text-slate-400 truncate">merchant@smos.example</p>
+        </div>
+        <a href="settings.html" class="ms-auto text-slate-400 hover:text-white transition-colors focus-ring rounded" aria-label="الإعدادات">
+          <i data-lucide="settings" class="h-4 w-4" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main wrapper -->
+  <div class="lg:ps-64 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm
+                   border-b border-slate-200 dark:border-slate-700
+                   flex items-center gap-3 px-4 sm:px-6 h-14">
+      <button type="button" data-sidebar-toggle
+              class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors"
+              aria-label="فتح القائمة الجانبية" aria-expanded="false" aria-controls="sidebar">
+        <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+      </button>
+      <div class="flex-1 max-w-md">
+        <div class="relative">
+          <span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400">
+            <i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i>
+          </span>
+          <input type="search" placeholder="بحث..." aria-label="بحث"
+                 class="w-full ps-9 pe-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-colors">
+        </div>
+      </div>
+      <div class="flex-1"></div>
+      <div class="flex items-center gap-1 sm:gap-2">
+        <button type="button" data-theme-toggle
+                class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors"
+                aria-label="تبديل الوضع الليلي / النهاري">
+          <i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i>
+          <i data-lucide="moon" class="h-4 w-4 hidden dark:block" aria-hidden="true"></i>
+        </button>
+        <a href="notifications.html" class="relative p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors" aria-label="الإشعارات">
+          <i data-lucide="bell" class="h-4 w-4" aria-hidden="true"></i>
+          <span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-rose-500" aria-hidden="true"></span>
+        </a>
+        <div class="relative" data-actions-dropdown="profile-menu">
+          <button type="button" class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors" aria-label="قائمة الملف الشخصي" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/img/placeholders/avatar.svg" alt="صورة ملف التاجر الشخصي" class="h-7 w-7 rounded-full ring-2 ring-brand-primary/30">
+            <span class="hidden sm:block text-sm font-medium">متجر الأناقة</span>
+            <i data-lucide="chevron-down" class="hidden sm:block h-3 w-3 text-slate-400" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+            <a href="profile.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" role="menuitem"><i data-lucide="user-circle" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الملف الشخصي</a>
+            <a href="settings.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" role="menuitem"><i data-lucide="settings" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>الإعدادات</a>
+            <hr class="my-1 border-slate-200 dark:border-slate-700">
+            <a href="login.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors" role="menuitem"><i data-lucide="log-out" class="h-4 w-4" aria-hidden="true"></i>تسجيل الخروج</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8">
+
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-6" aria-label="مسار التنقل">
+        <a href="affiliates.html" class="hover:text-brand-primary transition-colors">المسوقون</a>
+        <i data-lucide="chevron-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+        <span class="text-slate-900 dark:text-slate-100 font-medium">طلبات السحب</span>
+      </nav>
+
+      <!-- Page heading -->
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">طلبات السحب والعمولات</h1>
+          <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">مراجعة وتنفيذ طلبات سحب العمولات للمسوقين</p>
+        </div>
+      </div>
+
+      <!-- Summary stat cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
+          <p class="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">معلق</p>
+          <p class="text-2xl font-bold text-amber-600 dark:text-amber-400">5</p>
+          <p class="text-xs text-slate-400 mt-1">طلبات بانتظار الموافقة</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
+          <p class="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">إجمالي المعلق</p>
+          <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">8,320</p>
+          <p class="text-xs text-slate-400 mt-1">ريال سعودي</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
+          <p class="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">مدفوع هذا الشهر</p>
+          <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">6</p>
+          <p class="text-xs text-slate-400 mt-1">دفعات مكتملة</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
+          <p class="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">إجمالي المدفوع</p>
+          <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">14,750</p>
+          <p class="text-xs text-slate-400 mt-1">ريال سعودي</p>
+        </div>
+      </div>
+
+      <!-- Commission rule banner -->
+      <div class="flex items-start gap-3 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 rounded-xl px-4 py-3 mb-6 text-sm text-indigo-800 dark:text-indigo-300">
+        <i data-lucide="info" class="h-4 w-4 shrink-0 mt-0.5" aria-hidden="true"></i>
+        <span>يتم اعتماد العمولة بعد وصول الطلب إلى <strong>Delivered</strong> أو تأكيد الدفع.</span>
+      </div>
+
+      <!-- Tabs -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm"
+           data-tabs="payouts">
+
+        <!-- Tab bar -->
+        <div class="flex border-b border-slate-200 dark:border-slate-700 px-4" role="tablist" aria-label="تبويبات طلبات السحب">
+          <button type="button"
+                  role="tab"
+                  data-tab="tab-pending"
+                  aria-controls="panel-pending"
+                  aria-selected="true"
+                  class="tab-active px-4 py-3.5 text-sm font-medium border-b-2 -mb-px transition-colors focus-ring">
+            Pending
+            <span class="ms-1.5 inline-flex items-center justify-center h-5 w-5 rounded-full bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 text-xs font-bold">5</span>
+          </button>
+          <button type="button"
+                  role="tab"
+                  data-tab="tab-paid"
+                  aria-controls="panel-paid"
+                  aria-selected="false"
+                  class="px-4 py-3.5 text-sm font-medium text-slate-500 dark:text-slate-400 border-b-2 border-transparent -mb-px hover:text-slate-700 dark:hover:text-slate-300 transition-colors focus-ring">
+            Paid
+            <span class="ms-1.5 inline-flex items-center justify-center h-5 w-5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold">6</span>
+          </button>
+          <button type="button"
+                  role="tab"
+                  data-tab="tab-rejected"
+                  aria-controls="panel-rejected"
+                  aria-selected="false"
+                  class="px-4 py-3.5 text-sm font-medium text-slate-500 dark:text-slate-400 border-b-2 border-transparent -mb-px hover:text-slate-700 dark:hover:text-slate-300 transition-colors focus-ring">
+            Rejected
+            <span class="ms-1.5 inline-flex items-center justify-center h-5 w-5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold">3</span>
+          </button>
+        </div>
+
+        <!-- Tab panel: Pending -->
+        <div id="panel-pending" data-tab-panel="tab-pending" role="tabpanel">
+          <div class="table-responsive">
+            <table class="min-w-full text-sm" aria-label="طلبات السحب المعلقة">
+              <thead class="bg-slate-50 dark:bg-slate-800/50">
+                <tr>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">المسوق</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">المبلغ المطلوب</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الرصيد المتاح</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">طريقة الدفع</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الحالة</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">تاريخ الطلب</th>
+                  <th class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap">
+                    <div class="flex items-center gap-2.5">
+                      <img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة أحمد الشمري" class="h-8 w-8 rounded-full">
+                      <div>
+                        <p class="font-medium text-slate-900 dark:text-slate-100 text-sm">أحمد الشمري</p>
+                        <p class="text-xs text-slate-400"><span class="badge badge-gold" style="font-size:0.65rem;padding:0.1rem 0.4rem">Gold</span></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 font-semibold text-slate-900 dark:text-slate-100 whitespace-nowrap">1,420 SAR</td>
+                  <td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 font-medium whitespace-nowrap">1,420 SAR</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap">
+                    <span class="flex items-center gap-1.5">
+                      <i data-lucide="building-2" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>
+                      Bank Transfer
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-pending">Pending</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">8 مايو 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end">
+                    <div class="flex items-center justify-end gap-1">
+                      <button type="button" data-modal-trigger="modal-approve-pay-001" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">
+                        <i data-lucide="check" class="h-3 w-3" aria-hidden="true"></i>
+                        موافقة
+                      </button>
+                      <button type="button" data-modal-trigger="modal-reject-pay-001" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/60 focus-ring transition-colors">
+                        <i data-lucide="x" class="h-3 w-3" aria-hidden="true"></i>
+                        رفض
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap">
+                    <div class="flex items-center gap-2.5">
+                      <img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة سارة الخالدي" class="h-8 w-8 rounded-full">
+                      <div>
+                        <p class="font-medium text-slate-900 dark:text-slate-100 text-sm">سارة الخالدي</p>
+                        <p class="text-xs text-slate-400"><span class="badge badge-silver" style="font-size:0.65rem;padding:0.1rem 0.4rem">Silver</span></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 font-semibold text-slate-900 dark:text-slate-100 whitespace-nowrap">490 SAR</td>
+                  <td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 font-medium whitespace-nowrap">490 SAR</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap">
+                    <span class="flex items-center gap-1.5">
+                      <i data-lucide="smartphone" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>
+                      STC Pay
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-pending">Pending</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">7 مايو 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end">
+                    <div class="flex items-center justify-end gap-1">
+                      <button type="button" data-modal-trigger="modal-approve-pay-002" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">
+                        <i data-lucide="check" class="h-3 w-3" aria-hidden="true"></i>
+                        موافقة
+                      </button>
+                      <button type="button" data-modal-trigger="modal-reject-pay-002" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/60 focus-ring transition-colors">
+                        <i data-lucide="x" class="h-3 w-3" aria-hidden="true"></i>
+                        رفض
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap">
+                    <div class="flex items-center gap-2.5">
+                      <img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة فهد العتيبي" class="h-8 w-8 rounded-full">
+                      <div>
+                        <p class="font-medium text-slate-900 dark:text-slate-100 text-sm">فهد العتيبي</p>
+                        <p class="text-xs text-slate-400"><span class="badge badge-platinum" style="font-size:0.65rem;padding:0.1rem 0.4rem">Platinum</span></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 font-semibold text-slate-900 dark:text-slate-100 whitespace-nowrap">3,800 SAR</td>
+                  <td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 font-medium whitespace-nowrap">5,200 SAR</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap">
+                    <span class="flex items-center gap-1.5">
+                      <i data-lucide="building-2" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>
+                      Bank Transfer
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-pending">Pending</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">6 مايو 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end">
+                    <div class="flex items-center justify-end gap-1">
+                      <button type="button" data-modal-trigger="modal-approve-pay-003" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">
+                        <i data-lucide="check" class="h-3 w-3" aria-hidden="true"></i>
+                        موافقة
+                      </button>
+                      <button type="button" data-modal-trigger="modal-reject-pay-003" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/60 focus-ring transition-colors">
+                        <i data-lucide="x" class="h-3 w-3" aria-hidden="true"></i>
+                        رفض
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap">
+                    <div class="flex items-center gap-2.5">
+                      <img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة نورة المطيري" class="h-8 w-8 rounded-full">
+                      <div>
+                        <p class="font-medium text-slate-900 dark:text-slate-100 text-sm">نورة المطيري</p>
+                        <p class="text-xs text-slate-400"><span class="badge badge-gold" style="font-size:0.65rem;padding:0.1rem 0.4rem">Gold</span></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 font-semibold text-slate-900 dark:text-slate-100 whitespace-nowrap">1,850 AED</td>
+                  <td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 font-medium whitespace-nowrap">2,100 AED</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap">
+                    <span class="flex items-center gap-1.5">
+                      <i data-lucide="globe" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>
+                      Wise
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-pending">Pending</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">5 مايو 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end">
+                    <div class="flex items-center justify-end gap-1">
+                      <button type="button" data-modal-trigger="modal-approve-pay-004" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors"><i data-lucide="check" class="h-3 w-3" aria-hidden="true"></i>موافقة</button>
+                      <button type="button" data-modal-trigger="modal-reject-pay-004" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/60 focus-ring transition-colors"><i data-lucide="x" class="h-3 w-3" aria-hidden="true"></i>رفض</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap">
+                    <div class="flex items-center gap-2.5">
+                      <img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة ريم السبيعي" class="h-8 w-8 rounded-full">
+                      <div>
+                        <p class="font-medium text-slate-900 dark:text-slate-100 text-sm">ريم السبيعي</p>
+                        <p class="text-xs text-slate-400"><span class="badge badge-silver" style="font-size:0.65rem;padding:0.1rem 0.4rem">Silver</span></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 font-semibold text-slate-900 dark:text-slate-100 whitespace-nowrap">760 EGP</td>
+                  <td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 font-medium whitespace-nowrap">1,150 EGP</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap">
+                    <span class="flex items-center gap-1.5">
+                      <i data-lucide="credit-card" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>
+                      Instapay
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-pending">Pending</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">3 مايو 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end">
+                    <div class="flex items-center justify-end gap-1">
+                      <button type="button" data-modal-trigger="modal-approve-pay-005" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors"><i data-lucide="check" class="h-3 w-3" aria-hidden="true"></i>موافقة</button>
+                      <button type="button" data-modal-trigger="modal-reject-pay-005" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/60 focus-ring transition-colors"><i data-lucide="x" class="h-3 w-3" aria-hidden="true"></i>رفض</button>
+                    </div>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab panel: Paid -->
+        <div id="panel-paid" data-tab-panel="tab-paid" role="tabpanel" class="hidden">
+          <div class="table-responsive">
+            <table class="min-w-full text-sm" aria-label="طلبات السحب المدفوعة">
+              <thead class="bg-slate-50 dark:bg-slate-800/50">
+                <tr>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">المسوق</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">المبلغ</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الرصيد وقت السحب</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">طريقة الدفع</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الحالة</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">تاريخ الصرف</th>
+                  <th class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap"><div class="flex items-center gap-2.5"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة أحمد الشمري" class="h-8 w-8 rounded-full"><div><p class="font-medium text-sm">أحمد الشمري</p><p class="text-xs text-slate-400"><span class="badge badge-gold" style="font-size:0.65rem;padding:0.1rem 0.4rem">Gold</span></p></div></div></td>
+                  <td class="px-4 py-3 font-semibold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">2,500 SAR</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap">2,500 SAR</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap"><span class="flex items-center gap-1.5"><i data-lucide="smartphone" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>STC Pay</span></td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">1 أبريل 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end"><button type="button" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors"><i data-lucide="eye" class="h-3 w-3" aria-hidden="true"></i>عرض</button></td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap"><div class="flex items-center gap-2.5"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة فهد العتيبي" class="h-8 w-8 rounded-full"><div><p class="font-medium text-sm">فهد العتيبي</p><p class="text-xs text-slate-400"><span class="badge badge-platinum" style="font-size:0.65rem;padding:0.1rem 0.4rem">Platinum</span></p></div></div></td>
+                  <td class="px-4 py-3 font-semibold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">4,200 SAR</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap">5,000 SAR</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap"><span class="flex items-center gap-1.5"><i data-lucide="building-2" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>Bank Transfer</span></td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">1 أبريل 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end"><button type="button" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors"><i data-lucide="eye" class="h-3 w-3" aria-hidden="true"></i>عرض</button></td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap"><div class="flex items-center gap-2.5"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة سارة الخالدي" class="h-8 w-8 rounded-full"><div><p class="font-medium text-sm">سارة الخالدي</p><p class="text-xs text-slate-400"><span class="badge badge-silver" style="font-size:0.65rem;padding:0.1rem 0.4rem">Silver</span></p></div></div></td>
+                  <td class="px-4 py-3 font-semibold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">950 SAR</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap">950 SAR</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap"><span class="flex items-center gap-1.5"><i data-lucide="smartphone" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>STC Pay</span></td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">1 مارس 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end"><button type="button" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors"><i data-lucide="eye" class="h-3 w-3" aria-hidden="true"></i>عرض</button></td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap"><div class="flex items-center gap-2.5"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة نورة المطيري" class="h-8 w-8 rounded-full"><div><p class="font-medium text-sm">نورة المطيري</p><p class="text-xs text-slate-400"><span class="badge badge-gold" style="font-size:0.65rem;padding:0.1rem 0.4rem">Gold</span></p></div></div></td>
+                  <td class="px-4 py-3 font-semibold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">1,200 AED</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap">1,200 AED</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap"><span class="flex items-center gap-1.5"><i data-lucide="globe" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>Wise</span></td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">1 مارس 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end"><button type="button" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors"><i data-lucide="eye" class="h-3 w-3" aria-hidden="true"></i>عرض</button></td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap"><div class="flex items-center gap-2.5"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة Layla Nasser" class="h-8 w-8 rounded-full"><div><p class="font-medium text-sm">Layla Nasser</p><p class="text-xs text-slate-400"><span class="badge badge-silver" style="font-size:0.65rem;padding:0.1rem 0.4rem">Silver</span></p></div></div></td>
+                  <td class="px-4 py-3 font-semibold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">680 AED</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap">740 AED</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap"><span class="flex items-center gap-1.5"><i data-lucide="globe" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>PayPal</span></td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">15 فبراير 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end"><button type="button" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors"><i data-lucide="eye" class="h-3 w-3" aria-hidden="true"></i>عرض</button></td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap"><div class="flex items-center gap-2.5"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة هناء الجابري" class="h-8 w-8 rounded-full"><div><p class="font-medium text-sm">هناء الجابري</p><p class="text-xs text-slate-400"><span class="badge badge-platinum" style="font-size:0.65rem;padding:0.1rem 0.4rem">Platinum</span></p></div></div></td>
+                  <td class="px-4 py-3 font-semibold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">3,100 AED</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap">3,890 AED</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap"><span class="flex items-center gap-1.5"><i data-lucide="building-2" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>Bank Transfer</span></td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-paid">Paid</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">1 فبراير 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end"><button type="button" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors"><i data-lucide="eye" class="h-3 w-3" aria-hidden="true"></i>عرض</button></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab panel: Rejected -->
+        <div id="panel-rejected" data-tab-panel="tab-rejected" role="tabpanel" class="hidden">
+          <div class="table-responsive">
+            <table class="min-w-full text-sm" aria-label="طلبات السحب المرفوضة">
+              <thead class="bg-slate-50 dark:bg-slate-800/50">
+                <tr>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">المسوق</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">المبلغ المطلوب</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الرصيد المتاح</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">طريقة الدفع</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الحالة</th>
+                  <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">تاريخ الطلب</th>
+                  <th class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap"><div class="flex items-center gap-2.5"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة سامي الزهراني" class="h-8 w-8 rounded-full"><div><p class="font-medium text-sm">سامي الزهراني</p><p class="text-xs text-slate-400"><span class="badge badge-gold" style="font-size:0.65rem;padding:0.1rem 0.4rem">Gold</span></p></div></div></td>
+                  <td class="px-4 py-3 font-semibold text-slate-900 dark:text-slate-100 whitespace-nowrap">1,200 KWD</td>
+                  <td class="px-4 py-3 text-rose-600 dark:text-rose-400 font-medium whitespace-nowrap">580 KWD</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap"><span class="flex items-center gap-1.5"><i data-lucide="building-2" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>Bank Transfer</span></td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-cancelled">Rejected</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">20 أبريل 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end"><button type="button" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors"><i data-lucide="eye" class="h-3 w-3" aria-hidden="true"></i>عرض</button></td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap"><div class="flex items-center gap-2.5"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة خالد الرشيدي" class="h-8 w-8 rounded-full"><div><p class="font-medium text-sm">خالد الرشيدي</p><p class="text-xs text-slate-400"><span class="badge badge-bronze" style="font-size:0.65rem;padding:0.1rem 0.4rem">Bronze</span></p></div></div></td>
+                  <td class="px-4 py-3 font-semibold text-slate-900 dark:text-slate-100 whitespace-nowrap">350 SAR</td>
+                  <td class="px-4 py-3 text-rose-600 dark:text-rose-400 font-medium whitespace-nowrap">180 SAR</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap"><span class="flex items-center gap-1.5"><i data-lucide="smartphone" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>Vodafone Cash</span></td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-cancelled">Rejected</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">15 أبريل 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end"><button type="button" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors"><i data-lucide="eye" class="h-3 w-3" aria-hidden="true"></i>عرض</button></td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td class="px-4 py-3 whitespace-nowrap"><div class="flex items-center gap-2.5"><img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة Omar Khalil" class="h-8 w-8 rounded-full"><div><p class="font-medium text-sm">Omar Khalil</p><p class="text-xs text-slate-400"><span class="badge badge-bronze" style="font-size:0.65rem;padding:0.1rem 0.4rem">Bronze</span></p></div></div></td>
+                  <td class="px-4 py-3 font-semibold text-slate-900 dark:text-slate-100 whitespace-nowrap">400 EGP</td>
+                  <td class="px-4 py-3 text-rose-600 dark:text-rose-400 font-medium whitespace-nowrap">295 EGP</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400 whitespace-nowrap"><span class="flex items-center gap-1.5"><i data-lucide="credit-card" class="h-3.5 w-3.5 text-slate-400" aria-hidden="true"></i>Instapay</span></td>
+                  <td class="px-4 py-3 whitespace-nowrap"><span class="badge badge-cancelled">Rejected</span></td>
+                  <td class="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap">10 أبريل 2024</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-end"><button type="button" class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors"><i data-lucide="eye" class="h-3 w-3" aria-hidden="true"></i>عرض</button></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /tabs -->
+
+    </main>
+  </div><!-- /main wrapper -->
+
+  <!-- Modal backdrop -->
+  <div data-modal-backdrop
+       class="fixed inset-0 z-50 bg-black/50 hidden items-center justify-center p-4"
+       aria-hidden="true"></div>
+
+  <!-- Approve payout modals -->
+  <div data-modal="modal-approve-pay-001" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="apy-001-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0"><i data-lucide="wallet" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i></div><h3 id="apy-001-title" class="text-base font-semibold">تأكيد الصرف</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد الموافقة على صرف <strong>1,420 SAR</strong> لـ <strong>أحمد الشمري</strong> عبر Bank Transfer؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">موافقة وصرف</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-reject-pay-001" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="rpy-001-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="x-circle" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="rpy-001-title" class="text-base font-semibold">رفض طلب السحب</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد رفض طلب سحب <strong>أحمد الشمري</strong> بمبلغ 1,420 SAR؟ سيتم إشعاره بسبب الرفض.</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">رفض</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-approve-pay-002" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="apy-002-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0"><i data-lucide="wallet" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i></div><h3 id="apy-002-title" class="text-base font-semibold">تأكيد الصرف</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد الموافقة على صرف <strong>490 SAR</strong> لـ <strong>سارة الخالدي</strong> عبر STC Pay؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">موافقة وصرف</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-reject-pay-002" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="rpy-002-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="x-circle" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="rpy-002-title" class="text-base font-semibold">رفض طلب السحب</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد رفض طلب سحب <strong>سارة الخالدي</strong> بمبلغ 490 SAR؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">رفض</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-approve-pay-003" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="apy-003-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0"><i data-lucide="wallet" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i></div><h3 id="apy-003-title" class="text-base font-semibold">تأكيد الصرف</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد الموافقة على صرف <strong>3,800 SAR</strong> لـ <strong>فهد العتيبي</strong> عبر Bank Transfer؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">موافقة وصرف</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-reject-pay-003" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="rpy-003-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="x-circle" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="rpy-003-title" class="text-base font-semibold">رفض طلب السحب</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد رفض طلب سحب <strong>فهد العتيبي</strong> بمبلغ 3,800 SAR؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">رفض</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-approve-pay-004" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="apy-004-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0"><i data-lucide="wallet" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i></div><h3 id="apy-004-title" class="text-base font-semibold">تأكيد الصرف</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد الموافقة على صرف <strong>1,850 AED</strong> لـ <strong>نورة المطيري</strong> عبر Wise؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">موافقة وصرف</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-reject-pay-004" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="rpy-004-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="x-circle" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="rpy-004-title" class="text-base font-semibold">رفض طلب السحب</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد رفض طلب سحب <strong>نورة المطيري</strong> بمبلغ 1,850 AED؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">رفض</button></div>
+    </div>
+  </div>
+
+  <div data-modal="modal-approve-pay-005" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="apy-005-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0"><i data-lucide="wallet" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i></div><h3 id="apy-005-title" class="text-base font-semibold">تأكيد الصرف</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد الموافقة على صرف <strong>760 EGP</strong> لـ <strong>ريم السبيعي</strong> عبر Instapay؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">موافقة وصرف</button></div>
+    </div>
+  </div>
+  <div data-modal="modal-reject-pay-005" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="rpy-005-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="x-circle" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="rpy-005-title" class="text-base font-semibold">رفض طلب السحب</h3></div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد رفض طلب سحب <strong>ريم السبيعي</strong> بمبلغ 760 EGP؟</p>
+      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">رفض</button></div>
+    </div>
+  </div>
+
+  <!-- Copied toast -->
+  <div id="copied-toast" role="status" aria-live="polite">تم النسخ!</div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
