@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="خدمة تصميم هوية بصرية">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffedd5"/><stop offset="100%" stop-color="#fed7aa"/></linearGradient>
+    <linearGradient id="fg4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f97316" stop-opacity="0.5"/><stop offset="100%" stop-color="#ea580c" stop-opacity="0.7"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bg4)"/>
+  <circle cx="75" cy="75" r="35" fill="url(#fg4)" stroke="#f97316" stroke-width="1.5"/>
+  <polygon points="75,55 85,70 75,65 65,70" fill="white" opacity="0.8"/>
+  <polygon points="75,65 85,70 80,85 70,85 65,70" fill="white" opacity="0.6"/>
+  <rect x="120" y="60" width="40" height="40" rx="6" fill="#f97316" opacity="0.25" stroke="#f97316" stroke-width="1"/>
+  <text x="140" y="86" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="22" fill="#f97316" opacity="0.6">A</text>
+  <rect x="55" y="130" width="90" height="8" rx="4" fill="#f97316" opacity="0.3"/>
+  <rect x="70" y="145" width="60" height="6" rx="3" fill="#f97316" opacity="0.2"/>
+  <rect x="80" y="158" width="40" height="5" rx="2.5" fill="#f97316" opacity="0.15"/>
+  <circle cx="145" cy="150" r="18" fill="#f97316" opacity="0.15"/>
+  <path d="M138 150 L152 150 M145 143 L145 157" stroke="#f97316" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+</svg>

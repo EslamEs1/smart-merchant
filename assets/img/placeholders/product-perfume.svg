@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="عطر فاخر للرجال">
+  <defs>
+    <linearGradient id="bgpf" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fef3c7"/><stop offset="100%" stop-color="#fde68a"/></linearGradient>
+    <linearGradient id="fgpf" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d97706" stop-opacity="0.5"/><stop offset="100%" stop-color="#92400e" stop-opacity="0.7"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgpf)"/>
+  <rect x="72" y="80" width="56" height="75" rx="6" fill="url(#fgpf)" stroke="#d97706" stroke-width="1.5"/>
+  <rect x="82" y="65" width="36" height="20" rx="3" fill="url(#fgpf)" stroke="#d97706" stroke-width="1.2"/>
+  <rect x="92" y="48" width="16" height="20" rx="2" fill="#d97706" opacity="0.4"/>
+  <rect x="96" y="38" width="8" height="14" rx="4" fill="#d97706" opacity="0.5"/>
+  <rect x="80" y="100" width="40" height="1.5" rx="0.75" fill="white" opacity="0.3"/>
+  <rect x="80" y="115" width="40" height="1.5" rx="0.75" fill="white" opacity="0.25"/>
+  <rect x="80" y="130" width="40" height="1.5" rx="0.75" fill="white" opacity="0.2"/>
+  <circle cx="100" cy="168" r="5" fill="#d97706" opacity="0.15"/>
+</svg>

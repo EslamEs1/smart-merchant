@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="باقة إدارة التواصل الاجتماعي">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#dbeafe"/><stop offset="100%" stop-color="#bfdbfe"/></linearGradient>
+    <linearGradient id="fg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.5"/><stop offset="100%" stop-color="#2563eb" stop-opacity="0.7"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bg2)"/>
+  <rect x="35" y="55" width="55" height="75" rx="10" fill="url(#fg2)" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle cx="62.5" cy="78" r="12" fill="white" opacity="0.7"/>
+  <rect x="43" y="100" width="39" height="5" rx="2.5" fill="white" opacity="0.5"/>
+  <rect x="48" y="110" width="29" height="4" rx="2" fill="white" opacity="0.35"/>
+  <rect x="110" y="45" width="55" height="75" rx="10" fill="url(#fg2)" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle cx="137.5" cy="68" r="12" fill="white" opacity="0.7"/>
+  <rect x="118" y="90" width="39" height="5" rx="2.5" fill="white" opacity="0.5"/>
+  <rect x="123" y="100" width="29" height="4" rx="2" fill="white" opacity="0.35"/>
+  <circle cx="100" cy="140" r="8" fill="#3b82f6" opacity="0.25"/>
+  <path d="M97 137 L103 143 M103 137 L97 143" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+  <path d="M70 130 Q100 155 130 130" stroke="#3b82f6" stroke-width="1.5" fill="none" stroke-dasharray="4 3" opacity="0.4"/>
+</svg>

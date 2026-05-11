@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="قميص رسمي قطني">
+  <defs>
+    <linearGradient id="bgfs" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#dbeafe"/><stop offset="100%" stop-color="#e2e8f0"/></linearGradient>
+    <linearGradient id="fgfs" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.5"/><stop offset="100%" stop-color="#475569" stop-opacity="0.6"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgfs)"/>
+  <path d="M80 50 L65 60 L55 55 L45 75 L60 82 L65 155 Q65 160 72 160 L128 160 Q135 160 135 155 L140 82 L155 75 L145 55 L135 60 L120 50 Q110 55 100 55 Q90 55 80 50Z" fill="url(#fgfs)" stroke="#3b82f6" stroke-width="1.5"/>
+  <path d="M93 50 L97 105 L100 108 L103 105 L107 50" fill="white" opacity="0.3"/>
+  <circle cx="100" cy="70" r="2" fill="#3b82f6" opacity="0.4"/>
+  <circle cx="100" cy="82" r="2" fill="#3b82f6" opacity="0.35"/>
+  <circle cx="100" cy="94" r="2" fill="#3b82f6" opacity="0.3"/>
+  <line x1="65" y1="90" x2="65" y2="155" stroke="white" stroke-width="0.8" opacity="0.2"/>
+  <line x1="135" y1="90" x2="135" y2="155" stroke="white" stroke-width="0.8" opacity="0.2"/>
+  <circle cx="100" cy="175" r="5" fill="#3b82f6" opacity="0.15"/>
+</svg>

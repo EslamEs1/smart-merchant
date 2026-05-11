@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="اشتراك النشرة الأسبوعية">
+  <defs>
+    <linearGradient id="bg11" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e0e7ff"/><stop offset="100%" stop-color="#c7d2fe"/></linearGradient>
+    <linearGradient id="fg11" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#818cf8" stop-opacity="0.5"/><stop offset="100%" stop-color="#6366f1" stop-opacity="0.7"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bg11)"/>
+  <rect x="45" y="65" width="110" height="75" rx="6" fill="url(#fg11)" stroke="#818cf8" stroke-width="1.5"/>
+  <path d="M45 65 L100 105 L155 65" stroke="#818cf8" stroke-width="2" fill="none" opacity="0.5"/>
+  <rect x="70" y="50" width="60" height="25" rx="5" fill="#818cf8" opacity="0.2" stroke="#818cf8" stroke-width="1"/>
+  <text x="100" y="67" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="10" fill="#818cf8" opacity="0.7">@</text>
+  <circle cx="65" cy="160" r="8" fill="#818cf8" opacity="0.15"/>
+  <circle cx="100" cy="165" r="10" fill="#818cf8" opacity="0.2"/>
+  <circle cx="135" cy="160" r="8" fill="#818cf8" opacity="0.15"/>
+  <path d="M92 165 L98 171 L110 159" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.5"/>
+</svg>

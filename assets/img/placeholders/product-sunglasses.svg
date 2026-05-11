@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="نظارة شمسية بولاريزد">
+  <defs>
+    <linearGradient id="bgsu" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e2e8f0"/><stop offset="100%" stop-color="#cbd5e1"/></linearGradient>
+    <linearGradient id="fgsu" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#475569" stop-opacity="0.5"/><stop offset="100%" stop-color="#1e293b" stop-opacity="0.7"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgsu)"/>
+  <rect x="48" y="82" width="42" height="35" rx="6" fill="url(#fgsu)" stroke="#475569" stroke-width="1.5"/>
+  <rect x="110" y="82" width="42" height="35" rx="6" fill="url(#fgsu)" stroke="#475569" stroke-width="1.5"/>
+  <path d="M90 92 Q100 88 110 92" stroke="#475569" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M48 92 L32 88" stroke="#475569" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M152 92 L168 88" stroke="#475569" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <rect x="54" y="88" width="30" height="2" rx="1" fill="white" opacity="0.2"/>
+  <rect x="116" y="88" width="30" height="2" rx="1" fill="white" opacity="0.2"/>
+  <path d="M62 140 Q72 150 82 140" stroke="#475569" stroke-width="1.5" fill="none" opacity="0.2"/>
+  <path d="M118 140 Q128 150 138 140" stroke="#475569" stroke-width="1.5" fill="none" opacity="0.2"/>
+  <circle cx="100" cy="165" r="5" fill="#475569" opacity="0.15"/>
+</svg>

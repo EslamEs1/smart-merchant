@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="سجادة فاخرة">
+  <defs>
+    <linearGradient id="bgc" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fef3c7"/><stop offset="100%" stop-color="#fecdd3"/></linearGradient>
+    <linearGradient id="fgc" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#b45309" stop-opacity="0.5"/><stop offset="100%" stop-color="#9f1239" stop-opacity="0.6"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgc)"/>
+  <rect x="35" y="55" width="130" height="90" rx="4" fill="url(#fgc)" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="45" y="65" width="110" height="70" rx="2" fill="none" stroke="white" stroke-width="1" opacity="0.3"/>
+  <rect x="55" y="75" width="90" height="50" rx="1" fill="none" stroke="white" stroke-width="0.8" opacity="0.25"/>
+  <path d="M70 85 L80 100 L70 115" stroke="white" stroke-width="1" opacity="0.3" fill="none"/>
+  <path d="M130 85 L120 100 L130 115" stroke="white" stroke-width="1" opacity="0.3" fill="none"/>
+  <rect x="85" y="90" width="30" height="20" rx="1" fill="white" opacity="0.15"/>
+  <line x1="85" y1="100" x2="115" y2="100" stroke="white" stroke-width="0.8" opacity="0.25"/>
+  <path d="M35 145 Q40 155 35 160" stroke="#b45309" stroke-width="1.5" opacity="0.3" fill="none"/>
+  <path d="M165 145 Q160 155 165 160" stroke="#b45309" stroke-width="1.5" opacity="0.3" fill="none"/>
+  <circle cx="100" cy="165" r="5" fill="#b45309" opacity="0.15"/>
+</svg>

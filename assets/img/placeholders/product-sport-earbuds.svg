@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="Sport Earbuds Pro">
+  <defs>
+    <linearGradient id="bgse" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d1fae5"/><stop offset="100%" stop-color="#ecfccb"/></linearGradient>
+    <linearGradient id="fgse" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#10b981" stop-opacity="0.5"/><stop offset="100%" stop-color="#84cc16" stop-opacity="0.7"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgse)"/>
+  <circle cx="75" cy="85" r="18" fill="url(#fgse)" stroke="#10b981" stroke-width="1.5"/>
+  <circle cx="75" cy="85" r="8" fill="white" opacity="0.35"/>
+  <circle cx="75" cy="85" r="3" fill="#10b981" opacity="0.5"/>
+  <path d="M75 103 L75 130 Q75 140 68 145" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="125" cy="85" r="18" fill="url(#fgse)" stroke="#10b981" stroke-width="1.5"/>
+  <circle cx="125" cy="85" r="8" fill="white" opacity="0.35"/>
+  <circle cx="125" cy="85" r="3" fill="#10b981" opacity="0.5"/>
+  <path d="M125 103 L125 130 Q125 140 132 145" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M65 60 Q75 50 85 60" stroke="#84cc16" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <path d="M115 60 Q125 50 135 60" stroke="#84cc16" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <circle cx="100" cy="160" r="5" fill="#10b981" opacity="0.15"/>
+</svg>

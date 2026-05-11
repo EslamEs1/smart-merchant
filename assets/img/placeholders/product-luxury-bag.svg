@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="حقيبة جلدية فاخرة">
+  <defs>
+    <linearGradient id="bg8" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fef3c7"/><stop offset="100%" stop-color="#fde68a"/></linearGradient>
+    <linearGradient id="fg8" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#92400e" stop-opacity="0.4"/><stop offset="100%" stop-color="#78350f" stop-opacity="0.6"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bg8)"/>
+  <rect x="55" y="80" width="90" height="70" rx="8" fill="url(#fg8)" stroke="#92400e" stroke-width="1.5"/>
+  <rect x="55" y="80" width="90" height="15" rx="8" fill="#92400e" opacity="0.2"/>
+  <path d="M80 80 Q80 55 100 55 Q120 55 120 80" stroke="#92400e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="100" cy="87" r="5" fill="#92400e" opacity="0.5"/>
+  <rect x="65" y="110" width="30" height="3" rx="1.5" fill="white" opacity="0.3"/>
+  <rect x="65" y="118" width="20" height="3" rx="1.5" fill="white" opacity="0.2"/>
+  <circle cx="150" cy="60" r="12" fill="#92400e" opacity="0.1"/>
+  <path d="M146 56 L154 64 M154 56 L146 64" stroke="#92400e" stroke-width="1" stroke-linecap="round" opacity="0.3"/>
+</svg>

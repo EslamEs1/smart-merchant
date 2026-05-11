@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="طقم ملابس رياضية">
+  <defs>
+    <linearGradient id="bgs" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d1fae5"/><stop offset="100%" stop-color="#a7f3d0"/></linearGradient>
+    <linearGradient id="fgs" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#10b981" stop-opacity="0.5"/><stop offset="100%" stop-color="#059669" stop-opacity="0.7"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgs)"/>
+  <path d="M70 65 L55 75 L60 95 L75 85 L75 140 Q75 145 80 145 L120 145 Q125 145 125 140 L125 85 L140 95 L145 75 L130 65 Q115 55 100 55 Q85 55 70 65Z" fill="url(#fgs)" stroke="#10b981" stroke-width="1.5"/>
+  <line x1="90" y1="55" x2="90" y2="75" stroke="white" stroke-width="1" opacity="0.3"/>
+  <line x1="110" y1="55" x2="110" y2="75" stroke="white" stroke-width="1" opacity="0.3"/>
+  <path d="M88 75 Q100 82 112 75" stroke="white" stroke-width="1.2" fill="none" opacity="0.4"/>
+  <line x1="75" y1="105" x2="125" y2="105" stroke="white" stroke-width="0.8" opacity="0.25"/>
+  <rect x="85" y="115" width="30" height="3" rx="1.5" fill="white" opacity="0.2"/>
+  <circle cx="100" cy="165" r="5" fill="#10b981" opacity="0.15"/>
+</svg>
