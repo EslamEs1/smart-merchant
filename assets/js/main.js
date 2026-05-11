@@ -338,6 +338,96 @@ function initDateRange() {
   });
 }
 
+/* ─── 11. Favorite toggle ────────────────────────────────────────────────── */
+
+function initFavoriteToggle() {
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-favorite-toggle]');
+    if (!btn) return;
+    e.preventDefault();
+    var isFav = btn.classList.toggle('is-favorited');
+    btn.setAttribute('aria-pressed', String(isFav));
+  });
+}
+
+/* ─── 12. Gallery switch ─────────────────────────────────────────────────── */
+
+function initGallery() {
+  document.addEventListener('click', function (e) {
+    var thumb = e.target.closest('[data-gallery-thumb]');
+    if (!thumb) return;
+    var gallery = thumb.closest('[data-gallery]');
+    if (!gallery) return;
+    var mainImg = gallery.querySelector('[data-gallery-main]');
+    if (!mainImg) return;
+    var src = thumb.getAttribute('data-src');
+    var alt = thumb.getAttribute('data-alt');
+    if (src) mainImg.src = src;
+    if (alt) mainImg.alt = alt;
+    gallery.querySelectorAll('[data-gallery-thumb]').forEach(function (t) {
+      t.classList.remove('is-active');
+    });
+    thumb.classList.add('is-active');
+  });
+}
+
+/* ─── 13. Segmented tabs ─────────────────────────────────────────────────── */
+
+function initSegmentedTabs() {
+  document.addEventListener('click', function (e) {
+    var seg = e.target.closest('[data-segment]');
+    if (!seg) return;
+    var group = seg.closest('[data-segments]');
+    if (!group) return;
+    group.querySelectorAll('[data-segment]').forEach(function (s) {
+      s.classList.remove('is-active');
+      s.setAttribute('aria-selected', 'false');
+    });
+    seg.classList.add('is-active');
+    seg.setAttribute('aria-selected', 'true');
+  });
+}
+
+/* ─── 14. Bottom-nav active highlight ────────────────────────────────────── */
+
+function initBottomNavActive() {
+  var nav = document.querySelector('[data-bottom-nav]');
+  if (!nav) return;
+  var path = location.pathname;
+  var filename = path.substring(path.lastIndexOf('/') + 1);
+  var hash = location.hash;
+  var fullTarget = filename + hash;
+  nav.querySelectorAll('a[data-nav-target]').forEach(function (a) {
+    var target = a.getAttribute('data-nav-target');
+    if (target === fullTarget || target === filename) {
+      a.classList.add('is-active');
+      a.setAttribute('aria-current', 'page');
+    }
+  });
+  var sidebar = document.querySelector('aside [data-nav-target]');
+  if (!sidebar) {
+    var aside = nav.closest('body').querySelector('aside[data-nav-target], aside [data-nav-target]');
+    if (!aside) {
+      var sidebarLinks = document.querySelectorAll('.sidebar-link[data-nav-target]');
+      sidebarLinks.forEach(function (a) {
+        var target = a.getAttribute('data-nav-target');
+        if (target === fullTarget || target === filename) {
+          a.classList.add('is-active');
+          a.setAttribute('aria-current', 'page');
+        }
+      });
+    }
+  }
+  var sidebarLinks = document.querySelectorAll('aside .sidebar-link[data-nav-target]');
+  sidebarLinks.forEach(function (a) {
+    var target = a.getAttribute('data-nav-target');
+    if (target === fullTarget || target === filename) {
+      a.classList.add('is-active');
+      a.setAttribute('aria-current', 'page');
+    }
+  });
+}
+
 /* ─── Boot ────────────────────────────────────────────────────────────────── */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -348,6 +438,10 @@ document.addEventListener('DOMContentLoaded', function () {
   initTabs();
   initCopy();
   initDateRange();
+  initFavoriteToggle();
+  initGallery();
+  initSegmentedTabs();
+  initBottomNavActive();
   renderIcons();
 });
 

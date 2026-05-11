@@ -1,0 +1,430 @@
+<!-- AFFILIATE SHELL PARTIAL — copy-paste into every affiliate page body.
+     Instructions:
+       1. Set the correct bottom-nav item to is-active + aria-current="page" for the current page.
+       2. Set the correct desktop-sidebar item to is-active + aria-current="page" for the current page.
+       3. Change the header search placeholder to match the page context.
+       4. Wrap page-specific content inside <main class="pb-24 lg:pb-8">…</main>.
+       5. The page must also include partials/_head.html in <head> and a single
+          <script src="assets/js/main.js" defer></script> before </body>.
+-->
+
+<!-- ─── Affiliate Top Header ──────────────────────────────────────────────── -->
+<header class="sticky top-0 z-30 bg-white/80 dark:bg-slate-950/80 backdrop-blur
+               border-b border-slate-200/70 dark:border-slate-800/70
+               flex items-center gap-2 px-4 sm:px-6 h-14">
+
+  <!-- Desktop wordmark (lg+) -->
+  <span class="hidden lg:block text-sm font-bold gradient-brand-text whitespace-nowrap ms-1">بوابة المسوّق</span>
+
+  <!-- Profile avatar + name + earnings pill -->
+  <a href="affiliate-profile.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity focus-ring rounded-lg p-1">
+    <img src="assets/img/placeholders/affiliate-avatar.svg"
+         alt="صورة أحمد الشمري"
+         class="h-8 w-8 rounded-full ring-2 ring-brand-primary/30">
+    <span class="text-sm font-semibold text-slate-800 dark:text-slate-200 hidden sm:block">أحمد</span>
+  </a>
+
+  <span class="hidden sm:inline-flex items-center gap-1 text-xs font-semibold
+               bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400
+               px-2.5 py-1 rounded-full whitespace-nowrap">
+    متاح للسحب: <span class="text-emerald-800 dark:text-emerald-300">1,420 ر.س</span>
+  </span>
+
+  <!-- Search (wider on lg) -->
+  <div class="flex-1 max-w-xs lg:max-w-md">
+    <div class="relative">
+      <span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400">
+        <i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i>
+      </span>
+      <input type="search"
+             placeholder="ابحث عن منتج للبيع..."
+             class="w-full ps-9 pe-4 py-2 text-sm bg-slate-50 dark:bg-slate-900
+                    border border-slate-200 dark:border-slate-800 rounded-lg
+                    text-slate-800 dark:text-slate-200 placeholder:text-slate-400
+                    focus:outline-none focus:ring-2 focus:ring-brand-primary/50
+                    transition-colors"
+             aria-label="بحث">
+    </div>
+  </div>
+
+  <!-- Notification bell -->
+  <div class="relative" data-actions-dropdown="affiliate-notifications">
+    <button type="button"
+            class="relative p-2 rounded-lg text-slate-500 hover:bg-slate-100
+                   dark:hover:bg-slate-800 focus-ring transition-colors"
+            aria-label="الإشعارات"
+            aria-expanded="false"
+            aria-haspopup="true">
+      <i data-lucide="bell" class="h-4 w-4" aria-hidden="true"></i>
+      <span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-rose-500" aria-hidden="true"></span>
+    </button>
+
+    <!-- Notifications dropdown panel -->
+    <div class="dropdown-panel absolute end-0 top-full mt-1 w-80 bg-white dark:bg-slate-900
+                border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg
+                py-2 hidden z-50"
+         role="menu"
+         aria-label="الإشعارات">
+      <div class="px-4 py-2 border-b border-slate-100 dark:border-slate-800">
+        <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">الإشعارات</p>
+      </div>
+      <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" role="menuitem">
+        <span class="mt-0.5 h-2 w-2 rounded-full bg-brand-primary shrink-0"></span>
+        <div>
+          <p class="text-sm text-slate-700 dark:text-slate-300">تم اعتماد عمولة بقيمة <strong class="text-emerald-600">85 ر.س</strong></p>
+          <p class="text-xs text-slate-400 mt-0.5">منذ ساعتين</p>
+        </div>
+      </a>
+      <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" role="menuitem">
+        <span class="mt-0.5 h-2 w-2 rounded-full bg-brand-primary shrink-0"></span>
+        <div>
+          <p class="text-sm text-slate-700 dark:text-slate-300">طلب جديد <strong>AO-2026-0013</strong> بانتظار التأكيد</p>
+          <p class="text-xs text-slate-400 mt-0.5">منذ 5 ساعات</p>
+        </div>
+      </a>
+      <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" role="menuitem">
+        <span class="mt-0.5 h-2 w-2 rounded-full bg-slate-300 shrink-0"></span>
+        <div>
+          <p class="text-sm text-slate-700 dark:text-slate-300">منتج جديد متاح للتسويق: <strong>سماعات بلوتوث لاسلكية</strong></p>
+          <p class="text-xs text-slate-400 mt-0.5">أمس</p>
+        </div>
+      </a>
+      <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" role="menuitem">
+        <span class="mt-0.5 h-2 w-2 rounded-full bg-slate-300 shrink-0"></span>
+        <div>
+          <p class="text-sm text-slate-700 dark:text-slate-300">تم تسليم الطلب <strong>AO-2026-0007</strong> بنجاح</p>
+          <p class="text-xs text-slate-400 mt-0.5">منذ يومين</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Theme toggle -->
+  <button type="button"
+          data-theme-toggle
+          class="p-2 rounded-lg text-slate-500 hover:bg-slate-100
+                 dark:hover:bg-slate-800 focus-ring transition-colors"
+          aria-label="تبديل الوضع الليلي / النهاري">
+    <i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i>
+    <i data-lucide="moon" class="h-4 w-4 hidden dark:block" aria-hidden="true"></i>
+  </button>
+
+</header>
+<!-- /affiliate-header -->
+
+
+<!-- ─── Desktop Sidebar (hidden below lg) ────────────────────────────────── -->
+<aside class="hidden lg:flex fixed top-14 start-0 bottom-0 w-64 z-20
+              flex-col border-e border-slate-200 dark:border-slate-800
+              bg-white dark:bg-slate-950 overflow-y-auto"
+       aria-label="القائمة الجانبية">
+
+  <nav class="flex-1 py-4 px-3" aria-label="روابط التنقل">
+    <ul class="space-y-1" role="list">
+
+      <li>
+        <a href="affiliate-dashboard.html"
+           data-nav-target="affiliate-dashboard.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                  text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800
+                  hover:text-slate-900 dark:hover:text-white transition-colors">
+          <i data-lucide="home" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+          <span>الرئيسية</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="affiliate-dashboard.html#products"
+           data-nav-target="affiliate-dashboard.html#products"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                  text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800
+                  hover:text-slate-900 dark:hover:text-white transition-colors">
+          <i data-lucide="shopping-bag" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+          <span>المنتجات</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="affiliate-saved-products.html"
+           data-nav-target="affiliate-saved-products.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                  text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800
+                  hover:text-slate-900 dark:hover:text-white transition-colors">
+          <i data-lucide="bookmark" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+          <span>المحفوظات</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="affiliate-orders.html"
+           data-nav-target="affiliate-orders.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                  text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800
+                  hover:text-slate-900 dark:hover:text-white transition-colors">
+          <i data-lucide="package" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+          <span>الطلبات</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="affiliate-earnings.html"
+           data-nav-target="affiliate-earnings.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                  text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800
+                  hover:text-slate-900 dark:hover:text-white transition-colors">
+          <i data-lucide="wallet" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+          <span>الأرباح</span>
+        </a>
+      </li>
+
+      <li class="pt-2 mt-2 border-t border-slate-200 dark:border-slate-800">
+        <a href="affiliate-profile.html"
+           data-nav-target="affiliate-profile.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                  text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800
+                  hover:text-slate-900 dark:hover:text-white transition-colors">
+          <i data-lucide="user" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
+          <span>الملف الشخصي</span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+
+</aside>
+<!-- /desktop-sidebar -->
+
+
+<!-- ─── Mobile Bottom Navigation (hidden on lg+) ─────────────────────────── -->
+<nav data-bottom-nav
+     class="affiliate-bottom-nav fixed bottom-0 inset-x-0 z-30 lg:hidden
+            bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800
+            flex items-center justify-around h-16 px-1"
+     aria-label="التنقل السفلي">
+
+  <a href="affiliate-dashboard.html"
+     data-nav-target="affiliate-dashboard.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary
+            transition-colors"
+     aria-current="false">
+    <i data-lucide="home" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">الرئيسية</span>
+  </a>
+
+  <a href="affiliate-dashboard.html#products"
+     data-nav-target="affiliate-dashboard.html#products"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary
+            transition-colors"
+     aria-current="false">
+    <i data-lucide="shopping-bag" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">المنتجات</span>
+  </a>
+
+  <a href="affiliate-saved-products.html"
+     data-nav-target="affiliate-saved-products.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary
+            transition-colors"
+     aria-current="false">
+    <i data-lucide="bookmark" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">المحفوظات</span>
+  </a>
+
+  <a href="affiliate-orders.html"
+     data-nav-target="affiliate-orders.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary
+            transition-colors"
+     aria-current="false">
+    <i data-lucide="package" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">الطلبات</span>
+  </a>
+
+  <a href="affiliate-earnings.html"
+     data-nav-target="affiliate-earnings.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary
+            transition-colors"
+     aria-current="false">
+    <i data-lucide="wallet" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">الأرباح</span>
+  </a>
+
+</nav>
+<!-- /mobile-bottom-nav -->
+
+
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  CANONICAL SAMPLE-DATA SET — Affiliate Seller Portal                       ║
+║  Reference only. Not loaded at runtime.                                     ║
+║  Authors: copy values from here into the HTML of each affiliate page.       ║
+║  Cross-entity consistency verified against data-model.md checklist.         ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+══════════════════════════════════════════════════════════════════════════════
+  1. AFFILIATE PROFILE (single instance — أحمد الشمري)
+══════════════════════════════════════════════════════════════════════════════
+
+  name:              أحمد الشمري
+  avatar:            assets/img/placeholders/affiliate-avatar.svg
+  level:             Gold  → <span class="badge badge-gold">Gold</span>
+  referralLink:      https://smartmerchant.os/r/AHMAD20
+  couponCode:        AHMAD20
+  qrPlaceholder:     assets/img/placeholders/qr-code.svg
+  accountStatus:     Active  → <span class="badge badge-active">Active</span>
+  paymentMethod:     محفظة STC Pay — 0555•••41
+  contact.email:     ahm•••@gmail.com
+  contact.phone:     0555 •• •• 41
+  contact.city:      الرياض
+  contact.country:   السعودية
+
+  ── Derived figures (MUST stay coherent across all pages) ──
+  availableBalance:      1,420 ر.س   (= Σ earnings Approved)
+  totalEarnings:         2,315 ر.س   (= Σ earnings Approved+Paid+Pending)
+  underReviewEarnings:     490 ر.س   (= Σ earnings Pending)
+  paidEarnings:            405 ر.س   (= Σ earnings Paid)
+  successfulOrdersCount:       4      (= count orders Delivered)
+  savedProductsCount:          5      (= cards on saved-products page)
+
+══════════════════════════════════════════════════════════════════════════════
+  2. PRODUCTS (20 distinct — 10 SAR, 5 EGP, 4 AED, 1 KWD)
+══════════════════════════════════════════════════════════════════════════════
+
+  All images: assets/img/placeholders/product.svg   (alt = product name)
+  Video thumbs: product.svg  +  assets/img/placeholders/dashboard-preview.svg
+
+  ┌───────┬──────────────────────────────────────────┬───────────────┬────────────┬───────────┬───────────┬──────────┬────────────┬───────────┬─────────────┐
+  │ id    │ name                                     │ category      │ badge      │ supplier  │ suggested │ wasPrice │ profit     │ currency  │ isFavorited │
+  ├───────┼──────────────────────────────────────────┼───────────────┼────────────┼───────────┼───────────┼──────────┼────────────┼───────────┼─────────────┤
+  │ AP-001│ سماعات بلوتوث لاسلكية                    │ إلكترونيات    │ Bestseller │ 470 ر.س   │ 890 ر.س   │ —        │ 420 ر.س    │ SAR       │ true        │
+  │ AP-002│ حقيبة ظهر جلدية فاخرة                    │ إكسسوارات     │ Bestseller │ 300 ر.س   │ 680 ر.س   │ —        │ 380 ر.س    │ SAR       │ true        │
+  │ AP-003│ ساعة ذكية Smart Watch Pro                 │ إلكترونيات    │ Hot Offer  │ 580 ر.س   │ 920 ر.س   │ 1,200 ر.س│ 340 ر.س    │ SAR       │ true        │
+  │ AP-004│ عطر فاخر للرجال                          │ إكسسوارات     │ New        │ 180 ر.س   │ 310 ر.س   │ —        │ 130 ر.س    │ SAR       │ false       │
+  │ AP-005│ مكبر صوت بلوتوث مقاوم للماء              │ إلكترونيات    │ Hot Offer  │ 160 ر.س   │ 320 ر.س   │ 450 ر.س  │ 160 ر.س    │ SAR       │ false       │
+  │ AP-006│ طقم ملابس رياضية                         │ ملابس         │ Bestseller │ 190 ر.س   │ 340 ر.س   │ —        │ 150 ر.س    │ SAR       │ false       │
+  │ AP-007│ شاحن لاسلكي سريع                         │ إلكترونيات    │ New        │  85 ر.س   │ 180 ر.س   │ —        │  95 ر.س    │ SAR       │ false       │
+  │ AP-008│ حقيبة يد أنيقة                           │ إكسسوارات     │ Hot Offer  │ 180 ر.س   │ 380 ر.س   │ 520 ر.س  │ 200 ر.س    │ SAR       │ false       │
+  │ AP-009│ قميص رسمي قطني                           │ ملابس         │ Bestseller │  95 ر.س   │ 195 ر.س   │ —        │ 100 ر.س    │ SAR       │ false       │
+  │ AP-010│ كريم عناية بالبشرة                       │ أدوات منزلية  │ New        │  65 ر.س   │ 145 ر.س   │ —        │  80 ر.س    │ SAR       │ false       │
+  │ AP-011│ جهاز تنقية الهواء                        │ إلكترونيات    │ Bestseller │ 1,500 ج.م │ 2,200 ج.م │ —        │ 700 ج.م    │ EGP       │ true        │
+  │ AP-012│ سجادة فاخرة                              │ أدوات منزلية  │ Hot Offer  │ 650 ج.م   │ 1,200 ج.م │ 1,800 ج.م│ 550 ج.م    │ EGP       │ false       │
+  │ AP-013│ نظارة شمسية بولاريزد                     │ إكسسوارات     │ New        │ 200 ج.م   │ 450 ج.م   │ —        │ 250 ج.م    │ EGP       │ true        │
+  │ AP-014│ Leather Wallet Classic                   │ إكسسوارات     │ New        │ 150 ج.م   │ 300 ج.م   │ —        │ 150 ج.م    │ EGP       │ false       │
+  │ AP-015│ سترة شتوية                               │ ملابس         │ Hot Offer  │ 200 ج.م   │ 450 ج.م   │ 650 ج.م  │ 250 ج.م    │ EGP       │ false       │
+  │ AP-016│ روبوت تنظيف ذكي                          │ أدوات منزلية  │ Hot Offer  │ 320 د.إ   │ 550 د.إ   │ 850 د.إ  │ 230 د.إ    │ AED       │ false       │
+  │ AP-017│ Sport Earbuds Pro                        │ إلكترونيات    │ New        │  80 د.إ   │ 180 د.إ   │ —        │ 100 د.إ    │ AED       │ false       │
+  │ AP-018│ حذاء جري احترافي                         │ ملابس         │ Bestseller │ 150 د.إ   │ 280 د.إ   │ —        │ 130 د.إ    │ AED       │ false       │
+  │ AP-019│ كوب حافظ للحرارة                         │ أدوات منزلية  │ New        │  30 د.إ   │  75 د.إ   │ —        │  45 د.إ    │ AED       │ false       │
+  │ AP-020│ Gold Chain 18K                           │ إكسسوارات     │ Bestseller │  45 د.ك   │  78 د.ك   │ —        │  33 د.ك    │ KWD       │ false       │
+  └───────┴──────────────────────────────────────────┴───────────────┴────────────┴───────────┴───────────┴──────────┴────────────┴───────────┴─────────────┘
+
+  ── Dashboard section assignment (20 card slots, some products repeat) ──
+
+  الأكثر مبيعًا (5 cards): AP-001, AP-002, AP-006, AP-009, AP-011
+  عروض قوية اليوم (5 cards, all Hot Offer + wasPrice): AP-003, AP-005, AP-008, AP-012, AP-016
+  منتجات جديدة (5 cards, all New): AP-004, AP-007, AP-010, AP-013, AP-014
+  ربح عالي (5 cards, profit ≥ 60): AP-001, AP-002, AP-003, AP-011, AP-016
+
+  ── Product-detail page subject (AP-001 — سماعات بلوتوث لاسلكية) ──
+
+  shortDescription: سماعات بلوتوث لاسلكية عالية الجودة مع خاصية إلغاء الضوضاء
+    النشط، بطارية تدوم حتى 30 ساعة شحن، ومقاومة للعرق والماء.
+  readyCaption:
+    🎧 سماعات بلوتوث لاسلكية بجودة صوت استثنائية!
+    ✅ إلغاء ضوضاء نشط
+    🔋 بطارية 30 ساعة
+    💧 مقاومة للماء IPX5
+    #سماعات_بلوتوث #تسوق_اونلاين #عرض_خاص
+  readyDetails:
+    • نوع السماعات: فوق الأذن (Over-Ear)
+    • بلوتوث 5.3 مع نطاق يصل إلى 15 متر
+    • شحن سريع: 10 دقائق = 3 ساعات تشغيل
+    • وزن خفيف 250 جرام مع وسائد أذن مريحة
+    • مايكروفون مدمج عالي الوضوح للمكالمات
+    • قابلة للطي سهلة الحمل
+  sellingTips:
+    1. وجّه العملاء لميزة إلغاء الضوضاء — مثالية للعمل والسفر
+    2. شارح أن 10 دقائق شحن تعطي 3 ساعات — ميزة تنافسية قوية
+    3. استخدم صور السماعات مع ملابس رياضية لجذب شريحة الشباب
+  relatedIds: AP-003, AP-005, AP-007, AP-017
+
+══════════════════════════════════════════════════════════════════════════════
+  3. ORDERS (12 rows — current affiliate only)
+══════════════════════════════════════════════════════════════════════════════
+
+  Status distribution: Delivered(4) + Processing(2) + Confirmed(1) + Pending(2) + Cancelled(3) = 12
+
+  ┌──────────────┬──────────────────┬──────────────────────────────────────┬────────────┬───────────┬────────────────┐
+  │ orderNumber  │ customerMasked   │ productName                          │ status     │ commission│ date           │
+  ├──────────────┼──────────────────┼──────────────────────────────────────┼────────────┼───────────┼────────────────┤
+  │ AO-2026-0001 │ أسماء م***       │ سماعات بلوتوث لاسلكية               │ Delivered  │ 420 ر.س   │ 15 أبريل 2026  │
+  │ AO-2026-0002 │ أحمد ا***        │ حقيبة ظهر جلدية فاخرة               │ Delivered  │ 380 ر.س   │ 18 أبريل 2026  │
+  │ AO-2026-0003 │ Sara H***        │ ساعة ذكية Smart Watch Pro            │ Delivered  │ 340 ر.س   │ 20 أبريل 2026  │
+  │ AO-2026-0004 │ 055•• ••• 41     │ جهاز تنقية الهواء                   │ Delivered  │ 700 ج.م   │ 22 أبريل 2026  │
+  │ AO-2026-0005 │ فاطمة ع***       │ حقيبة يد أنيقة                      │ Processing │ 200 ر.س   │ 25 أبريل 2026  │
+  │ AO-2026-0006 │ 011•• ••• 88     │ مكبر صوت بلوتوث مقاوم للماء         │ Processing │ 160 ر.س   │ 27 أبريل 2026  │
+  │ AO-2026-0007 │ محمد ر***        │ روبوت تنظيف ذكي                     │ Confirmed  │ 230 د.إ   │ 28 أبريل 2026  │
+  │ AO-2026-0008 │ نورة ا***        │ عطر فاخر للرجال                     │ Pending    │ 130 ر.س   │ 1 مايو 2026    │
+  │ AO-2026-0009 │ 054•• ••• 23     │ Sport Earbuds Pro                   │ Pending    │ 100 د.إ   │ 3 مايو 2026    │
+  │ AO-2026-0010 │ خالد س***        │ سجادة فاخرة                         │ Cancelled  │ 550 ج.م   │ 5 مايو 2026    │
+  │ AO-2026-0011 │ Nora A***        │ حذاء جري احترافي                    │ Cancelled  │ 130 د.إ   │ 7 مايو 2026    │
+  │ AO-2026-0012 │ عبدالله م***     │ شاحن لاسلكي سريع                    │ Cancelled  │  95 ر.س   │ 9 مايو 2026    │
+  └──────────────┴──────────────────┴──────────────────────────────────────┴────────────┴───────────┴────────────────┘
+
+  ── Summary cards (MUST add up) ──
+  كل الطلبات:    12
+  قيد التنفيذ:    5  (= Pending 2 + Confirmed 1 + Processing 2)
+  تم التسليم:     4  (= Delivered)
+  ملغية:          3  (= Cancelled)
+
+══════════════════════════════════════════════════════════════════════════════
+  4. EARNINGS (12 rows — all SAR for coherent summary cards)
+══════════════════════════════════════════════════════════════════════════════
+
+  Status distribution: Paid(4) + Approved(4) + Pending(3) + Rejected(1) = 12
+
+  ┌──────────────────────────────────────┬──────────────┬───────────┬──────────┬────────────────┐
+  │ productName                          │ orderNumber  │ commission│ status   │ date           │
+  ├──────────────────────────────────────┼──────────────┼───────────┼──────────┼────────────────┤
+  │ سماعات بلوتوث لاسلكية               │ AO-2026-0001 │ 420 ر.س   │ Approved │ 16 أبريل 2026  │
+  │ حقيبة ظهر جلدية فاخرة               │ AO-2026-0002 │ 380 ر.س   │ Approved │ 19 أبريل 2026  │
+  │ ساعة ذكية Smart Watch Pro            │ AO-2026-0003 │ 340 ر.س   │ Approved │ 21 أبريل 2026  │
+  │ طقم ملابس رياضية                    │ —            │ 280 ر.س   │ Approved │ 24 أبريل 2026  │
+  │ قميص رسمي قطني                      │ —            │ 100 ر.س   │ Paid     │ 25 أبريل 2026  │
+  │ كريم عناية بالبشرة                  │ —            │  80 ر.س   │ Paid     │ 27 أبريل 2026  │
+  │ عطر فاخر للرجال                     │ —            │ 130 ر.س   │ Paid     │ 28 أبريل 2026  │
+  │ شاحن لاسلكي سريع                    │ —            │  95 ر.س   │ Paid     │ 30 أبريل 2026  │
+  │ حقيبة يد أنيقة                      │ AO-2026-0005 │ 200 ر.س   │ Pending  │ 1 مايو 2026    │
+  │ مكبر صوت بلوتوث مقاوم للماء         │ AO-2026-0006 │ 160 ر.س   │ Pending  │ 3 مايو 2026    │
+  │ حذاء جري احترافي                    │ —            │ 130 ر.س   │ Pending  │ 5 مايو 2026    │
+  │ شاحن لاسلكي سريع                    │ AO-2026-0012 │  95 ر.س   │ Rejected │ 9 مايو 2026    │
+  └──────────────────────────────────────┴──────────────┴───────────┴──────────┴────────────────┘
+
+  ── Earnings summary cards (MUST be internally coherent) ──
+  الأرباح المتاحة للسحب: 1,420 ر.س  (= Σ Approved: 420+380+340+280)
+  إجمالي الأرباح:        2,315 ر.س  (= Σ Approved+Paid+Pending: 1,420+405+490)
+  أرباح قيد المراجعة:      490 ر.س  (= Σ Pending: 200+160+130)
+  أرباح مدفوعة:            405 ر.س  (= Σ Paid: 100+80+130+95)
+
+  ── Mandatory notice text ──
+  يتم اعتماد العمولة بعد تأكيد الدفع أو تسليم الطلب.
+
+══════════════════════════════════════════════════════════════════════════════
+  5. CROSS-ENTITY CONSISTENCY CHECKLIST ✓
+══════════════════════════════════════════════════════════════════════════════
+
+  1. ✓ availableBalance (1,420 ر.س) = Σ Earnings[Approved] = dashboard card = payout prefill
+  2. ✓ successfulOrdersCount (4) = count Orders[Delivered] = dashboard "الطلبات الناجحة"
+  3. ✓ savedProductsCount (5) = cards on saved-products = dashboard "المنتجات المحفوظة"
+  4. ✓ Orders summary: كل(12) = قيد التنفيذ(5) + تم التسليم(4) + ملغية(3)
+  5. ✓ Earnings: 1,420 + 405 + 490 = 2,315 إجمالي; 405 مدفوعة; 490 مراجعة
+  6. ✓ All cross-referenced (orderNumber) earnings match order commission & currency
+  7. ✓ Currency mix: Products SAR 50% / EGP 25% / AED 20% / KWD 5%
+  8. ✓ Names ~80% Arabic: 16 Arabic / 4 Latin product names; 7 Arabic / 2 Latin / 3 phone customers
+  9. ✓ Product cards render exactly §2 fields (image, badge, name, suggested price, profit, heart, button)
+  10. ✓ AP-001 detail page has: ≥3 images, ≥2 video thumbs, badge, description, pricing, caption,
+        details, 3 tips, 4 related cards (AP-003, AP-005, AP-007, AP-017)
+-->
