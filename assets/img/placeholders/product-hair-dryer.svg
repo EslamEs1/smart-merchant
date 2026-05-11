@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="مجفف شعر">
+  <defs>
+    <linearGradient id="bghd" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f3e8ff"/><stop offset="100%" stop-color="#e9d5ff"/></linearGradient>
+    <linearGradient id="fghd" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#a855f7" stop-opacity="0.35"/><stop offset="100%" stop-color="#9333ea" stop-opacity="0.55"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bghd)"/>
+  <circle cx="85" cy="90" r="35" fill="url(#fghd)" stroke="#a855f7" stroke-width="1.5"/>
+  <circle cx="85" cy="90" r="15" fill="white" opacity="0.3"/>
+  <circle cx="85" cy="90" r="5" fill="#a855f7" opacity="0.3"/>
+  <rect x="120" y="82" width="45" height="16" rx="8" fill="url(#fghd)" stroke="#a855f7" stroke-width="1"/>
+  <rect x="50" y="125" width="10" height="30" rx="5" fill="#a855f7" opacity="0.25" stroke="#a855f7" stroke-width="1"/>
+  <rect x="110" y="125" width="10" height="30" rx="5" fill="#a855f7" opacity="0.25" stroke="#a855f7" stroke-width="1"/>
+  <circle cx="85" cy="170" r="4" fill="#a855f7" opacity="0.2"/>
+</svg>

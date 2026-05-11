@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="ماكينة قهوة">
+  <defs>
+    <linearGradient id="bgcm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fef3c7"/><stop offset="100%" stop-color="#fde68a"/></linearGradient>
+    <linearGradient id="fgcm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#78350f" stop-opacity="0.35"/><stop offset="100%" stop-color="#92400e" stop-opacity="0.55"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgcm)"/>
+  <rect x="60" y="50" width="80" height="90" rx="10" fill="url(#fgcm)" stroke="#92400e" stroke-width="1.5"/>
+  <rect x="60" y="50" width="80" height="20" rx="10" fill="#92400e" opacity="0.15"/>
+  <circle cx="100" cy="95" r="18" fill="#92400e" opacity="0.15" stroke="#92400e" stroke-width="1"/>
+  <circle cx="100" cy="95" r="8" fill="#92400e" opacity="0.2"/>
+  <rect x="70" y="125" width="25" height="10" rx="3" fill="#92400e" opacity="0.2"/>
+  <rect x="55" y="140" width="90" height="8" rx="4" fill="#92400e" opacity="0.15"/>
+  <ellipse cx="75" cy="42" rx="10" ry="5" fill="#92400e" opacity="0.1"/>
+  <ellipse cx="100" cy="38" rx="12" ry="6" fill="#92400e" opacity="0.08"/>
+</svg>

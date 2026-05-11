@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="ستاند لابتوب">
+  <defs>
+    <linearGradient id="bgls" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f1f5f9"/><stop offset="100%" stop-color="#e2e8f0"/></linearGradient>
+    <linearGradient id="fgls" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#64748b" stop-opacity="0.35"/><stop offset="100%" stop-color="#475569" stop-opacity="0.55"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgls)"/>
+  <rect x="55" y="55" width="90" height="60" rx="6" fill="url(#fgls)" stroke="#64748b" stroke-width="1.5" transform="rotate(-5 100 85)"/>
+  <rect x="65" y="65" width="70" height="40" rx="3" fill="white" opacity="0.4" transform="rotate(-5 100 85)"/>
+  <rect x="80" y="75" width="40" height="4" rx="2" fill="#64748b" opacity="0.2" transform="rotate(-5 100 85)"/>
+  <rect x="90" y="83" width="20" height="3" rx="1.5" fill="#64748b" opacity="0.15" transform="rotate(-5 100 85)"/>
+  <rect x="85" y="118" width="30" height="40" rx="3" fill="#64748b" opacity="0.2" stroke="#64748b" stroke-width="1"/>
+  <rect x="65" y="155" width="70" height="6" rx="3" fill="#64748b" opacity="0.15"/>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="كريم عناية بالبشرة">
+  <defs>
+    <linearGradient id="bgsk" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fce7f3"/><stop offset="100%" stop-color="#fbcfe8"/></linearGradient>
+    <linearGradient id="fgsk" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f472b6" stop-opacity="0.5"/><stop offset="100%" stop-color="#ec4899" stop-opacity="0.7"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgsk)"/>
+  <rect x="65" y="80" width="70" height="70" rx="10" fill="url(#fgsk)" stroke="#ec4899" stroke-width="1.5"/>
+  <path d="M65 80 Q65 68 100 65 Q135 68 135 80" fill="url(#fgsk)" stroke="#ec4899" stroke-width="1.2"/>
+  <ellipse cx="100" cy="80" rx="35" ry="5" fill="#ec4899" opacity="0.2"/>
+  <rect x="80" y="55" width="40" height="12" rx="4" fill="#ec4899" opacity="0.35" stroke="#ec4899" stroke-width="1"/>
+  <circle cx="100" cy="115" r="12" fill="white" opacity="0.25"/>
+  <circle cx="100" cy="115" r="6" fill="#ec4899" opacity="0.25"/>
+  <path d="M78 138 L122 138" stroke="white" stroke-width="1" opacity="0.25"/>
+  <circle cx="100" cy="165" r="5" fill="#ec4899" opacity="0.15"/>
+</svg>

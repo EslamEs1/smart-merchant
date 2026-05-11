@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="تيشيرت قطن">
+  <defs>
+    <linearGradient id="bgt" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fce7f3"/><stop offset="100%" stop-color="#fbcfe8"/></linearGradient>
+    <linearGradient id="fgt" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ec4899" stop-opacity="0.35"/><stop offset="100%" stop-color="#db2777" stop-opacity="0.55"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgt)"/>
+  <path d="M68 60 L48 75 L58 90 L72 82 L72 148 L128 148 L128 82 L142 90 L152 75 L132 60 L118 56 Q100 68 82 56 Z" fill="url(#fgt)" stroke="#ec4899" stroke-width="1.5"/>
+  <rect x="85" y="100" width="30" height="4" rx="2" fill="white" opacity="0.35"/>
+  <rect x="90" y="110" width="20" height="3" rx="1.5" fill="white" opacity="0.25"/>
+  <circle cx="100" cy="90" r="8" fill="white" opacity="0.25"/>
+</svg>

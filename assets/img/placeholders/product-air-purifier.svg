@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="جهاز تنقية الهواء">
+  <defs>
+    <linearGradient id="bgp" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ccfbf1"/><stop offset="100%" stop-color="#99f6e4"/></linearGradient>
+    <linearGradient id="fgp" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#14b8a6" stop-opacity="0.5"/><stop offset="100%" stop-color="#0d9488" stop-opacity="0.7"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgp)"/>
+  <rect x="60" y="55" width="80" height="100" rx="12" fill="url(#fgp)" stroke="#14b8a6" stroke-width="1.5"/>
+  <circle cx="100" cy="95" r="22" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="100" cy="95" r="12" fill="white" opacity="0.3"/>
+  <circle cx="100" cy="95" r="4" fill="#14b8a6" opacity="0.5"/>
+  <path d="M88 50 Q90 42 100 40 Q110 42 112 50" stroke="#14b8a6" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <path d="M82 46 Q86 36 100 33 Q114 36 118 46" stroke="#14b8a6" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.25"/>
+  <rect x="75" y="140" width="50" height="4" rx="2" fill="#14b8a6" opacity="0.25"/>
+  <circle cx="100" cy="165" r="5" fill="#14b8a6" opacity="0.15"/>
+</svg>

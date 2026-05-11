@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="قلاية هوائية">
+  <defs>
+    <linearGradient id="bgaf" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fef9c3"/><stop offset="100%" stop-color="#fef08a"/></linearGradient>
+    <linearGradient id="fgaf" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ca8a04" stop-opacity="0.4"/><stop offset="100%" stop-color="#a16207" stop-opacity="0.6"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgaf)"/>
+  <ellipse cx="100" cy="130" rx="50" ry="40" fill="url(#fgaf)" stroke="#ca8a04" stroke-width="1.5"/>
+  <ellipse cx="100" cy="130" rx="50" ry="10" fill="#ca8a04" opacity="0.15"/>
+  <ellipse cx="100" cy="90" rx="40" ry="30" fill="url(#fgaf)" stroke="#ca8a04" stroke-width="1.5"/>
+  <ellipse cx="100" cy="70" rx="25" ry="15" fill="#ca8a04" opacity="0.15" stroke="#ca8a04" stroke-width="1"/>
+  <circle cx="100" cy="68" r="8" fill="#ca8a04" opacity="0.2"/>
+  <path d="M96 64 L100 72 L104 64" stroke="#ca8a04" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <rect x="90" y="100" width="20" height="5" rx="2.5" fill="white" opacity="0.3"/>
+  <circle cx="115" cy="102" r="3" fill="#ca8a04" opacity="0.3"/>
+</svg>

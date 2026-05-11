@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="مكبر صوت بلوتوث مقاوم للماء">
+  <defs>
+    <linearGradient id="bgsp" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ccfbf1"/><stop offset="100%" stop-color="#bae6fd"/></linearGradient>
+    <linearGradient id="fgsp" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#14b8a6" stop-opacity="0.5"/><stop offset="100%" stop-color="#2563eb" stop-opacity="0.6"/></linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="12" fill="url(#bgsp)"/>
+  <rect x="60" y="50" width="80" height="105" rx="14" fill="url(#fgsp)" stroke="#14b8a6" stroke-width="1.5"/>
+  <circle cx="100" cy="90" r="22" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="100" cy="90" r="14" fill="none" stroke="white" stroke-width="1" opacity="0.3"/>
+  <circle cx="100" cy="90" r="5" fill="white" opacity="0.35"/>
+  <circle cx="100" cy="132" r="10" fill="none" stroke="white" stroke-width="1" opacity="0.3"/>
+  <circle cx="100" cy="132" r="3" fill="white" opacity="0.3"/>
+  <rect x="75" y="60" width="50" height="3" rx="1.5" fill="white" opacity="0.2"/>
+  <circle cx="100" cy="170" r="5" fill="#14b8a6" opacity="0.15"/>
+</svg>
