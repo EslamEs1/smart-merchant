@@ -228,6 +228,33 @@
             </label>
           </div>
 
+          <!-- Role selector -->
+          <div>
+            <p class="text-sm font-medium text-text-primary dark:text-white mb-2">أنا أدخل بصفتي</p>
+            <div class="grid grid-cols-2 gap-2" role="group" aria-label="اختر نوع الحساب">
+              <label class="role-option">
+                <input type="radio" name="login-role" value="merchant" class="sr-only" checked>
+                <span class="role-option-label flex flex-col items-center gap-1.5 px-3 py-3 rounded-xl border-2 cursor-pointer transition-colors
+                             border-brand-primary bg-brand-primary/5
+                             text-brand-primary font-semibold text-sm text-center"
+                      id="role-merchant-label">
+                  <i data-lucide="store" class="h-5 w-5" aria-hidden="true"></i>
+                  أنا تاجر
+                </span>
+              </label>
+              <label class="role-option">
+                <input type="radio" name="login-role" value="affiliate" class="sr-only">
+                <span class="role-option-label flex flex-col items-center gap-1.5 px-3 py-3 rounded-xl border-2 cursor-pointer transition-colors
+                             border-surface-border dark:border-slate-600
+                             text-text-secondary dark:text-slate-400 font-medium text-sm text-center"
+                      id="role-affiliate-label">
+                  <i data-lucide="megaphone" class="h-5 w-5" aria-hidden="true"></i>
+                  أنا مسوّق بالعمولة
+                </span>
+              </label>
+            </div>
+          </div>
+
           <!-- Submit -->
           <button
             type="submit"
@@ -284,6 +311,22 @@
       var expanded = this.getAttribute('aria-expanded') === 'true';
       this.setAttribute('aria-expanded', String(!expanded));
     });
+    // Role selector — swap form action and update active label style
+    (function () {
+      var form = document.querySelector('form[action]');
+      var radios = document.querySelectorAll('input[name="login-role"]');
+      var labels = { merchant: document.getElementById('role-merchant-label'), affiliate: document.getElementById('role-affiliate-label') };
+      var activeClasses = ['border-brand-primary', 'bg-brand-primary/5', 'text-brand-primary', 'font-semibold'];
+      var inactiveClasses = ['border-surface-border', 'dark:border-slate-600', 'text-text-secondary', 'dark:text-slate-400', 'font-medium'];
+      radios.forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          var isMerchant = this.value === 'merchant';
+          if (form) form.action = isMerchant ? 'dashboard.html' : 'affiliate-dashboard.html';
+          activeClasses.forEach(function (c) { labels.merchant.classList.toggle(c, isMerchant); labels.affiliate.classList.toggle(c, !isMerchant); });
+          inactiveClasses.forEach(function (c) { labels.merchant.classList.toggle(c, !isMerchant); labels.affiliate.classList.toggle(c, isMerchant); });
+        });
+      });
+    })();
     // Password visibility toggle
     document.getElementById('toggle-password')?.addEventListener('click', function () {
       var input = document.getElementById('login-password');
