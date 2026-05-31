@@ -6,9 +6,9 @@ class EmailOrUsernameBackend(ModelBackend):
     """Authenticate using email (as entered in the preserved login form) or username.
 
     When the credential contains '@', an email lookup is attempted first (case-insensitive).
-    If that lookup finds nothing (e.g. a username that happens to contain '@'), the backend
-    falls through to a username lookup. This removes the hard '@'-heuristic routing and
-    means a user is never silently locked out due to an ambiguous credential string.
+    If the email lookup finds a user but the password is wrong, a username lookup is still
+    attempted — a username that happens to contain '@' should not be silently locked out.
+    Only when no matching user is found at all does the timing-safe dummy hash run.
     """
 
     def authenticate(self, request, username=None, password=None, **kwargs):
@@ -18,25 +18,27 @@ class EmailOrUsernameBackend(ModelBackend):
         if username is None or password is None:
             return None
 
-        user = None
+        candidates: list = []
+
         if "@" in username:
             try:
-                user = UserModel.objects.get(email__iexact=username)
+                candidates.append(UserModel.objects.get(email__iexact=username))
             except UserModel.DoesNotExist:
                 pass
 
-        if user is None:
-            try:
-                user = UserModel.objects.get(username=username)
-            except UserModel.DoesNotExist:
-                # Timing-safe dummy: run the hasher when neither lookup finds a user,
-                # so the response time is similar to a hit-with-wrong-password.
-                # Note: check_password() on the found-user path is itself constant-time
-                # (it always runs the full PBKDF2/argon2 derivation), so the dummy
-                # primarily equalises the not-found vs. wrong-password timings.
-                UserModel().set_password(password)
-                return None
+        try:
+            by_username = UserModel.objects.get(username=username)
+            # Avoid duplicate if email lookup already found this same user.
+            if not candidates or candidates[0].pk != by_username.pk:
+                candidates.append(by_username)
+        except UserModel.DoesNotExist:
+            pass
 
-        if user.check_password(password) and self.user_can_authenticate(user):
-            return user
+        for user in candidates:
+            if user.check_password(password) and self.user_can_authenticate(user):
+                return user
+
+        # Timing-safe dummy: run the hasher when no candidate matched so the
+        # response time is similar to a hit-with-wrong-password.
+        UserModel().set_password(password)
         return None

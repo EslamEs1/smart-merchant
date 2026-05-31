@@ -15,5 +15,5 @@ def serve_page(request, template: str):
     """
     try:
         return render(request, template)
-    except TemplateDoesNotExist:
-        raise Http404(f"Page not found: {template}")
+    except TemplateDoesNotExist as e:
+        raise Http404(f"Page not found: {template}") from e

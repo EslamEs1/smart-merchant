@@ -43,11 +43,13 @@ as one connected product.
 | 5 | Browse the product grid | Physical catalog; try the favorite ♥ toggle, category tabs, and search |
 | 6 | Click **عرض التفاصيل** on a product | `affiliate-product-detail.html` — image gallery, sale price, your commission |
 | 7 | Click **نسخ الكابشن** | "تم النسخ ✓" toast — a ready-made marketing caption is copied |
-| 8 | Open **الأرباح** (`affiliate-earnings.html`) | 1,420 available / 490 pending / 405 paid; every row ties to a real order number |
+| 8 | Open **الأرباح** (`affiliate-earnings.html`) | 1,420 available / 490 pending / 405 paid; rows correspond to order numbers (not DB-verified in this demo) |
 | 9 | Click **طلب سحب** | Payout modal opens; close it via the button, **Esc**, or the backdrop |
 | 10 | Open the avatar → **الملف الشخصي**, click **نسخ رابط الإحالة** | Referral link `…/r/AHMAD20` and coupon `AHMAD20` copied |
 
-See `specs/002-affiliate-seller-portal/quickstart.md` and `specs/001-static-frontend-mvp/quickstart.md`
+See `specs/003-backend-foundation/quickstart.md` (active branch),
+`specs/002-affiliate-seller-portal/quickstart.md`, and
+`specs/001-static-frontend-mvp/quickstart.md`
 for the full per-user-story verification checklists.
 
 ---

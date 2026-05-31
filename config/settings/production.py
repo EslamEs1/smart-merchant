@@ -13,6 +13,11 @@ _allowed_raw = os.environ.get("ALLOWED_HOSTS", "")
 if not _allowed_raw:
     raise ImproperlyConfigured("ALLOWED_HOSTS env var is required in production.")
 ALLOWED_HOSTS = [h.strip() for h in _allowed_raw.split(",") if h.strip()]
+if not ALLOWED_HOSTS:
+    raise ImproperlyConfigured(
+        "ALLOWED_HOSTS env var produced an empty list after normalisation "
+        "(check for stray commas or whitespace-only values)."
+    )
 
 # ── Database ──────────────────────────────────────────────────────────────────
 DATABASES = {
