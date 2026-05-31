@@ -41,22 +41,19 @@ In the relevant app's `views.py` (e.g. `apps/products/views.py`), add a function
 view decorated with the correct role guard:
 
 ```python
-# For merchant pages:
-from apps.dashboard.views import _role_required
+from django.shortcuts import render
+from apps.core.decorators import role_required  # public utility in apps/core/
 
-@_role_required("is_merchant")
+@role_required("is_merchant")   # use "is_affiliate" for affiliate pages
 def products_list(request):
     return render(request, "products.html")
-
-# For affiliate pages:
-@_role_required("is_affiliate")
-def affiliate_orders(request):
-    return render(request, "affiliate-orders.html")
 ```
 
 ### Step 3 — Wire the URL in the app's `urls.py`
 
 ```python
+# Keep the .html extension — mirrors the static prototype URL so all existing
+# links in other templates remain valid without any link rewriting.
 path("products.html", views.products_list, name="products"),
 ```
 

@@ -13,6 +13,11 @@ DATABASES = {
     }
 }
 
+# Dev-only fallback — never used by production.py (which requires os.environ["SECRET_KEY"]).
 SECRET_KEY = os.environ.get(
     "SECRET_KEY", "django-insecure-local-dev-key-change-in-production"
 )
+
+# Print emails to the console in development so password-reset links are visible
+# without an SMTP server. production.py should configure a real EMAIL_BACKEND.
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

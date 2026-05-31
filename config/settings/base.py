@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # should never happen), Django's system check will raise ImproperlyConfigured
 # because SECRET_KEY will be absent/empty.
 _secret = os.environ.get("SECRET_KEY", "")
-if not _secret and os.environ.get("DJANGO_SETTINGS_MODULE", "").endswith("base"):
+if not _secret and os.environ.get("DJANGO_SETTINGS_MODULE", "").endswith(".base"):
     raise ImproperlyConfigured(
         "SECRET_KEY is not set. "
         "Use DJANGO_SETTINGS_MODULE=config.settings.local for development."
@@ -109,3 +109,39 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = "/login.html"
 LOGIN_REDIRECT_URL = "/post-login/"
 LOGOUT_REDIRECT_URL = "/login.html"
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+# Minimal structured config: request errors (5xx) and security events go to
+# stderr with timestamps.  Production deployments should extend this with a
+# dedicated handler (file, Sentry, CloudWatch, etc.).
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{asctime} {levelname} {name} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "WARNING",
+        },
+        "django.security": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "apps": {
+            "handlers": ["console"],
+            "level": "WARNING",
+        },
+    },
+}
