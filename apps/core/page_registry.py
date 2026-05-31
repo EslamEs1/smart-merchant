@@ -8,12 +8,16 @@ Authoritative source: specs/003-backend-foundation/contracts/routes.md
 33 prototype pages + "/" alias for index.html = 34 URL entries.
 """
 
+import enum
 from typing import NamedTuple
 
 
-class Access:
+class Access(enum.StrEnum):
     PUBLIC = "public"
-    AUTH = "auth"
+    # GUEST: unauthenticated-only pages (login, register).  NOT "requires auth" —
+    # the name "auth" was avoided to prevent Phase 4 enforcement code from treating
+    # these as login-required by mistake.
+    GUEST = "guest"
     MERCHANT = "merchant"
     AFFILIATE = "affiliate"
 
@@ -24,14 +28,18 @@ class PageEntry(NamedTuple):
     access: str    # one of Access.*
 
 
+# Authoritative page map per contracts/routes.md.
+# 33 prototype pages + "/" alias for index = 34 URL entries.
+# Access enforcement is NOT applied here; it is added in Phase 4 (US2) by the
+# login_required decorator in views.py, keyed off this access metadata.
 REGISTRY: list[PageEntry] = [
-    # ── Public / auth ──────────────────────────────────────────────────────────
+    # ── Public / guest (login, register) ──────────────────────────────────────
     PageEntry("", "index.html", Access.PUBLIC),            # /
     PageEntry("index.html", "index.html", Access.PUBLIC),  # /index.html
     PageEntry("features.html", "features.html", Access.PUBLIC),
     PageEntry("pricing.html", "pricing.html", Access.PUBLIC),
-    PageEntry("login.html", "login.html", Access.AUTH),
-    PageEntry("register.html", "register.html", Access.AUTH),
+    PageEntry("login.html", "login.html", Access.GUEST),
+    PageEntry("register.html", "register.html", Access.GUEST),
     # ── Merchant surface (login required) ─────────────────────────────────────
     PageEntry("dashboard.html", "dashboard.html", Access.MERCHANT),
     PageEntry("products.html", "products.html", Access.MERCHANT),
