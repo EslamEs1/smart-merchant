@@ -176,29 +176,29 @@ mechanism by converting exactly one page per surface to template inheritance, vi
 bases; confirm each renders identically to its static original, edit a shared include once and see it
 reflected across pages (de-dup proof), and confirm merchant/affiliate shells stay independent.
 
-- [ ] T024 [US3] Create `templates/base.html`: the shared `<head>` extracted verbatim from the
+- [x] T024 [US3] Create `templates/base.html`: the shared `<head>` extracted verbatim from the
   prototype (Tailwind CDN, Lucide CDN, theme pre-paint script, `{% static 'css/app.css' %}`,
   `{% static 'js/main.js' %}`) plus the common `{% block %}`s (title, head_extra, body, content).
-- [ ] T025 [P] [US3] Create `templates/auth_base.html` extending `base.html` for the public/auth surface
+- [x] T025 [P] [US3] Create `templates/auth_base.html` extending `base.html` for the public/auth surface
   (minimal centered shell matching `login.html`/`register.html`).
-- [ ] T026 [P] [US3] Create `templates/merchant_base.html` extending `base.html`, plus
+- [x] T026 [P] [US3] Create `templates/merchant_base.html` extending `base.html`, plus
   `templates/includes/merchant_header.html` and `templates/includes/merchant_sidebar.html` extracted
   verbatim from the existing merchant shell (`dashboard.html`).
-- [ ] T027 [P] [US3] Create `templates/affiliate_base.html` extending `base.html`, plus
+- [x] T027 [P] [US3] Create `templates/affiliate_base.html` extending `base.html`, plus
   `templates/includes/affiliate_header.html`, `templates/includes/affiliate_sidebar.html`, and
   `templates/includes/affiliate_bottom_nav.html` extracted verbatim from the affiliate shell
   (`affiliate-dashboard.html`), preserving the mobile-first layout.
-- [ ] T028 [US3] Convert `templates/login.html` to `{% extends 'auth_base.html' %}` (template
+- [x] T028 [US3] Convert `templates/login.html` to `{% extends 'auth_base.html' %}` (template
   inheritance), preserving the functional auth form from T020 and exact visuals.
-- [ ] T029 [US3] Convert `templates/dashboard.html` to `{% extends 'merchant_base.html' %}` +
+- [x] T029 [US3] Convert `templates/dashboard.html` to `{% extends 'merchant_base.html' %}` +
   `{% include %}` the merchant header/sidebar; serve it via a real view in `apps/dashboard/views.py` +
   `apps/dashboard/urls.py` (login-required **and merchant-role-gated** via a role mixin/check), and
   remove `dashboard.html` from the raw registry.
-- [ ] T030 [US3] Convert `templates/affiliate-dashboard.html` to `{% extends 'affiliate_base.html' %}` +
+- [x] T030 [US3] Convert `templates/affiliate-dashboard.html` to `{% extends 'affiliate_base.html' %}` +
   `{% include %}` the affiliate header/sidebar/bottom-nav; serve via `apps/dashboard` (login-required
   **and affiliate-role-gated** via a role mixin/check), and remove `affiliate-dashboard.html` from the
   raw registry.
-- [ ] T031 [US3] **Verify SC-008** per quickstart.md: view-source the 3 converted pages to confirm they
+- [x] T031 [US3] **Verify SC-008** per quickstart.md: view-source the 3 converted pages to confirm they
   render via `{% extends %}`/`{% include %}` yet look identical to the static originals; edit one
   include once and confirm all consumers reflect it (de-dup); confirm merchant vs affiliate shells stay
   visually independent (no cross-contamination).

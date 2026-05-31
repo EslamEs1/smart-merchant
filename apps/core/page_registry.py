@@ -32,8 +32,10 @@ class PageEntry(NamedTuple):
 
 
 # Authoritative page map per contracts/routes.md.
-# login.html removed — now served by apps.accounts LoginView (Phase 4).
-# dashboard.html, affiliate-dashboard.html will be removed in Phase 5.
+# Removed as they gained dedicated views:
+#   Phase 4: login.html             → apps.accounts LoginView
+#   Phase 5: dashboard.html         → apps.dashboard merchant_dashboard
+#            affiliate-dashboard.html → apps.dashboard affiliate_dashboard
 REGISTRY: list[PageEntry] = [
     # ── Public / guest ─────────────────────────────────────────────────────────
     PageEntry("", "index.html", Access.PUBLIC),            # /
@@ -42,7 +44,6 @@ REGISTRY: list[PageEntry] = [
     PageEntry("pricing.html", "pricing.html", Access.PUBLIC),
     PageEntry("register.html", "register.html", Access.GUEST),
     # ── Merchant surface (login required) ─────────────────────────────────────
-    PageEntry("dashboard.html", "dashboard.html", Access.MERCHANT),
     PageEntry("products.html", "products.html", Access.MERCHANT),
     PageEntry("product-create.html", "product-create.html", Access.MERCHANT),
     PageEntry("product-detail.html", "product-detail.html", Access.MERCHANT),
@@ -65,7 +66,6 @@ REGISTRY: list[PageEntry] = [
     PageEntry("profile.html", "profile.html", Access.MERCHANT),
     PageEntry("notifications.html", "notifications.html", Access.MERCHANT),
     # ── Affiliate surface (login required) ────────────────────────────────────
-    PageEntry("affiliate-dashboard.html", "affiliate-dashboard.html", Access.AFFILIATE),
     PageEntry("affiliate-product-detail.html", "affiliate-product-detail.html", Access.AFFILIATE),
     PageEntry("affiliate-orders.html", "affiliate-orders.html", Access.AFFILIATE),
     PageEntry("affiliate-earnings.html", "affiliate-earnings.html", Access.AFFILIATE),

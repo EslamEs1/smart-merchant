@@ -1,0 +1,81 @@
+  <!-- Sidebar overlay (mobile) -->
+  <div data-sidebar-overlay
+       class="fixed inset-0 z-30 bg-black/50 hidden lg:hidden"
+       aria-hidden="true"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar"
+         class="fixed top-0 start-0 z-40 h-screen w-64 bg-slate-900 dark:bg-slate-950 flex flex-col
+                translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out"
+         aria-label="القائمة الجانبية">
+    <div class="flex items-center gap-3 px-5 py-5 border-b border-slate-700/60">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" aria-hidden="true" class="h-9 w-9 shrink-0">
+        <defs>
+          <linearGradient id="aff-logo-g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6366f1"/>
+            <stop offset="50%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#3b82f6"/>
+          </linearGradient>
+        </defs>
+        <rect x="4" y="12" width="14" height="14" rx="3" fill="url(#aff-logo-g)" transform="rotate(45 11 19)"/>
+        <rect x="18" y="8" width="10" height="10" rx="2" fill="url(#aff-logo-g)" opacity="0.72" transform="rotate(45 23 13)"/>
+        <rect x="14" y="22" width="8" height="8" rx="2" fill="url(#aff-logo-g)" opacity="0.50" transform="rotate(45 18 26)"/>
+      </svg>
+      <div class="leading-tight">
+        <p class="text-xs font-semibold text-white tracking-wide">Smart Merchant OS</p>
+        <p class="text-xs text-slate-400 font-medium">بوابة المسوّق</p>
+      </div>
+    </div>
+    <nav class="flex-1 overflow-y-auto py-4 px-3" aria-label="روابط التنقل">
+      <ul class="space-y-1" role="list">
+      <li>
+        <a href="affiliate-dashboard.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" aria-current="page">
+          <i data-lucide="home" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>الرئيسية</span>
+        </a>
+      </li>
+      <li>
+        <a href="affiliate-dashboard.html#products"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+          <i data-lucide="shopping-bag" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>المنتجات</span>
+        </a>
+      </li>
+      <li>
+        <a href="affiliate-saved-products.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+          <i data-lucide="bookmark" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>المحفوظات</span>
+        </a>
+      </li>
+      <li>
+        <a href="affiliate-orders.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+          <i data-lucide="package" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>الطلبات</span>
+        </a>
+      </li>
+      <li>
+        <a href="affiliate-earnings.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+          <i data-lucide="wallet" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>الأرباح</span>
+        </a>
+      </li>
+      <li class="pt-2 mt-2 border-t border-slate-700/60">
+        <a href="affiliate-profile.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+          <i data-lucide="user" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>الملف الشخصي</span>
+        </a>
+      </li>
+      </ul>
+    </nav>
+    <div class="border-t border-slate-700/60 px-4 py-4">
+      <div class="flex items-center gap-3">
+        <img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة أحمد الشمري" class="h-8 w-8 rounded-full">
+        <div class="min-w-0">
+          <p class="text-xs font-semibold text-white truncate">أحمد الشمري</p>
+          <p class="text-xs text-slate-400 truncate">عضو ذهبي</p>
+        </div>
+        <a href="affiliate-profile.html" class="ms-auto text-slate-400 hover:text-white transition-colors focus-ring rounded" aria-label="الملف الشخصي">
+          <i data-lucide="settings" class="h-4 w-4" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </aside>
