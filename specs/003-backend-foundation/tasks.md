@@ -97,23 +97,23 @@ change versus the static files. This is the non-negotiable core (frontend preser
 (public, auth, merchant, affiliate) directly by URL; confirm pixel-equivalent appearance to the
 static file, working interactions, resolving internal links, and no failed asset requests.
 
-- [ ] T013 [US1] Create `apps/core/page_registry.py`: a declarative list of all 33 pages as
+- [x] T013 [US1] Create `apps/core/page_registry.py`: a declarative list of all 33 pages as
   `(url path = filename, template, access-level)` tuples per `contracts/routes.md` (public / auth /
   merchant / affiliate), with `/` and `/index.html` both mapping to `index.html`. Access level is
   recorded as metadata now; enforcement is added in US2.
-- [ ] T014 [US1] Create the generic page-registry view and `apps/core/urls.py` in `apps/core/views.py`
+- [x] T014 [US1] Create the generic page-registry view and `apps/core/urls.py` in `apps/core/views.py`
   that renders each registry entry's template at a URL equal to its filename; wire `apps.core.urls`
   at the project root in `config/urls.py`. All 33 pages are served (open) at this stage.
-- [ ] T015 [US1] Preserve the JS hook attributes consumed by `static/js/main.js` in every served
+- [x] T015 [US1] Preserve the JS hook attributes consumed by `static/js/main.js` in every served
   template (verbatim move already does this — confirm no template accidentally altered them):
   `[data-theme-toggle]`, `[data-sidebar-toggle]`, `[data-sidebar-overlay]`, `#sidebar`,
   `[data-actions-dropdown]`, `[data-modal-*]`, `[data-tab]/[data-tabs]`, `[data-copy*]`,
   `[data-favorite-toggle]`, `[data-gallery*]`, `[data-segments]/[data-segment]`,
   `[data-bottom-nav]/[data-nav-target]`, `#copied-toast` (per `contracts/routes.md` static-asset contract).
-- [ ] T016 [US1] **Verify SC-002**: open the served pages with DevTools Network and confirm every
+- [x] T016 [US1] **Verify SC-002**: open the served pages with DevTools Network and confirm every
   `assets/...` reference resolves to a 200 under `/assets/...` (css/app.css, js/main.js, img/placeholders
   SVGs) with **zero 404s** on a representative set from all three surfaces.
-- [ ] T017 [US1] **Verify SC-001 / SC-003 / SC-007** per quickstart.md: visual parity vs the static
+- [x] T017 [US1] **Verify SC-001 / SC-003 / SC-007** per quickstart.md: visual parity vs the static
   originals; interactions work (theme toggle persists, dropdown, modal, tabs, copy-button toast,
   favorite toggle, gallery thumbnail switch, affiliate bottom-nav active state); and every internal
   link resolves (no dead links) on sampled pages from each surface.
