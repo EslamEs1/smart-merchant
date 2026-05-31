@@ -132,31 +132,31 @@ and logout ends the session. Role is taken from the **account** (selector is inf
 the correct landing surface; request a private page while logged out and confirm redirect to login;
 log out and confirm the session ends.
 
-- [ ] T018 [US2] Implement the post-login role-dispatch view `post_login_redirect` in
+- [x] T018 [US2] Implement the post-login role-dispatch view `post_login_redirect` in
   `apps/accounts/views.py`: `MERCHANT`→`/dashboard.html`, `AFFILIATE`→`/affiliate-dashboard.html`,
   `ADMIN`/staff→`/admin/`, unknown role→`/index.html`; honor a safe `?next=` when the user may view it.
   Key the admin branch off `is_staff`/`is_superuser` (a default superuser has `role=MERCHANT` but must
   still land on `/admin/`).
-- [ ] T019 [US2] Wire auth URLs in `apps/accounts/urls.py`: Django `LoginView` at `/login.html`
+- [x] T019 [US2] Wire auth URLs in `apps/accounts/urls.py`: Django `LoginView` at `/login.html`
   (`template_name='login.html'`) and `LogoutView` at `/logout`; in `config/settings/base.py` set
   `LOGIN_URL='/login.html'` and `LOGIN_REDIRECT_URL` to the dispatch view (T018). Remove `login.html`
   from the raw page registry (now served by `LoginView`). Add an **email-or-username authentication
   backend** in `apps/accounts/backends.py` and register it in `AUTHENTICATION_BACKENDS` so the email a
   user types in the preserved login field authenticates them (`email` is unique per T009).
-- [ ] T020 [US2] Make the login form functional in `templates/login.html` (still flat, not yet
+- [x] T020 [US2] Make the login form functional in `templates/login.html` (still flat, not yet
   extending a base): `<form method="post">` posting to the login URL, add `{% csrf_token %}`, keep the
   existing **email** input but give it Django's credential field name `username` (it carries the email
   value, resolved by the T019 backend) and name the password input `password`; keep the role selector
   **informational only**. The email label/placeholder and overall visual appearance MUST stay identical.
-- [ ] T021 [US2] Enforce login-required gating: in `apps/core/views.py` apply `login_required`
+- [x] T021 [US2] Enforce login-required gating: in `apps/core/views.py` apply `login_required`
   (redirecting to `LOGIN_URL` with `?next=`) to registry entries whose access level is `merchant` or
   `affiliate`, reading the access metadata from `page_registry.py` (T013). Public/auth pages stay open.
   This phase gates raw registry pages by **login only** (not role); cross-role access to them is
   acceptable because they serve no owner-scoped data (FR-016). Role-specific gating is applied to the
   converted dashboards (T029/T030) and to each page as it is later data-converted.
-- [ ] T022 [US2] Confirm logout in `apps/accounts/urls.py`/settings ends the session and redirects to a
+- [x] T022 [US2] Confirm logout in `apps/accounts/urls.py`/settings ends the session and redirects to a
   public/auth page (`/login.html` or `/index.html`), and that all POST forms carry CSRF (FR-014).
-- [ ] T023 [US2] **Verify SC-004 / SC-005** per quickstart.md: create role test accounts (merchant1,
+- [x] T023 [US2] **Verify SC-004 / SC-005** per quickstart.md: create role test accounts (merchant1,
   affiliate1, a superuser), then confirm merchant→`/dashboard.html`, affiliate→`/affiliate-dashboard.html`,
   superuser→`/admin/`; logged-out request to `/dashboard.html`→`/login.html?next=/dashboard.html`;
   logout ends the session. Also **verify FR-018**: a bad-credentials login re-renders `login.html` with

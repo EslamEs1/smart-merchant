@@ -2,10 +2,13 @@
 
 Each PageEntry records the URL path fragment, the template to render, and the
 access level required.  Access is stored as metadata here; enforcement (login_required
-/ role check) is layered on top in Phase 4 (US2) using this metadata.
+/ role check) is applied in urls.py using this metadata.
 
 Authoritative source: specs/003-backend-foundation/contracts/routes.md
-33 prototype pages + "/" alias for index.html = 34 URL entries.
+
+Pages removed from this registry as they gain dedicated views:
+  Phase 4: login.html  → apps.accounts LoginView
+  Phase 5: dashboard.html, affiliate-dashboard.html → apps.dashboard views
 """
 
 import enum
@@ -29,16 +32,14 @@ class PageEntry(NamedTuple):
 
 
 # Authoritative page map per contracts/routes.md.
-# 33 prototype pages + "/" alias for index = 34 URL entries.
-# Access enforcement is NOT applied here; it is added in Phase 4 (US2) by the
-# login_required decorator in views.py, keyed off this access metadata.
+# login.html removed — now served by apps.accounts LoginView (Phase 4).
+# dashboard.html, affiliate-dashboard.html will be removed in Phase 5.
 REGISTRY: list[PageEntry] = [
-    # ── Public / guest (login, register) ──────────────────────────────────────
+    # ── Public / guest ─────────────────────────────────────────────────────────
     PageEntry("", "index.html", Access.PUBLIC),            # /
     PageEntry("index.html", "index.html", Access.PUBLIC),  # /index.html
     PageEntry("features.html", "features.html", Access.PUBLIC),
     PageEntry("pricing.html", "pricing.html", Access.PUBLIC),
-    PageEntry("login.html", "login.html", Access.GUEST),
     PageEntry("register.html", "register.html", Access.GUEST),
     # ── Merchant surface (login required) ─────────────────────────────────────
     PageEntry("dashboard.html", "dashboard.html", Access.MERCHANT),
