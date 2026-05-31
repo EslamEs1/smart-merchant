@@ -26,9 +26,9 @@ class Access(enum.StrEnum):
 
 
 class PageEntry(NamedTuple):
-    url_path: str  # URL path fragment, no leading slash; "" = site root
-    template: str  # template file name inside templates/
-    access: str    # one of Access.*
+    url_path: str     # URL path fragment, no leading slash; "" = site root
+    template: str     # template file name inside templates/
+    access: Access    # tighter than `str` — typos raise ValueError at startup
 
 
 # Authoritative page map per contracts/routes.md.

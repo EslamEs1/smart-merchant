@@ -1,11 +1,25 @@
 import os
 from pathlib import Path
 
+from django.core.exceptions import ImproperlyConfigured
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-# SECRET_KEY must be provided by each environment settings file.
-# base.py carries no default — a well-known fallback string would be a secret leak.
-SECRET_KEY = os.environ.get("SECRET_KEY", "")
+# SECRET_KEY is not set here.  Each environment file (local.py, production.py)
+# is responsible for setting it before Django processes any request.
+# local.py   → os.environ.get("SECRET_KEY", "django-insecure-dev-fallback")
+# production.py → os.environ["SECRET_KEY"]  (raises KeyError if missing)
+#
+# If base.py is imported as the final DJANGO_SETTINGS_MODULE directly (which
+# should never happen), Django's system check will raise ImproperlyConfigured
+# because SECRET_KEY will be absent/empty.
+_secret = os.environ.get("SECRET_KEY", "")
+if not _secret and os.environ.get("DJANGO_SETTINGS_MODULE", "").endswith("base"):
+    raise ImproperlyConfigured(
+        "SECRET_KEY is not set. "
+        "Use DJANGO_SETTINGS_MODULE=config.settings.local for development."
+    )
+SECRET_KEY = _secret
 
 DEBUG = False
 

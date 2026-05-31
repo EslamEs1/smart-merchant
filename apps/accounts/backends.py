@@ -29,7 +29,11 @@ class EmailOrUsernameBackend(ModelBackend):
             try:
                 user = UserModel.objects.get(username=username)
             except UserModel.DoesNotExist:
-                # Timing-safe: run the hasher so the response time matches a successful lookup.
+                # Timing-safe dummy: run the hasher when neither lookup finds a user,
+                # so the response time is similar to a hit-with-wrong-password.
+                # Note: check_password() on the found-user path is itself constant-time
+                # (it always runs the full PBKDF2/argon2 derivation), so the dummy
+                # primarily equalises the not-found vs. wrong-password timings.
                 UserModel().set_password(password)
                 return None
 

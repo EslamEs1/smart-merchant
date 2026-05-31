@@ -170,7 +170,7 @@
           <p class="text-text-secondary dark:text-slate-400 text-sm">سجّل دخولك للوصول إلى لوحة التحكم</p>
         </div>
 
-        <form class="space-y-5" method="post">
+        <form class="space-y-5" method="post" action="{% url 'accounts:login' %}">
           {% csrf_token %}
           {% if form.errors %}
           <div role="alert" class="p-3 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-sm text-red-700 dark:text-red-400 flex items-center gap-2">
@@ -320,9 +320,10 @@
       var expanded = this.getAttribute('aria-expanded') === 'true';
       this.setAttribute('aria-expanded', String(!expanded));
     });
-    // Role selector — swap form action and update active label style
+    // Role selector — visual style toggle only (informational).
+    // The server-side role on the account determines the landing page;
+    // the form.action mutation from the static prototype is removed.
     (function () {
-      var form = document.querySelector('form[action]');
       var radios = document.querySelectorAll('input[name="login-role"]');
       var labels = { merchant: document.getElementById('role-merchant-label'), affiliate: document.getElementById('role-affiliate-label') };
       var activeClasses = ['border-brand-primary', 'bg-brand-primary/5', 'text-brand-primary', 'font-semibold'];
@@ -330,7 +331,6 @@
       radios.forEach(function (radio) {
         radio.addEventListener('change', function () {
           var isMerchant = this.value === 'merchant';
-          if (form) form.action = isMerchant ? 'dashboard.html' : 'affiliate-dashboard.html';
           activeClasses.forEach(function (c) { labels.merchant.classList.toggle(c, isMerchant); labels.affiliate.classList.toggle(c, !isMerchant); });
           inactiveClasses.forEach(function (c) { labels.merchant.classList.toggle(c, !isMerchant); labels.affiliate.classList.toggle(c, isMerchant); });
         });

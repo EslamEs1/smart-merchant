@@ -8,11 +8,23 @@ app_name = "core"
 
 _PRIVATE = (Access.MERCHANT, Access.AFFILIATE)
 
+# Cache one wrapped view per access level rather than creating N identical
+# login_required wrappers (one per private entry).
+_serve_page_login_required = login_required(serve_page)
+
 
 def _view(entry):
-    """Return serve_page wrapped with login_required for private pages."""
+    """Return the appropriate view callable for a registry entry.
+
+    Phase 4 (US2): private pages require login but NOT a specific role.
+    Raw registry pages serve no owner-scoped data (FR-016), so cross-role
+    access is acceptable at this stage.
+
+    TODO Phase 5: apply role-level enforcement to each page as it is
+    data-converted (T029/T030 already gate the converted dashboards by role).
+    """
     if entry.access in _PRIVATE:
-        return login_required(serve_page)
+        return _serve_page_login_required
     return serve_page
 
 
