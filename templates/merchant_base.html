@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block html_class %}text-slate-900 dark:text-slate-100{% endblock %}
+
 {% block body_class %}min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased{% endblock %}
 
 {% block body %}
@@ -16,6 +18,12 @@
     </main>
   </div><!-- /main wrapper -->
 
-  <!-- Copied toast -->
-  <div id="copied-toast" role="status" aria-live="polite">تم النسخ!</div>
+  <!-- Copied toast — matches affiliate toast styling (fixed bottom-right, fade in/out) -->
+  <div id="copied-toast"
+       class="fixed bottom-6 start-1/2 -translate-x-1/2 z-50
+              bg-slate-900 dark:bg-slate-700 text-white text-sm px-4 py-2 rounded-full
+              shadow-lg opacity-0 pointer-events-none transition-opacity duration-300"
+       role="status" aria-live="polite">
+    تم النسخ ✓
+  </div>
 {% endblock %}
