@@ -274,6 +274,12 @@ function initCopy() {
     var key = btn.getAttribute('data-copy');
     // Look for the value in a sibling/nearby input[data-copy-value] or data-copy-value attr
     var valueEl = btn.closest('[data-copy-container]') && btn.closest('[data-copy-container]').querySelector('[data-copy-value]');
+    // Fallback: a copy shortcut outside the container can target a [data-copy-value] element
+    // whose id matches the data-copy key (e.g. data-copy="caption-value" → <pre id="caption-value">).
+    if (!valueEl && key) {
+      var byId = document.getElementById(key);
+      if (byId && byId.hasAttribute('data-copy-value')) valueEl = byId;
+    }
     var text = (valueEl && (valueEl.value || valueEl.textContent.trim())) || btn.getAttribute('data-copy-value') || key;
 
     if (navigator.clipboard && navigator.clipboard.writeText) {

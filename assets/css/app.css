@@ -365,3 +365,10 @@ html { font-family: 'Cairo', 'Tajawal', system-ui, sans-serif; }
   fill: currentColor;
   color: #fb7185;
 }
+/* When NOT favorited the heart must read as an outline, even if the markup
+   hard-codes `fill-current`. Higher specificity than Tailwind's .fill-current
+   so toggling the class off always visually empties the heart. */
+[data-favorite-toggle]:not(.is-favorited) svg,
+[data-favorite-toggle]:not(.is-favorited) [data-lucide] {
+  fill: none;
+}
