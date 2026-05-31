@@ -211,16 +211,16 @@ reflected across pages (de-dup proof), and confirm merchant/affiliate shells sta
 
 **Purpose**: Verify the constitution/spec guardrails and run the full acceptance pass.
 
-- [ ] T032 [P] Verify production hardening in `config/settings/production.py` (FR-015): `DEBUG=False`,
+- [x] T032 [P] Verify production hardening in `config/settings/production.py` (FR-015): `DEBUG=False`,
   `SECRET_KEY`/DB creds from env (no secrets committed), security headers, WhiteNoise static serving,
   env-driven `ALLOWED_HOSTS`.
-- [ ] T033 [P] Confirm scope guardrails (FR-016 / FR-017): no domain CRUD added (products/orders/
+- [x] T033 [P] Confirm scope guardrails (FR-016 / FR-017): no domain CRUD added (products/orders/
   customers/affiliates/commissions/payouts/landing-pages still serve hardcoded prototype content), and
   no forbidden tech introduced (no SPA/API/DRF/Node build); `merchants/products/orders/customers/
   affiliates/commissions/payouts/landing_pages/notifications` remain empty scaffolds.
-- [ ] T034 [P] Update `CLAUDE.md` (and `quickstart.md` if needed) with a short "how to convert the next
+- [x] T034 [P] Update `CLAUDE.md` (and `quickstart.md` if needed) with a short "how to convert the next
   page" note (registry → real view + `{% extends %}`), reflecting the 3 pages converted this phase.
-- [ ] T035 Run the full `quickstart.md` validation end-to-end (SC-001…SC-008) from a clean checkout and
+- [x] T035 Run the full `quickstart.md` validation end-to-end (SC-001…SC-008) from a clean checkout and
   confirm the **Definition of Done** holds (SC-006: clean-checkout setup completes in a handful of
   documented commands).
 

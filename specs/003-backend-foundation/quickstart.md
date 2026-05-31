@@ -94,6 +94,19 @@ db.sqlite3          # local only (gitignored)
 
 ---
 
+## Converting the next page (summary)
+
+1. Remove its `PageEntry` from `apps/core/page_registry.py`.
+2. Add a view in the owning app (e.g. `apps/products/views.py`) decorated with `_role_required("is_merchant")` (imported from `apps.dashboard.views`).
+3. Wire `path("products.html", views.products_list, name="products")` in the app's `urls.py`.
+4. Replace the template's boilerplate with `{% extends 'merchant_base.html' %}` (or `affiliate_base.html` / `auth_base.html`), add `{% block title %}` and `{% block content %}` with the page-specific markup only.
+5. Replace `assets/img/...` with `{% static 'img/...' %}`. Leave all other HTML, CSS classes, and `data-*` hooks verbatim.
+6. Visual check: open the converted page side-by-side with the static original and confirm pixel equivalence.
+
+See `CLAUDE.md` for the full four-step guide.
+
+---
+
 ## Definition of Done (phase 0 slice)
 
 This phase is done when SC-001…SC-008 pass: the app runs, every prototype page is served and
