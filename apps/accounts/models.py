@@ -10,19 +10,27 @@ class User(AbstractUser):
         ADMIN = "ADMIN", _("مدير")
 
     role = models.CharField(
+        verbose_name=_("الدور"),
         max_length=16,
         choices=Role.choices,
         default=Role.MERCHANT,
     )
     email = models.EmailField(unique=True)
 
+    class Meta(AbstractUser.Meta):
+        verbose_name = _("مستخدم")
+        verbose_name_plural = _("المستخدمون")
+
+    def __str__(self) -> str:
+        return self.email or self.username
+
     @property
     def is_merchant(self) -> bool:
-        return self.role == self.Role.MERCHANT
+        return self.role == self.Role.MERCHANT and not self.is_admin
 
     @property
     def is_affiliate(self) -> bool:
-        return self.role == self.Role.AFFILIATE
+        return self.role == self.Role.AFFILIATE and not self.is_admin
 
     @property
     def is_admin(self) -> bool:

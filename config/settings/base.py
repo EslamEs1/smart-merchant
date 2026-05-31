@@ -3,7 +3,9 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-change-me-in-production")
+# SECRET_KEY must be provided by each environment settings file.
+# base.py carries no default — a well-known fallback string would be a secret leak.
+SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 DEBUG = False
 
@@ -65,9 +67,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 AUTH_USER_MODEL = "accounts.User"
 
+# EmailOrUsernameBackend extends ModelBackend and handles both email and username
+# lookups, so ModelBackend is redundant and would double DB queries on every failed
+# login attempt.
 AUTHENTICATION_BACKENDS = [
     "apps.accounts.backends.EmailOrUsernameBackend",
-    "django.contrib.auth.backends.ModelBackend",
 ]
 
 AUTH_PASSWORD_VALIDATORS = [
