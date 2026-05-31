@@ -12,3 +12,11 @@ Thumbs.db
 coverage/
 *.min.js
 *.min.css
+
+# Django / Python
+db.sqlite3
+venv/
+__pycache__/
+*.pyc
+*.pyo
+staticfiles/
