@@ -70,18 +70,18 @@ prerequisite for every story.
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T009 Implement the custom user model in `apps/accounts/models.py`: `User(AbstractUser)` with a
+- [x] T009 Implement the custom user model in `apps/accounts/models.py`: `User(AbstractUser)` with a
   `Role` `TextChoices` (`MERCHANT` تاجر / `AFFILIATE` مسوّق بالعمولة / `ADMIN` مدير), a
   `role = CharField(choices=Role, default=Role.MERCHANT, max_length=16)`, and convenience properties
   `is_merchant` / `is_affiliate` / `is_admin` (per data-model.md), where `is_admin` is also True for
   `is_staff`/`is_superuser`. Set `email = EmailField(unique=True)`. `username` stays the canonical
   unique identifier; login is accepted **by email** via the auth backend wired in T019.
-- [ ] T010 [P] Register `User` in `apps/accounts/admin.py` for internal user management only (Django
+- [x] T010 [P] Register `User` in `apps/accounts/admin.py` for internal user management only (Django
   admin is the Admin/Staff landing target; never a customer-facing UI).
-- [ ] T011 Create and apply the initial migration: `python manage.py makemigrations accounts` then
+- [x] T011 Create and apply the initial migration: `python manage.py makemigrations accounts` then
   `python manage.py migrate` — produces the `accounts.User` table plus built-in
   `auth`/`admin`/`contenttypes`/`sessions` tables. No other app produces migrations. (Depends on T009.)
-- [ ] T012 Verify the project boots: `python manage.py check` passes with no system-check errors and
+- [x] T012 Verify the project boots: `python manage.py check` passes with no system-check errors and
   `python manage.py runserver` starts cleanly (confirms `AUTH_USER_MODEL` resolves and settings load).
 
 **Checkpoint**: App boots, DB migrated, `/admin/` reachable with a superuser. Stories can now begin.
