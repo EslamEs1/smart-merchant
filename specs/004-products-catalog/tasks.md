@@ -154,12 +154,12 @@ to the new clean `/products/…` routes. Foundation utilities reused: `apps/core
 
 **Purpose**: Constitution/acceptance sweeps spanning all stories.
 
-- [ ] T046 [P] Physical-commerce audit: confirm seed + categories contain **zero** educational/digital items (`apps/products/management/commands/seed_products.py`) — SC-009, constitution VIII, `physical-commerce-only` memory.
-- [ ] T047 [P] Ownership/security sweep across `apps/products/views.py`: every view has `@role_required("is_merchant")`, every read/write goes through the owner-scoped selectors (grep for any bare `Product.objects` in views), and every mutation is `@require_POST` + CSRF — Principle IV (NON-NEGOTIABLE), FR-017/018/019.
-- [ ] T048 [P] Performance check: confirm the list query uses `select_related("category")` + main-image prefetch (no N+1) in `apps/products/selectors.py`.
-- [ ] T049 [P] Visual-parity sweep over all four converted pages vs the static originals (theme toggle, dropdowns, modals, copy buttons, gallery, RTL) — SC-001, Principle I.
-- [ ] T050 Run the full `quickstart.md` acceptance checklist (§A–§H) and the spec's 12 acceptance criteria; fix any gap.
-- [ ] T051 [P] Confirm no leftover legacy product template files remain under `templates/`, admin works (SC-010), and update `README.md`/`SAMPLE-DATA.md` references to the catalog if needed.
+- [x] T046 [P] Physical-commerce audit: confirm seed + categories contain **zero** educational/digital items (`apps/products/management/commands/seed_products.py`) — SC-009, constitution VIII, `physical-commerce-only` memory.
+- [x] T047 [P] Ownership/security sweep across `apps/products/views.py`: every view has `@role_required("is_merchant")`, every read/write goes through the owner-scoped selectors (grep for any bare `Product.objects` in views), and every mutation is `@require_POST` + CSRF — Principle IV (NON-NEGOTIABLE), FR-017/018/019.
+- [x] T048 [P] Performance check: confirm the list query uses `select_related("category")` + main-image prefetch (no N+1) in `apps/products/selectors.py`.
+- [x] T049 [P] Visual-parity sweep over all four converted pages vs the static originals (theme toggle, dropdowns, modals, copy buttons, gallery, RTL) — SC-001, Principle I.
+- [x] T050 Run the full `quickstart.md` acceptance checklist (§A–§H) and the spec's 12 acceptance criteria; fix any gap.
+- [x] T051 [P] Confirm no leftover legacy product template files remain under `templates/`, admin works (SC-010), and update `README.md`/`SAMPLE-DATA.md` references to the catalog if needed.
 
 ---
 

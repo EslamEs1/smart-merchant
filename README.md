@@ -78,10 +78,13 @@ smart-merchant/
 ├── register.html                # Registration form
 │
 ├── dashboard.html               # Dashboard overview
-├── products.html                # Product catalogue list
-├── product-create.html          # New product form
-├── product-edit.html            # Edit product form
-├── product-detail.html          # Product detail + orders + affiliates
+│
+│   # Products (004) — DB-backed at clean URLs; legacy *.html redirects preserved
+│   # /products/           product list + filters
+│   # /products/create/    new product form
+│   # /products/<slug>/    product detail
+│   # /products/<slug>/edit/  edit product form
+│
 ├── orders.html                  # Orders list with filters
 ├── order-detail.html            # Order detail with timeline + invoice
 ├── order-edit.html              # Order edit form
@@ -153,10 +156,10 @@ smart-merchant/
 | File | Description |
 |------|-------------|
 | `dashboard.html` | Overview — stats, charts, recent orders, top affiliates |
-| `products.html` | Product catalogue list |
-| `product-create.html` | New product form |
-| `product-edit.html` | Edit product form |
-| `product-detail.html` | Product detail with related orders / top affiliates |
+| `/products/` | DB-backed product catalogue list with filters (feature 004) — legacy `products.html` redirects here |
+| `/products/create/` | New product form (feature 004) — legacy `product-create.html` redirects here |
+| `/products/<slug>/edit/` | Edit product form (feature 004) — legacy `product-edit.html` redirects to list |
+| `/products/<slug>/` | Product detail with real data, empty-state orders/affiliates (feature 004) — legacy `product-detail.html` redirects to list |
 | `orders.html` | Orders list with filters |
 | `order-detail.html` | Order detail with timeline and invoice preview |
 | `order-edit.html` | Order edit form |
