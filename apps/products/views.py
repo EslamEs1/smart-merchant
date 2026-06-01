@@ -1,11 +1,13 @@
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
+from django.views.decorators.http import require_POST
 
 from apps.core.decorators import role_required
 
 from .forms import ProductForm
 from .models import Product, ProductCategory
 from .selectors import get_owned_product_or_404, list_products
+from .services import duplicate_product, set_product_status
 
 
 @role_required("is_merchant")
@@ -55,9 +57,6 @@ def product_create(request):
     return render(request, "products/product_form.html", {"form": form, "is_create": True})
 
 
-# ── Stub views (replaced in later phases) ────────────────────────────────────
-
-
 @role_required("is_merchant")
 def product_detail(request, slug):
     product = get_owned_product_or_404(request.user, slug)
@@ -86,20 +85,32 @@ def product_edit(request, slug):
 
 
 @role_required("is_merchant")
+@require_POST
 def product_disable(request, slug):
-    return redirect("products:list")
+    product = get_owned_product_or_404(request.user, slug)
+    set_product_status(product, Product.Status.DISABLED)
+    return redirect("products:detail", slug=product.slug)
 
 
 @role_required("is_merchant")
+@require_POST
 def product_enable(request, slug):
-    return redirect("products:list")
+    product = get_owned_product_or_404(request.user, slug)
+    set_product_status(product, Product.Status.ACTIVE)
+    return redirect("products:detail", slug=product.slug)
 
 
 @role_required("is_merchant")
+@require_POST
 def product_duplicate(request, slug):
-    return redirect("products:list")
+    product = get_owned_product_or_404(request.user, slug)
+    copy = duplicate_product(product)
+    return redirect("products:edit", slug=copy.slug)
 
 
 @role_required("is_merchant")
+@require_POST
 def product_delete(request, slug):
+    product = get_owned_product_or_404(request.user, slug)
+    product.delete()
     return redirect("products:list")

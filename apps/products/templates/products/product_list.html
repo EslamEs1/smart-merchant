@@ -138,13 +138,19 @@
                     <a href="{% url 'products:detail' slug=product.slug %}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض التفاصيل</a>
                     <a href="{% url 'products:edit' slug=product.slug %}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" role="menuitem"><i data-lucide="pencil" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تعديل</a>
                     <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-start" role="menuitem" data-copy-container><i data-lucide="link" class="h-4 w-4 text-slate-400" aria-hidden="true"></i><span data-copy-value class="hidden">/p/{{ product.public_link_slug }}</span>نسخ الرابط</button>
-                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-start" role="menuitem"><i data-lucide="copy" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تكرار</button>
+                    <form method="post" action="{% url 'products:duplicate' slug=product.slug %}">
+                      {% csrf_token %}
+                      <button type="submit" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-start" role="menuitem"><i data-lucide="copy" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تكرار</button>
+                    </form>
                     {% if product.status == 'Disabled' %}
-                      <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-colors text-start text-emerald-600 dark:text-emerald-400" role="menuitem"><i data-lucide="eye" class="h-4 w-4" aria-hidden="true"></i>تفعيل</button>
+                      <form method="post" action="{% url 'products:enable' slug=product.slug %}">
+                        {% csrf_token %}
+                        <button type="submit" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-colors text-start text-emerald-600 dark:text-emerald-400" role="menuitem"><i data-lucide="eye" class="h-4 w-4" aria-hidden="true"></i>تفعيل</button>
+                      </form>
                     {% else %}
-                      <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-start text-amber-600 dark:text-amber-400" role="menuitem" data-modal-trigger="modal-disable-prod"><i data-lucide="eye-off" class="h-4 w-4" aria-hidden="true"></i>تعطيل</button>
+                      <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-start text-amber-600 dark:text-amber-400" role="menuitem" data-modal-trigger="modal-disable-{{ product.pk }}"><i data-lucide="eye-off" class="h-4 w-4" aria-hidden="true"></i>تعطيل</button>
                     {% endif %}
-                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors text-start text-rose-600 dark:text-rose-400" role="menuitem" data-modal-trigger="modal-delete-prod"><i data-lucide="trash-2" class="h-4 w-4" aria-hidden="true"></i>حذف</button>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors text-start text-rose-600 dark:text-rose-400" role="menuitem" data-modal-trigger="modal-delete-{{ product.pk }}"><i data-lucide="trash-2" class="h-4 w-4" aria-hidden="true"></i>حذف</button>
                   </div>
                 </div>
               </td>
@@ -182,25 +188,32 @@
     {% endif %}
   </div>
 
-  <!-- Modal backdrop -->
+  <!-- Modal backdrop (shared by all product modals below) -->
   <div data-modal-backdrop class="fixed inset-0 z-50 bg-black/50 hidden items-center justify-center p-4" aria-hidden="true"></div>
 
-  <!-- Disable modal -->
-  <div data-modal="modal-disable-prod" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="disable-prod-title">
-    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
-      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-amber-100 dark:bg-amber-950/40 flex items-center justify-center shrink-0"><i data-lucide="eye-off" class="h-5 w-5 text-amber-600 dark:text-amber-400" aria-hidden="true"></i></div><h3 id="disable-prod-title" class="text-base font-semibold">تعطيل المنتج</h3></div>
-      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد تعطيل هذا المنتج؟ لن يظهر للزوار حتى تعيد تفعيله.</p>
-      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 focus-ring transition-colors">تعطيل</button></div>
+  <!-- Per-product disable/delete modals -->
+  {% for product in page_obj %}
+    <div data-modal="modal-disable-{{ product.pk }}" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="disable-{{ product.pk }}-title">
+      <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+        <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-amber-100 dark:bg-amber-950/40 flex items-center justify-center shrink-0"><i data-lucide="eye-off" class="h-5 w-5 text-amber-600 dark:text-amber-400" aria-hidden="true"></i></div><h3 id="disable-{{ product.pk }}-title" class="text-base font-semibold">تعطيل {{ product.name }}</h3></div>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد تعطيل هذا المنتج؟ لن يظهر للزوار حتى تعيد تفعيله.</p>
+        <form method="post" action="{% url 'products:disable' slug=product.slug %}">
+          {% csrf_token %}
+          <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="submit" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 focus-ring transition-colors">تعطيل</button></div>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <!-- Delete modal -->
-  <div data-modal="modal-delete-prod" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="delete-prod-title">
-    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
-      <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="trash-2" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="delete-prod-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">حذف المنتج</h3></div>
-      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل أنت متأكد من حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.</p>
-      <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="button" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">حذف</button></div>
+    <div data-modal="modal-delete-{{ product.pk }}" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="delete-{{ product.pk }}-title">
+      <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+        <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="trash-2" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="delete-{{ product.pk }}-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">حذف {{ product.name }}</h3></div>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل أنت متأكد من حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.</p>
+        <form method="post" action="{% url 'products:delete' slug=product.slug %}">
+          {% csrf_token %}
+          <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="submit" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">حذف</button></div>
+        </form>
+      </div>
     </div>
-  </div>
+  {% endfor %}
 
 {% endblock %}

@@ -139,12 +139,12 @@ to the new clean `/products/…` routes. Foundation utilities reused: `apps/core
 
 **Independent Test**: Disable → Disabled & excluded from `public_products`; enable → Active; duplicate → new Draft copy with fresh slugs/images; delete → removed; all cross-owner attempts → 404.
 
-- [ ] T040 [US5] Add to `apps/products/services.py`: `set_product_status(product, status)`; `duplicate_product(product)` (clone fields + images, new per-merchant `slug` + global `public_link_slug`, status forced `Draft`); a delete-safety check (no dependents this phase).
-- [ ] T041 [US5] Implement `product_disable`, `product_enable`, `product_duplicate`, `product_delete` views in `apps/products/views.py` (`@role_required("is_merchant")` + `@require_POST` + `get_owned_product_or_404`; duplicate → redirect new product's edit; delete → redirect list; disable/enable → redirect back) and add the 4 routes to `apps/products/urls.py`.
-- [ ] T042 [US5] Wire the disable/delete modals and the duplicate/enable menu items in `apps/products/templates/products/product_list.html` to CSRF-protected POST forms targeting the row's action URLs, preserving the existing modal markup and `data-*` hooks. (Same file as T019 → after T019.)
-- [ ] T043 [US5] Wire the disable/enable/duplicate/delete actions on `apps/products/templates/products/product_detail.html` as CSRF POST forms, preserving markup. (Same file as T036 → after T036.)
-- [ ] T044 [P] [US5] Tests in `apps/products/tests/test_views_lifecycle.py`: disable→Disabled (excluded from `public_products`); enable→Active; duplicate→new Draft + fresh slugs + copied images; delete→removed; cross-owner → 404 on all four; non-POST → 405; missing CSRF → 403.
-- [ ] T045 [US5] Manual (quickstart §D): exercise disable/enable/duplicate/delete via the UI modals/menu; confirm transitions, Draft duplicate, and deletion (SC-008).
+- [x] T040 [US5] Add to `apps/products/services.py`: `set_product_status(product, status)`; `duplicate_product(product)` (clone fields + images, new per-merchant `slug` + global `public_link_slug`, status forced `Draft`); a delete-safety check (no dependents this phase).
+- [x] T041 [US5] Implement `product_disable`, `product_enable`, `product_duplicate`, `product_delete` views in `apps/products/views.py` (`@role_required("is_merchant")` + `@require_POST` + `get_owned_product_or_404`; duplicate → redirect new product's edit; delete → redirect list; disable/enable → redirect back) and add the 4 routes to `apps/products/urls.py`.
+- [x] T042 [US5] Wire the disable/delete modals and the duplicate/enable menu items in `apps/products/templates/products/product_list.html` to CSRF-protected POST forms targeting the row's action URLs, preserving the existing modal markup and `data-*` hooks. (Same file as T019 → after T019.)
+- [x] T043 [US5] Wire the disable/enable/duplicate/delete actions on `apps/products/templates/products/product_detail.html` as CSRF POST forms, preserving markup. (Same file as T036 → after T036.)
+- [x] T044 [P] [US5] Tests in `apps/products/tests/test_views_lifecycle.py`: disable→Disabled (excluded from `public_products`); enable→Active; duplicate→new Draft + fresh slugs + copied images; delete→removed; cross-owner → 404 on all four; non-POST → 405; missing CSRF → 403.
+- [x] T045 [US5] Manual (quickstart §D): exercise disable/enable/duplicate/delete via the UI modals/menu; confirm transitions, Draft duplicate, and deletion (SC-008).
 
 **Checkpoint**: All five user stories independently functional — full merchant catalog CRUD + lifecycle.
 

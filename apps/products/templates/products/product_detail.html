@@ -237,10 +237,13 @@
             <i data-lucide="pencil" class="h-4 w-4 text-brand-primary"></i>
             تعديل المنتج
           </a>
-          <button type="button" class="w-full flex items-center gap-2 p-2.5 rounded-xl text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors dark:text-slate-300 text-start">
-            <i data-lucide="copy" class="h-4 w-4 text-brand-primary"></i>
-            نسخ المنتج
-          </button>
+          <form method="post" action="{% url 'products:duplicate' slug=product.slug %}">
+            {% csrf_token %}
+            <button type="submit" class="w-full flex items-center gap-2 p-2.5 rounded-xl text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors dark:text-slate-300 text-start">
+              <i data-lucide="copy" class="h-4 w-4 text-brand-primary"></i>
+              نسخ المنتج
+            </button>
+          </form>
           <a href="landing-page-create.html" class="flex items-center gap-2 p-2.5 rounded-xl text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors dark:text-slate-300">
             <i data-lucide="layout-template" class="h-4 w-4 text-brand-primary"></i>
             إنشاء صفحة تسويقية
@@ -250,14 +253,23 @@
             عرض الطلبات
           </a>
           <hr class="border-slate-200 dark:border-slate-700" />
-          <button
-            type="button"
-            data-modal-trigger
-            data-modal-target="modal-disable-detail"
-            class="w-full flex items-center gap-2 p-2.5 rounded-xl text-sm text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors text-start"
-          >
-            <i data-lucide="eye-off" class="h-4 w-4"></i>
-            تعطيل المنتج
+          {% if product.status == 'Disabled' %}
+            <form method="post" action="{% url 'products:enable' slug=product.slug %}">
+              {% csrf_token %}
+              <button type="submit" class="w-full flex items-center gap-2 p-2.5 rounded-xl text-sm text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors text-start">
+                <i data-lucide="eye" class="h-4 w-4"></i>
+                تفعيل المنتج
+              </button>
+            </form>
+          {% else %}
+            <button type="button" data-modal-trigger="modal-disable-detail" class="w-full flex items-center gap-2 p-2.5 rounded-xl text-sm text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors text-start">
+              <i data-lucide="eye-off" class="h-4 w-4"></i>
+              تعطيل المنتج
+            </button>
+          {% endif %}
+          <button type="button" data-modal-trigger="modal-delete-detail" class="w-full flex items-center gap-2 p-2.5 rounded-xl text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors text-start">
+            <i data-lucide="trash-2" class="h-4 w-4"></i>
+            حذف المنتج
           </button>
         </div>
       </div>
@@ -283,14 +295,47 @@
       <p class="text-sm text-slate-600 dark:text-slate-400 mb-5">
         هل تريد تعطيل <strong class="text-slate-900 dark:text-white">{{ product.name }}</strong>؟ يمكنك إعادة تفعيله في أي وقت.
       </p>
-      <div class="flex gap-3">
-        <button type="button" data-modal-close class="flex-1 px-4 py-2.5 text-sm font-medium rounded-xl border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-          إلغاء
-        </button>
-        <button type="button" class="flex-1 px-4 py-2.5 text-sm font-semibold rounded-xl bg-amber-500 text-white hover:bg-amber-600 transition-colors">
-          تعطيل المنتج
-        </button>
+      <form method="post" action="{% url 'products:disable' slug=product.slug %}">
+        {% csrf_token %}
+        <div class="flex gap-3">
+          <button type="button" data-modal-close class="flex-1 px-4 py-2.5 text-sm font-medium rounded-xl border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+            إلغاء
+          </button>
+          <button type="submit" class="flex-1 px-4 py-2.5 text-sm font-semibold rounded-xl bg-amber-500 text-white hover:bg-amber-600 transition-colors">
+            تعطيل المنتج
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
+  <div data-modal="modal-delete-detail" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-modal-backdrop class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-md w-full p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-11 w-11 rounded-full bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="trash-2" class="h-5 w-5 text-rose-600"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold dark:text-white">حذف المنتج</h3>
+          <p class="text-sm text-slate-400">لا يمكن التراجع عن هذا الإجراء</p>
+        </div>
       </div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-5">
+        هل أنت متأكد من حذف <strong class="text-slate-900 dark:text-white">{{ product.name }}</strong>؟
+      </p>
+      <form method="post" action="{% url 'products:delete' slug=product.slug %}">
+        {% csrf_token %}
+        <div class="flex gap-3">
+          <button type="button" data-modal-close class="flex-1 px-4 py-2.5 text-sm font-medium rounded-xl border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+            إلغاء
+          </button>
+          <button type="submit" class="flex-1 px-4 py-2.5 text-sm font-semibold rounded-xl bg-rose-600 text-white hover:bg-rose-700 transition-colors">
+            حذف المنتج
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 
