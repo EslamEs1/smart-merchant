@@ -92,6 +92,15 @@ class ProductFormValidationTests(TestCase):
         self.assertTrue(form.is_valid(), form.errors)
         self.assertEqual(form.cleaned_data["affiliate_profit"], Decimal("5.00"))
 
+    def test_affiliate_profit_above_margin_fails(self):
+        data = base_data(self.cat)
+        data["supplier_price"] = "10.00"
+        data["suggested_price"] = "20.00"  # margin = 10
+        data["affiliate_profit"] = "15.00"  # exceeds margin
+        form = ProductForm(data=data, merchant=self.m)
+        self.assertFalse(form.is_valid())
+        self.assertIn("affiliate_profit", form.errors)
+
 
 class ProductFormSlugTests(TestCase):
     def setUp(self):

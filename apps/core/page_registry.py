@@ -52,9 +52,9 @@ REGISTRY: list[PageEntry] = [
     PageEntry("customers.html", "customers.html", Access.MERCHANT),
     PageEntry("customer-detail.html", "customer-detail.html", Access.MERCHANT),
     PageEntry("customer-edit.html", "customer-edit.html", Access.MERCHANT),
-    PageEntry("affiliates.html", "affiliates.html", Access.MERCHANT),
-    PageEntry("affiliate-detail.html", "affiliate-detail.html", Access.MERCHANT),
-    PageEntry("affiliate-requests.html", "affiliate-requests.html", Access.MERCHANT),
+    # affiliates.html, affiliate-detail.html, affiliate-requests.html
+    # → removed; now owned by apps.affiliates (clean URLs + legacy redirects)
+    # affiliate-payouts.html → out of scope
     PageEntry("affiliate-payouts.html", "affiliate-payouts.html", Access.MERCHANT),
     PageEntry("landing-pages.html", "landing-pages.html", Access.MERCHANT),
     PageEntry("landing-page-create.html", "landing-page-create.html", Access.MERCHANT),

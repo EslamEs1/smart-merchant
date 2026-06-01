@@ -143,7 +143,7 @@ merchant** by `seed_products`. The ProductForm category dropdown is scoped to th
 categories. Category CRUD is via Django admin (a lightweight `CategoryForm` is provided for admin/future
 use); no new merchant-facing category page (none exists in the four converted pages).
 
-**Rationale**: The model specifies a `merchant` FK → per-merchant categories; constitution VIII fixes the
+**Rationale**: The model specifies a `merchant` FK → per-merchant categories; constitution Principle VIII fixes the
 visible six. Seeding + admin discipline (not a hard DB enum) keeps categories as data while guaranteeing
 the MVP shows only physical-commerce categories.
 
@@ -229,7 +229,7 @@ creates the six categories for that merchant, and creates ~12 physical-commerce 
 example list (ProBass X2, FitTime S9, WiFi cam 360, power bank, Type-C charger, Ring Light, air fryer,
 shaver, waterproof backpack, hoodie, drawer organizer, laptop stand) spanning all six categories, with a
 mix of statuses (Active/Draft/Disabled) and badges, and placeholder images. **No** educational/digital
-items (constitution VIII + `physical-commerce-only` memory).
+items (constitution Principle VIII + `physical-commerce-only` memory).
 
 **Rationale**: FR-024/SC-009; idempotency lets the command run repeatedly in dev without duplicates.
 Aligns with `SAMPLE-DATA.md` canonical names/currencies.

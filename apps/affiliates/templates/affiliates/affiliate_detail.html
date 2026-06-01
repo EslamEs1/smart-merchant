@@ -1,0 +1,495 @@
+{% extends 'merchant_base.html' %}
+{% load static %}
+
+{% block title %}{{ affiliate.full_name }} — تفاصيل المسوق | Smart Merchant OS{% endblock %}
+
+{% block content %}
+
+  <!-- Breadcrumb -->
+  <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400" aria-label="مسار التنقل">
+    <a href="{% url 'affiliates:list' %}" class="hover:text-brand-primary transition-colors">المسوقون</a>
+    <i data-lucide="chevron-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+    <span class="text-slate-900 dark:text-slate-100 font-medium">{{ affiliate.full_name }}</span>
+  </nav>
+
+  <!-- Page heading -->
+  <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+    <div class="flex items-center gap-3">
+      <img src="{% static 'img/placeholders/affiliate-avatar.svg' %}"
+           alt="صورة المسوق {{ affiliate.full_name }}"
+           class="h-14 w-14 rounded-full ring-2 ring-brand-primary/30">
+      <div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">{{ affiliate.full_name }}</h1>
+          <span class="badge badge-{{ affiliate.level|lower }}">{{ affiliate.level }}</span>
+          <span class="badge badge-{{ affiliate.status|lower }}">{{ affiliate.status }}</span>
+        </div>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">{{ affiliate.referral_code }} · انضم في {{ affiliate.created_at|date:"F Y" }}</p>
+      </div>
+    </div>
+    <div class="sm:ms-auto flex items-center gap-2 flex-wrap">
+      <a href="#"
+         class="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-lg hover:bg-indigo-600 focus-ring transition-colors">
+        <i data-lucide="wallet" class="h-4 w-4" aria-hidden="true"></i>
+        صرف العمولة
+      </a>
+      {% if affiliate.is_pending %}
+      <button type="button"
+              data-modal-trigger="modal-approve-detail"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 text-emerald-600 text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 focus-ring transition-colors">
+        <i data-lucide="check-circle" class="h-4 w-4" aria-hidden="true"></i>
+        قبول
+      </button>
+      {% elif affiliate.is_active %}
+      <button type="button"
+              data-modal-trigger="modal-suspend-detail"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 text-rose-600 text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-rose-50 dark:hover:bg-rose-950/30 focus-ring transition-colors">
+        <i data-lucide="ban" class="h-4 w-4" aria-hidden="true"></i>
+        إيقاف
+      </button>
+      {% elif affiliate.is_suspended %}
+      <button type="button"
+              data-modal-trigger="modal-reactivate-detail"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 text-emerald-600 text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 focus-ring transition-colors">
+        <i data-lucide="play-circle" class="h-4 w-4" aria-hidden="true"></i>
+        إعادة تفعيل
+      </button>
+      {% endif %}
+      <button type="button"
+              data-modal-trigger="modal-change-level-detail"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 focus-ring transition-colors">
+        <i data-lucide="award" class="h-4 w-4" aria-hidden="true"></i>
+        تغيير المستوى
+      </button>
+    </div>
+  </div>
+
+  <!-- Commission rule banner -->
+  <div class="flex items-start gap-3 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 rounded-xl px-4 py-3 text-sm text-indigo-800 dark:text-indigo-300">
+    <i data-lucide="info" class="h-4 w-4 shrink-0 mt-0.5" aria-hidden="true"></i>
+    <span>يتم اعتماد العمولة بعد وصول الطلب إلى <strong>Delivered</strong> أو تأكيد الدفع.</span>
+  </div>
+
+  <!-- Two-column layout -->
+  <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+    <!-- Left column: profile + referral + coupon + notes -->
+    <div class="xl:col-span-1 space-y-5">
+
+      <!-- Profile card -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5 space-y-4">
+        <h2 class="text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">معلومات المسوق</h2>
+        <dl class="space-y-3 text-sm">
+          {% if affiliate.email %}
+          <div class="flex items-center gap-2">
+            <i data-lucide="mail" class="h-4 w-4 text-slate-400 shrink-0" aria-hidden="true"></i>
+            <dt class="text-slate-500 dark:text-slate-400 w-20 shrink-0">البريد</dt>
+            <dd class="text-slate-900 dark:text-slate-100 truncate">{{ affiliate.email }}</dd>
+          </div>
+          {% endif %}
+          {% if affiliate.phone %}
+          <div class="flex items-center gap-2">
+            <i data-lucide="phone" class="h-4 w-4 text-slate-400 shrink-0" aria-hidden="true"></i>
+            <dt class="text-slate-500 dark:text-slate-400 w-20 shrink-0">الجوال</dt>
+            <dd class="text-slate-900 dark:text-slate-100">{{ affiliate.phone }}</dd>
+          </div>
+          {% endif %}
+          {% if affiliate.social_instagram %}
+          <div class="flex items-center gap-2">
+            <i data-lucide="instagram" class="h-4 w-4 text-slate-400 shrink-0" aria-hidden="true"></i>
+            <dt class="text-slate-500 dark:text-slate-400 w-20 shrink-0">انستغرام</dt>
+            <dd><a href="#" class="text-brand-primary hover:underline">{{ affiliate.social_instagram }}</a></dd>
+          </div>
+          {% endif %}
+          {% if affiliate.country %}
+          <div class="flex items-center gap-2">
+            <i data-lucide="map-pin" class="h-4 w-4 text-slate-400 shrink-0" aria-hidden="true"></i>
+            <dt class="text-slate-500 dark:text-slate-400 w-20 shrink-0">الدولة</dt>
+            <dd class="text-slate-900 dark:text-slate-100">{{ affiliate.country }}</dd>
+          </div>
+          {% endif %}
+          <div class="flex items-center gap-2">
+            <i data-lucide="calendar" class="h-4 w-4 text-slate-400 shrink-0" aria-hidden="true"></i>
+            <dt class="text-slate-500 dark:text-slate-400 w-20 shrink-0">تاريخ الانضمام</dt>
+            <dd class="text-slate-900 dark:text-slate-100">{{ affiliate.created_at|date:"j F Y" }}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Referral link copy box -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5">
+        <h2 class="text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-3">رابط الإحالة</h2>
+        <div class="flex items-center gap-2" data-copy-container>
+          <input type="text"
+                 data-copy-value
+                 value="{{ affiliate.referral_link }}"
+                 readonly
+                 class="flex-1 min-w-0 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
+                 aria-label="رابط الإحالة">
+          <button type="button"
+                  data-copy="referral-link"
+                  class="flex items-center gap-1.5 px-3 py-2 bg-brand-primary text-white text-xs font-medium rounded-lg hover:bg-indigo-600 focus-ring transition-colors shrink-0"
+                  aria-label="نسخ الرابط">
+            <i data-lucide="copy" class="h-3.5 w-3.5" aria-hidden="true"></i>
+            نسخ
+          </button>
+        </div>
+        <!-- QR code placeholder -->
+        <div class="mt-4 flex flex-col items-center gap-2">
+          <img src="{% static 'img/placeholders/qr-code.svg' %}"
+               alt="QR للرابط التسويقي الخاص بـ{{ affiliate.full_name }}"
+               class="h-32 w-32 rounded-lg border border-slate-200 dark:border-slate-700">
+          <p class="text-xs text-slate-400">مسح QR للانتقال للرابط</p>
+        </div>
+      </div>
+
+      <!-- Coupon code -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5">
+        <h2 class="text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-3">كود الخصم</h2>
+        {% if affiliate.coupon_code %}
+        <div class="flex items-center gap-3" data-copy-container>
+          <div class="flex-1 flex items-center justify-center bg-gradient-to-r from-indigo-50 to-violet-50 dark:from-indigo-950/40 dark:to-violet-950/40 border border-dashed border-indigo-300 dark:border-indigo-700 rounded-lg px-4 py-3">
+            <span data-copy-value class="text-xl font-bold tracking-widest text-indigo-700 dark:text-indigo-300 font-mono">{{ affiliate.coupon_code }}</span>
+          </div>
+          <button type="button"
+                  data-copy="coupon-code"
+                  class="flex items-center gap-1.5 px-3 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors shrink-0"
+                  aria-label="نسخ كود الخصم">
+            <i data-lucide="copy" class="h-3.5 w-3.5" aria-hidden="true"></i>
+            نسخ
+          </button>
+        </div>
+        {% else %}
+        <p class="text-sm text-slate-400 text-center py-2">لم يُحدَّد كود خصم بعد.</p>
+        {% endif %}
+      </div>
+
+      <!-- Notes — inline edit affordance (US4/T037) -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5">
+        <h2 class="text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-3">ملاحظات</h2>
+        <form method="post" action="{% url 'affiliates:notes' pk=affiliate.pk %}">
+          {% csrf_token %}
+          <textarea name="notes" rows="5"
+                    class="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 resize-y"
+                    placeholder="أضف ملاحظاتك هنا...">{{ affiliate.notes }}</textarea>
+          <button type="submit"
+                  class="mt-2 w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-brand-primary rounded-lg hover:bg-indigo-600 focus-ring transition-colors">
+            <i data-lucide="save" class="h-4 w-4" aria-hidden="true"></i>
+            حفظ الملاحظات
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Right column: stats + orders + payouts + assets + timeline -->
+    <div class="xl:col-span-2 space-y-6">
+
+      <!-- Stats grid (Principle V — out-of-scope commission engine, truthful zeros) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="h-8 w-8 rounded-lg bg-blue-100 dark:bg-blue-950/40 flex items-center justify-center">
+              <i data-lucide="mouse-pointer-click" class="h-4 w-4 text-blue-600 dark:text-blue-400" aria-hidden="true"></i>
+            </div>
+            <span class="text-xs font-medium text-slate-500 dark:text-slate-400">إجمالي النقرات</span>
+          </div>
+          <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">0</p>
+          <p class="text-xs text-slate-400 mt-1">—</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="h-8 w-8 rounded-lg bg-indigo-100 dark:bg-indigo-950/40 flex items-center justify-center">
+              <i data-lucide="shopping-bag" class="h-4 w-4 text-indigo-600 dark:text-indigo-400" aria-hidden="true"></i>
+            </div>
+            <span class="text-xs font-medium text-slate-500 dark:text-slate-400">إجمالي الطلبات</span>
+          </div>
+          <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">0</p>
+          <p class="text-xs text-slate-400 mt-1">—</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="h-8 w-8 rounded-lg bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center">
+              <i data-lucide="trending-up" class="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i>
+            </div>
+            <span class="text-xs font-medium text-slate-500 dark:text-slate-400">إجمالي المبيعات</span>
+          </div>
+          <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">0</p>
+          <p class="text-xs text-slate-400 mt-1">ريال سعودي</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="h-8 w-8 rounded-lg bg-amber-100 dark:bg-amber-950/40 flex items-center justify-center">
+              <i data-lucide="clock" class="h-4 w-4 text-amber-600 dark:text-amber-400" aria-hidden="true"></i>
+            </div>
+            <span class="text-xs font-medium text-slate-500 dark:text-slate-400">عمولة معلقة</span>
+          </div>
+          <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">0</p>
+          <p class="text-xs text-slate-400 mt-1">ريال سعودي</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="h-8 w-8 rounded-lg bg-violet-100 dark:bg-violet-950/40 flex items-center justify-center">
+              <i data-lucide="check-circle-2" class="h-4 w-4 text-violet-600 dark:text-violet-400" aria-hidden="true"></i>
+            </div>
+            <span class="text-xs font-medium text-slate-500 dark:text-slate-400">عمولة مدفوعة</span>
+          </div>
+          <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">0</p>
+          <p class="text-xs text-slate-400 mt-1">ريال سعودي</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="h-8 w-8 rounded-lg bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center">
+              <i data-lucide="percent" class="h-4 w-4 text-rose-600 dark:text-rose-400" aria-hidden="true"></i>
+            </div>
+            <span class="text-xs font-medium text-slate-500 dark:text-slate-400">معدل التحويل</span>
+          </div>
+          <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">0%</p>
+          <p class="text-xs text-slate-400 mt-1">—</p>
+        </div>
+      </div>
+
+      <!-- Attributed orders table (empty-state — Principle V) -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-slate-200 dark:border-slate-700">
+          <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">الطلبات المنسوبة للمسوق</h2>
+          <a href="orders.html" class="text-sm text-brand-primary hover:underline">عرض الكل</a>
+        </div>
+        <div class="table-responsive">
+          <table class="min-w-full text-sm" aria-label="الطلبات المنسوبة لـ{{ affiliate.full_name }}">
+            <thead class="bg-slate-50 dark:bg-slate-800/50">
+              <tr>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">رقم الطلب</th>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">العميل</th>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">المنتج</th>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الإجمالي</th>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">العمولة</th>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الحالة</th>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">التاريخ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td colspan="7" class="px-4 py-10 text-center text-sm text-slate-400">لا توجد طلبات منسوبة لهذا المسوق</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Payout history (empty-state — Principle V) -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-slate-200 dark:border-slate-700">
+          <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">سجل المدفوعات</h2>
+          <a href="affiliate-payouts.html" class="text-sm text-brand-primary hover:underline">عرض الكل</a>
+        </div>
+        <div class="table-responsive">
+          <table class="min-w-full text-sm" aria-label="سجل مدفوعات {{ affiliate.full_name }}">
+            <thead class="bg-slate-50 dark:bg-slate-800/50">
+              <tr>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">رقم الصرف</th>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">المبلغ</th>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">طريقة الدفع</th>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الحالة</th>
+                <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">التاريخ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td colspan="5" class="px-4 py-10 text-center text-sm text-slate-400">لا توجد مدفوعات بعد</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Marketing assets -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5">
+        <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100 mb-4">أدوات التسويق</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Banner -->
+          <div class="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+            <img src="{% static 'img/placeholders/product.svg' %}"
+                 alt="بانر تسويقي جاهز للنشر على منصات التواصل الاجتماعي"
+                 class="w-full h-28 object-cover bg-slate-100 dark:bg-slate-800">
+            <div class="p-3 flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-900 dark:text-slate-100">بانر تسويقي</p>
+                <p class="text-xs text-slate-400">1200 × 628 px</p>
+              </div>
+              <button type="button" class="flex items-center gap-1 px-2.5 py-1.5 text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus-ring">
+                <i data-lucide="download" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                تحميل
+              </button>
+            </div>
+          </div>
+          <!-- Story -->
+          <div class="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+            <img src="{% static 'img/placeholders/template-story-driven.svg' %}"
+                 alt="تصميم ستوري لمنصة انستغرام وسناب شات"
+                 class="w-full h-28 object-cover bg-slate-100 dark:bg-slate-800">
+            <div class="p-3 flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-900 dark:text-slate-100">ستوري انستغرام</p>
+                <p class="text-xs text-slate-400">1080 × 1920 px</p>
+              </div>
+              <button type="button" class="flex items-center gap-1 px-2.5 py-1.5 text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus-ring">
+                <i data-lucide="download" class="h-3.5 w-3.5" aria-hidden="true"></i>
+                تحميل
+              </button>
+            </div>
+          </div>
+          <!-- Reel Caption -->
+          <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 hover:shadow-md transition-shadow">
+            <div class="flex items-start gap-3">
+              <div class="h-10 w-10 rounded-lg bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0">
+                <i data-lucide="video" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-slate-900 dark:text-slate-100">نص ريلز جاهز</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed line-clamp-2">جودة مذهلة على أفضل منتجاتنا! استخدم كود {{ affiliate.coupon_code|default:"—" }}...</p>
+              </div>
+            </div>
+            <button type="button" class="mt-3 w-full flex items-center justify-center gap-1 px-2.5 py-1.5 text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus-ring">
+              <i data-lucide="copy" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              نسخ النص
+            </button>
+          </div>
+          <!-- Email Template -->
+          <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 hover:shadow-md transition-shadow">
+            <div class="flex items-start gap-3">
+              <div class="h-10 w-10 rounded-lg bg-blue-100 dark:bg-blue-950/40 flex items-center justify-center shrink-0">
+                <i data-lucide="mail" class="h-5 w-5 text-blue-600 dark:text-blue-400" aria-hidden="true"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-slate-900 dark:text-slate-100">قالب إيميل ترويجي</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed line-clamp-2">موضوع: عرض حصري! خصم مع كود {{ affiliate.coupon_code|default:"—" }}...</p>
+              </div>
+            </div>
+            <button type="button" class="mt-3 w-full flex items-center justify-center gap-1 px-2.5 py-1.5 text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus-ring">
+              <i data-lucide="copy" class="h-3.5 w-3.5" aria-hidden="true"></i>
+              نسخ القالب
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity timeline (empty-state — Principle V) -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5">
+        <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100 mb-5">سجل النشاط</h2>
+        <p class="text-sm text-slate-400 text-center py-4">لا يوجد سجل نشاط بعد.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Approve modal (shown when Pending — US4/T037) -->
+  <div data-modal="modal-approve-detail"
+       class="fixed inset-0 z-50 hidden items-center justify-center p-4"
+       role="dialog" aria-modal="true" aria-labelledby="modal-approve-detail-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0">
+          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i>
+        </div>
+        <h3 id="modal-approve-detail-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">قبول طلب الانضمام</h3>
+      </div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد قبول <strong>{{ affiliate.full_name }}</strong> كمسوق؟ سيتمكن من إنشاء روابط إحالة.</p>
+      <form method="post" action="{% url 'affiliates:approve' pk=affiliate.pk %}">
+        {% csrf_token %}
+        <div class="flex gap-3">
+          <button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button>
+          <button type="submit" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">قبول</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Suspend modal (wired in US4/T037) -->
+  <div data-modal-backdrop
+       class="fixed inset-0 z-50 bg-black/50 hidden items-center justify-center p-4"
+       aria-hidden="true">
+  </div>
+  <div data-modal="modal-suspend-detail"
+       class="fixed inset-0 z-50 hidden items-center justify-center p-4"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="modal-suspend-detail-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0">
+          <i data-lucide="ban" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i>
+        </div>
+        <h3 id="modal-suspend-detail-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">تأكيد إيقاف المسوق</h3>
+      </div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">هل أنت متأكد من إيقاف حساب <strong>{{ affiliate.full_name }}</strong>؟ لن يتمكن من الوصول إلى رابطه أو تتبع مبيعاته.</p>
+      <form method="post" action="{% url 'affiliates:suspend' pk=affiliate.pk %}">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label for="suspend-detail-reason" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">سبب الإيقاف (اختياري)</label>
+          <textarea id="suspend-detail-reason" name="reason" rows="2"
+                    class="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/40 resize-none"
+                    placeholder="سبب الإيقاف..."></textarea>
+        </div>
+        <div class="flex gap-3">
+          <button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button>
+          <button type="submit" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">إيقاف</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Reactivate modal (shown when Suspended — US4/T037) -->
+  <div data-modal="modal-reactivate-detail"
+       class="fixed inset-0 z-50 hidden items-center justify-center p-4"
+       role="dialog" aria-modal="true" aria-labelledby="modal-reactivate-detail-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0">
+          <i data-lucide="play-circle" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i>
+        </div>
+        <h3 id="modal-reactivate-detail-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">إعادة تفعيل المسوق</h3>
+      </div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد إعادة تفعيل حساب <strong>{{ affiliate.full_name }}</strong>؟ سيتمكن من استئناف نشاطه.</p>
+      <form method="post" action="{% url 'affiliates:reactivate' pk=affiliate.pk %}">
+        {% csrf_token %}
+        <div class="flex gap-3">
+          <button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button>
+          <button type="submit" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">تفعيل</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Change level modal (US4/T037) -->
+  <div data-modal="modal-change-level-detail"
+       class="fixed inset-0 z-50 hidden items-center justify-center p-4"
+       role="dialog" aria-modal="true" aria-labelledby="modal-change-level-detail-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-10 w-10 rounded-xl bg-indigo-100 dark:bg-indigo-950/40 flex items-center justify-center shrink-0">
+          <i data-lucide="award" class="h-5 w-5 text-indigo-600 dark:text-indigo-400" aria-hidden="true"></i>
+        </div>
+        <h3 id="modal-change-level-detail-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">تغيير مستوى المسوق</h3>
+      </div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">اختر المستوى الجديد لـ<strong>{{ affiliate.full_name }}</strong>.</p>
+      <form method="post" action="{% url 'affiliates:change-level' pk=affiliate.pk %}">
+        {% csrf_token %}
+        <fieldset class="mb-4">
+          <legend class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">المستوى</legend>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700"><input type="radio" name="level" value="Bronze" class="text-indigo-600" {% if affiliate.level == 'Bronze' %}checked{% endif %}><span class="badge badge-bronze text-xs">Bronze</span></label>
+            <label class="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700"><input type="radio" name="level" value="Silver" class="text-indigo-600" {% if affiliate.level == 'Silver' %}checked{% endif %}><span class="badge badge-silver text-xs">Silver</span></label>
+            <label class="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700"><input type="radio" name="level" value="Gold" class="text-indigo-600" {% if affiliate.level == 'Gold' %}checked{% endif %}><span class="badge badge-gold text-xs">Gold</span></label>
+            <label class="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700"><input type="radio" name="level" value="Platinum" class="text-indigo-600" {% if affiliate.level == 'Platinum' %}checked{% endif %}><span class="badge badge-platinum text-xs">Platinum</span></label>
+          </div>
+        </fieldset>
+        <div class="flex gap-3">
+          <button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button>
+          <button type="submit" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus-ring transition-colors">حفظ التغيير</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

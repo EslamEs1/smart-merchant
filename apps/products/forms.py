@@ -43,6 +43,10 @@ class ProductForm(forms.ModelForm):
             self.fields["category"].queryset = ProductCategory.objects.filter(
                 merchant=merchant, status=ProductCategory.Status.ACTIVE
             )
+        else:
+            # Fail closed: with no merchant context, expose no categories so a
+            # selection can never bypass the owner-scoped check below (Principle IV).
+            self.fields["category"].queryset = ProductCategory.objects.none()
         self.fields["affiliate_profit"].required = False
         self.fields["public_link_slug"].required = False
 

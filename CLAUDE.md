@@ -1,31 +1,37 @@
 <!-- SPECKIT START -->
-Active feature: `004-products-catalog` (branch: `004-products-catalog`).
+Active feature: `005-affiliate-management` (branch: `005-affiliate-management`).
 
-This feature is the first **data conversion** on top of the Django foundation: it
-turns the four static product pages into a database-backed, merchant-owned catalog
-in `apps/products`. For technologies, project structure, shell commands, and design
-decisions, read the current plan and supporting design artifacts:
+This feature is the second **data conversion** on top of the Django foundation: it
+turns the three merchant-side affiliate pages into a database-backed, merchant-owned
+affiliate roster in `apps/affiliates`. For technologies, project structure, shell
+commands, and design decisions, read the current plan and supporting design artifacts:
 
-- Spec: `specs/004-products-catalog/spec.md`
-- Plan: `specs/004-products-catalog/plan.md`
-- Research: `specs/004-products-catalog/research.md`
-- Data model: `specs/004-products-catalog/data-model.md`
-- Routes/form contract: `specs/004-products-catalog/contracts/routes.md`
-- Quickstart: `specs/004-products-catalog/quickstart.md`
+- Spec: `specs/005-affiliate-management/spec.md`
+- Plan: `specs/005-affiliate-management/plan.md`
+- Research: `specs/005-affiliate-management/research.md`
+- Data model: `specs/005-affiliate-management/data-model.md`
+- Routes/action contract: `specs/005-affiliate-management/contracts/routes.md`
+- Quickstart: `specs/005-affiliate-management/quickstart.md`
 - Constitution (v2.0.0): `.specify/memory/constitution.md`
 
-Phase scope: `ProductCategory` + `Product` + `ProductImage` models; merchant CRUD
-(list with server-side filtering + empty state, create, edit, detail,
-disable/enable, duplicate, delete) — all owner-scoped (Principle IV); pricing +
-affiliate-profit validation; admin with inline images; idempotent physical-commerce
-seed. The product surface adopts **clean URLs** (`/products/…`) with legacy `*.html`
-redirects so no inbound link breaks. Two user-approved **in-style** UI extensions
-(create/edit form fields; filter bar badge + stock selects) — see spec Clarifications.
-Out of scope: orders, affiliates, commissions, payouts, customers, landing pages.
+Phase scope: one `AffiliateProfile` model (a Pending profile *is* the join request —
+no separate `AffiliateApplication`); merchant views for the roster (list with
+search/status/level filtering + empty state), the join-requests queue, the detail
+page, and lifecycle mutations (approve, reject, suspend, reactivate, change level,
+edit notes) — all owner-scoped (Principle IV), all mutations POST+CSRF. Referral code
+is globally unique; coupon code is unique per merchant. The surface adopts **clean
+URLs** (`/affiliates/…`) with legacy `*.html` redirects. Order/commission/payout
+figures render as **truthful zeros / empty-state** (Principle V — those subsystems are
+out of scope). Two bounded **in-style** additions required for backend integration:
+the list page's triggered-but-undefined confirmation modals are supplied, and the
+detail notes block gains an edit affordance (see plan Complexity Tracking). Out of
+scope: commission engine, order attribution, payouts, affiliate seller portal, real
+QR/WhatsApp.
 
-Prior features: `003-backend-foundation` (Django skeleton, `accounts.User` + role,
-role-based login, base templates, page registry) and the static prototype
-`001-static-frontend-mvp` / `002-affiliate-seller-portal`. Preserve their UI exactly.
+Prior features: `004-products-catalog` (first data conversion — `apps/products`),
+`003-backend-foundation` (Django skeleton, `accounts.User` + role, role-based login,
+base templates, page registry), and the static prototype `001-static-frontend-mvp` /
+`002-affiliate-seller-portal`. Preserve their UI exactly.
 
 ## How to convert the next page
 

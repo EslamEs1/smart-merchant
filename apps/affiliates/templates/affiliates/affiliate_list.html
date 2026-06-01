@@ -1,0 +1,272 @@
+{% extends 'merchant_base.html' %}
+{% load static %}
+
+{% block title %}المسوقون | Smart Merchant OS{% endblock %}
+
+{% block content %}
+
+  <!-- Breadcrumb -->
+  <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400" aria-label="مسار التنقل">
+    <a href="dashboard.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">لوحة التحكم</a>
+    <i data-lucide="chevron-left" class="h-4 w-4" aria-hidden="true"></i>
+    <span class="text-slate-900 dark:text-slate-100 font-medium">المسوقون</span>
+  </nav>
+
+  <!-- Page header -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-slate-900 dark:text-white">نظام المسوقين</h1>
+      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">إدارة المسوقين، الموافقة على الطلبات، وتتبع العمولات</p>
+    </div>
+    <div class="flex items-center gap-3 flex-wrap">
+      <a href="affiliate-dashboard.html"
+         target="_blank"
+         rel="noopener"
+         class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-lg hover:bg-emerald-100 dark:hover:bg-emerald-900/30 transition-colors">
+        <i data-lucide="external-link" class="h-4 w-4" aria-hidden="true"></i>
+        معاينة بوابة المسوّق ↗
+      </a>
+      <a href="{% url 'affiliates:requests' %}" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-900/30 transition-colors">
+        <i data-lucide="user-plus" class="h-4 w-4" aria-hidden="true"></i>طلبات الانضمام
+        <span class="inline-flex items-center justify-center h-5 min-w-[1.25rem] px-1 text-xs font-bold bg-indigo-600 text-white rounded-full">{{ pending_count }}</span>
+      </a>
+      <a href="affiliate-payouts.html" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors">
+        <i data-lucide="wallet" class="h-4 w-4" aria-hidden="true"></i>المدفوعات
+      </a>
+    </div>
+  </div>
+
+  <!-- Commission rule banner -->
+  <div class="rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/30 p-4 flex items-start gap-3">
+    <i data-lucide="info" class="h-5 w-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" aria-hidden="true"></i>
+    <p class="text-sm text-amber-800 dark:text-amber-200">يتم اعتماد العمولة بعد وصول الطلب إلى <strong>Delivered</strong> أو تأكيد الدفع.</p>
+  </div>
+
+  <!-- Filter bar -->
+  <form method="get" action="">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 flex flex-wrap items-center gap-3">
+      <div class="flex-1 min-w-[200px] relative">
+        <span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400"><i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i></span>
+        <input type="search" name="q" value="{{ filters.q }}" placeholder="بحث بالاسم أو الكود..."
+               class="w-full ps-9 pe-4 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
+               aria-label="بحث في المسوقين">
+      </div>
+      <select name="status"
+              class="px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
+              aria-label="فلتر الحالة">
+        <option value="">كل الحالات</option>
+        {% for value, label in status_choices %}
+        <option value="{{ value }}" {% if filters.status == value %}selected{% endif %}>{{ value }}</option>
+        {% endfor %}
+      </select>
+      <select name="level"
+              class="px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
+              aria-label="فلتر المستوى">
+        <option value="">كل المستويات</option>
+        {% for value, label in level_choices %}
+        <option value="{{ value }}" {% if filters.level == value %}selected{% endif %}>{{ value }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="inline-flex items-center gap-2 px-3 py-2 text-sm text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+        <i data-lucide="sliders-horizontal" class="h-4 w-4" aria-hidden="true"></i>فلاتر إضافية
+      </button>
+    </div>
+  </form>
+
+  {% if page_obj.object_list %}
+  <!-- Affiliates table -->
+  <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm">
+    <div class="table-responsive">
+      <table class="w-full text-sm" role="grid" aria-label="قائمة المسوقين">
+        <thead>
+          <tr class="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+            <th scope="col" class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">المسوق</th>
+            <th scope="col" class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">المستوى</th>
+            <th scope="col" class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">كود الإحالة</th>
+            <th scope="col" class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">الطلبات</th>
+            <th scope="col" class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">المبيعات</th>
+            <th scope="col" class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">عمولة معلقة</th>
+            <th scope="col" class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">عمولة مدفوعة</th>
+            <th scope="col" class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">معدل التحويل</th>
+            <th scope="col" class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">الحالة</th>
+            <th scope="col" class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider"><span class="sr-only">إجراءات</span></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+          {% for affiliate in page_obj %}
+          <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-white dark:bg-slate-900">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <img src="{% static 'img/placeholders/affiliate-avatar.svg' %}" alt="صورة {{ affiliate.full_name }}" class="h-9 w-9 rounded-full">
+                <div>
+                  <p class="font-semibold text-slate-900 dark:text-white">{{ affiliate.full_name }}</p>
+                  <p class="text-xs text-slate-400">{{ affiliate.referral_code }}{% if affiliate.email %} • {{ affiliate.email }}{% endif %}</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3"><span class="badge badge-{{ affiliate.level|lower }}">{{ affiliate.level }}</span></td>
+            <td class="px-4 py-3"><code class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-indigo-600 dark:text-indigo-400">{{ affiliate.referral_code }}</code></td>
+            <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">0</td>
+            <td class="px-4 py-3 text-end font-medium text-slate-700 dark:text-slate-300">0</td>
+            <td class="px-4 py-3 text-end font-semibold text-amber-600 dark:text-amber-400">0</td>
+            <td class="px-4 py-3 text-end font-medium text-emerald-600 dark:text-emerald-400">0</td>
+            <td class="px-4 py-3 text-end text-slate-700 dark:text-slate-300">0%</td>
+            <td class="px-4 py-3"><span class="badge badge-{{ affiliate.status|lower }}">{{ affiliate.status }}</span></td>
+            <td class="px-4 py-3">
+              <div class="relative" data-actions-dropdown="aff-{{ affiliate.pk }}-actions">
+                <button type="button" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-700 dark:hover:text-slate-200 focus-ring transition-colors"
+                        aria-label="إجراءات {{ affiliate.full_name }}" aria-expanded="false" aria-haspopup="true">
+                  <i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-panel absolute end-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-50" role="menu">
+                  <a href="{{ affiliate.get_absolute_url }}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الملف</a>
+                  <button type="button" data-modal-trigger="modal-approve-{{ affiliate.pk }}" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/30" role="menuitem"><i data-lucide="check-circle-2" class="h-4 w-4" aria-hidden="true"></i>موافقة</button>
+                  <button type="button" data-modal-trigger="modal-suspend-{{ affiliate.pk }}" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30" role="menuitem"><i data-lucide="pause-circle" class="h-4 w-4" aria-hidden="true"></i>تعليق</button>
+                  <button type="button" data-modal-trigger="modal-change-level-{{ affiliate.pk }}" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="award" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تغيير المستوى</button>
+                  <a href="orders.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="shopping-cart" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض الطلبات</a>
+                  <button type="button" data-modal-trigger="modal-pay-commission" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30" role="menuitem"><i data-lucide="banknote" class="h-4 w-4" aria-hidden="true"></i>دفع عمولة</button>
+                  <hr class="my-1 border-slate-200 dark:border-slate-600">
+                  <button type="button" data-copy="{{ affiliate.referral_link }}" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700" role="menuitem"><i data-lucide="link-2" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>نسخ رابط الإحالة</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex items-center justify-between px-4 py-4 border-t border-slate-200 dark:border-slate-700">
+      <p class="text-sm text-slate-500 dark:text-slate-400">
+        عرض <span class="font-medium text-slate-700 dark:text-slate-300">{{ page_obj.start_index }}–{{ page_obj.end_index }}</span>
+        من <span class="font-medium text-slate-700 dark:text-slate-300">{{ page_obj.paginator.count }}</span> مسوق
+      </p>
+      <div class="flex items-center gap-1">
+        {% if page_obj.has_previous %}
+        <a href="?{{ querystring }}&page={{ page_obj.previous_page_number }}" class="p-2 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring" aria-label="الصفحة السابقة"><i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i></a>
+        {% else %}
+        <button type="button" class="p-2 rounded-lg text-slate-400 disabled:opacity-40 focus-ring" disabled aria-label="الصفحة السابقة"><i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i></button>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+          <button type="button" class="min-w-[2rem] h-8 px-2 rounded-lg text-sm font-medium bg-indigo-600 text-white focus-ring" aria-current="page" aria-label="الصفحة {{ num }}">{{ num }}</button>
+          {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
+          <a href="?{{ querystring }}&page={{ num }}" class="min-w-[2rem] h-8 px-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring" aria-label="الصفحة {{ num }}">{{ num }}</a>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <a href="?{{ querystring }}&page={{ page_obj.next_page_number }}" class="p-2 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring" aria-label="الصفحة التالية"><i data-lucide="chevron-left" class="h-4 w-4" aria-hidden="true"></i></a>
+        {% else %}
+        <button type="button" class="p-2 rounded-lg text-slate-400 disabled:opacity-40 focus-ring" disabled aria-label="الصفحة التالية"><i data-lucide="chevron-left" class="h-4 w-4" aria-hidden="true"></i></button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Per-affiliate action modals (US4/T036) -->
+  {% for affiliate in page_obj %}
+  <div data-modal="modal-approve-{{ affiliate.pk }}"
+       class="fixed inset-0 z-50 hidden items-center justify-center p-4"
+       role="dialog" aria-modal="true" aria-labelledby="approve-list-{{ affiliate.pk }}-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 flex items-center justify-center shrink-0">
+          <i data-lucide="check-circle" class="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true"></i>
+        </div>
+        <h3 id="approve-list-{{ affiliate.pk }}-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">قبول المسوق</h3>
+      </div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد قبول <strong>{{ affiliate.full_name }}</strong> كمسوق؟</p>
+      <form method="post" action="{% url 'affiliates:approve' pk=affiliate.pk %}">
+        {% csrf_token %}
+        <div class="flex gap-3">
+          <button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button>
+          <button type="submit" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus-ring transition-colors">قبول</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div data-modal="modal-suspend-{{ affiliate.pk }}"
+       class="fixed inset-0 z-50 hidden items-center justify-center p-4"
+       role="dialog" aria-modal="true" aria-labelledby="suspend-list-{{ affiliate.pk }}-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-10 w-10 rounded-xl bg-amber-100 dark:bg-amber-950/40 flex items-center justify-center shrink-0">
+          <i data-lucide="pause-circle" class="h-5 w-5 text-amber-600 dark:text-amber-400" aria-hidden="true"></i>
+        </div>
+        <h3 id="suspend-list-{{ affiliate.pk }}-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">تعليق حساب المسوق</h3>
+      </div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">سيتم تعليق حساب <strong>{{ affiliate.full_name }}</strong> مؤقتاً.</p>
+      <form method="post" action="{% url 'affiliates:suspend' pk=affiliate.pk %}">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label for="suspend-list-reason-{{ affiliate.pk }}" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">سبب التعليق (اختياري)</label>
+          <textarea id="suspend-list-reason-{{ affiliate.pk }}" name="reason" rows="2"
+                    class="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/40 resize-none"
+                    placeholder="سبب التعليق..."></textarea>
+        </div>
+        <div class="flex gap-3">
+          <button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button>
+          <button type="submit" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 focus-ring transition-colors">تعليق الحساب</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div data-modal="modal-change-level-{{ affiliate.pk }}"
+       class="fixed inset-0 z-50 hidden items-center justify-center p-4"
+       role="dialog" aria-modal="true" aria-labelledby="level-list-{{ affiliate.pk }}-title">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-10 w-10 rounded-xl bg-indigo-100 dark:bg-indigo-950/40 flex items-center justify-center shrink-0">
+          <i data-lucide="award" class="h-5 w-5 text-indigo-600 dark:text-indigo-400" aria-hidden="true"></i>
+        </div>
+        <h3 id="level-list-{{ affiliate.pk }}-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">تغيير مستوى المسوق</h3>
+      </div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">اختر المستوى الجديد لـ<strong>{{ affiliate.full_name }}</strong>.</p>
+      <form method="post" action="{% url 'affiliates:change-level' pk=affiliate.pk %}">
+        {% csrf_token %}
+        <fieldset class="mb-4">
+          <legend class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">المستوى</legend>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700"><input type="radio" name="level" value="Bronze" class="text-indigo-600" {% if affiliate.level == 'Bronze' %}checked{% endif %}><span class="badge badge-bronze text-xs">Bronze</span></label>
+            <label class="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700"><input type="radio" name="level" value="Silver" class="text-indigo-600" {% if affiliate.level == 'Silver' %}checked{% endif %}><span class="badge badge-silver text-xs">Silver</span></label>
+            <label class="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700"><input type="radio" name="level" value="Gold" class="text-indigo-600" {% if affiliate.level == 'Gold' %}checked{% endif %}><span class="badge badge-gold text-xs">Gold</span></label>
+            <label class="flex items-center gap-2 p-3 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700"><input type="radio" name="level" value="Platinum" class="text-indigo-600" {% if affiliate.level == 'Platinum' %}checked{% endif %}><span class="badge badge-platinum text-xs">Platinum</span></label>
+          </div>
+        </fieldset>
+        <div class="flex gap-3">
+          <button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button>
+          <button type="submit" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus-ring transition-colors">حفظ التغيير</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% else %}
+  <!-- Empty state -->
+  <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-12 text-center">
+    <i data-lucide="handshake" class="mx-auto h-12 w-12 text-slate-300 dark:text-slate-600 mb-4" aria-hidden="true"></i>
+    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">لا يوجد مسوقون بعد</h3>
+    <p class="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto">لم ينضم أي مسوق إلى نظامك بعد. يمكنك مشاركة رابط الانضمام مع المسوقين المهتمين.</p>
+  </div>
+  {% endif %}
+
+<!-- Modal: Pay commission (out of scope — preserved inert, Principle V) -->
+<div data-modal-backdrop class="fixed inset-0 z-50 bg-black/50 hidden items-center justify-center p-4" aria-hidden="true">
+  <div id="modal-pay-commission" class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md p-6 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-pay-title">
+    <div class="flex items-start justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center shrink-0"><i data-lucide="banknote" class="h-5 w-5 text-emerald-600" aria-hidden="true"></i></div>
+        <div><h2 id="modal-pay-title" class="text-base font-semibold text-slate-900 dark:text-white">دفع العمولة</h2><p class="text-sm text-slate-500 dark:text-slate-400">هذه الميزة قيد التطوير</p></div>
+      </div>
+      <button type="button" data-modal-close class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus-ring"><i data-lucide="x" class="h-4 w-4" aria-hidden="true"></i></button>
+    </div>
+    <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">ميزة دفع العمولات ستكون متاحة في الإصدار القادم.</p>
+    <div class="flex items-center gap-3 justify-end">
+      <button type="button" data-modal-close class="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 rounded-lg transition-colors focus-ring">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

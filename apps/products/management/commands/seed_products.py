@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 from django.contrib.auth import get_user_model
@@ -185,17 +186,31 @@ class Command(BaseCommand):
             self.stdout.write(f"Using existing merchant: {merchant.email}")
             return merchant
 
+        # No password is hardcoded or logged. create_user() with no password
+        # leaves the account with an unusable password; a dev can opt into a
+        # usable one via the DEMO_MERCHANT_PASSWORD env var (dev-only).
         merchant = User.objects.create_user(
             username="demo_merchant",
             email="demo@merchant.com",
-            password="demo1234",
             role="MERCHANT",
         )
-        self.stdout.write(
-            self.style.WARNING(
-                f"Created demo merchant: {merchant.email}  password: demo1234"
+        password = os.environ.get("DEMO_MERCHANT_PASSWORD")
+        if password:
+            merchant.set_password(password)
+            merchant.save(update_fields=["password"])
+            self.stdout.write(
+                self.style.WARNING(
+                    f"Created demo merchant: {merchant.email} "
+                    "(password set from DEMO_MERCHANT_PASSWORD)."
+                )
             )
-        )
+        else:
+            self.stdout.write(
+                self.style.WARNING(
+                    f"Created demo merchant: {merchant.email} (no usable password — set "
+                    "DEMO_MERCHANT_PASSWORD before seeding, or run `manage.py changepassword`)."
+                )
+            )
         return merchant
 
     def _seed_categories(self, merchant):
