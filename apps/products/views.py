@@ -5,7 +5,7 @@ from apps.core.decorators import role_required
 
 from .forms import ProductForm
 from .models import Product, ProductCategory
-from .selectors import list_products
+from .selectors import get_owned_product_or_404, list_products
 
 
 @role_required("is_merchant")
@@ -65,7 +65,19 @@ def product_detail(request, slug):
 
 @role_required("is_merchant")
 def product_edit(request, slug):
-    return redirect("products:list")
+    product = get_owned_product_or_404(request.user, slug)
+    if request.method == "POST":
+        form = ProductForm(request.POST, instance=product, merchant=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("products:detail", slug=product.slug)
+    else:
+        form = ProductForm(instance=product, merchant=request.user)
+    return render(
+        request,
+        "products/product_form.html",
+        {"form": form, "is_create": False, "product": product},
+    )
 
 
 @role_required("is_merchant")

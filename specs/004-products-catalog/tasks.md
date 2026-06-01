@@ -108,10 +108,10 @@ to the new clean `/products/…` routes. Foundation utilities reused: `apps/core
 
 **Independent Test**: Edit one of your products → change persists in list/detail; open another merchant's edit URL → access denied (404).
 
-- [ ] T031 [US3] Implement `product_edit` view in `apps/products/views.py` (`get_owned_product_or_404`; GET → `ProductForm(instance=…)` pre-filled; POST valid → save → redirect `products:detail`; invalid → re-render; uniqueness checks exclude self) and add `path("products/<slug:slug>/edit/", …, name="edit")`.
-- [ ] T032 [US3] Update `apps/products/templates/products/product_form.html` to bind for edit (instance values + correct form `action`), keeping it the single shared create/edit template. (Same file as T026 → after T026.)
-- [ ] T033 [P] [US3] Tests in `apps/products/tests/test_views_edit.py`: edit pre-fills and persists; cross-merchant edit GET/POST → 404; invalid rejected; slug uniqueness excludes self.
-- [ ] T034 [US3] Manual (quickstart §C): edit a product → change shows in list/detail; another merchant's edit URL → 404.
+- [x] T031 [US3] Implement `product_edit` view in `apps/products/views.py` (`get_owned_product_or_404`; GET → `ProductForm(instance=…)` pre-filled; POST valid → save → redirect `products:detail`; invalid → re-render; uniqueness checks exclude self) and add `path("products/<slug:slug>/edit/", …, name="edit")`.
+- [x] T032 [US3] Update `apps/products/templates/products/product_form.html` to bind for edit (instance values + correct form `action`), keeping it the single shared create/edit template. (Same file as T026 → after T026.)
+- [x] T033 [P] [US3] Tests in `apps/products/tests/test_views_edit.py`: edit pre-fills and persists; cross-merchant edit GET/POST → 404; invalid rejected; slug uniqueness excludes self.
+- [x] T034 [US3] Manual (quickstart §C): edit a product → change shows in list/detail; another merchant's edit URL → 404.
 
 **Checkpoint**: US1–US3 work independently — browse, create, edit.
 
