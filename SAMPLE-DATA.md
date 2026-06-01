@@ -52,7 +52,7 @@ Use realistic Gulf/Levant/Egyptian name patterns for authenticity.
 | AFF-002 | سارة الخالدي | Silver | SARA15 | 23 | 9,800 | 490 | SAR | Active |
 | AFF-003 | Omar Khalil | Bronze | OMAR10 | 8 | 2,950 | 295 | EGP | Pending |
 
-**Extended list for affiliates.html** (10+ rows) should cover all 4 levels (Bronze/Silver/Gold/Platinum) and all 4 statuses (Pending/Active/Suspended/Rejected).
+**Extended list for `/affiliates/`** (feature 005 — DB-backed; seeded via `manage.py seed_affiliates`) covers all 4 levels (Bronze/Silver/Gold/Platinum) and all 4 statuses (Pending/Active/Suspended/Rejected).
 
 ---
 
@@ -81,7 +81,7 @@ Use realistic Gulf/Levant/Egyptian name patterns for authenticity.
 ## Cross-Page Consistency Rules
 
 1. When PRD-001 appears on `product-detail.html`, the related-orders table MUST include ORD-2024-0091.
-2. When AFF-001 appears on `affiliate-detail.html`, the attributed orders table MUST include ORD-2024-0091.
+2. When AFF-001 appears on `/affiliates/<id>/` (feature 005), the attributed orders table shows empty-state (commission engine out of scope this phase).
 3. When CST-001 appears on `customer-detail.html`, the order history MUST include ORD-2024-0091.
 4. The commission on ORD-2024-0091 (420 SAR) must appear in AFF-001's payout history on `affiliate-payouts.html`.
 5. On `dashboard.html`, the "top affiliates" card must feature AFF-001 (أحمد الشمري).

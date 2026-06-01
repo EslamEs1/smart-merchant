@@ -30,7 +30,7 @@ editable in admin.
 - **`Status` (TextChoices)**: `ACTIVE="active"` (نشط), `INACTIVE="inactive"` (غير نشط).
 - **Constraints**: `UniqueConstraint(fields=["merchant","slug"], name="uniq_category_slug_per_merchant")`.
 - **Meta**: `ordering = ["sort_order", "name"]`; `verbose_name = "تصنيف"`.
-- **Rules**: only the six approved categories appear in the visible MVP (seeded; constitution VIII).
+- **Rules**: only the six approved categories appear in the visible MVP (seeded; constitution Principle VIII).
   The ProductForm category dropdown shows only the merchant's `ACTIVE` categories.
 - **Relationships**: one merchant → many categories; one category → many products.
 

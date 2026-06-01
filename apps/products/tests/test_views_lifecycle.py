@@ -94,6 +94,12 @@ class ProductEnableTests(TestCase):
     def test_get_returns_405(self):
         self.assertEqual(self.client.get(self.url).status_code, 405)
 
+    def test_missing_csrf_returns_403(self):
+        csrf_client = Client(enforce_csrf_checks=True)
+        csrf_client.force_login(self.m)
+        response = csrf_client.post(self.url)
+        self.assertEqual(response.status_code, 403)
+
 
 class ProductDuplicateTests(TestCase):
     def setUp(self):
@@ -143,6 +149,12 @@ class ProductDuplicateTests(TestCase):
     def test_get_returns_405(self):
         self.assertEqual(self.client.get(self.url).status_code, 405)
 
+    def test_missing_csrf_returns_403(self):
+        csrf_client = Client(enforce_csrf_checks=True)
+        csrf_client.force_login(self.m)
+        response = csrf_client.post(self.url)
+        self.assertEqual(response.status_code, 403)
+
 
 class ProductDeleteTests(TestCase):
     def setUp(self):
@@ -169,3 +181,9 @@ class ProductDeleteTests(TestCase):
 
     def test_get_returns_405(self):
         self.assertEqual(self.client.get(self.url).status_code, 405)
+
+    def test_missing_csrf_returns_403(self):
+        csrf_client = Client(enforce_csrf_checks=True)
+        csrf_client.force_login(self.m)
+        response = csrf_client.post(self.url)
+        self.assertEqual(response.status_code, 403)

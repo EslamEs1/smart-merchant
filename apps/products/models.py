@@ -183,19 +183,23 @@ class Product(models.Model):
         return self.name
 
     def clean(self):
-        if (
-            self.affiliate_profit is None
-            and self.suggested_price is not None
-            and self.supplier_price is not None
-        ):
-            self.affiliate_profit = self.suggested_price - self.supplier_price
-
         if self.suggested_price is not None and self.supplier_price is not None:
             if self.suggested_price < self.supplier_price:
                 raise ValidationError(
                     {
                         "suggested_price": _(
                             "السعر المقترح يجب أن يكون أكبر من أو يساوي سعر المورد."
+                        )
+                    }
+                )
+            max_margin = self.suggested_price - self.supplier_price
+            if self.affiliate_profit is None:
+                self.affiliate_profit = max_margin
+            elif self.affiliate_profit > max_margin:
+                raise ValidationError(
+                    {
+                        "affiliate_profit": _(
+                            "عمولة المسوّق لا يمكن أن تتجاوز الفرق بين السعر المقترح وسعر المورد."
                         )
                     }
                 )

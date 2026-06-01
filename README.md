@@ -88,9 +88,10 @@ smart-merchant/
 ├── orders.html                  # Orders list with filters
 ├── order-detail.html            # Order detail with timeline + invoice
 ├── order-edit.html              # Order edit form
-├── affiliates.html              # Affiliate roster (core differentiator)
-├── affiliate-detail.html        # Profile + referral link + QR + payouts
-├── affiliate-requests.html      # Pending affiliate applications
+│   # Affiliates (005) — DB-backed at clean URLs; legacy *.html redirects preserved
+│   # /affiliates/               affiliate roster + filters
+│   # /affiliates/requests/      pending join requests queue
+│   # /affiliates/<id>/          affiliate detail + lifecycle actions
 ├── affiliate-payouts.html       # Payouts: Pending / Paid / Rejected
 ├── customers.html               # CRM list
 ├── customer-detail.html         # Customer profile + order history
@@ -163,9 +164,9 @@ smart-merchant/
 | `orders.html` | Orders list with filters |
 | `order-detail.html` | Order detail with timeline and invoice preview |
 | `order-edit.html` | Order edit form |
-| `affiliates.html` | Affiliate roster (core differentiator) |
-| `affiliate-detail.html` | Affiliate profile + referral link + QR + payout history |
-| `affiliate-requests.html` | Pending applications queue |
+| `/affiliates/` | DB-backed affiliate roster with filters (feature 005) — legacy `affiliates.html` redirects here |
+| `/affiliates/requests/` | Pending join requests queue (feature 005) — legacy `affiliate-requests.html` redirects here |
+| `/affiliates/<id>/` | Affiliate profile, referral link, coupon, lifecycle actions (feature 005) — legacy `affiliate-detail.html` redirects to list |
 | `affiliate-payouts.html` | Payouts queue (Pending / Paid / Rejected tabs) |
 | `customers.html` | CRM list |
 | `customer-detail.html` | Customer profile with order history |
