@@ -44,10 +44,8 @@ REGISTRY: list[PageEntry] = [
     PageEntry("pricing.html", "pricing.html", Access.PUBLIC),
     PageEntry("register.html", "register.html", Access.GUEST),
     # ── Merchant surface (login required) ─────────────────────────────────────
-    PageEntry("products.html", "products.html", Access.MERCHANT),
-    PageEntry("product-create.html", "product-create.html", Access.MERCHANT),
-    PageEntry("product-detail.html", "product-detail.html", Access.MERCHANT),
-    PageEntry("product-edit.html", "product-edit.html", Access.MERCHANT),
+    # products.html, product-create.html, product-detail.html, product-edit.html
+    # → removed; now owned by apps.products (clean URLs + legacy redirects)
     PageEntry("orders.html", "orders.html", Access.MERCHANT),
     PageEntry("order-detail.html", "order-detail.html", Access.MERCHANT),
     PageEntry("order-edit.html", "order-edit.html", Access.MERCHANT),

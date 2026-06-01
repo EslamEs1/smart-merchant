@@ -1,0 +1,356 @@
+{% extends 'merchant_base.html' %}
+{% load static %}
+
+{% block title %}{% if is_create %}إضافة منتج جديد{% else %}تعديل المنتج{% endif %} | Smart Merchant OS{% endblock %}
+
+{% block content %}
+
+  <!-- Breadcrumb -->
+  <nav class="flex items-center gap-2 text-sm text-slate-400 dark:text-slate-400 -mt-2">
+    <a href="dashboard.html" class="hover:text-brand-primary transition-colors">لوحة التحكم</a>
+    <i data-lucide="chevron-left" class="h-4 w-4 rtl:rotate-180"></i>
+    <a href="{% url 'products:list' %}" class="hover:text-brand-primary transition-colors">المنتجات والخدمات</a>
+    <i data-lucide="chevron-left" class="h-4 w-4 rtl:rotate-180"></i>
+    <span class="text-slate-900 dark:text-white font-medium">{% if is_create %}إضافة منتج جديد{% else %}تعديل المنتج{% endif %}</span>
+  </nav>
+
+  <!-- Page Title -->
+  <div>
+    <h1 class="text-2xl font-bold dark:text-white">{% if is_create %}إضافة منتج جديد{% else %}تعديل المنتج{% endif %}</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{% if is_create %}أضف منتجاً أو خدمة جديدة لمتجرك{% else %}عدّل بيانات المنتج{% endif %}</p>
+  </div>
+
+  <!-- Form -->
+  <form method="post" action="{% if is_create %}{% url 'products:create' %}{% else %}{% url 'products:edit' slug=product.slug %}{% endif %}">
+    {% csrf_token %}
+
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+      <!-- ── Left: main sections ── -->
+      <div class="xl:col-span-2 space-y-6">
+
+        <!-- Basic Info -->
+        <section class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
+          <h2 class="text-base font-semibold mb-5 flex items-center gap-2 dark:text-white">
+            <i data-lucide="info" class="h-5 w-5 text-brand-primary"></i>
+            المعلومات الأساسية
+          </h2>
+          <div class="space-y-4">
+
+            <!-- Name -->
+            <div>
+              <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">اسم المنتج / الخدمة <span class="text-red-500">*</span></label>
+              <input type="text" id="{{ form.name.id_for_label }}" name="{{ form.name.html_name }}" value="{{ form.name.value|default:'' }}" placeholder="مثال: سماعة بلوتوث ProBass X2"
+                     class="w-full px-4 py-2.5 text-sm rounded-xl border {% if form.name.errors %}border-red-500{% else %}border-slate-200 dark:border-slate-600{% endif %} bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white placeholder:text-slate-400" />
+              {% if form.name.errors %}<p class="text-xs text-red-500 mt-1">{{ form.name.errors|join:", " }}</p>{% endif %}
+            </div>
+
+            <!-- Category -->
+            <div>
+              <label for="{{ form.category.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">نوع المنتج <span class="text-red-500">*</span></label>
+              <select id="{{ form.category.id_for_label }}" name="{{ form.category.html_name }}"
+                      class="w-full px-4 py-2.5 text-sm rounded-xl border {% if form.category.errors %}border-red-500{% else %}border-slate-200 dark:border-slate-600{% endif %} bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white">
+                <option value="">اختر نوع المنتج</option>
+                {% for cat in form.category.field.queryset %}
+                  <option value="{{ cat.pk }}" {% if form.category.value|stringformat:"s" == cat.pk|stringformat:"s" %}selected{% endif %}>{{ cat.name }}</option>
+                {% endfor %}
+              </select>
+              {% if form.category.errors %}<p class="text-xs text-red-500 mt-1">{{ form.category.errors|join:", " }}</p>{% endif %}
+            </div>
+
+            <!-- Short Description -->
+            <div>
+              <label for="{{ form.short_description.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">وصف مختصر</label>
+              <input type="text" id="{{ form.short_description.id_for_label }}" name="{{ form.short_description.html_name }}" value="{{ form.short_description.value|default:'' }}" placeholder="وصف مختصر للمنتج (حتى 300 حرف)"
+                     class="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white placeholder:text-slate-400" />
+            </div>
+
+            <!-- Description -->
+            <div>
+              <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">وصف المنتج</label>
+              <textarea id="{{ form.description.id_for_label }}" name="{{ form.description.html_name }}" rows="4" placeholder="اكتب وصفاً شاملاً للمنتج يوضح مميزاته وما يقدمه للعميل..."
+                        class="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white placeholder:text-slate-400 resize-none">{{ form.description.value|default:'' }}</textarea>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Pricing & Stock -->
+        <section class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
+          <h2 class="text-base font-semibold mb-5 flex items-center gap-2 dark:text-white">
+            <i data-lucide="tag" class="h-5 w-5 text-brand-primary"></i>
+            السعر والمخزون
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <!-- Suggested Price + Currency -->
+            <div>
+              <label for="{{ form.suggested_price.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">السعر المقترح <span class="text-red-500">*</span></label>
+              <div class="flex gap-2">
+                <input type="number" id="{{ form.suggested_price.id_for_label }}" name="{{ form.suggested_price.html_name }}" value="{{ form.suggested_price.value|default:'' }}" placeholder="0.00" min="0" step="0.01"
+                       class="flex-1 px-4 py-2.5 text-sm rounded-xl border {% if form.suggested_price.errors %}border-red-500{% else %}border-slate-200 dark:border-slate-600{% endif %} bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white placeholder:text-slate-400" />
+                <select name="{{ form.currency.html_name }}"
+                        class="w-24 px-2 py-2.5 text-sm rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white">
+                  {% for value, label in form.currency.field.choices %}
+                    <option value="{{ value }}" {% if form.currency.value == value %}selected{% endif %}>{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% if form.suggested_price.errors %}<p class="text-xs text-red-500 mt-1">{{ form.suggested_price.errors|join:", " }}</p>{% endif %}
+            </div>
+
+            <!-- Supplier Price -->
+            <div>
+              <label for="{{ form.supplier_price.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">سعر المورد <span class="text-red-500">*</span></label>
+              <input type="number" id="{{ form.supplier_price.id_for_label }}" name="{{ form.supplier_price.html_name }}" value="{{ form.supplier_price.value|default:'' }}" placeholder="0.00" min="0" step="0.01"
+                     class="w-full px-4 py-2.5 text-sm rounded-xl border {% if form.supplier_price.errors %}border-red-500{% else %}border-slate-200 dark:border-slate-600{% endif %} bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white placeholder:text-slate-400" />
+              {% if form.supplier_price.errors %}<p class="text-xs text-red-500 mt-1">{{ form.supplier_price.errors|join:", " }}</p>{% endif %}
+            </div>
+
+            <!-- Affiliate Profit -->
+            <div>
+              <label for="{{ form.affiliate_profit.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">عمولة المسوّق</label>
+              <input type="number" id="{{ form.affiliate_profit.id_for_label }}" name="{{ form.affiliate_profit.html_name }}" value="{{ form.affiliate_profit.value|default:'' }}" placeholder="يُحسب تلقائياً (مقترح − مورد)" min="0" step="0.01"
+                     class="w-full px-4 py-2.5 text-sm rounded-xl border {% if form.affiliate_profit.errors %}border-red-500{% else %}border-slate-200 dark:border-slate-600{% endif %} bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white placeholder:text-slate-400" />
+              <p class="text-xs text-slate-400 mt-1">اتركه فارغاً لحسابه تلقائياً</p>
+              {% if form.affiliate_profit.errors %}<p class="text-xs text-red-500 mt-1">{{ form.affiliate_profit.errors|join:", " }}</p>{% endif %}
+            </div>
+
+            <!-- Stock -->
+            <div>
+              <label for="{{ form.stock_quantity.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">الكمية المتاحة</label>
+              <input type="number" id="{{ form.stock_quantity.id_for_label }}" name="{{ form.stock_quantity.html_name }}" value="{{ form.stock_quantity.value|default:'0' }}" placeholder="0" min="0"
+                     class="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white placeholder:text-slate-400" />
+              <p class="text-xs text-slate-400 mt-1">اتركه فارغاً للمنتجات غير المحدودة الكمية</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Media -->
+        <section class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
+          <h2 class="text-base font-semibold mb-5 flex items-center gap-2 dark:text-white">
+            <i data-lucide="image" class="h-5 w-5 text-brand-primary"></i>
+            الصور والوسائط
+          </h2>
+
+          <!-- Image Upload Zone -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium mb-2 dark:text-slate-200">صور المنتج</label>
+            <div class="border-2 border-dashed border-slate-200 dark:border-slate-600 rounded-xl p-8 text-center hover:border-brand-primary transition-colors cursor-pointer group">
+              <div class="flex justify-center mb-3">
+                <div class="h-12 w-12 rounded-full bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/50 transition-colors">
+                  <i data-lucide="upload-cloud" class="h-6 w-6 text-brand-primary"></i>
+                </div>
+              </div>
+              <p class="text-sm font-medium dark:text-slate-200">اسحب الصور هنا أو انقر للرفع</p>
+              <p class="text-xs text-slate-400 mt-1">PNG, JPG, WEBP — حتى 5 ميجابايت لكل صورة</p>
+              <input type="file" accept="image/*" multiple class="hidden" />
+            </div>
+          </div>
+
+          <!-- Preview Thumbnails -->
+          <div class="grid grid-cols-4 gap-3">
+            <div class="aspect-square rounded-xl overflow-hidden border border-slate-200 dark:border-slate-600 relative group">
+              <img src="{% static 'img/placeholders/product.svg' %}" alt="صورة المنتج الأولى" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1">
+                <button type="button" class="p-1.5 bg-white rounded-lg" aria-label="حذف الصورة"><i data-lucide="trash-2" class="h-3 w-3 text-red-500"></i></button>
+              </div>
+              <span class="absolute bottom-1 start-1 text-[10px] bg-brand-primary text-white rounded px-1">رئيسية</span>
+            </div>
+            <div class="aspect-square rounded-xl overflow-hidden border border-dashed border-slate-200 dark:border-slate-600 flex items-center justify-center cursor-pointer hover:border-brand-primary transition-colors">
+              <i data-lucide="plus" class="h-5 w-5 text-slate-400"></i>
+            </div>
+          </div>
+
+          <!-- Video URL -->
+          <div class="mt-4">
+            <label for="{{ form.video_url.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">رابط فيديو المنتج</label>
+            <div class="relative">
+              <i data-lucide="video" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-slate-400 pointer-events-none"></i>
+              <input type="url" id="{{ form.video_url.id_for_label }}" name="{{ form.video_url.html_name }}" value="{{ form.video_url.value|default:'' }}" placeholder="https://youtube.com/watch?v=..."
+                     class="w-full ps-10 pe-4 py-2.5 text-sm rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white placeholder:text-slate-400" />
+            </div>
+            <p class="text-xs text-slate-400 mt-1">يدعم روابط YouTube وVimeo</p>
+          </div>
+
+        </section>
+
+        <!-- SEO -->
+        <section class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
+          <h2 class="text-base font-semibold mb-5 flex items-center gap-2 dark:text-white">
+            <i data-lucide="search" class="h-5 w-5 text-brand-primary"></i>
+            تحسين محركات البحث (SEO)
+          </h2>
+          <div class="space-y-4">
+
+            <!-- SEO Title -->
+            <div>
+              <label for="{{ form.seo_title.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">عنوان SEO</label>
+              <input type="text" id="{{ form.seo_title.id_for_label }}" name="{{ form.seo_title.html_name }}" value="{{ form.seo_title.value|default:'' }}" placeholder="عنوان يظهر في نتائج البحث..." maxlength="60"
+                     class="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white placeholder:text-slate-400" />
+              <p class="text-xs text-slate-400 mt-1">يُنصح بـ 50–60 حرفاً</p>
+            </div>
+
+            <!-- SEO Description -->
+            <div>
+              <label for="{{ form.seo_description.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">وصف SEO</label>
+              <textarea id="{{ form.seo_description.id_for_label }}" name="{{ form.seo_description.html_name }}" rows="3" placeholder="وصف مختصر يظهر في نتائج البحث..." maxlength="160"
+                        class="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white placeholder:text-slate-400 resize-none">{{ form.seo_description.value|default:'' }}</textarea>
+              <p class="text-xs text-slate-400 mt-1">يُنصح بـ 120–160 حرفاً</p>
+            </div>
+
+            <!-- Public Link Slug -->
+            <div>
+              <label for="{{ form.public_link_slug.id_for_label }}" class="block text-sm font-medium mb-1.5 dark:text-slate-200">الرابط المخصص (Slug)</label>
+              <div class="flex items-center rounded-xl border {% if form.public_link_slug.errors %}border-red-500{% else %}border-slate-200 dark:border-slate-600{% endif %} overflow-hidden focus-within:ring-2 focus-within:ring-brand-primary/50">
+                <span class="px-3 py-2.5 text-sm text-slate-400 bg-slate-50 dark:bg-slate-700 border-e border-slate-200 dark:border-slate-600 select-none whitespace-nowrap">/p/</span>
+                <input type="text" id="{{ form.public_link_slug.id_for_label }}" name="{{ form.public_link_slug.html_name }}" value="{{ form.public_link_slug.value|default:'' }}" placeholder="product-name-in-english"
+                       class="flex-1 px-4 py-2.5 text-sm bg-white dark:bg-slate-700 focus:outline-none dark:text-white placeholder:text-slate-400" />
+              </div>
+              <p class="text-xs text-slate-400 mt-1">
+                الرابط الكامل: <span class="text-brand-primary font-mono text-xs">https://smartmerchant.os/p/<em>slug</em></span>
+              </p>
+              {% if form.public_link_slug.errors %}<p class="text-xs text-red-500 mt-1">{{ form.public_link_slug.errors|join:", " }}</p>{% endif %}
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+      <!-- /left -->
+
+      <!-- ── Right Sidebar ── -->
+      <div class="space-y-6">
+
+        <!-- SEO Tips -->
+        <div class="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800 p-5">
+          <h3 class="text-sm font-semibold text-indigo-800 dark:text-indigo-300 mb-3 flex items-center gap-2">
+            <i data-lucide="lightbulb" class="h-4 w-4"></i>
+            نصائح لتحسين SEO
+          </h3>
+          <ul class="space-y-2.5 text-xs text-indigo-700 dark:text-indigo-400">
+            <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-indigo-500"></i>استخدم الكلمات المفتاحية التي يبحث عنها عملاؤك في اسم المنتج.</li>
+            <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-indigo-500"></i>اجعل عنوان SEO فريداً لكل منتج ويتضمن نوع المنتج.</li>
+            <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-indigo-500"></i>اكتب وصفاً يشرح فائدة المنتج للعميل بجملة تحفيزية.</li>
+            <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-indigo-500"></i>الـ Slug يجب أن يكون قصيراً وباللغة الإنجليزية بدون مسافات.</li>
+            <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-indigo-500"></i>أضف صوراً عالية الجودة — محركات البحث تُقيّم وجود الصور.</li>
+            <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-indigo-500"></i>حافظ على وصف المنتج بين 120 و160 حرفاً.</li>
+          </ul>
+        </div>
+
+        <!-- Publish Status Card -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5">
+          <h3 class="text-sm font-semibold mb-3 dark:text-white flex items-center gap-2">
+            <i data-lucide="eye" class="h-4 w-4 text-brand-primary"></i>
+            حالة النشر
+          </h3>
+          <div class="space-y-2 text-sm">
+            {% for value, label in form.status.field.choices %}
+              {% if value %}
+                <label class="flex items-center gap-3 p-2.5 rounded-lg border {% if form.status.value == value %}border-2 border-brand-primary bg-indigo-50/50 dark:bg-indigo-900/20{% else %}border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700{% endif %} cursor-pointer transition-colors">
+                  <input type="radio" name="{{ form.status.html_name }}" value="{{ value }}" {% if form.status.value == value %}checked{% endif %} class="accent-brand-primary" />
+                  <div>
+                    <p class="font-medium dark:text-white">{{ value }}</p>
+                    <p class="text-xs text-slate-400">
+                      {% if value == 'Active' %}يظهر للعملاء فوراً
+                      {% elif value == 'Draft' %}غير مرئي للعملاء
+                      {% else %}موقوف مؤقتاً{% endif %}
+                    </p>
+                  </div>
+                </label>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% if form.status.errors %}<p class="text-xs text-red-500 mt-1">{{ form.status.errors|join:", " }}</p>{% endif %}
+        </div>
+
+        <!-- Badge -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5">
+          <h3 class="text-sm font-semibold mb-3 dark:text-white flex items-center gap-2">
+            <i data-lucide="award" class="h-4 w-4 text-brand-primary"></i>
+            الشارة
+          </h3>
+          <select name="{{ form.badge.html_name }}"
+                  class="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 dark:text-white">
+            {% for value, label in form.badge.field.choices %}
+              <option value="{{ value }}" {% if form.badge.value == value %}selected{% endif %}>{{ value }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Feature Toggles -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5">
+          <h3 class="text-sm font-semibold mb-3 dark:text-white flex items-center gap-2">
+            <i data-lucide="star" class="h-4 w-4 text-brand-primary"></i>
+            خيارات العرض
+          </h3>
+          <div class="space-y-2 text-sm">
+            <label class="flex items-center gap-3 p-2.5 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+              <input type="checkbox" name="{{ form.is_featured.html_name }}" {% if form.is_featured.value %}checked{% endif %} class="accent-brand-primary" />
+              <div>
+                <p class="font-medium dark:text-white">مميّز</p>
+                <p class="text-xs text-slate-400">يظهر في القسم المميّز</p>
+              </div>
+            </label>
+            <label class="flex items-center gap-3 p-2.5 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+              <input type="checkbox" name="{{ form.is_best_seller.html_name }}" {% if form.is_best_seller.value %}checked{% endif %} class="accent-brand-primary" />
+              <div>
+                <p class="font-medium dark:text-white">الأكثر مبيعاً</p>
+                <p class="text-xs text-slate-400">يظهر في قائمة الأكثر مبيعاً</p>
+              </div>
+            </label>
+            <label class="flex items-center gap-3 p-2.5 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+              <input type="checkbox" name="{{ form.is_hot_offer.html_name }}" {% if form.is_hot_offer.value %}checked{% endif %} class="accent-brand-primary" />
+              <div>
+                <p class="font-medium dark:text-white">عرض ساخن</p>
+                <p class="text-xs text-slate-400">يظهر في العروض الساخنة</p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5">
+          <h3 class="text-sm font-semibold mb-3 dark:text-white">روابط سريعة</h3>
+          <div class="space-y-2">
+            <a href="{% url 'products:list' %}" class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors">
+              <i data-lucide="list" class="h-4 w-4"></i> قائمة المنتجات
+            </a>
+            <a href="product-detail.html" class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors">
+              <i data-lucide="eye" class="h-4 w-4"></i> معاينة تفصيلية
+            </a>
+            <a href="landing-pages.html" class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors">
+              <i data-lucide="layout-template" class="h-4 w-4"></i> إنشاء صفحة تسويقية
+            </a>
+          </div>
+        </div>
+
+      </div>
+      <!-- /right sidebar -->
+
+    </div>
+
+    <!-- Sticky Footer Actions -->
+    <div class="sticky bottom-0 z-10 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 px-4 lg:px-6 py-3 -mx-4 sm:-mx-6 lg:-mx-8 mt-6">
+      <div class="max-w-5xl mx-auto flex items-center justify-between gap-3">
+        <a href="{% url 'products:list' %}" class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-xl border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+          <i data-lucide="x" class="h-4 w-4"></i>
+          إلغاء
+        </a>
+        <div class="flex items-center gap-2">
+          <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-xl border border-brand-primary text-brand-primary hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-colors">
+            <i data-lucide="save" class="h-4 w-4"></i>
+            حفظ كمسودة
+          </button>
+          <button type="submit" class="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-sm">
+            <i data-lucide="check" class="h-4 w-4"></i>
+            نشر المنتج
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+{% endblock %}

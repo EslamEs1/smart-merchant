@@ -1,0 +1,219 @@
+{% extends 'merchant_base.html' %}
+{% load static %}
+
+{% block title %}المنتجات والخدمات | Smart Merchant OS{% endblock %}
+
+{% block content %}
+
+  <!-- Page heading -->
+  <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+    <div>
+      <h1 class="text-2xl font-bold">المنتجات والخدمات</h1>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">إدارة منتجاتك ومخزونك</p>
+    </div>
+    <div class="sm:ms-auto flex items-center gap-2">
+      <a href="{% url 'products:create' %}" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-lg hover:bg-indigo-600 focus-ring transition-colors">
+        <i data-lucide="plus" class="h-4 w-4" aria-hidden="true"></i>
+        إضافة منتج
+      </a>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <form method="get" action="">
+    <div class="flex flex-wrap items-center gap-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-3 shadow-sm">
+      <div class="relative flex-1 min-w-48">
+        <span class="absolute inset-y-0 start-0 flex items-center ps-3 text-slate-400 pointer-events-none"><i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i></span>
+        <input type="search" name="q" value="{{ filters.q }}" placeholder="بحث بالاسم أو الكود..." aria-label="بحث في المنتجات"
+               class="w-full ps-9 pe-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-colors">
+      </div>
+      <select name="category" aria-label="نوع المنتج" class="py-2 px-3 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/50 text-slate-700 dark:text-slate-300 transition-colors">
+        <option value="">كل الأنواع</option>
+        {% for cat in categories %}
+          <option value="{{ cat.slug }}" {% if filters.category == cat.slug %}selected{% endif %}>{{ cat.name }}</option>
+        {% endfor %}
+      </select>
+      <select name="status" aria-label="حالة المنتج" class="py-2 px-3 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/50 text-slate-700 dark:text-slate-300 transition-colors">
+        <option value="">كل الحالات</option>
+        {% for value, label in status_choices %}
+          <option value="{{ value }}" {% if filters.status == value %}selected{% endif %}>{{ value }}</option>
+        {% endfor %}
+      </select>
+      <select name="badge" aria-label="شارة المنتج" class="py-2 px-3 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/50 text-slate-700 dark:text-slate-300 transition-colors">
+        <option value="">كل الشارات</option>
+        {% for value, label in badge_choices %}
+          {% if value != 'None' %}
+            <option value="{{ value }}" {% if filters.badge == value %}selected{% endif %}>{{ value }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+      <select name="stock" aria-label="توفر المخزون" class="py-2 px-3 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/50 text-slate-700 dark:text-slate-300 transition-colors">
+        <option value="">كل المخزون</option>
+        <option value="in" {% if filters.stock == 'in' %}selected{% endif %}>متوفر</option>
+        <option value="out" {% if filters.stock == 'out' %}selected{% endif %}>غير متوفر</option>
+      </select>
+      <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-lg hover:bg-indigo-600 focus-ring transition-colors">
+        <i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i>
+        بحث
+      </button>
+    </div>
+  </form>
+
+  <!-- Products table -->
+  <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+
+    {% if page_obj.paginator.count == 0 %}
+
+      <!-- Empty state -->
+      <div class="flex flex-col items-center gap-3 py-16 text-center">
+        <div class="h-14 w-14 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+          <i data-lucide="package" class="h-7 w-7 text-slate-400" aria-hidden="true"></i>
+        </div>
+        <p class="text-base font-semibold text-slate-700 dark:text-slate-300">لا توجد منتجات</p>
+        <p class="text-sm text-slate-400">ابدأ بإضافة منتجك الأول</p>
+        <a href="{% url 'products:create' %}" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-lg hover:bg-indigo-600 focus-ring transition-colors"><i data-lucide="plus" class="h-4 w-4" aria-hidden="true"></i>إضافة منتج</a>
+      </div>
+
+    {% else %}
+
+      <div class="table-responsive">
+        <table class="min-w-full text-sm" aria-label="قائمة المنتجات">
+          <thead class="bg-slate-50 dark:bg-slate-800/50">
+            <tr>
+              <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">المنتج</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">النوع</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">السعر</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الخصم</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">المخزون</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الحالة</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">المبيعات</th>
+              <th class="px-4 py-3 text-end text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap">الإجراءات</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+
+            {% for product in page_obj %}
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors {% if product.status == 'Disabled' %}opacity-60{% endif %}">
+              <td class="px-4 py-3 whitespace-nowrap">
+                <div class="flex items-center gap-3">
+                  {% if product.main_image and product.main_image.image %}
+                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="h-10 w-10 rounded-lg object-cover bg-slate-100 dark:bg-slate-800 shrink-0">
+                  {% else %}
+                    <img src="{% static 'img/placeholders/product-headphones.svg' %}" alt="{{ product.name }}" class="h-10 w-10 rounded-lg object-cover bg-slate-100 dark:bg-slate-800 shrink-0">
+                  {% endif %}
+                  <div class="min-w-0">
+                    <p class="font-medium text-slate-900 dark:text-slate-100 truncate max-w-48">{{ product.name }}</p>
+                    <p class="text-xs text-slate-400">/p/{{ product.public_link_slug }}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3 whitespace-nowrap">
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
+                  {% if product.category.slug == 'electronics' %}bg-violet-100 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300
+                  {% elif product.category.slug == 'mobile-accessories' %}bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300
+                  {% elif product.category.slug == 'small-home-appliances' %}bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300
+                  {% elif product.category.slug == 'personal-care' %}bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300
+                  {% elif product.category.slug == 'clothing' %}bg-rose-100 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300
+                  {% else %}bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300{% endif %}">
+                  {{ product.category.name }}
+                </span>
+              </td>
+              <td class="px-4 py-3 font-medium text-slate-900 dark:text-slate-100 whitespace-nowrap">{{ product.suggested_price }} {{ product.currency_symbol }}</td>
+              <td class="px-4 py-3 text-rose-600 dark:text-rose-400 font-medium whitespace-nowrap">{{ product.supplier_price }} {{ product.currency_symbol }}</td>
+              <td class="px-4 py-3 text-slate-700 dark:text-slate-300 whitespace-nowrap">{{ product.stock_quantity }}</td>
+              <td class="px-4 py-3 whitespace-nowrap">
+                {% if product.status == 'Active' %}
+                  <span class="badge badge-published">Active</span>
+                {% elif product.status == 'Draft' %}
+                  <span class="badge badge-draft">Draft</span>
+                {% else %}
+                  <span class="badge badge-disabled">Disabled</span>
+                {% endif %}
+              </td>
+              <td class="px-4 py-3 font-semibold text-slate-900 dark:text-slate-100 whitespace-nowrap">0</td>
+              <td class="px-4 py-3 whitespace-nowrap text-end">
+                <div class="relative inline-block" data-actions-dropdown="prod-{{ product.pk }}">
+                  <button type="button" class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors" aria-label="إجراءات المنتج" aria-expanded="false" aria-haspopup="true"><i data-lucide="more-horizontal" class="h-4 w-4" aria-hidden="true"></i></button>
+                  <div class="dropdown-panel absolute end-0 top-full mt-1 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 hidden z-10" role="menu">
+                    <a href="{% url 'products:detail' slug=product.slug %}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" role="menuitem"><i data-lucide="eye" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>عرض التفاصيل</a>
+                    <a href="{% url 'products:edit' slug=product.slug %}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" role="menuitem"><i data-lucide="pencil" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تعديل</a>
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-start" role="menuitem" data-copy-container><i data-lucide="link" class="h-4 w-4 text-slate-400" aria-hidden="true"></i><span data-copy-value class="hidden">/p/{{ product.public_link_slug }}</span>نسخ الرابط</button>
+                    <form method="post" action="{% url 'products:duplicate' slug=product.slug %}">
+                      {% csrf_token %}
+                      <button type="submit" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-start" role="menuitem"><i data-lucide="copy" class="h-4 w-4 text-slate-400" aria-hidden="true"></i>تكرار</button>
+                    </form>
+                    {% if product.status == 'Disabled' %}
+                      <form method="post" action="{% url 'products:enable' slug=product.slug %}">
+                        {% csrf_token %}
+                        <button type="submit" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-colors text-start text-emerald-600 dark:text-emerald-400" role="menuitem"><i data-lucide="eye" class="h-4 w-4" aria-hidden="true"></i>تفعيل</button>
+                      </form>
+                    {% else %}
+                      <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-start text-amber-600 dark:text-amber-400" role="menuitem" data-modal-trigger="modal-disable-{{ product.pk }}"><i data-lucide="eye-off" class="h-4 w-4" aria-hidden="true"></i>تعطيل</button>
+                    {% endif %}
+                    <button type="button" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors text-start text-rose-600 dark:text-rose-400" role="menuitem" data-modal-trigger="modal-delete-{{ product.pk }}"><i data-lucide="trash-2" class="h-4 w-4" aria-hidden="true"></i>حذف</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex items-center justify-between px-4 py-3 border-t border-slate-100 dark:border-slate-800">
+        <p class="text-xs text-slate-400">عرض {{ page_obj.start_index }}–{{ page_obj.end_index }} من {{ page_obj.paginator.count }} منتج</p>
+        <div class="flex items-center gap-1">
+          {% if page_obj.has_previous %}
+            <a href="?{{ querystring }}{% if querystring %}&{% endif %}page={{ page_obj.previous_page_number }}" class="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors" aria-label="الصفحة السابقة"><i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i></a>
+          {% else %}
+            <button type="button" class="p-1.5 rounded-lg text-slate-400 focus-ring" aria-label="الصفحة السابقة" disabled><i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i></button>
+          {% endif %}
+          {% for page_num in page_obj.paginator.page_range %}
+            {% if page_num == page_obj.number %}
+              <button type="button" class="px-3 py-1 text-xs font-medium rounded-lg bg-brand-primary text-white focus-ring">{{ page_num }}</button>
+            {% else %}
+              <a href="?{{ querystring }}{% if querystring %}&{% endif %}page={{ page_num }}" class="px-3 py-1 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors">{{ page_num }}</a>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <a href="?{{ querystring }}{% if querystring %}&{% endif %}page={{ page_obj.next_page_number }}" class="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors" aria-label="الصفحة التالية"><i data-lucide="chevron-left" class="h-4 w-4" aria-hidden="true"></i></a>
+          {% else %}
+            <button type="button" class="p-1.5 rounded-lg text-slate-400 focus-ring" aria-label="الصفحة التالية" disabled><i data-lucide="chevron-left" class="h-4 w-4" aria-hidden="true"></i></button>
+          {% endif %}
+        </div>
+      </div>
+
+    {% endif %}
+  </div>
+
+  <!-- Modal backdrop (shared by all product modals below) -->
+  <div data-modal-backdrop class="fixed inset-0 z-50 bg-black/50 hidden items-center justify-center p-4" aria-hidden="true"></div>
+
+  <!-- Per-product disable/delete modals -->
+  {% for product in page_obj %}
+    <div data-modal="modal-disable-{{ product.pk }}" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="disable-{{ product.pk }}-title">
+      <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+        <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-amber-100 dark:bg-amber-950/40 flex items-center justify-center shrink-0"><i data-lucide="eye-off" class="h-5 w-5 text-amber-600 dark:text-amber-400" aria-hidden="true"></i></div><h3 id="disable-{{ product.pk }}-title" class="text-base font-semibold">تعطيل {{ product.name }}</h3></div>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل تريد تعطيل هذا المنتج؟ لن يظهر للزوار حتى تعيد تفعيله.</p>
+        <form method="post" action="{% url 'products:disable' slug=product.slug %}">
+          {% csrf_token %}
+          <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="submit" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 focus-ring transition-colors">تعطيل</button></div>
+        </form>
+      </div>
+    </div>
+
+    <div data-modal="modal-delete-{{ product.pk }}" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="delete-{{ product.pk }}-title">
+      <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm p-6">
+        <div class="flex items-center gap-3 mb-4"><div class="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-950/40 flex items-center justify-center shrink-0"><i data-lucide="trash-2" class="h-5 w-5 text-rose-600 dark:text-rose-400" aria-hidden="true"></i></div><h3 id="delete-{{ product.pk }}-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">حذف {{ product.name }}</h3></div>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">هل أنت متأكد من حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.</p>
+        <form method="post" action="{% url 'products:delete' slug=product.slug %}">
+          {% csrf_token %}
+          <div class="flex gap-3"><button type="button" data-modal-close class="flex-1 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 focus-ring transition-colors">إلغاء</button><button type="submit" class="flex-1 px-4 py-2 text-sm font-medium text-white bg-rose-600 rounded-lg hover:bg-rose-700 focus-ring transition-colors">حذف</button></div>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+
+{% endblock %}

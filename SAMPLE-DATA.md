@@ -34,7 +34,7 @@ Use realistic Gulf/Levant/Egyptian name patterns for authenticity.
 | PRD-002 | ساعة ذكية Smart Watch Pro | إلكترونيات | 920 | SAR | Active |
 | PRD-003 | شاحن سريع Type-C 65W | إكسسوارات موبايل | 149 | AED | Active |
 
-**Extended list for products.html** (12+ rows total) should cover the 6 physical categories:
+**Extended list for `/products/`** (feature 004 — DB-backed; seeded via `manage.py seed_products`) covers the 6 physical categories:
 - إلكترونيات (electronics): e.g., سماعة بلوتوث ProBass X2, 750 EGP
 - إكسسوارات موبايل (mobile accessories): e.g., شاحن سريع Type-C 65W, 149 AED
 - أجهزة منزلية صغيرة (small appliances): e.g., قلاية هوائية 4 لتر, 1,800 EGP
