@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 
 from apps.core.decorators import role_required
 
+from .forms import ProductForm
 from .models import Product, ProductCategory
 from .selectors import list_products
 
@@ -40,11 +41,21 @@ def product_list(request):
     )
 
 
-# ── Stub views (replaced in later phases) ────────────────────────────────────
-
 @role_required("is_merchant")
 def product_create(request):
-    return redirect("products:list")
+    if request.method == "POST":
+        form = ProductForm(request.POST, merchant=request.user)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.merchant = request.user
+            product.save()
+            return redirect("products:detail", slug=product.slug)
+    else:
+        form = ProductForm(merchant=request.user)
+    return render(request, "products/product_form.html", {"form": form, "is_create": True})
+
+
+# ── Stub views (replaced in later phases) ────────────────────────────────────
 
 
 @role_required("is_merchant")

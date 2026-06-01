@@ -90,13 +90,13 @@ to the new clean `/products/…` routes. Foundation utilities reused: `apps/core
 
 **Independent Test**: Submit valid data → product persists under the merchant and shows in the list; submit invalid pricing + duplicate slug → form re-renders with errors, nothing created.
 
-- [ ] T024 [US2] Create `apps/products/forms.py` `ProductForm` (ModelForm): all FR-011a fields; `category` queryset scoped to the merchant's `ACTIVE` categories; `clean()` → suggested ≥ supplier, non-negative prices/stock/profit, affiliate_profit default via `services.compute_affiliate_profit`, per-merchant `slug` uniqueness + auto-gen, global `public_link_slug` uniqueness + auto-gen, category-merchant match.
-- [ ] T025 [US2] Implement `product_create` view in `apps/products/views.py` (GET blank form scoped to `request.user`; POST valid → set `merchant=request.user` server-side → save → redirect `products:detail`; invalid → re-render) and add `path("products/create/", …, name="create")` to `apps/products/urls.py`; add the `product-create.html` → `products:create` legacy redirect.
-- [ ] T026 [US2] Convert `apps/products/templates/products/product_form.html` from `templates/product-create.html`: `{% extends 'merchant_base.html' %}`, render `ProductForm`, add the **in-style** fields (supplier price + affiliate profit in the pricing section, badge select + is-featured/is-best-seller/is-hot-offer toggles in the publish sidebar), `{% csrf_token %}`, preserve all sections/SEO/sidebar; bound for create.
-- [ ] T027 [US2] Delete the now-replaced `templates/product-create.html`.
-- [ ] T028 [P] [US2] Tests in `apps/products/tests/test_forms.py`: suggested ≥ supplier; non-negatives; affiliate_profit default; slug auto-gen + per-merchant uniqueness; `public_link_slug` global uniqueness; category scoping.
-- [ ] T029 [P] [US2] Tests in `apps/products/tests/test_views_create.py`: valid POST persists with `merchant` from `request.user` (not trusted from form); invalid POST creates nothing and preserves values.
-- [ ] T030 [US2] Manual (quickstart §B): create a product through the form; confirm it appears in list/detail; confirm invalid pricing/slug rejected with clear messages (SC-004/005).
+- [x] T024 [US2] Create `apps/products/forms.py` `ProductForm` (ModelForm): all FR-011a fields; `category` queryset scoped to the merchant's `ACTIVE` categories; `clean()` → suggested ≥ supplier, non-negative prices/stock/profit, affiliate_profit default via `services.compute_affiliate_profit`, per-merchant `slug` uniqueness + auto-gen, global `public_link_slug` uniqueness + auto-gen, category-merchant match.
+- [x] T025 [US2] Implement `product_create` view in `apps/products/views.py` (GET blank form scoped to `request.user`; POST valid → set `merchant=request.user` server-side → save → redirect `products:detail`; invalid → re-render) and add `path("products/create/", …, name="create")` to `apps/products/urls.py`; add the `product-create.html` → `products:create` legacy redirect.
+- [x] T026 [US2] Convert `apps/products/templates/products/product_form.html` from `templates/product-create.html`: `{% extends 'merchant_base.html' %}`, render `ProductForm`, add the **in-style** fields (supplier price + affiliate profit in the pricing section, badge select + is-featured/is-best-seller/is-hot-offer toggles in the publish sidebar), `{% csrf_token %}`, preserve all sections/SEO/sidebar; bound for create.
+- [x] T027 [US2] Delete the now-replaced `templates/product-create.html`.
+- [x] T028 [P] [US2] Tests in `apps/products/tests/test_forms.py`: suggested ≥ supplier; non-negatives; affiliate_profit default; slug auto-gen + per-merchant uniqueness; `public_link_slug` global uniqueness; category scoping.
+- [x] T029 [P] [US2] Tests in `apps/products/tests/test_views_create.py`: valid POST persists with `merchant` from `request.user` (not trusted from form); invalid POST creates nothing and preserves values.
+- [x] T030 [US2] Manual (quickstart §B): create a product through the form; confirm it appears in list/detail; confirm invalid pricing/slug rejected with clear messages (SC-004/005).
 
 **Checkpoint**: US1 + US2 work independently — browse and create.
 
