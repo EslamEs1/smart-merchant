@@ -60,7 +60,12 @@ def product_create(request):
 
 @role_required("is_merchant")
 def product_detail(request, slug):
-    return redirect("products:list")
+    product = get_owned_product_or_404(request.user, slug)
+    images = list(product.images.all())
+    return render(request, "products/product_detail.html", {
+        "product": product,
+        "images": images,
+    })
 
 
 @role_required("is_merchant")

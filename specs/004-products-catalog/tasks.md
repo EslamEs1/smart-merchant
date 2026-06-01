@@ -123,11 +123,11 @@ to the new clean `/products/…` routes. Foundation utilities reused: `apps/core
 
 **Independent Test**: Open a product's detail → every product value matches the DB record and layout matches static `product-detail.html`; another merchant's detail URL → 404.
 
-- [ ] T035 [US4] Implement `product_detail` view in `apps/products/views.py` (`get_owned_product_or_404`; context = product + images + **zeroed** order-derived widgets) and add `path("products/<slug:slug>/", …, name="detail")`.
-- [ ] T036 [US4] Convert `apps/products/templates/products/product_detail.html` from `templates/product-detail.html`: `{% extends 'merchant_base.html' %}`, render real product fields, build the gallery from `product.images` (placeholder fallback), render the "recent orders" table as its **empty-state** and order-stats as **0** (Principle V), preserve gallery/JS hooks/modals/RTL.
-- [ ] T037 [US4] Delete the now-replaced `templates/product-detail.html`.
-- [ ] T038 [P] [US4] Tests in `apps/products/tests/test_views_detail.py`: owner's data rendered; cross-merchant detail → 404.
-- [ ] T039 [US4] Manual (quickstart §C): detail shows real data; order widgets show zero/empty; cross-merchant → 404 (SC-001).
+- [x] T035 [US4] Implement `product_detail` view in `apps/products/views.py` (`get_owned_product_or_404`; context = product + images + **zeroed** order-derived widgets) and add `path("products/<slug:slug>/", …, name="detail")`.
+- [x] T036 [US4] Convert `apps/products/templates/products/product_detail.html` from `templates/product-detail.html`: `{% extends 'merchant_base.html' %}`, render real product fields, build the gallery from `product.images` (placeholder fallback), render the "recent orders" table as its **empty-state** and order-stats as **0** (Principle V), preserve gallery/JS hooks/modals/RTL.
+- [x] T037 [US4] Delete the now-replaced `templates/product-detail.html`.
+- [x] T038 [P] [US4] Tests in `apps/products/tests/test_views_detail.py`: owner's data rendered; cross-merchant detail → 404.
+- [x] T039 [US4] Manual (quickstart §C): detail shows real data; order widgets show zero/empty; cross-merchant → 404 (SC-001).
 
 **Checkpoint**: US1–US4 work independently — full read + create/edit.
 
