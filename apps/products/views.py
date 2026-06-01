@@ -1,0 +1,77 @@
+from django.core.paginator import Paginator
+from django.shortcuts import redirect, render
+
+from apps.core.decorators import role_required
+
+from .models import Product, ProductCategory
+from .selectors import list_products
+
+
+@role_required("is_merchant")
+def product_list(request):
+    params = {
+        "q": request.GET.get("q", ""),
+        "category": request.GET.get("category", ""),
+        "status": request.GET.get("status", ""),
+        "badge": request.GET.get("badge", ""),
+        "stock": request.GET.get("stock", ""),
+    }
+    qs = list_products(request.user, params)
+    paginator = Paginator(qs, 12)
+    page_obj = paginator.get_page(request.GET.get("page"))
+
+    qs_params = request.GET.copy()
+    qs_params.pop("page", None)
+
+    categories = ProductCategory.objects.filter(
+        merchant=request.user, status=ProductCategory.Status.ACTIVE
+    )
+    return render(
+        request,
+        "products/product_list.html",
+        {
+            "page_obj": page_obj,
+            "categories": categories,
+            "filters": params,
+            "querystring": qs_params.urlencode(),
+            "status_choices": Product.Status.choices,
+            "badge_choices": Product.Badge.choices,
+        },
+    )
+
+
+# ── Stub views (replaced in later phases) ────────────────────────────────────
+
+@role_required("is_merchant")
+def product_create(request):
+    return redirect("products:list")
+
+
+@role_required("is_merchant")
+def product_detail(request, slug):
+    return redirect("products:list")
+
+
+@role_required("is_merchant")
+def product_edit(request, slug):
+    return redirect("products:list")
+
+
+@role_required("is_merchant")
+def product_disable(request, slug):
+    return redirect("products:list")
+
+
+@role_required("is_merchant")
+def product_enable(request, slug):
+    return redirect("products:list")
+
+
+@role_required("is_merchant")
+def product_duplicate(request, slug):
+    return redirect("products:list")
+
+
+@role_required("is_merchant")
+def product_delete(request, slug):
+    return redirect("products:list")

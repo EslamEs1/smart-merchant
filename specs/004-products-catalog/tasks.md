@@ -69,16 +69,16 @@ to the new clean `/products/…` routes. Foundation utilities reused: `apps/core
 
 **Independent Test**: Seed two merchants; sign in as each and confirm each sees only their own products; apply each filter + a combination; sign in as a zero-product merchant and confirm the empty state.
 
-- [ ] T014 [US1] Remove the 4 product `PageEntry` lines (`products.html`, `product-create.html`, `product-detail.html`, `product-edit.html`) from `apps/core/page_registry.py`, adding a comment that `apps.products` now owns them.
-- [ ] T015 [US1] Add filter logic to `apps/products/selectors.py`: `list_products(merchant, params)` applying `q` (name/slug/public_link_slug icontains), `category`, `status`, `badge`, `stock` (in=`>0`/out=`=0`), ordered `-created_at`, with `select_related("category")` + main-image prefetch.
-- [ ] T016 [US1] Implement `product_list` view in `apps/products/views.py` (`@role_required("is_merchant")`, build filters from GET, paginate 12/page, pass active-filter context) and add the `path("products/", …, name="list")` route to `apps/products/urls.py`.
-- [ ] T017 [US1] Add legacy redirects to `apps/products/urls.py`: `products.html`, `product-detail.html`, `product-edit.html` → `RedirectView`/view to `products:list` (permanent). (`product-create.html` redirect is added in US2.)
-- [ ] T018 [US1] Update `templates/includes/merchant_sidebar.html`: change the products link `href="products.html"` → `{% url 'products:list' %}`.
-- [ ] T019 [US1] Convert `apps/products/templates/products/product_list.html` from `templates/products.html`: `{% extends 'merchant_base.html' %}`, `{% load static %}`, loop DB rows (image via `main_image` else placeholder, name, public link, category badge, prices/currency, stock, status badge, **sales column = 0**), preserve the action dropdown + disable/delete modals + RTL, add the two **in-style** filter selects (badge, stock-availability) echoing active values, render the existing empty-state when no rows, and paginate preserving the querystring.
-- [ ] T020 [US1] Delete the now-replaced `templates/products.html`.
-- [ ] T021 [P] [US1] Tests in `apps/products/tests/test_selectors.py`: `merchant_products` isolation; `public_products` excludes Draft/Disabled; each of q/category/status/badge/stock + a combination.
-- [ ] T022 [P] [US1] Tests in `apps/products/tests/test_views_list.py`: list is owner-scoped; `@role_required` redirects anonymous / 403s non-merchant; empty-state for zero products; filter results + pagination.
-- [ ] T023 [US1] Manual visual-parity check (quickstart §A/§H): `/products/` vs static `products.html` — layout, badges, dropdown, modals, theme, RTL identical; list is DB-backed with no static rows (SC-001/002/006/007).
+- [x] T014 [US1] Remove the 4 product `PageEntry` lines (`products.html`, `product-create.html`, `product-detail.html`, `product-edit.html`) from `apps/core/page_registry.py`, adding a comment that `apps.products` now owns them.
+- [x] T015 [US1] Add filter logic to `apps/products/selectors.py`: `list_products(merchant, params)` applying `q` (name/slug/public_link_slug icontains), `category`, `status`, `badge`, `stock` (in=`>0`/out=`=0`), ordered `-created_at`, with `select_related("category")` + main-image prefetch.
+- [x] T016 [US1] Implement `product_list` view in `apps/products/views.py` (`@role_required("is_merchant")`, build filters from GET, paginate 12/page, pass active-filter context) and add the `path("products/", …, name="list")` route to `apps/products/urls.py`.
+- [x] T017 [US1] Add legacy redirects to `apps/products/urls.py`: `products.html`, `product-detail.html`, `product-edit.html` → `RedirectView`/view to `products:list` (permanent). (`product-create.html` redirect added early to close gap from T014 removal.)
+- [x] T018 [US1] Update `templates/includes/merchant_sidebar.html`: change the products link `href="products.html"` → `{% url 'products:list' %}`.
+- [x] T019 [US1] Convert `apps/products/templates/products/product_list.html` from `templates/products.html`: `{% extends 'merchant_base.html' %}`, `{% load static %}`, loop DB rows (image via `main_image` else placeholder, name, public link, category badge, prices/currency, stock, status badge, **sales column = 0**), preserve the action dropdown + disable/delete modals + RTL, add the two **in-style** filter selects (badge, stock-availability) echoing active values, render the existing empty-state when no rows, and paginate preserving the querystring.
+- [x] T020 [US1] Delete the now-replaced `templates/products.html`.
+- [x] T021 [P] [US1] Tests in `apps/products/tests/test_selectors.py`: `merchant_products` isolation; `public_products` excludes Draft/Disabled; each of q/category/status/badge/stock + a combination.
+- [x] T022 [P] [US1] Tests in `apps/products/tests/test_views_list.py`: list is owner-scoped; `@role_required` redirects anonymous / 403s non-merchant; empty-state for zero products; filter results + pagination.
+- [x] T023 [US1] Manual visual-parity check (quickstart §A/§H): `/products/` vs static `products.html` — layout, badges, dropdown, modals, theme, RTL identical; list is DB-backed with no static rows (SC-001/002/006/007).
 
 **Checkpoint**: US1 fully functional — DB-backed list with filters + empty state, owner-scoped. MVP.
 

@@ -211,8 +211,25 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("products:detail", kwargs={"slug": self.slug})
 
+    _CURRENCY_SYMBOLS = {
+        "EGP": "ج.م",
+        "SAR": "ر.س",
+        "AED": "د.إ",
+        "KWD": "د.ك",
+        "USD": "$",
+    }
+
+    @property
+    def currency_symbol(self):
+        return self._CURRENCY_SYMBOLS.get(self.currency, self.currency)
+
     @property
     def main_image(self):
+        if hasattr(self, "prefetched_images"):
+            images = self.prefetched_images
+            return next((img for img in images if img.is_main), None) or (
+                images[0] if images else None
+            )
         return self.images.filter(is_main=True).first() or self.images.first()
 
     @property
