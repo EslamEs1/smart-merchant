@@ -1,3 +1,4 @@
+from django.db import IntegrityError, transaction
 from django.test import TestCase
 
 from apps.accounts.models import User
@@ -36,8 +37,9 @@ class ReferralCodeUniquenessTests(TestCase):
 
     def test_global_uniqueness_enforced(self):
         make_affiliate(self.ma, referral_code="SHARED")
-        with self.assertRaises(Exception):
-            make_affiliate(self.mb, referral_code="SHARED")
+        with self.assertRaises(IntegrityError):
+            with transaction.atomic():
+                make_affiliate(self.mb, referral_code="SHARED")
 
     def test_auto_generated_when_blank(self):
         a = AffiliateProfile.objects.create(merchant=self.ma, full_name="Auto Code Test")
@@ -62,8 +64,9 @@ class CouponCodeUniquenessTests(TestCase):
 
     def test_duplicate_coupon_same_merchant_rejected(self):
         make_affiliate(self.ma, referral_code="C01", coupon_code="SUMMER")
-        with self.assertRaises(Exception):
-            make_affiliate(self.ma, referral_code="C02", coupon_code="SUMMER")
+        with self.assertRaises(IntegrityError):
+            with transaction.atomic():
+                make_affiliate(self.ma, referral_code="C02", coupon_code="SUMMER")
 
     def test_blank_coupon_allowed_multiple_times_same_merchant(self):
         make_affiliate(self.ma, referral_code="C03", coupon_code="")

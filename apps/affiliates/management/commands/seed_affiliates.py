@@ -119,9 +119,9 @@ class Command(BaseCommand):
         now = timezone.now()
         for data in _AFFILIATES:
             affiliate, created = AffiliateProfile.objects.get_or_create(
-                merchant=merchant,
                 referral_code=data["referral_code"],
                 defaults={
+                    "merchant": merchant,
                     "full_name": data["full_name"],
                     "level": data["level"],
                     "status": data["status"],

@@ -51,11 +51,11 @@ def affiliate_list(request):
 def affiliate_requests(request):
     q = request.GET.get("q", "").strip()
     base_qs = pending_affiliates(merchant_affiliates(request.user))
+    pending_count = base_qs.count()
     if q:
         base_qs = base_qs.filter(
             Q(full_name__icontains=q) | Q(referral_code__icontains=q)
         )
-    pending_count = pending_affiliates(merchant_affiliates(request.user)).count()
 
     return render(
         request,

@@ -47,7 +47,7 @@
         <i data-lucide="ban" class="h-4 w-4" aria-hidden="true"></i>
         إيقاف
       </button>
-      {% elif affiliate.status == 'Suspended' %}
+      {% elif affiliate.is_suspended %}
       <button type="button"
               data-modal-trigger="modal-reactivate-detail"
               class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 text-emerald-600 text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 focus-ring transition-colors">

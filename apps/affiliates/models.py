@@ -135,3 +135,7 @@ class AffiliateProfile(models.Model):
     @property
     def is_pending(self):
         return self.status == self.Status.PENDING
+
+    @property
+    def is_suspended(self):
+        return self.status == self.Status.SUSPENDED
