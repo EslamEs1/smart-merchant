@@ -1,0 +1,370 @@
+{% extends 'affiliate_base.html' %}
+{% load static %}
+
+{% block title %}بوابة المسوّق — الرئيسية{% endblock %}
+{% block meta_description %}<meta name="description" content="منصة إدارة التجارة الإلكترونية الذكية — المنتجات والطلبات والعملاء والمسوقين">{% endblock %}
+
+{% block content %}
+    <!-- ── Welcome Header ─────────────────────────────────────────────────── -->
+    <div class="mb-6">
+      <h1 class="text-xl font-bold text-slate-900 dark:text-white">أهلاً يا أحمد 👋</h1>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">ابدأ بيع المنتجات الجاهزة واربح عمولتك فورًا</p>
+    </div>
+
+    <!-- ── Quick Earnings Card ─────────────────────────────────────────────── -->
+    <div class="bg-gradient-brand text-white rounded-2xl p-5 mb-6 shadow-md">
+      <div class="grid grid-cols-3 gap-4 text-center">
+        <a href="affiliate-earnings.html" class="group block hover:opacity-90 transition-opacity focus-ring rounded-xl p-2">
+          <p class="text-2xl font-bold">1,420 ر.س</p>
+          <p class="text-xs text-white/80 mt-1">الأرباح المتاحة</p>
+        </a>
+        <a href="affiliate-orders.html" class="group block hover:opacity-90 transition-opacity focus-ring rounded-xl p-2 border-x border-white/20">
+          <p class="text-2xl font-bold">4</p>
+          <p class="text-xs text-white/80 mt-1">الطلبات الناجحة</p>
+        </a>
+        <a href="affiliate-saved-products.html" class="group block hover:opacity-90 transition-opacity focus-ring rounded-xl p-2">
+          <p class="text-2xl font-bold">5</p>
+          <p class="text-xs text-white/80 mt-1">المنتجات المحفوظة</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- ── In-body Search ─────────────────────────────────────────────────── -->
+    <div class="relative mb-5">
+      <span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400">
+        <i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i>
+      </span>
+      <input type="search"
+             placeholder="ابحث عن منتج للبيع..."
+             class="w-full ps-9 pe-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-900
+                    border border-slate-200 dark:border-slate-800 rounded-xl
+                    text-slate-900 dark:text-white placeholder:text-slate-400
+                    focus:outline-none focus:ring-2 focus:ring-brand-primary/50
+                    transition-colors"
+             aria-label="بحث عن منتج">
+    </div>
+
+    <!-- ── Category Tabs ──────────────────────────────────────────────────── -->
+    <div class="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 mb-6">
+      <div data-segments="categories"
+           class="segmented-tabs flex items-center gap-2 w-max"
+           role="tablist"
+           aria-label="تصفية حسب الفئة">
+        <button data-segment class="is-active" role="tab" aria-selected="true">الكل</button>
+        <button data-segment role="tab" aria-selected="false">الأكثر مبيعًا</button>
+        <button data-segment role="tab" aria-selected="false">عروض</button>
+        <button data-segment role="tab" aria-selected="false">إلكترونيات</button>
+        <button data-segment role="tab" aria-selected="false">ملابس</button>
+        <button data-segment role="tab" aria-selected="false">أدوات منزلية</button>
+        <button data-segment role="tab" aria-selected="false">إكسسوارات</button>
+      </div>
+    </div>
+
+    <!-- ── Section 1: الأكثر مبيعًا ─────────────────────────────────────── -->
+    <section id="products" class="mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base font-bold text-slate-900 dark:text-white">الأكثر مبيعًا</h2>
+        <a href="affiliate-dashboard.html#products"
+           class="text-xs text-brand-primary hover:underline font-medium focus-ring rounded">عرض الكل</a>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-headphones.svg' %}" alt="سماعات بلوتوث لاسلكية" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-bestseller absolute top-2 start-2 text-[10px]">Bestseller</span>
+            <button type="button" data-favorite-toggle aria-pressed="true" aria-label="إزالة من المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-rose-500 hover:bg-white dark:hover:bg-slate-700 transition-colors is-favorited focus-ring"><i data-lucide="heart" class="h-4 w-4 fill-current" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">سماعات بلوتوث لاسلكية</p>
+            <p class="text-xs text-slate-400">سعر البيع: 890 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 420 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-luxury-bag.svg' %}" alt="حقيبة ظهر جلدية فاخرة" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-bestseller absolute top-2 start-2 text-[10px]">Bestseller</span>
+            <button type="button" data-favorite-toggle aria-pressed="true" aria-label="إزالة من المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-rose-500 hover:bg-white dark:hover:bg-slate-700 transition-colors is-favorited focus-ring"><i data-lucide="heart" class="h-4 w-4 fill-current" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">حقيبة ظهر جلدية فاخرة</p>
+            <p class="text-xs text-slate-400">سعر البيع: 680 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 380 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-sports-outfit.svg' %}" alt="طقم ملابس رياضية" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-bestseller absolute top-2 start-2 text-[10px]">Bestseller</span>
+            <button type="button" data-favorite-toggle aria-pressed="false" aria-label="إضافة إلى المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring"><i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">طقم ملابس رياضية</p>
+            <p class="text-xs text-slate-400">سعر البيع: 340 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 150 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-formal-shirt.svg' %}" alt="قميص رسمي قطني" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-bestseller absolute top-2 start-2 text-[10px]">Bestseller</span>
+            <button type="button" data-favorite-toggle aria-pressed="false" aria-label="إضافة إلى المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring"><i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">قميص رسمي قطني</p>
+            <p class="text-xs text-slate-400">سعر البيع: 195 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 100 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-air-purifier.svg' %}" alt="جهاز تنقية الهواء" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-bestseller absolute top-2 start-2 text-[10px]">Bestseller</span>
+            <button type="button" data-favorite-toggle aria-pressed="true" aria-label="إزالة من المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-rose-500 hover:bg-white dark:hover:bg-slate-700 transition-colors is-favorited focus-ring"><i data-lucide="heart" class="h-4 w-4 fill-current" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">جهاز تنقية الهواء</p>
+            <p class="text-xs text-slate-400">سعر البيع: 2,200 ج.م</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 700 ج.م</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ── Section 2: عروض قوية اليوم ──────────────────────────────────── -->
+    <section id="offers" class="mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base font-bold text-slate-900 dark:text-white">عروض قوية اليوم</h2>
+        <a href="affiliate-dashboard.html#offers" class="text-xs text-brand-primary hover:underline font-medium focus-ring rounded">عرض الكل</a>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-smart-watch.svg' %}" alt="ساعة ذكية Smart Watch Pro" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-hot absolute top-2 start-2 text-[10px]">Hot Offer</span>
+            <button type="button" data-favorite-toggle aria-pressed="true" aria-label="إزالة من المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-rose-500 hover:bg-white dark:hover:bg-slate-700 transition-colors is-favorited focus-ring"><i data-lucide="heart" class="h-4 w-4 fill-current" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">ساعة ذكية Smart Watch Pro</p>
+            <p class="text-xs text-slate-400 line-through">كان 1,200 ر.س</p>
+            <p class="text-xs text-slate-400">سعر البيع: 920 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 340 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-speaker.svg' %}" alt="مكبر صوت بلوتوث مقاوم للماء" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-hot absolute top-2 start-2 text-[10px]">Hot Offer</span>
+            <button type="button" data-favorite-toggle aria-pressed="false" aria-label="إضافة إلى المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring"><i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">مكبر صوت بلوتوث مقاوم للماء</p>
+            <p class="text-xs text-slate-400 line-through">كان 450 ر.س</p>
+            <p class="text-xs text-slate-400">سعر البيع: 320 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 160 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-handbag.svg' %}" alt="حقيبة يد أنيقة" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-hot absolute top-2 start-2 text-[10px]">Hot Offer</span>
+            <button type="button" data-favorite-toggle aria-pressed="false" aria-label="إضافة إلى المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring"><i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">حقيبة يد أنيقة</p>
+            <p class="text-xs text-slate-400 line-through">كان 520 ر.س</p>
+            <p class="text-xs text-slate-400">سعر البيع: 380 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 200 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-carpet.svg' %}" alt="سجادة فاخرة" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-hot absolute top-2 start-2 text-[10px]">Hot Offer</span>
+            <button type="button" data-favorite-toggle aria-pressed="false" aria-label="إضافة إلى المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring"><i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">سجادة فاخرة</p>
+            <p class="text-xs text-slate-400 line-through">كان 1,800 ج.م</p>
+            <p class="text-xs text-slate-400">سعر البيع: 1,200 ج.م</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 550 ج.م</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-robot-vacuum.svg' %}" alt="روبوت تنظيف ذكي" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-hot absolute top-2 start-2 text-[10px]">Hot Offer</span>
+            <button type="button" data-favorite-toggle aria-pressed="false" aria-label="إضافة إلى المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring"><i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">روبوت تنظيف ذكي</p>
+            <p class="text-xs text-slate-400 line-through">كان 850 د.إ</p>
+            <p class="text-xs text-slate-400">سعر البيع: 550 د.إ</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 230 د.إ</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ── Section 3: منتجات جديدة ──────────────────────────────────────── -->
+    <section id="new-products" class="mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base font-bold text-slate-900 dark:text-white">منتجات جديدة</h2>
+        <a href="affiliate-dashboard.html#new-products" class="text-xs text-brand-primary hover:underline font-medium focus-ring rounded">عرض الكل</a>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-perfume.svg' %}" alt="عطر فاخر للرجال" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-new absolute top-2 start-2 text-[10px]">New</span>
+            <button type="button" data-favorite-toggle aria-pressed="false" aria-label="إضافة إلى المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring"><i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">عطر فاخر للرجال</p>
+            <p class="text-xs text-slate-400">سعر البيع: 310 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 130 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-wireless-charger.svg' %}" alt="شاحن لاسلكي سريع" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-new absolute top-2 start-2 text-[10px]">New</span>
+            <button type="button" data-favorite-toggle aria-pressed="false" aria-label="إضافة إلى المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring"><i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">شاحن لاسلكي سريع</p>
+            <p class="text-xs text-slate-400">سعر البيع: 180 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 95 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-skincare.svg' %}" alt="كريم عناية بالبشرة" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-new absolute top-2 start-2 text-[10px]">New</span>
+            <button type="button" data-favorite-toggle aria-pressed="false" aria-label="إضافة إلى المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring"><i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">كريم عناية بالبشرة</p>
+            <p class="text-xs text-slate-400">سعر البيع: 145 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 80 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-sunglasses.svg' %}" alt="نظارة شمسية بولاريزد" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-new absolute top-2 start-2 text-[10px]">New</span>
+            <button type="button" data-favorite-toggle aria-pressed="true" aria-label="إزالة من المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-rose-500 hover:bg-white dark:hover:bg-slate-700 transition-colors is-favorited focus-ring"><i data-lucide="heart" class="h-4 w-4 fill-current" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">نظارة شمسية بولاريزد</p>
+            <p class="text-xs text-slate-400">سعر البيع: 450 ج.م</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 250 ج.م</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-wallet.svg' %}" alt="Leather Wallet Classic" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-new absolute top-2 start-2 text-[10px]">New</span>
+            <button type="button" data-favorite-toggle aria-pressed="false" aria-label="إضافة إلى المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring"><i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">Leather Wallet Classic</p>
+            <p class="text-xs text-slate-400">سعر البيع: 300 ج.م</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 150 ج.م</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ── Section 4: ربح عالي ──────────────────────────────────────────── -->
+    <section id="high-profit" class="mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base font-bold text-slate-900 dark:text-white">ربح عالي</h2>
+        <a href="affiliate-dashboard.html#high-profit" class="text-xs text-brand-primary hover:underline font-medium focus-ring rounded">عرض الكل</a>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-headphones.svg' %}" alt="سماعات بلوتوث لاسلكية" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-bestseller absolute top-2 start-2 text-[10px]">Bestseller</span>
+            <button type="button" data-favorite-toggle aria-pressed="true" aria-label="إزالة من المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-rose-500 hover:bg-white dark:hover:bg-slate-700 transition-colors is-favorited focus-ring"><i data-lucide="heart" class="h-4 w-4 fill-current" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">سماعات بلوتوث لاسلكية</p>
+            <p class="text-xs text-slate-400">سعر البيع: 890 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 420 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-luxury-bag.svg' %}" alt="حقيبة ظهر جلدية فاخرة" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-bestseller absolute top-2 start-2 text-[10px]">Bestseller</span>
+            <button type="button" data-favorite-toggle aria-pressed="true" aria-label="إزالة من المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-rose-500 hover:bg-white dark:hover:bg-slate-700 transition-colors is-favorited focus-ring"><i data-lucide="heart" class="h-4 w-4 fill-current" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">حقيبة ظهر جلدية فاخرة</p>
+            <p class="text-xs text-slate-400">سعر البيع: 680 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 380 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-smart-watch.svg' %}" alt="ساعة ذكية Smart Watch Pro" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-hot absolute top-2 start-2 text-[10px]">Hot Offer</span>
+            <button type="button" data-favorite-toggle aria-pressed="true" aria-label="إزالة من المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-rose-500 hover:bg-white dark:hover:bg-slate-700 transition-colors is-favorited focus-ring"><i data-lucide="heart" class="h-4 w-4 fill-current" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">ساعة ذكية Smart Watch Pro</p>
+            <p class="text-xs text-slate-400 line-through">كان 1,200 ر.س</p>
+            <p class="text-xs text-slate-400">سعر البيع: 920 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 340 ر.س</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-air-purifier.svg' %}" alt="جهاز تنقية الهواء" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-bestseller absolute top-2 start-2 text-[10px]">Bestseller</span>
+            <button type="button" data-favorite-toggle aria-pressed="true" aria-label="إزالة من المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-rose-500 hover:bg-white dark:hover:bg-slate-700 transition-colors is-favorited focus-ring"><i data-lucide="heart" class="h-4 w-4 fill-current" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">جهاز تنقية الهواء</p>
+            <p class="text-xs text-slate-400">سعر البيع: 2,200 ج.م</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 700 ج.م</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+            <img src="{% static 'img/placeholders/product-robot-vacuum.svg' %}" alt="روبوت تنظيف ذكي" class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-hot absolute top-2 start-2 text-[10px]">Hot Offer</span>
+            <button type="button" data-favorite-toggle aria-pressed="false" aria-label="إضافة إلى المحفوظات" class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring"><i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i></button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">روبوت تنظيف ذكي</p>
+            <p class="text-xs text-slate-400 line-through">كان 850 د.إ</p>
+            <p class="text-xs text-slate-400">سعر البيع: 550 د.إ</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 230 د.إ</p>
+            <a href="affiliate-product-detail.html" class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+      </div>
+    </section>
+{% endblock %}

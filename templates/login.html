@@ -1,0 +1,310 @@
+{% extends 'auth_base.html' %}
+{% load static %}
+
+{% block title %}تسجيل الدخول | Smart Merchant OS{% endblock %}
+
+{% block content %}
+  <!-- ========== MARKETING NAV ========== -->
+  <nav class="sticky top-0 z-40 bg-surface-card/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-surface-border dark:border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-3 flex-shrink-0">
+          <div class="h-9 w-9 rounded-xl bg-gradient-brand flex items-center justify-center">
+            <svg class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="hidden sm:block">
+            <p class="text-sm font-bold text-text-primary dark:text-white leading-tight">Smart Merchant OS</p>
+            <p class="text-xs text-text-muted leading-tight">سمارت مرتشانت</p>
+          </div>
+        </a>
+        <div class="hidden md:flex items-center gap-1">
+          <a href="features.html" class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-brand-primary dark:hover:text-indigo-300 transition-colors rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700/60">الميزات</a>
+          <a href="pricing.html" class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-brand-primary dark:hover:text-indigo-300 transition-colors rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700/60">الأسعار</a>
+          <a href="index.html#faq" class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-brand-primary dark:hover:text-indigo-300 transition-colors rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700/60">الأسئلة الشائعة</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <button data-theme-toggle class="p-2 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors focus-ring" aria-label="تبديل الوضع">
+            <i data-lucide="sun" class="h-5 w-5 text-text-secondary dark:text-slate-300 block dark:hidden" aria-hidden="true"></i>
+            <i data-lucide="moon" class="h-5 w-5 text-text-secondary dark:text-slate-300 hidden dark:block" aria-hidden="true"></i>
+          </button>
+          <a href="register.html" class="hidden sm:block px-4 py-2 text-sm font-semibold rounded-xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-sm">إنشاء حساب</a>
+          <button class="md:hidden p-2 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors focus-ring" id="mobile-nav-toggle" aria-label="قائمة التنقل" aria-expanded="false" aria-controls="mobile-nav">
+            <i data-lucide="menu" class="h-5 w-5 text-text-secondary dark:text-slate-300" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-nav" class="hidden pb-4 md:hidden border-t border-surface-border dark:border-slate-700 pt-4 space-y-1">
+        <a href="features.html" class="block px-4 py-2.5 text-sm font-medium text-text-secondary dark:text-slate-300 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700">الميزات</a>
+        <a href="pricing.html" class="block px-4 py-2.5 text-sm font-medium text-text-secondary dark:text-slate-300 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700">الأسعار</a>
+        <a href="index.html#faq" class="block px-4 py-2.5 text-sm font-medium text-text-secondary dark:text-slate-300 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700">الأسئلة الشائعة</a>
+        <a href="register.html" class="block px-4 py-2.5 text-sm font-medium text-text-secondary dark:text-slate-300 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700">إنشاء حساب مجاناً</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Auth layout -->
+  <div class="flex flex-1">
+
+  <!-- Brand Panel -->
+  <div class="hidden lg:flex lg:w-2/5 xl:w-1/2 bg-gradient-brand flex-col justify-between p-10 relative overflow-hidden">
+    <!-- Background shapes -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute -top-20 -end-20 h-64 w-64 rounded-full bg-white/5"></div>
+      <div class="absolute bottom-32 -start-16 h-48 w-48 rounded-full bg-white/5"></div>
+      <div class="absolute top-1/2 end-10 h-32 w-32 rounded-2xl bg-white/5 rotate-12"></div>
+    </div>
+
+    <!-- Logo + Wordmark -->
+    <div class="relative flex items-center gap-3">
+      <div class="h-12 w-12 rounded-2xl bg-white/20 flex items-center justify-center flex-shrink-0 shadow-lg">
+        <svg class="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <div>
+        <p class="text-lg font-bold text-white leading-tight">Smart Merchant OS</p>
+        <p class="text-sm text-white/70 leading-tight">سمارت مرتشانت</p>
+      </div>
+    </div>
+
+    <!-- Center content -->
+    <div class="relative space-y-8">
+      <div>
+        <h2 class="text-3xl font-bold text-white leading-tight mb-3">
+          أدِر تجارتك<br/>بذكاء من مكان واحد
+        </h2>
+        <p class="text-white/75 text-base leading-relaxed">
+          نظام متكامل للمنتجات، الطلبات، العملاء، والمسوّقين — مع نظام عمولات احترافي.
+        </p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-white/15 rounded-2xl p-4">
+          <p class="text-2xl font-bold text-white">+2,400</p>
+          <p class="text-sm text-white/70">تاجر نشط</p>
+        </div>
+        <div class="bg-white/15 rounded-2xl p-4">
+          <p class="text-2xl font-bold text-white">+150K</p>
+          <p class="text-sm text-white/70">طلب محالٍ</p>
+        </div>
+        <div class="bg-white/15 rounded-2xl p-4">
+          <p class="text-2xl font-bold text-white">+18K</p>
+          <p class="text-sm text-white/70">مسوّق مرتبط</p>
+        </div>
+        <div class="bg-white/15 rounded-2xl p-4">
+          <p class="text-2xl font-bold text-white">99.9%</p>
+          <p class="text-sm text-white/70">وقت تشغيل</p>
+        </div>
+      </div>
+
+      <!-- Preview thumbnail -->
+      <div class="bg-white/10 rounded-2xl overflow-hidden border border-white/20">
+        <img src="{% static 'img/placeholders/dashboard-preview.svg' %}" alt="لقطة من لوحة التحكم" class="w-full object-cover opacity-90" />
+      </div>
+    </div>
+
+    <!-- Bottom features -->
+    <div class="relative flex items-center gap-6 text-sm text-white/70">
+      <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="h-4 w-4 text-white/80"></i> آمن ومشفّر</span>
+      <span class="flex items-center gap-1.5"><i data-lucide="zap" class="h-4 w-4 text-white/80"></i> سريع الاستجابة</span>
+      <span class="flex items-center gap-1.5"><i data-lucide="globe" class="h-4 w-4 text-white/80"></i> يدعم العربية</span>
+    </div>
+  </div>
+
+  <!-- Form Panel -->
+  <div class="flex-1 flex flex-col justify-between">
+
+    <!-- Form -->
+    <div class="flex-1 flex items-center justify-center px-6 py-8">
+      <div class="w-full max-w-md">
+        <div class="mb-8">
+          <h1 class="text-2xl font-bold text-text-primary dark:text-white mb-2">مرحباً بعودتك</h1>
+          <p class="text-text-secondary dark:text-slate-400 text-sm">سجّل دخولك للوصول إلى لوحة التحكم</p>
+        </div>
+
+        <form class="space-y-5" method="post" action="{% url 'accounts:login' %}">
+          {% csrf_token %}
+          {% if form.errors %}
+          <div role="alert" class="p-3 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-sm text-red-700 dark:text-red-400 flex items-center gap-2">
+            <i data-lucide="alert-circle" class="h-4 w-4 flex-shrink-0" aria-hidden="true"></i>
+            بيانات الدخول غير صحيحة. يرجى المحاولة مرة أخرى.
+          </div>
+          {% endif %}
+
+          <!-- Email / Phone -->
+          <div>
+            <label for="login-email" class="block text-sm font-medium text-text-primary dark:text-white mb-1.5">
+              البريد الإلكتروني أو رقم الجوال
+            </label>
+            <div class="relative">
+              <i data-lucide="mail" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-text-muted pointer-events-none"></i>
+              <input
+                type="text"
+                id="login-email"
+                name="username"
+                placeholder="example@email.com"
+                dir="ltr"
+                autocomplete="username"
+                class="w-full ps-10 pe-4 py-3 text-sm bg-white dark:bg-slate-700 border border-surface-border dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white placeholder:text-text-muted"
+              />
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label for="login-password" class="text-sm font-medium text-text-primary dark:text-white">كلمة المرور</label>
+              <a href="#" class="text-xs text-brand-primary hover:underline">نسيت كلمة المرور؟</a>
+            </div>
+            <div class="relative">
+              <i data-lucide="lock" class="absolute top-1/2 -translate-y-1/2 start-3 h-4 w-4 text-text-muted pointer-events-none"></i>
+              <input
+                type="password"
+                id="login-password"
+                name="password"
+                placeholder="••••••••"
+                autocomplete="current-password"
+                class="w-full ps-10 pe-11 py-3 text-sm bg-white dark:bg-slate-700 border border-surface-border dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary dark:text-white placeholder:text-text-muted"
+              />
+              <button
+                type="button"
+                id="toggle-password"
+                class="absolute top-1/2 -translate-y-1/2 end-3 p-1 text-text-muted hover:text-text-secondary dark:hover:text-slate-300 transition-colors"
+                aria-label="إظهار/إخفاء كلمة المرور"
+              >
+                <i data-lucide="eye" class="h-4 w-4" id="eye-icon"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Remember me -->
+          <div class="flex items-center gap-3">
+            <input
+              type="checkbox"
+              id="remember-me"
+              class="h-4 w-4 rounded border-surface-border text-brand-primary focus:ring-brand-primary focus:ring-offset-0"
+            />
+            <label for="remember-me" class="text-sm text-text-secondary dark:text-slate-300">
+              تذكّرني لمدة 30 يوماً
+            </label>
+          </div>
+
+          <!-- Role selector -->
+          <div>
+            <p class="text-sm font-medium text-text-primary dark:text-white mb-2">أنا أدخل بصفتي</p>
+            <div class="grid grid-cols-2 gap-2" role="group" aria-label="اختر نوع الحساب">
+              <label class="role-option">
+                <input type="radio" name="login-role" value="merchant" class="sr-only" checked>
+                <span class="role-option-label flex flex-col items-center gap-1.5 px-3 py-3 rounded-xl border-2 cursor-pointer transition-colors
+                             border-brand-primary bg-brand-primary/5
+                             text-brand-primary font-semibold text-sm text-center"
+                      id="role-merchant-label">
+                  <i data-lucide="store" class="h-5 w-5" aria-hidden="true"></i>
+                  أنا تاجر
+                </span>
+              </label>
+              <label class="role-option">
+                <input type="radio" name="login-role" value="affiliate" class="sr-only">
+                <span class="role-option-label flex flex-col items-center gap-1.5 px-3 py-3 rounded-xl border-2 cursor-pointer transition-colors
+                             border-surface-border dark:border-slate-600
+                             text-text-secondary dark:text-slate-400 font-medium text-sm text-center"
+                      id="role-affiliate-label">
+                  <i data-lucide="megaphone" class="h-5 w-5" aria-hidden="true"></i>
+                  أنا مسوّق بالعمولة
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="w-full py-3 text-sm font-semibold rounded-xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-sm flex items-center justify-center gap-2"
+          >
+            <i data-lucide="log-in" class="h-4 w-4"></i>
+            تسجيل الدخول
+          </button>
+
+          <!-- Divider -->
+          <div class="relative flex items-center gap-3 text-text-muted text-xs">
+            <hr class="flex-1 border-surface-border dark:border-slate-600" />
+            <span>أو</span>
+            <hr class="flex-1 border-surface-border dark:border-slate-600" />
+          </div>
+
+          <!-- Social login placeholder -->
+          <button type="button" class="w-full py-3 text-sm font-medium rounded-xl border border-surface-border dark:border-slate-600 text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            متابعة مع Google
+          </button>
+        </form>
+
+        <!-- Register link -->
+        <p class="text-center text-sm text-text-secondary dark:text-slate-400 mt-8">
+          لا تملك حساباً؟
+          <a href="register.html" class="font-semibold text-brand-primary hover:underline">سجّل الآن مجاناً</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="px-6 py-4 text-center text-xs text-text-muted border-t border-surface-border dark:border-slate-700">
+      <p>© 2024 Smart Merchant OS — جميع الحقوق محفوظة</p>
+      <div class="flex items-center justify-center gap-4 mt-1">
+        <a href="#" class="hover:text-brand-primary transition-colors">سياسة الخصوصية</a>
+        <a href="#" class="hover:text-brand-primary transition-colors">الشروط والأحكام</a>
+        <a href="#" class="hover:text-brand-primary transition-colors">المساعدة</a>
+      </div>
+    </div>
+  </div>
+  </div><!-- /flex flex-1 (auth layout) -->
+
+  <script>
+    // Mobile nav toggle
+    document.getElementById('mobile-nav-toggle')?.addEventListener('click', function () {
+      var nav = document.getElementById('mobile-nav');
+      if (nav) nav.classList.toggle('hidden');
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!expanded));
+    });
+    // Role selector — visual style toggle only (informational).
+    // The server-side role on the account determines the landing page;
+    // the form.action mutation from the static prototype is removed.
+    (function () {
+      var radios = document.querySelectorAll('input[name="login-role"]');
+      var labels = { merchant: document.getElementById('role-merchant-label'), affiliate: document.getElementById('role-affiliate-label') };
+      var activeClasses = ['border-brand-primary', 'bg-brand-primary/5', 'text-brand-primary', 'font-semibold'];
+      var inactiveClasses = ['border-surface-border', 'dark:border-slate-600', 'text-text-secondary', 'dark:text-slate-400', 'font-medium'];
+      radios.forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          var isMerchant = this.value === 'merchant';
+          activeClasses.forEach(function (c) { labels.merchant.classList.toggle(c, isMerchant); labels.affiliate.classList.toggle(c, !isMerchant); });
+          inactiveClasses.forEach(function (c) { labels.merchant.classList.toggle(c, !isMerchant); labels.affiliate.classList.toggle(c, isMerchant); });
+        });
+      });
+    })();
+    // Password visibility toggle
+    document.getElementById('toggle-password')?.addEventListener('click', function () {
+      var input = document.getElementById('login-password');
+      var icon = document.getElementById('eye-icon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.setAttribute('data-lucide', 'eye-off');
+      } else {
+        input.type = 'password';
+        icon.setAttribute('data-lucide', 'eye');
+      }
+      if (window.lucide) lucide.createIcons();
+    });
+  </script>
+{% endblock %}

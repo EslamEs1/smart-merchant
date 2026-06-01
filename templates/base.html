@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html dir="rtl" lang="ar" class="font-sans {% block html_class %}{% endblock %}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Smart Merchant OS{% endblock %}</title>
+  {% block meta_description %}{% endblock %}
+  <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#6366f1',
+            'brand-accent':  '#8b5cf6',
+            'brand-info':    '#3b82f6',
+            'surface-base':  '#f8fafc',
+            'surface-card':  '#ffffff',
+            'surface-muted': '#f1f5f9',
+            'surface-border':'#e2e8f0',
+            'text-primary':  '#0f172a',
+            'text-secondary':'#475569',
+            'text-muted':    '#94a3b8',
+          },
+          fontFamily: {
+            sans: ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'],
+          },
+          backgroundImage: {
+            'gradient-brand': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%)',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.446.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script>
+    try {
+      var t = localStorage.getItem('smos:theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  {% block head_extra %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+{% block body %}{% endblock %}
+<script src="{% static 'js/main.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}500 — خطأ في الخادم{% endblock %}
+
+{% block body_class %}min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center{% endblock %}
+
+{% block body %}
+<div class="text-center p-8">
+  <p class="text-6xl font-bold text-gray-300 dark:text-gray-700">500</p>
+  <h1 class="mt-4 text-2xl font-semibold text-gray-800 dark:text-gray-100">خطأ في الخادم</h1>
+  <p class="mt-2 text-gray-500 dark:text-gray-400">حدث خطأ داخلي في الخادم. يرجى المحاولة مرة أخرى لاحقاً.</p>
+  <a href="/" class="mt-6 inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+    العودة إلى الرئيسية
+  </a>
+</div>
+{% endblock %}

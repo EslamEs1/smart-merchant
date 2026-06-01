@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة المسوّق — تفاصيل المنتج</title>
+  <meta name="description" content="منصة إدارة التجارة الإلكترونية الذكية — المنتجات والطلبات والعملاء والمسوقين">
+
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#6366f1',
+            'brand-accent':  '#8b5cf6',
+            'brand-info':    '#3b82f6',
+            'surface-base':  '#f8fafc',
+            'surface-card':  '#ffffff',
+            'surface-muted': '#f1f5f9',
+            'surface-border':'#e2e8f0',
+            'text-primary':  '#0f172a',
+            'text-secondary':'#475569',
+            'text-muted':    '#94a3b8',
+          },
+          fontFamily: {
+            sans: ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'],
+          },
+          backgroundImage: {
+            'gradient-brand': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="assets/css/app.css">
+
+  <script>
+    try {
+      var t = localStorage.getItem('smos:theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body class="bg-surface-base dark:bg-slate-900 text-text-primary dark:text-white font-sans antialiased">
+
+  <div data-sidebar-overlay
+       class="fixed inset-0 z-30 bg-black/50 hidden lg:hidden"
+       aria-hidden="true"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar"
+         class="fixed top-0 start-0 z-40 h-screen w-64 bg-slate-900 dark:bg-slate-950 flex flex-col
+                translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out"
+         aria-label="القائمة الجانبية">
+    <div class="flex items-center gap-3 px-5 py-5 border-b border-slate-700/60">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" aria-hidden="true" class="h-9 w-9 shrink-0">
+        <defs>
+          <linearGradient id="aff-logo-g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6366f1"/>
+            <stop offset="50%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#3b82f6"/>
+          </linearGradient>
+        </defs>
+        <rect x="4" y="12" width="14" height="14" rx="3" fill="url(#aff-logo-g)" transform="rotate(45 11 19)"/>
+        <rect x="18" y="8" width="10" height="10" rx="2" fill="url(#aff-logo-g)" opacity="0.72" transform="rotate(45 23 13)"/>
+        <rect x="14" y="22" width="8" height="8" rx="2" fill="url(#aff-logo-g)" opacity="0.50" transform="rotate(45 18 26)"/>
+      </svg>
+      <div class="leading-tight">
+        <p class="text-xs font-semibold text-white tracking-wide">Smart Merchant OS</p>
+        <p class="text-xs text-slate-400 font-medium">بوابة المسوّق</p>
+      </div>
+    </div>
+    <nav class="flex-1 overflow-y-auto py-4 px-3" aria-label="روابط التنقل">
+      <ul class="space-y-1" role="list">
+      <li>
+        <a href="affiliate-dashboard.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+          <i data-lucide="home" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>الرئيسية</span>
+        </a>
+      </li>
+      <li>
+        <a href="affiliate-dashboard.html#products"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+          <i data-lucide="shopping-bag" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>المنتجات</span>
+        </a>
+      </li>
+      <li>
+        <a href="affiliate-saved-products.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+          <i data-lucide="bookmark" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>المحفوظات</span>
+        </a>
+      </li>
+      <li>
+        <a href="affiliate-orders.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+          <i data-lucide="package" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>الطلبات</span>
+        </a>
+      </li>
+      <li>
+        <a href="affiliate-earnings.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+          <i data-lucide="wallet" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>الأرباح</span>
+        </a>
+      </li>
+      <li class="pt-2 mt-2 border-t border-slate-700/60">
+        <a href="affiliate-profile.html"
+           class="sidebar-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+          <i data-lucide="user" class="h-4 w-4 shrink-0" aria-hidden="true"></i><span>الملف الشخصي</span>
+        </a>
+      </li>
+      </ul>
+    </nav>
+    <div class="border-t border-slate-700/60 px-4 py-4">
+      <div class="flex items-center gap-3">
+        <img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة أحمد الشمري" class="h-8 w-8 rounded-full">
+        <div class="min-w-0">
+          <p class="text-xs font-semibold text-white truncate">أحمد الشمري</p>
+          <p class="text-xs text-slate-400 truncate">عضو ذهبي</p>
+        </div>
+        <a href="affiliate-profile.html" class="ms-auto text-slate-400 hover:text-white transition-colors focus-ring rounded" aria-label="الملف الشخصي">
+          <i data-lucide="settings" class="h-4 w-4" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main wrapper -->
+  <div class="lg:ps-64 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm
+                   border-b border-slate-200 dark:border-slate-700
+                   flex items-center gap-3 px-4 sm:px-6 h-14">
+      <button type="button" data-sidebar-toggle
+              class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors"
+              aria-label="فتح القائمة الجانبية" aria-expanded="false" aria-controls="sidebar">
+        <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+      </button>
+      <div class="flex-1 max-w-xs lg:max-w-md">
+        <div class="relative">
+          <span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400">
+            <i data-lucide="search" class="h-4 w-4" aria-hidden="true"></i>
+          </span>
+          <input type="search" placeholder="ابحث عن منتج للبيع..." aria-label="بحث"
+                 class="w-full ps-9 pe-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-colors">
+        </div>
+      </div>
+      <span class="hidden sm:inline-flex items-center gap-1 text-xs font-semibold
+                   bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400
+                   px-2.5 py-1 rounded-full whitespace-nowrap">
+        متاح للسحب: <span class="text-emerald-800 dark:text-emerald-300">1,420 ر.س</span>
+      </span>
+      <button type="button" data-theme-toggle
+              class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors"
+              aria-label="تبديل الوضع الليلي / النهاري">
+        <i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i>
+        <i data-lucide="moon" class="h-4 w-4 hidden dark:block" aria-hidden="true"></i>
+      </button>
+      <div class="relative" data-actions-dropdown="affiliate-notifications">
+        <button type="button"
+                class="relative p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors"
+                aria-label="الإشعارات"
+                aria-expanded="false"
+                aria-haspopup="true">
+          <i data-lucide="bell" class="h-4 w-4" aria-hidden="true"></i>
+          <span class="absolute top-1.5 end-1.5 h-2 w-2 rounded-full bg-rose-500" aria-hidden="true"></span>
+        </button>
+        <div class="dropdown-panel absolute end-0 top-full mt-1 w-80 bg-white dark:bg-slate-800
+                    border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg
+                    py-2 hidden z-50"
+             role="menu" aria-label="الإشعارات">
+          <div class="px-4 py-2 border-b border-slate-200 dark:border-slate-700">
+            <p class="text-sm font-semibold">الإشعارات</p>
+          </div>
+          <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" role="menuitem">
+            <span class="mt-0.5 h-2 w-2 rounded-full bg-brand-primary shrink-0"></span>
+            <div><p class="text-sm text-slate-700 dark:text-slate-300">تم اعتماد عمولة بقيمة <strong class="text-emerald-600">85 ر.س</strong></p><p class="text-xs text-slate-400 mt-0.5">منذ ساعتين</p></div>
+          </a>
+          <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" role="menuitem">
+            <span class="mt-0.5 h-2 w-2 rounded-full bg-brand-primary shrink-0"></span>
+            <div><p class="text-sm text-slate-700 dark:text-slate-300">طلب جديد <strong>AO-2026-0013</strong> بانتظار التأكيد</p><p class="text-xs text-slate-400 mt-0.5">منذ 5 ساعات</p></div>
+          </a>
+          <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" role="menuitem">
+            <span class="mt-0.5 h-2 w-2 rounded-full bg-slate-300 shrink-0"></span>
+            <div><p class="text-sm text-slate-700 dark:text-slate-300">منتج جديد متاح للتسويق: <strong>سماعات بلوتوث لاسلكية</strong></p><p class="text-xs text-slate-400 mt-0.5">أمس</p></div>
+          </a>
+        </div>
+      </div>
+      <a href="affiliate-profile.html" class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus-ring transition-colors" aria-label="الملف الشخصي">
+        <img src="assets/img/placeholders/affiliate-avatar.svg" alt="صورة أحمد الشمري" class="h-7 w-7 rounded-full ring-2 ring-brand-primary/30">
+        <span class="hidden sm:block text-sm font-medium">أحمد</span>
+      </a>
+    </header>
+
+<!-- ─── Main Content ──────────────────────────────────────────────────────── -->
+<main class="flex-1 pb-24 lg:pb-8">
+  <div class="px-4 sm:px-6 lg:px-8 py-6 max-w-3xl mx-auto">
+
+    <!-- ── Back Link ──────────────────────────────────────────────────────── -->
+    <a href="affiliate-dashboard.html"
+       class="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400
+              hover:text-brand-primary transition-colors mb-5 focus-ring rounded">
+      <i data-lucide="arrow-right" class="h-4 w-4" aria-hidden="true"></i>
+      العودة إلى الرئيسية
+    </a>
+
+    <!-- ── Product Name + Badges + Heart ──────────────────────────────────── -->
+    <div class="flex items-start justify-between gap-3 mb-4">
+      <div class="flex-1">
+        <div class="flex flex-wrap gap-2 mb-2">
+          <span class="badge badge-bestseller">الأكثر مبيعاً</span>
+          <span class="badge badge-hot">عرض ساخن</span>
+        </div>
+        <h1 class="text-xl font-bold text-slate-900 dark:text-white">سماعة بلوتوث ProBass X2</h1>
+      </div>
+      <button type="button"
+              data-favorite-toggle
+              aria-pressed="true"
+              aria-label="إزالة من المحفوظات"
+              class="p-2 rounded-full border border-slate-200 dark:border-slate-800
+                     text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/20
+                     transition-colors is-favorited focus-ring shrink-0">
+        <i data-lucide="heart" class="h-5 w-5 fill-current" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <!-- ── Image Gallery ──────────────────────────────────────────────────── -->
+    <div data-gallery class="mb-6">
+      <!-- Main image -->
+      <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 mb-3 bg-slate-50 dark:bg-slate-900"
+           style="padding-top:66%">
+        <img data-gallery-main
+             src="assets/img/placeholders/product-headphones.svg"
+             alt="سماعة بلوتوث ProBass X2 — الصورة الرئيسية"
+             class="w-full h-full object-cover" style="margin-top:-66%">
+      </div>
+      <!-- Thumbnails -->
+      <div class="flex gap-2 overflow-x-auto pb-1">
+        <!-- Image thumb 1 (active) -->
+        <button type="button"
+                data-gallery-thumb
+                 data-src="assets/img/placeholders/product-headphones.svg"
+                 data-alt="سماعة بلوتوث ProBass X2 — صورة 1"
+                class="shrink-0 h-16 w-16 rounded-xl overflow-hidden border-2 border-brand-primary is-active focus-ring">
+           <img src="assets/img/placeholders/product-headphones.svg"
+                alt="الصورة 1"
+               class="h-full w-full object-cover">
+        </button>
+        <!-- Image thumb 2 -->
+        <button type="button"
+                data-gallery-thumb
+                 data-src="assets/img/placeholders/product-headphones.svg"
+                 data-alt="سماعة بلوتوث ProBass X2 — صورة 2"
+                class="shrink-0 h-16 w-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-primary/50 focus-ring transition-colors">
+           <img src="assets/img/placeholders/product-headphones.svg"
+                alt="الصورة 2"
+               class="h-full w-full object-cover opacity-70">
+        </button>
+        <!-- Image thumb 3 -->
+        <button type="button"
+                data-gallery-thumb
+                 data-src="assets/img/placeholders/product-headphones.svg"
+                 data-alt="سماعة بلوتوث ProBass X2 — صورة 3"
+                class="shrink-0 h-16 w-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-primary/50 focus-ring transition-colors">
+           <img src="assets/img/placeholders/product-headphones.svg"
+                alt="الصورة 3"
+               class="h-full w-full object-cover opacity-70">
+        </button>
+        <!-- Video thumb 1 (play overlay) -->
+        <button type="button"
+                data-gallery-thumb
+                data-src="assets/img/placeholders/dashboard-preview.svg"
+                data-alt="سماعة بلوتوث ProBass X2 — فيديو 1"
+                class="relative shrink-0 h-16 w-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-primary/50 focus-ring transition-colors">
+          <img src="assets/img/placeholders/dashboard-preview.svg"
+               alt="مقطع فيديو 1"
+               class="h-full w-full object-cover opacity-70">
+          <span class="absolute inset-0 flex items-center justify-center">
+            <span class="h-6 w-6 rounded-full bg-white/90 flex items-center justify-center shadow">
+              <i data-lucide="play" class="h-3 w-3 text-brand-primary ms-0.5" aria-hidden="true"></i>
+            </span>
+          </span>
+        </button>
+        <!-- Video thumb 2 (play overlay) -->
+        <button type="button"
+                data-gallery-thumb
+                data-src="assets/img/placeholders/dashboard-preview.svg"
+                data-alt="سماعة بلوتوث ProBass X2 — فيديو 2"
+                class="relative shrink-0 h-16 w-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-primary/50 focus-ring transition-colors">
+          <img src="assets/img/placeholders/dashboard-preview.svg"
+               alt="مقطع فيديو 2"
+               class="h-full w-full object-cover opacity-70">
+          <span class="absolute inset-0 flex items-center justify-center">
+            <span class="h-6 w-6 rounded-full bg-white/90 flex items-center justify-center shadow">
+              <i data-lucide="play" class="h-3 w-3 text-brand-primary ms-0.5" aria-hidden="true"></i>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Short Description ──────────────────────────────────────────────── -->
+    <p class="text-sm text-text-secondary dark:text-slate-400 mb-5 leading-relaxed">
+      سماعة بلوتوث بتصميم خفيف وصوت Bass قوي، مناسبة للاستخدام اليومي والرياضة، مع بطارية تدوم لساعات طويلة.
+    </p>
+
+    <!-- ── Sales / Pricing Card ───────────────────────────────────────────── -->
+    <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 mb-5">
+      <div class="grid grid-cols-3 gap-3 text-center divide-x divide-x-reverse divide-slate-200 dark:divide-slate-800">
+        <div class="px-2">
+          <p class="text-xs text-text-muted dark:text-slate-400 mb-1">سعر المورد</p>
+          <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">580 ج.م</p>
+        </div>
+        <div class="px-2">
+          <p class="text-xs text-text-muted dark:text-slate-400 mb-1">سعر البيع المقترح</p>
+          <p class="text-sm font-semibold text-slate-900 dark:text-white">750 ج.م</p>
+        </div>
+        <div class="px-2">
+          <p class="text-xs text-text-muted dark:text-slate-400 mb-1">صافي ربحك</p>
+          <p class="text-base font-bold text-emerald-600 dark:text-emerald-400">170 ج.م</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Quick Action Buttons ───────────────────────────────────────────── -->
+    <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-6">
+      <a href="assets/img/placeholders/product-headphones.svg"
+         download="product-image.svg"
+         class="flex flex-col items-center gap-1.5 p-3 rounded-xl
+                bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800
+                text-text-secondary dark:text-slate-400 hover:bg-surface-muted dark:hover:bg-slate-700
+                transition-colors focus-ring text-center">
+        <i data-lucide="image" class="h-5 w-5" aria-hidden="true"></i>
+        <span class="text-[10px] font-medium leading-tight">تحميل الصور</span>
+      </a>
+      <a href="assets/img/placeholders/dashboard-preview.svg"
+         download="product-video-thumb.svg"
+         class="flex flex-col items-center gap-1.5 p-3 rounded-xl
+                bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800
+                text-text-secondary dark:text-slate-400 hover:bg-surface-muted dark:hover:bg-slate-700
+                transition-colors focus-ring text-center">
+        <i data-lucide="video" class="h-5 w-5" aria-hidden="true"></i>
+        <span class="text-[10px] font-medium leading-tight">تحميل الفيديوهات</span>
+      </a>
+      <button type="button"
+              data-copy="caption-value"
+              aria-label="نسخ الكابشن الجاهز"
+              class="flex flex-col items-center gap-1.5 p-3 rounded-xl
+                     bg-brand-primary/10 dark:bg-brand-primary/20 border border-brand-primary/30
+                     text-brand-primary hover:bg-brand-primary/20 transition-colors focus-ring text-center">
+        <i data-lucide="clipboard-copy" class="h-5 w-5" aria-hidden="true"></i>
+        <span class="text-[10px] font-medium leading-tight">نسخ الكابشن</span>
+      </button>
+      <button type="button"
+              data-copy="details-value"
+              aria-label="نسخ تفاصيل المنتج"
+              class="flex flex-col items-center gap-1.5 p-3 rounded-xl
+                     bg-brand-primary/10 dark:bg-brand-primary/20 border border-brand-primary/30
+                     text-brand-primary hover:bg-brand-primary/20 transition-colors focus-ring text-center">
+        <i data-lucide="file-text" class="h-5 w-5" aria-hidden="true"></i>
+        <span class="text-[10px] font-medium leading-tight">نسخ تفاصيل المنتج</span>
+      </button>
+      <a href="https://wa.me/?text=%F0%9F%8E%A7%20%D8%B3%D9%85%D8%A7%D8%B9%D8%A9%20%D8%A8%D9%84%D9%88%D8%AA%D9%88%D8%AB%20ProBass%20X2%20%E2%80%94%20%D8%B5%D9%88%D8%AA%20Bass%20%D9%82%D9%88%D9%8A%20%D9%88%D8%A8%D8%B7%D8%A7%D8%B1%D9%8A%D8%A9%20%D8%AA%D8%AF%D9%88%D9%85%20%D8%B7%D9%88%D9%8A%D9%84%D8%A7%D9%8B%21%20%D8%A7%D9%84%D8%B3%D8%B9%D8%B1%20750%20%D8%AC.%D9%85"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="flex flex-col items-center gap-1.5 p-3 rounded-xl
+                bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900
+                text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950/50
+                transition-colors focus-ring text-center">
+        <i data-lucide="message-circle" class="h-5 w-5" aria-hidden="true"></i>
+        <span class="text-[10px] font-medium leading-tight">مشاركة واتساب</span>
+      </a>
+      <button type="button"
+              data-modal-trigger="order-modal"
+              aria-label="طلب أوردر"
+              class="flex flex-col items-center gap-1.5 p-3 rounded-xl
+                     bg-violet-50 dark:bg-violet-950/30 border border-violet-200 dark:border-violet-900
+                     text-violet-700 dark:text-violet-400 hover:bg-violet-100 dark:hover:bg-violet-950/50
+                     transition-colors focus-ring text-center">
+        <i data-lucide="shopping-cart" class="h-5 w-5" aria-hidden="true"></i>
+        <span class="text-[10px] font-medium leading-tight">طلب أوردر</span>
+      </button>
+    </div>
+
+    <!-- ── Ready Caption Box ──────────────────────────────────────────────── -->
+    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 mb-4" data-copy-container>
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+          <i data-lucide="clipboard" class="h-4 w-4 text-brand-primary" aria-hidden="true"></i>
+          الكابشن الجاهز للنشر
+        </h2>
+        <button type="button"
+                data-copy="caption-value"
+                class="inline-flex items-center gap-1.5 text-xs font-medium text-brand-primary
+                       hover:text-brand-accent transition-colors focus-ring rounded px-2 py-1">
+          <i data-lucide="copy" class="h-3.5 w-3.5" aria-hidden="true"></i>
+          نسخ
+        </button>
+      </div>
+      <pre id="caption-value"
+           data-copy-value
+           class="text-sm text-slate-700 dark:text-slate-300 whitespace-pre-wrap leading-relaxed font-sans">🎧 سماعة بلوتوث ProBass X2 — صوت Bass قوي بتصميم خفيف!
+✅ مناسبة للرياضة والاستخدام اليومي
+🔋 بطارية تدوم ساعات طويلة
+💧 مقاومة للعرق والماء
+#ProBass #سماعات_بلوتوث #تسوق_اونلاين #عرض_ساخن</pre>
+    </div>
+
+    <!-- ── Product Details Box ────────────────────────────────────────────── -->
+    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 mb-4" data-copy-container>
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+          <i data-lucide="file-text" class="h-4 w-4 text-brand-primary" aria-hidden="true"></i>
+          تفاصيل المنتج الجاهزة
+        </h2>
+        <button type="button"
+                data-copy="details-value"
+                class="inline-flex items-center gap-1.5 text-xs font-medium text-brand-primary
+                       hover:text-brand-accent transition-colors focus-ring rounded px-2 py-1">
+          <i data-lucide="copy" class="h-3.5 w-3.5" aria-hidden="true"></i>
+          نسخ
+        </button>
+      </div>
+      <pre id="details-value"
+           data-copy-value
+           class="text-sm text-slate-700 dark:text-slate-300 whitespace-pre-wrap leading-relaxed font-sans">• نوع السماعة: فوق الأذن (Over-Ear) خفيفة الوزن
+• تقنية بلوتوث 5.3 مع نطاق اتصال 15 متر
+• صوت Bass قوي وعميق مع تجربة استماع غامرة
+• بطارية تدوم حتى 20 ساعة تشغيل متواصل
+• مايكروفون مدمج للمكالمات الواضحة
+• قابلة للطي وسهلة الحمل أثناء التنقل</pre>
+    </div>
+
+    <!-- ── Selling Tips ────────────────────────────────────────────────────── -->
+    <div class="bg-amber-50 dark:bg-amber-950/20 rounded-2xl border border-amber-200 dark:border-amber-900/50 p-4 mb-6">
+      <h2 class="text-sm font-bold text-amber-800 dark:text-amber-400 flex items-center gap-2 mb-3">
+        <i data-lucide="lightbulb" class="h-4 w-4" aria-hidden="true"></i>
+        نصائح للبيع
+      </h2>
+      <ul class="space-y-2">
+        <li class="flex items-start gap-2 text-sm text-amber-900 dark:text-amber-300">
+          <span class="mt-0.5 text-amber-500 shrink-0">1.</span>
+          وجّه العملاء لجودة الصوت Bass — مثالية للاستماع للموسيقى والبودكاست
+        </li>
+        <li class="flex items-start gap-2 text-sm text-amber-900 dark:text-amber-300">
+          <span class="mt-0.5 text-amber-500 shrink-0">2.</span>
+          أبرز خفة الوزن والراحة — ميزة تنافسية للاستخدام اليومي الطويل
+        </li>
+        <li class="flex items-start gap-2 text-sm text-amber-900 dark:text-amber-300">
+          <span class="mt-0.5 text-amber-500 shrink-0">3.</span>
+          استخدم صور السماعة مع ملابس رياضية لجذب شريحة الشباب والرياضيين
+        </li>
+      </ul>
+    </div>
+
+    <!-- ── Related Products ───────────────────────────────────────────────── -->
+    <section class="mb-6">
+      <h2 class="text-base font-bold text-text-primary dark:text-white mb-4">منتجات ذات صلة</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+
+        <!-- AP-003 -->
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+             <img src="assets/img/placeholders/product-smart-watch.svg"
+                  alt="ساعة ذكية Smart Watch Pro"
+                 class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-hot absolute top-2 start-2 text-[10px]">Hot Offer</span>
+            <button type="button"
+                    data-favorite-toggle
+                    aria-pressed="true"
+                    aria-label="إزالة من المحفوظات"
+                    class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80
+                           text-rose-500 hover:bg-white dark:hover:bg-slate-700 transition-colors is-favorited focus-ring">
+              <i data-lucide="heart" class="h-4 w-4 fill-current" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">ساعة ذكية Smart Watch Pro</p>
+            <p class="text-xs text-text-muted dark:text-slate-400">سعر البيع: 920 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 340 ر.س</p>
+            <a href="affiliate-product-detail.html"
+               class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium
+                      hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+
+        <!-- AP-005 -->
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+             <img src="assets/img/placeholders/product-speaker.svg"
+                  alt="مكبر صوت بلوتوث مقاوم للماء"
+                 class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-hot absolute top-2 start-2 text-[10px]">Hot Offer</span>
+            <button type="button"
+                    data-favorite-toggle
+                    aria-pressed="false"
+                    aria-label="إضافة إلى المحفوظات"
+                    class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80
+                           text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring">
+              <i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">مكبر صوت بلوتوث مقاوم للماء</p>
+            <p class="text-xs text-text-muted dark:text-slate-400">سعر البيع: 320 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 160 ر.س</p>
+            <a href="affiliate-product-detail.html"
+               class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium
+                      hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+
+        <!-- AP-007 -->
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+             <img src="assets/img/placeholders/product-wireless-charger.svg"
+                  alt="شاحن لاسلكي سريع"
+                 class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-new absolute top-2 start-2 text-[10px]">New</span>
+            <button type="button"
+                    data-favorite-toggle
+                    aria-pressed="false"
+                    aria-label="إضافة إلى المحفوظات"
+                    class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80
+                           text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring">
+              <i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">شاحن لاسلكي سريع</p>
+            <p class="text-xs text-text-muted dark:text-slate-400">سعر البيع: 180 ر.س</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 95 ر.س</p>
+            <a href="affiliate-product-detail.html"
+               class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium
+                      hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+
+        <!-- AP-017 -->
+        <article class="product-card rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden bg-white dark:bg-slate-900">
+          <div class="relative" style="padding-top:100%">
+             <img src="assets/img/placeholders/product-sport-earbuds.svg"
+                  alt="Sport Earbuds Pro"
+                 class="absolute inset-0 w-full h-full object-cover">
+            <span class="badge badge-new absolute top-2 start-2 text-[10px]">New</span>
+            <button type="button"
+                    data-favorite-toggle
+                    aria-pressed="false"
+                    aria-label="إضافة إلى المحفوظات"
+                    class="absolute top-2 end-2 p-1.5 rounded-full bg-white/80 dark:bg-slate-800/80
+                           text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-colors focus-ring">
+              <i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="p-3 space-y-1">
+            <p class="text-sm font-semibold line-clamp-2 text-slate-800 dark:text-slate-200">Sport Earbuds Pro</p>
+            <p class="text-xs text-text-muted dark:text-slate-400">سعر البيع: 180 د.إ</p>
+            <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">أرباحك: 100 د.إ</p>
+            <a href="affiliate-product-detail.html"
+               class="block w-full text-center bg-brand-primary text-white rounded-xl py-1.5 text-xs font-medium
+                      hover:bg-brand-accent transition-colors focus-ring mt-2">عرض التفاصيل</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </div><!-- /max-w-3xl -->
+</main>
+  </div><!-- /lg:ps-64 wrapper -->
+
+<!-- ─── Mobile Bottom Navigation ─────────────────────────────────────────── -->
+<nav data-bottom-nav
+     class="affiliate-bottom-nav fixed bottom-0 inset-x-0 z-30 lg:hidden
+            bg-white dark:bg-slate-950 border-t border-surface-border dark:border-slate-700
+            flex items-center justify-around h-16 px-1"
+     aria-label="التنقل السفلي">
+
+  <a href="affiliate-dashboard.html"
+     data-nav-target="affiliate-dashboard.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors"
+     aria-current="false">
+    <i data-lucide="home" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">الرئيسية</span>
+  </a>
+
+  <a href="affiliate-dashboard.html#products"
+     data-nav-target="affiliate-dashboard.html#products"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors"
+     aria-current="false">
+    <i data-lucide="shopping-bag" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">المنتجات</span>
+  </a>
+
+  <a href="affiliate-saved-products.html"
+     data-nav-target="affiliate-saved-products.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors"
+     aria-current="false">
+    <i data-lucide="bookmark" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">المحفوظات</span>
+  </a>
+
+  <a href="affiliate-orders.html"
+     data-nav-target="affiliate-orders.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors"
+     aria-current="false">
+    <i data-lucide="package" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">الطلبات</span>
+  </a>
+
+  <a href="affiliate-earnings.html"
+     data-nav-target="affiliate-earnings.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors"
+     aria-current="false">
+    <i data-lucide="wallet" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">الأرباح</span>
+  </a>
+
+</nav>
+
+<!-- ─── Order Modal ───────────────────────────────────────────────────────── -->
+<div data-modal="order-modal"
+     class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="order-modal-title">
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" data-modal-close></div>
+  <div class="relative bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-sm p-6 z-10">
+    <div class="flex items-center justify-between mb-4">
+      <h2 id="order-modal-title" class="text-base font-bold text-slate-900 dark:text-white">طلب أوردر</h2>
+      <button type="button" data-modal-close
+              class="p-1.5 rounded-lg text-slate-400 hover:bg-surface-muted dark:hover:bg-slate-700 focus-ring transition-colors"
+              aria-label="إغلاق">
+        <i data-lucide="x" class="h-4 w-4" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="space-y-3 mb-5">
+      <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800 rounded-xl">
+        <img src="assets/img/placeholders/product-headphones.svg" alt="سماعة بلوتوث ProBass X2" class="h-12 w-12 rounded-lg object-cover">
+        <div>
+          <p class="text-sm font-semibold text-text-primary dark:text-white">سماعة بلوتوث ProBass X2</p>
+          <p class="text-xs text-text-muted dark:text-slate-400">سعر البيع: 750 ج.م · ربحك: 170 ج.م</p>
+        </div>
+      </div>
+      <div>
+        <label for="order-customer-name" class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">اسم العميل</label>
+        <input type="text" id="order-customer-name" placeholder="أدخل اسم العميل"
+               class="w-full px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg
+                      text-text-primary dark:text-white placeholder:text-text-muted
+                      focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-colors">
+      </div>
+      <div>
+        <label for="order-phone" class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">رقم الجوال</label>
+        <input type="tel" id="order-phone" placeholder="05XXXXXXXX"
+               class="w-full px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg
+                      text-text-primary dark:text-white placeholder:text-text-muted
+                      focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-colors">
+      </div>
+      <div>
+        <label for="order-address" class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">العنوان</label>
+        <input type="text" id="order-address" placeholder="المدينة، الحي، الشارع"
+               class="w-full px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg
+                      text-text-primary dark:text-white placeholder:text-text-muted
+                      focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-colors">
+      </div>
+    </div>
+    <div class="flex gap-2">
+      <button type="button" data-modal-close
+              class="flex-1 px-4 py-2.5 text-sm font-medium rounded-xl
+                     border border-slate-200 dark:border-slate-700
+                     text-text-secondary dark:text-slate-300 hover:bg-surface-muted dark:hover:bg-slate-700
+                     transition-colors focus-ring">إلغاء</button>
+      <button type="button" data-modal-close
+              class="flex-1 px-4 py-2.5 text-sm font-medium rounded-xl
+                     bg-brand-primary text-white hover:bg-brand-accent
+                     transition-colors focus-ring">تأكيد الطلب</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Copy Toast ────────────────────────────────────────────────────────── -->
+<div id="copied-toast"
+     class="fixed bottom-20 lg:bottom-6 start-1/2 -translate-x-1/2 z-50
+            bg-slate-900 dark:bg-slate-700 text-white text-sm px-4 py-2 rounded-full
+            shadow-lg opacity-0 pointer-events-none transition-opacity duration-300"
+     aria-live="polite" role="status">
+  تم النسخ ✓
+</div>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

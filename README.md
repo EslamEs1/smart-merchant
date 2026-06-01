@@ -28,22 +28,29 @@ Other alternatives: `npx http-server`, `php -S localhost:8080`, any static-file 
 
 ---
 
-## How to Demo This to a Client (8-step walkthrough)
+## How to Demo This to a Client (connected merchant → affiliate walkthrough)
 
-Run via Live Server or `python3 -m http.server` for the best experience.
+Run via Live Server or `python3 -m http.server` for the best experience (the copy buttons need a
+secure context — see Troubleshooting). This path shows the merchant and the affiliate seller portal
+as one connected product.
 
 | Step | Action | What to show |
 |------|--------|-------------|
-| 1 | Open `index.html` | Marketing home — hero, CTAs, affiliate explainer, features grid, pricing teaser, FAQ |
-| 2 | Click **تسجيل الدخول** in the navbar | `login.html` loads — brand panel + form card layout |
-| 3 | Click the primary login button | `dashboard.html` loads — 6 stat cards, chart placeholders, recent orders, top affiliates |
-| 4 | Click **Affiliates** in sidebar | `affiliates.html` — roster with level/status badges; open any row's ⋯ menu to show 7 actions |
-| 5 | Click **View profile** on any affiliate | `affiliate-detail.html` — referral link box, QR placeholder, stats, payout history |
-| 6 | Click **Copy Referral Link** | Toast appears briefly; paste to show copied URL |
-| 7 | Toggle the ☀/🌙 button in the header | Entire UI switches to dark/light theme |
-| 8 | Resize to mobile width | Hamburger appears; tap → sidebar drawer slides in; tap overlay → closes |
+| 1 | Open `login.html` | Login card with the role selector — **أنا تاجر** / **أنا مسوّق بالعمولة** |
+| 2 | Choose **أنا تاجر** and submit | Routes to `dashboard.html` — stat cards, recent orders, top affiliates |
+| 3 | Open **المسوّقون** (`affiliates.html`) | Affiliate roster; **أحمد الشمري** (Gold, code `AHMAD20`) sits at the top |
+| 4 | Click **معاينة بوابة المسوّق ↗** | Opens `affiliate-dashboard.html` — the affiliate's own portal in a new tab |
+| 5 | Browse the product grid | Physical catalog; try the favorite ♥ toggle, category tabs, and search |
+| 6 | Click **عرض التفاصيل** on a product | `affiliate-product-detail.html` — image gallery, sale price, your commission |
+| 7 | Click **نسخ الكابشن** | "تم النسخ ✓" toast — a ready-made marketing caption is copied |
+| 8 | Open **الأرباح** (`affiliate-earnings.html`) | 1,420 available / 490 pending / 405 paid; rows correspond to order numbers (not DB-verified in this demo) |
+| 9 | Click **طلب سحب** | Payout modal opens; close it via the button, **Esc**, or the backdrop |
+| 10 | Open the avatar → **الملف الشخصي**, click **نسخ رابط الإحالة** | Referral link `…/r/AHMAD20` and coupon `AHMAD20` copied |
 
-See `specs/001-static-frontend-mvp/quickstart.md` for the full verification checklist covering all 8 user stories.
+See `specs/003-backend-foundation/quickstart.md` (active branch),
+`specs/002-affiliate-seller-portal/quickstart.md`, and
+`specs/001-static-frontend-mvp/quickstart.md`
+for the full per-user-story verification checklists.
 
 ---
 
@@ -167,6 +174,23 @@ smart-merchant/
 | `profile.html` | Profile form + password change + danger zone |
 | `notifications.html` | Notifications inbox (5 categories, filter chips) |
 | `analytics.html` | Coming-soon placeholder with chart previews |
+
+### Affiliate seller portal
+
+A separate lightweight, mobile-first surface for affiliate sellers (feature `002`). It reuses the
+same design tokens but has its own shell (collapsible sidebar on desktop, bottom nav on mobile).
+
+| File | Description |
+|------|-------------|
+| `affiliate-dashboard.html` | Affiliate home — quick earnings, search, category tabs, product grid |
+| `affiliate-product-detail.html` | Product detail — image gallery, your commission, copy caption / details |
+| `affiliate-orders.html` | The affiliate's attributed orders (mobile cards + desktop table) |
+| `affiliate-earnings.html` | Earnings ledger + payout-request modal |
+| `affiliate-saved-products.html` | Saved / favorited products |
+| `affiliate-profile.html` | Profile + referral link + coupon code |
+
+> The merchant-side affiliate management pages (`affiliate-detail.html`, `affiliate-requests.html`,
+> `affiliate-payouts.html`) are listed under **Merchant dashboard** above.
 
 ---
 

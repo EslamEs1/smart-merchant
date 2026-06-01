@@ -1,0 +1,53 @@
+<!-- ─── Mobile Bottom Navigation ─────────────────────────────────────────── -->
+<nav data-bottom-nav
+     class="affiliate-bottom-nav fixed bottom-0 inset-x-0 z-30 lg:hidden
+            bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-700
+            flex items-center justify-around h-16 px-1"
+     aria-label="التنقل السفلي">
+
+  <a href="affiliate-dashboard.html"
+     data-nav-target="affiliate-dashboard.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-brand-primary transition-colors is-active"
+     aria-current="page">
+    <i data-lucide="home" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">الرئيسية</span>
+  </a>
+
+  <a href="affiliate-dashboard.html#products"
+     data-nav-target="affiliate-dashboard.html#products"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors"
+     aria-current="false">
+    <i data-lucide="shopping-bag" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">المنتجات</span>
+  </a>
+
+  <a href="affiliate-saved-products.html"
+     data-nav-target="affiliate-saved-products.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors"
+     aria-current="false">
+    <i data-lucide="bookmark" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">المحفوظات</span>
+  </a>
+
+  <a href="affiliate-orders.html"
+     data-nav-target="affiliate-orders.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors"
+     aria-current="false">
+    <i data-lucide="package" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">الطلبات</span>
+  </a>
+
+  <a href="affiliate-earnings.html"
+     data-nav-target="affiliate-earnings.html"
+     class="flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg
+            text-slate-500 dark:text-slate-400 hover:text-brand-primary transition-colors"
+     aria-current="false">
+    <i data-lucide="wallet" class="h-5 w-5" aria-hidden="true"></i>
+    <span class="text-[10px] font-medium">الأرباح</span>
+  </a>
+
+</nav>

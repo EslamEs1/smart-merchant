@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" class="font-sans bg-surface-base text-text-primary scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Merchant OS — نظام إدارة التجارة الذكي</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#6366f1',
+            'brand-accent': '#8b5cf6',
+            'brand-info': '#3b82f6',
+            'surface-base': '#f8fafc',
+            'surface-card': '#ffffff',
+            'surface-muted': '#f1f5f9',
+            'surface-border': '#e2e8f0',
+            'text-primary': '#0f172a',
+            'text-secondary': '#475569',
+            'text-muted': '#94a3b8',
+          },
+          fontFamily: { sans: ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'] },
+          backgroundImage: {
+            'gradient-brand': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%)',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/app.css" />
+  <script>
+    (function () {
+      var t = localStorage.getItem('smos:theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+<body class="bg-surface-base dark:bg-slate-900 text-text-primary dark:text-white">
+
+  <!-- ========== MARKETING NAV ========== -->
+  <nav class="sticky top-0 z-40 bg-surface-card/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-surface-border dark:border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 flex-shrink-0">
+          <div class="h-9 w-9 rounded-xl bg-gradient-brand flex items-center justify-center">
+            <svg class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="hidden sm:block">
+            <p class="text-sm font-bold text-text-primary dark:text-white leading-tight">Smart Merchant OS</p>
+            <p class="text-xs text-text-muted leading-tight">سمارت مرتشانت</p>
+          </div>
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center gap-1">
+          <a href="features.html" class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-brand-primary dark:hover:text-indigo-300 transition-colors rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700/60">الميزات</a>
+          <a href="pricing.html" class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-brand-primary dark:hover:text-indigo-300 transition-colors rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700/60">الأسعار</a>
+          <a href="#faq" class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-brand-primary dark:hover:text-indigo-300 transition-colors rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700/60">الأسئلة الشائعة</a>
+        </div>
+
+        <!-- Right actions -->
+        <div class="flex items-center gap-2">
+          <button data-theme-toggle class="p-2 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors" aria-label="تبديل الوضع">
+            <i data-lucide="sun" class="h-5 w-5 text-text-secondary dark:text-slate-300 block dark:hidden"></i>
+            <i data-lucide="moon" class="h-5 w-5 text-text-secondary dark:text-slate-300 hidden dark:block"></i>
+          </button>
+          <a href="login.html" class="hidden sm:block px-4 py-2 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-brand-primary transition-colors">دخول</a>
+          <a href="register.html" class="px-4 py-2 text-sm font-semibold rounded-xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-sm">
+            ابدأ مجاناً
+          </a>
+          <button class="md:hidden p-2 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700 transition-colors" id="mobile-nav-toggle" aria-label="قائمة التنقل">
+            <i data-lucide="menu" class="h-5 w-5 text-text-secondary dark:text-slate-300"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile nav -->
+      <div id="mobile-nav" class="hidden pb-4 md:hidden border-t border-surface-border dark:border-slate-700 pt-4 space-y-1">
+        <a href="features.html" class="block px-4 py-2.5 text-sm font-medium text-text-secondary dark:text-slate-300 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700">الميزات</a>
+        <a href="pricing.html" class="block px-4 py-2.5 text-sm font-medium text-text-secondary dark:text-slate-300 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700">الأسعار</a>
+        <a href="#faq" class="block px-4 py-2.5 text-sm font-medium text-text-secondary dark:text-slate-300 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700">الأسئلة الشائعة</a>
+        <a href="login.html" class="block px-4 py-2.5 text-sm font-medium text-text-secondary dark:text-slate-300 rounded-xl hover:bg-surface-muted dark:hover:bg-slate-700">دخول</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-indigo-50/80 via-surface-base to-surface-base dark:from-slate-900 dark:to-slate-900 py-20 lg:py-32">
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute -top-40 -start-40 h-96 w-96 rounded-full bg-indigo-200/30 dark:bg-indigo-900/20 blur-3xl"></div>
+      <div class="absolute top-20 -end-32 h-72 w-72 rounded-full bg-violet-200/30 dark:bg-violet-900/20 blur-3xl"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 text-sm font-medium mb-8">
+        <i data-lucide="sparkles" class="h-4 w-4"></i>
+        نظام إدارة تجارة ذكي للسوق العربي
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-primary dark:text-white leading-tight mb-6">
+        أدِر تجارتك بذكاء<br/>
+        <span class="bg-gradient-brand bg-clip-text text-transparent">من مكان واحد</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-text-secondary dark:text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+        Smart Merchant OS هو نظامك الشامل لإدارة المنتجات، الطلبات، العملاء، والمسوّقين — مع نظام عمولات تلقائي وصفحات تسويقية جاهزة.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="register.html" class="px-8 py-4 text-base font-semibold rounded-2xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-lg inline-flex items-center gap-2">
+          <i data-lucide="rocket" class="h-5 w-5"></i>
+          ابدأ إدارة تجارتك بذكاء
+        </a>
+        <a href="dashboard.html" class="px-8 py-4 text-base font-semibold rounded-2xl border-2 border-surface-border dark:border-slate-600 text-text-primary dark:text-white hover:border-brand-primary dark:hover:border-brand-primary transition-colors inline-flex items-center gap-2 bg-surface-card dark:bg-slate-800">
+          <i data-lucide="play-circle" class="h-5 w-5 text-brand-primary"></i>
+          شاهد لوحة التحكم
+        </a>
+      </div>
+      <!-- Social proof -->
+      <div class="flex items-center justify-center gap-2 mt-10 text-sm text-text-muted">
+        <div class="flex -space-x-2 rtl:space-x-reverse">
+          <div class="h-8 w-8 rounded-full bg-indigo-200 dark:bg-indigo-800 border-2 border-white dark:border-slate-900 flex items-center justify-center text-xs font-bold text-indigo-700 dark:text-indigo-300">م</div>
+          <div class="h-8 w-8 rounded-full bg-violet-200 dark:bg-violet-800 border-2 border-white dark:border-slate-900 flex items-center justify-center text-xs font-bold text-violet-700 dark:text-violet-300">أ</div>
+          <div class="h-8 w-8 rounded-full bg-blue-200 dark:bg-blue-800 border-2 border-white dark:border-slate-900 flex items-center justify-center text-xs font-bold text-blue-700 dark:text-blue-300">ف</div>
+          <div class="h-8 w-8 rounded-full bg-emerald-200 dark:bg-emerald-800 border-2 border-white dark:border-slate-900 flex items-center justify-center text-xs font-bold text-emerald-700 dark:text-emerald-300">س</div>
+        </div>
+        <span>انضم <strong class="text-text-primary dark:text-white">+2,400 تاجر</strong> بالفعل</span>
+      </div>
+    </div>
+
+    <!-- Dashboard Preview -->
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+      <div class="rounded-2xl shadow-2xl border border-surface-border dark:border-slate-700 overflow-hidden">
+        <img src="assets/img/placeholders/dashboard-preview.svg" alt="لقطة من لوحة التحكم" class="w-full object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS BAR ========== -->
+  <section class="py-12 border-y border-surface-border dark:border-slate-700 bg-surface-card dark:bg-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <div>
+          <p class="text-3xl font-extrabold text-brand-primary mb-1">+2,400</p>
+          <p class="text-sm text-text-secondary dark:text-slate-400">تاجر نشط</p>
+        </div>
+        <div>
+          <p class="text-3xl font-extrabold text-brand-primary mb-1">+150K</p>
+          <p class="text-sm text-text-secondary dark:text-slate-400">طلب مُعالَج</p>
+        </div>
+        <div>
+          <p class="text-3xl font-extrabold text-brand-primary mb-1">+18K</p>
+          <p class="text-sm text-text-secondary dark:text-slate-400">مسوّق مُرتبط</p>
+        </div>
+        <div>
+          <p class="text-3xl font-extrabold text-brand-primary mb-1">99.9%</p>
+          <p class="text-sm text-text-secondary dark:text-slate-400">وقت تشغيل</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== AFFILIATE GROWTH ========== -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-4">
+          <i data-lucide="handshake" class="h-3.5 w-3.5"></i>
+          نظام المسوّقين
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-text-primary dark:text-white mb-4">
+          حوّل عملاءك إلى مسوّقين<br/>ينمّون تجارتك تلقائياً
+        </h2>
+        <p class="text-lg text-text-secondary dark:text-slate-300 leading-relaxed">
+          الميزة الأكثر تميّزاً في Smart Merchant OS — نظام إحالة متكامل يربط كل طلب بمسوّقه مع عمولات تلقائية شفافة.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-8 shadow-sm hover:shadow-md transition-shadow">
+          <div class="h-14 w-14 rounded-2xl bg-gradient-brand flex items-center justify-center mb-6">
+            <i data-lucide="handshake" class="h-7 w-7 text-white"></i>
+          </div>
+          <h3 class="text-lg font-bold text-text-primary dark:text-white mb-3">تسجيل المسوّقين</h3>
+          <p class="text-text-secondary dark:text-slate-400 leading-relaxed text-sm">
+            يقدّم المسوّقون طلبات الانضمام. أنت تراجع وتوافق. يحصل كل مسوّق على رابط إحالة خاص ورمز QR وكود خصم.
+          </p>
+        </div>
+        <div class="bg-gradient-brand rounded-2xl p-8 shadow-lg">
+          <div class="h-14 w-14 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
+            <i data-lucide="link" class="h-7 w-7 text-white"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-3">تتبّع الإحالات</h3>
+          <p class="text-white/80 leading-relaxed text-sm">
+            كل زيارة وطلب يأتي عبر رابط المسوّق يُسجَّل تلقائياً. اعرف كل طلب من أين جاء — من أي مسوّق وعبر أي قناة.
+          </p>
+        </div>
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-8 shadow-sm hover:shadow-md transition-shadow">
+          <div class="h-14 w-14 rounded-2xl bg-gradient-brand flex items-center justify-center mb-6">
+            <i data-lucide="coins" class="h-7 w-7 text-white"></i>
+          </div>
+          <h3 class="text-lg font-bold text-text-primary dark:text-white mb-3">عمولات تلقائية</h3>
+          <p class="text-text-secondary dark:text-slate-400 leading-relaxed text-sm">
+            العمولات تُحتسب تلقائياً عند تسليم الطلب أو تأكيد الدفع. راجع وادفع العمولات بنقرة واحدة.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRODUCTS / ORDERS / CUSTOMERS ========== -->
+  <section class="py-20 lg:py-28 bg-surface-muted/50 dark:bg-slate-800/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-text-primary dark:text-white mb-4">
+          أدوات إدارة تجارتك — كاملة ومتكاملة
+        </h2>
+        <p class="text-lg text-text-secondary dark:text-slate-300">
+          كل ما تحتاجه لتشغيل متجرك، من المنتج الأول حتى العميل الأخير.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Products -->
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 overflow-hidden shadow-sm">
+          <div class="p-6 border-b border-surface-border dark:border-slate-700">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="h-10 w-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
+                <i data-lucide="package" class="h-5 w-5 text-indigo-600 dark:text-indigo-400"></i>
+              </div>
+              <h3 class="font-bold text-text-primary dark:text-white">المنتجات والخدمات</h3>
+            </div>
+            <p class="text-sm text-text-secondary dark:text-slate-400 leading-relaxed">
+              إدارة كاملة لمنتجاتك الفعلية: تصنيفات، مخزون، أسعار وعروض — مع صور، سيو، وروابط عامة لكل منتج.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-muted dark:bg-slate-700/40 space-y-2">
+            <div class="flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400">
+              <i data-lucide="check-circle-2" class="h-3.5 w-3.5 text-emerald-500 flex-shrink-0"></i>
+              إدارة كاملة لأنواع المنتجات والمخزون
+            </div>
+            <div class="flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400">
+              <i data-lucide="check-circle-2" class="h-3.5 w-3.5 text-emerald-500 flex-shrink-0"></i>
+              إدارة المخزون والخصومات
+            </div>
+            <div class="flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400">
+              <i data-lucide="check-circle-2" class="h-3.5 w-3.5 text-emerald-500 flex-shrink-0"></i>
+              صفحة منتج عامة مع SEO
+            </div>
+          </div>
+        </div>
+
+        <!-- Orders -->
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 overflow-hidden shadow-sm">
+          <div class="p-6 border-b border-surface-border dark:border-slate-700">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="h-10 w-10 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center">
+                <i data-lucide="shopping-cart" class="h-5 w-5 text-violet-600 dark:text-violet-400"></i>
+              </div>
+              <h3 class="font-bold text-text-primary dark:text-white">إدارة الطلبات</h3>
+            </div>
+            <p class="text-sm text-text-secondary dark:text-slate-400 leading-relaxed">
+              تتبّع كل طلب من لحظة إنشائه حتى التسليم — مع حالات متعددة للدفع والشحن وإسناد العمولة للمسوّق.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-muted dark:bg-slate-700/40 space-y-2">
+            <div class="flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400">
+              <i data-lucide="check-circle-2" class="h-3.5 w-3.5 text-emerald-500 flex-shrink-0"></i>
+              6 حالات للطلب + 4 للدفع + 5 للشحن
+            </div>
+            <div class="flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400">
+              <i data-lucide="check-circle-2" class="h-3.5 w-3.5 text-emerald-500 flex-shrink-0"></i>
+              نسب العمولة تلقائية
+            </div>
+            <div class="flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400">
+              <i data-lucide="check-circle-2" class="h-3.5 w-3.5 text-emerald-500 flex-shrink-0"></i>
+              فاتورة قابلة للطباعة
+            </div>
+          </div>
+        </div>
+
+        <!-- Customers -->
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 overflow-hidden shadow-sm">
+          <div class="p-6 border-b border-surface-border dark:border-slate-700">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                <i data-lucide="users" class="h-5 w-5 text-emerald-600 dark:text-emerald-400"></i>
+              </div>
+              <h3 class="font-bold text-text-primary dark:text-white">CRM العملاء</h3>
+            </div>
+            <p class="text-sm text-text-secondary dark:text-slate-400 leading-relaxed">
+              قاعدة بيانات عملاء متكاملة مع تتبّع مصدر كل عميل، سجل طلباته، والتصنيفات وجدولة المتابعات.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-muted dark:bg-slate-700/40 space-y-2">
+            <div class="flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400">
+              <i data-lucide="check-circle-2" class="h-3.5 w-3.5 text-emerald-500 flex-shrink-0"></i>
+              7 مصادر: مسوّق، واتساب، سوشيال...
+            </div>
+            <div class="flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400">
+              <i data-lucide="check-circle-2" class="h-3.5 w-3.5 text-emerald-500 flex-shrink-0"></i>
+              تصنيفات ومتابعة دورية
+            </div>
+            <div class="flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400">
+              <i data-lucide="check-circle-2" class="h-3.5 w-3.5 text-emerald-500 flex-shrink-0"></i>
+              ربط العميل بمسوّقه تلقائياً
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COMMISSIONS / PAYOUTS ========== -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-xs font-semibold uppercase tracking-wider mb-6">
+            <i data-lucide="wallet" class="h-3.5 w-3.5"></i>
+            نظام العمولات والمدفوعات
+          </div>
+          <h2 class="text-3xl lg:text-4xl font-extrabold text-text-primary dark:text-white mb-6 leading-tight">
+            شفافية كاملة في<br/>كل عمولة وكل دفعة
+          </h2>
+          <p class="text-text-secondary dark:text-slate-300 leading-relaxed mb-8">
+            يتم احتساب العمولة تلقائياً عند وصول الطلب إلى حالة Delivered أو تأكيد الدفع. المسوّق يرى رصيده دائماً محدّثاً، وأنت تتحكم بالموافقة على صرف الرصيد.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3 p-4 bg-surface-card dark:bg-slate-800 rounded-xl border border-surface-border dark:border-slate-700">
+              <div class="h-8 w-8 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="percent" class="h-4 w-4 text-amber-600 dark:text-amber-400"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-text-primary dark:text-white text-sm">نسب عمولة مرنة</p>
+                <p class="text-xs text-text-muted mt-0.5">حدّد نسبة لكل منتج أو مستوى مسوّق.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-surface-card dark:bg-slate-800 rounded-xl border border-surface-border dark:border-slate-700">
+              <div class="h-8 w-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="credit-card" class="h-4 w-4 text-emerald-600 dark:text-emerald-400"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-text-primary dark:text-white text-sm">طلبات سحب بنقرة</p>
+                <p class="text-xs text-text-muted mt-0.5">يطلب المسوّق سحب رصيده، أنت تراجع وتوافق.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-surface-card dark:bg-slate-800 rounded-xl border border-surface-border dark:border-slate-700">
+              <div class="h-8 w-8 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="layers" class="h-4 w-4 text-indigo-600 dark:text-indigo-400"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-text-primary dark:text-white text-sm">مستويات المسوّقين</p>
+                <p class="text-xs text-text-muted mt-0.5">Bronze → Silver → Gold → Platinum مع مزايا مختلفة لكل مستوى.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-slate-800 dark:to-slate-700 rounded-3xl p-8 border border-amber-100 dark:border-slate-600">
+            <div class="flex items-center justify-between mb-6">
+              <h4 class="font-bold text-text-primary dark:text-white">ملخص العمولات</h4>
+              <span class="text-xs font-medium text-text-muted bg-surface-card dark:bg-slate-700 px-3 py-1 rounded-lg">آخر 30 يوم</span>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="bg-surface-card dark:bg-slate-800 rounded-xl p-4 shadow-sm">
+                <p class="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400" dir="ltr">24,800</p>
+                <p class="text-xs text-text-muted mt-1">عمولة SAR مدفوعة</p>
+              </div>
+              <div class="bg-surface-card dark:bg-slate-800 rounded-xl p-4 shadow-sm">
+                <p class="text-2xl font-extrabold text-amber-600 dark:text-amber-400" dir="ltr">6,200</p>
+                <p class="text-xs text-text-muted mt-1">عمولة SAR معلّقة</p>
+              </div>
+              <div class="bg-surface-card dark:bg-slate-800 rounded-xl p-4 shadow-sm">
+                <p class="text-2xl font-extrabold text-brand-primary" dir="ltr">142</p>
+                <p class="text-xs text-text-muted mt-1">مسوّق نشط</p>
+              </div>
+              <div class="bg-surface-card dark:bg-slate-800 rounded-xl p-4 shadow-sm">
+                <p class="text-2xl font-extrabold text-violet-600 dark:text-violet-400" dir="ltr">18.4%</p>
+                <p class="text-xs text-text-muted mt-1">متوسط التحويل</p>
+              </div>
+            </div>
+            <div class="bg-amber-100 dark:bg-amber-900/30 rounded-xl p-3 flex items-center gap-2">
+              <i data-lucide="info" class="h-4 w-4 text-amber-700 dark:text-amber-300 flex-shrink-0"></i>
+              <p class="text-xs text-amber-800 dark:text-amber-200">
+                يتم اعتماد العمولة بعد وصول الطلب إلى Delivered أو تأكيد الدفع.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES GRID ========== -->
+  <section class="py-20 lg:py-28 bg-surface-muted/50 dark:bg-slate-800/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-text-primary dark:text-white mb-4">
+          كل أدوات التاجر الذكي في مكان واحد
+        </h2>
+        <p class="text-lg text-text-secondary dark:text-slate-300">
+          منصة متكاملة تغطي كل جوانب إدارة أعمالك التجارية.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl p-6 border border-surface-border dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+          <div class="h-12 w-12 rounded-2xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-4">
+            <i data-lucide="layout-dashboard" class="h-6 w-6 text-indigo-600 dark:text-indigo-400"></i>
+          </div>
+          <h3 class="font-bold text-text-primary dark:text-white mb-2">لوحة تحكم ذكية</h3>
+          <p class="text-sm text-text-secondary dark:text-slate-400 leading-relaxed">
+            نظرة شاملة على مبيعاتك ومسوّقيك وطلباتك في لوحة واحدة واضحة مع مؤشرات أداء حية.
+          </p>
+        </div>
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl p-6 border border-surface-border dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+          <div class="h-12 w-12 rounded-2xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center mb-4">
+            <i data-lucide="qr-code" class="h-6 w-6 text-violet-600 dark:text-violet-400"></i>
+          </div>
+          <h3 class="font-bold text-text-primary dark:text-white mb-2">روابط QR وإحالة</h3>
+          <p class="text-sm text-text-secondary dark:text-slate-400 leading-relaxed">
+            كل مسوّق يحصل على رابط إحالة خاص، رمز QR، وكود خصم — يمكن مشاركتها فوراً.
+          </p>
+        </div>
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl p-6 border border-surface-border dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+          <div class="h-12 w-12 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-4">
+            <i data-lucide="layout-template" class="h-6 w-6 text-emerald-600 dark:text-emerald-400"></i>
+          </div>
+          <h3 class="font-bold text-text-primary dark:text-white mb-2">صفحات تسويقية</h3>
+          <p class="text-sm text-text-secondary dark:text-slate-400 leading-relaxed">
+            أنشئ صفحات هبوط احترافية لمنتجاتك وعروضك في دقائق من قوالب جاهزة.
+          </p>
+        </div>
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl p-6 border border-surface-border dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+          <div class="h-12 w-12 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-4">
+            <i data-lucide="bar-chart-3" class="h-6 w-6 text-blue-600 dark:text-blue-400"></i>
+          </div>
+          <h3 class="font-bold text-text-primary dark:text-white mb-2">تقارير متقدمة</h3>
+          <p class="text-sm text-text-secondary dark:text-slate-400 leading-relaxed">
+            تحليلات مبيعات، أداء المسوّقين، مصادر العملاء، وتوزيع الطلبات — كل ذلك في رسوم بيانية واضحة.
+          </p>
+        </div>
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl p-6 border border-surface-border dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+          <div class="h-12 w-12 rounded-2xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-4">
+            <i data-lucide="bell" class="h-6 w-6 text-amber-600 dark:text-amber-400"></i>
+          </div>
+          <h3 class="font-bold text-text-primary dark:text-white mb-2">إشعارات فورية</h3>
+          <p class="text-sm text-text-secondary dark:text-slate-400 leading-relaxed">
+            إشعارات لحظية لكل طلب جديد، طلب انضمام مسوّق، طلب سحب عمولة، وتنبيه المخزون المنخفض.
+          </p>
+        </div>
+        <div class="bg-gradient-brand rounded-2xl p-6 shadow-md">
+          <div class="h-12 w-12 rounded-2xl bg-white/20 flex items-center justify-center mb-4">
+            <i data-lucide="shield-check" class="h-6 w-6 text-white"></i>
+          </div>
+          <h3 class="font-bold text-white mb-2">أمان وخصوصية</h3>
+          <p class="text-sm text-white/80 leading-relaxed">
+            بياناتك مشفّرة وآمنة. ضبط الصلاحيات، سجل التدقيق، وعمليات نسخ احتياطي يومية.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRICING TEASER ========== -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-text-primary dark:text-white mb-4">
+          خطط أسعار تناسب كل مرحلة
+        </h2>
+        <p class="text-lg text-text-secondary dark:text-slate-300">
+          ابدأ مجاناً وتوسّع مع نمو أعمالك.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Starter -->
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-8 shadow-sm">
+          <h3 class="text-lg font-bold text-text-primary dark:text-white mb-1">Starter</h3>
+          <p class="text-sm text-text-muted mb-4">للمشاريع الناشئة</p>
+          <p class="text-3xl font-extrabold text-text-primary dark:text-white mb-1" dir="ltr">99 <span class="text-lg font-normal text-text-muted">SAR/شهر</span></p>
+          <ul class="space-y-2 my-6 text-sm text-text-secondary dark:text-slate-400">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> 50 منتج</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> 10 مسوّقين</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> 500 طلب/شهر</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> صفحة تسويقية واحدة</li>
+          </ul>
+          <a href="register.html" class="block text-center w-full py-2.5 text-sm font-semibold rounded-xl border border-surface-border dark:border-slate-600 text-text-secondary dark:text-slate-300 hover:border-brand-primary hover:text-brand-primary transition-colors">
+            ابدأ الآن
+          </a>
+        </div>
+
+        <!-- Growth (recommended) -->
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border-2 border-brand-primary p-8 shadow-xl relative">
+          <div class="absolute -top-3 start-1/2 -translate-x-1/2 rtl:translate-x-1/2">
+            <span class="bg-gradient-brand text-white text-xs font-semibold px-4 py-1 rounded-full shadow">موصى به</span>
+          </div>
+          <h3 class="text-lg font-bold text-text-primary dark:text-white mb-1">Growth</h3>
+          <p class="text-sm text-text-muted mb-4">للمتاجر النامية</p>
+          <p class="text-3xl font-extrabold text-brand-primary mb-1" dir="ltr">249 <span class="text-lg font-normal text-text-muted">SAR/شهر</span></p>
+          <ul class="space-y-2 my-6 text-sm text-text-secondary dark:text-slate-400">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> 500 منتج</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> 100 مسوّق</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> 5,000 طلب/شهر</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> 10 صفحات تسويقية</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> تقارير متقدمة</li>
+          </ul>
+          <a href="register.html" class="block text-center w-full py-2.5 text-sm font-semibold rounded-xl bg-gradient-brand text-white hover:opacity-90 transition-opacity shadow-sm">
+            ابدأ الآن
+          </a>
+        </div>
+
+        <!-- Pro -->
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-8 shadow-sm">
+          <h3 class="text-lg font-bold text-text-primary dark:text-white mb-1">Pro</h3>
+          <p class="text-sm text-text-muted mb-4">للمؤسسات والمتاجر الكبرى</p>
+          <p class="text-3xl font-extrabold text-text-primary dark:text-white mb-1" dir="ltr">599 <span class="text-lg font-normal text-text-muted">SAR/شهر</span></p>
+          <ul class="space-y-2 my-6 text-sm text-text-secondary dark:text-slate-400">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> منتجات غير محدودة</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> مسوّقون غير محدودون</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> طلبات غير محدودة</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> صفحات غير محدودة</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-emerald-500 flex-shrink-0"></i> دعم أولوية 24/7</li>
+          </ul>
+          <a href="register.html" class="block text-center w-full py-2.5 text-sm font-semibold rounded-xl border border-surface-border dark:border-slate-600 text-text-secondary dark:text-slate-300 hover:border-brand-primary hover:text-brand-primary transition-colors">
+            ابدأ الآن
+          </a>
+        </div>
+      </div>
+      <div class="text-center mt-8">
+        <a href="pricing.html" class="text-sm text-brand-primary font-medium hover:underline inline-flex items-center gap-1">
+          مقارنة تفصيلية لجميع الخطط
+          <i data-lucide="arrow-left" class="h-4 w-4 rtl:rotate-180"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIALS ========== -->
+  <section class="py-20 lg:py-28 bg-surface-muted/50 dark:bg-slate-800/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-text-primary dark:text-white mb-4">
+          ماذا يقول عملاؤنا
+        </h2>
+        <p class="text-lg text-text-secondary dark:text-slate-300">
+          آلاف التجار يثقون بـ Smart Merchant OS لإدارة أعمالهم يومياً.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- T1 -->
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-8 shadow-sm">
+          <div class="flex items-center gap-1 text-amber-400 mb-4">
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+          </div>
+          <blockquote class="text-text-secondary dark:text-slate-300 text-sm leading-relaxed mb-6">
+            "نظام المسوّقين غيّر عملي تماماً. الآن لديّ 45 مسوّقاً يرسلون لي طلبات يومياً وأتابع عمولاتهم بشكل شفاف بدون أي جهد."
+          </blockquote>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full bg-indigo-200 dark:bg-indigo-900 flex items-center justify-center text-sm font-bold text-indigo-700 dark:text-indigo-300">م</div>
+            <div>
+              <p class="font-semibold text-text-primary dark:text-white text-sm">محمد العنزي</p>
+              <p class="text-xs text-text-muted">صاحب متجر أزياء — الرياض</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- T2 -->
+        <div class="bg-gradient-brand rounded-2xl p-8 shadow-lg">
+          <div class="flex items-center gap-1 text-white/80 mb-4">
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+          </div>
+          <blockquote class="text-white/90 text-sm leading-relaxed mb-6">
+            "كنت أدير طلباتي يدوياً في ملف Excel! الآن لوحة التحكم تعطيني كل شيء بنقرة واحدة وتربط العميل بالمسوّق تلقائياً."
+          </blockquote>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold text-white">س</div>
+            <div>
+              <p class="font-semibold text-white text-sm">سارة الغامدي</p>
+              <p class="text-xs text-white/70">صاحبة متجر إلكترونيات — جدة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- T3 -->
+        <div class="bg-surface-card dark:bg-slate-800 rounded-2xl border border-surface-border dark:border-slate-700 p-8 shadow-sm">
+          <div class="flex items-center gap-1 text-amber-400 mb-4">
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+          </div>
+          <blockquote class="text-text-secondary dark:text-slate-300 text-sm leading-relaxed mb-6">
+            "الصفحات التسويقية رائعة — أنشأت صفحة لعرضي في 10 دقائق وحققت 23% معدل تحويل في الأسبوع الأول."
+          </blockquote>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full bg-violet-200 dark:bg-violet-900 flex items-center justify-center text-sm font-bold text-violet-700 dark:text-violet-300">أ</div>
+            <div>
+              <p class="font-semibold text-text-primary dark:text-white text-sm">أحمد الشمري</p>
+              <p class="text-xs text-text-muted">تاجر إلكتروني — دبي</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section id="faq" class="py-20 lg:py-28">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-text-primary dark:text-white mb-4">الأسئلة الشائعة</h2>
+        <p class="text-text-secondary dark:text-slate-300">لم تجد إجابتك؟ <a href="mailto:support@smartmerchant.os" class="text-brand-primary hover:underline">تواصل معنا</a></p>
+      </div>
+      <div class="space-y-3">
+        <details class="group bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none font-semibold text-text-primary dark:text-white hover:text-brand-primary transition-colors list-none">
+            هل يدعم النظام العملات العربية؟
+            <i data-lucide="chevron-down" class="h-5 w-5 text-text-muted transition-transform group-open:rotate-180 flex-shrink-0"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
+            نعم، يدعم النظام SAR (ريال سعودي)، EGP (جنيه مصري)، AED (درهم إماراتي)، KWD (دينار كويتي)، وغيرها. يمكنك تحديد العملة لكل منتج بشكل منفصل.
+          </div>
+        </details>
+        <details class="group bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none font-semibold text-text-primary dark:text-white hover:text-brand-primary transition-colors list-none">
+            كيف يتم احتساب عمولات المسوّقين تلقائياً؟
+            <i data-lucide="chevron-down" class="h-5 w-5 text-text-muted transition-transform group-open:rotate-180 flex-shrink-0"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
+            العمولة تُحتسب تلقائياً عند وصول الطلب إلى حالة Delivered أو عند تأكيد الدفع. تظهر في رصيد المسوّق فور اعتمادها وينتظر الموافقة على صرف الرصيد من قِبلك.
+          </div>
+        </details>
+        <details class="group bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none font-semibold text-text-primary dark:text-white hover:text-brand-primary transition-colors list-none">
+            هل يمكنني استخدام النظام بدون برمجة أو خادم؟
+            <i data-lucide="chevron-down" class="h-5 w-5 text-text-muted transition-transform group-open:rotate-180 flex-shrink-0"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
+            بالكامل نعم. النظام سحابي بالكامل وسهل الاستخدام — لا تحتاج أي خلفية تقنية. فقط سجّل وابدأ فوراً.
+          </div>
+        </details>
+        <details class="group bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none font-semibold text-text-primary dark:text-white hover:text-brand-primary transition-colors list-none">
+            هل يمكنني تنظيم منتجاتي حسب التصنيف والمخزون؟
+            <i data-lucide="chevron-down" class="h-5 w-5 text-text-muted transition-transform group-open:rotate-180 flex-shrink-0"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
+            نعم، كل منتج فعلي له تصنيف وسعر ومخزون وصور ورابط عام، مع حالة نشر (Active / Draft) وتتبّع الكمية المتاحة.
+          </div>
+        </details>
+        <details class="group bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none font-semibold text-text-primary dark:text-white hover:text-brand-primary transition-colors list-none">
+            هل هناك فترة تجريبية مجانية؟
+            <i data-lucide="chevron-down" class="h-5 w-5 text-text-muted transition-transform group-open:rotate-180 flex-shrink-0"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
+            نعم، تجربة مجانية 14 يوماً بدون أي تكلفة وبدون الحاجة لبطاقة ائتمانية. تستطيع استخدام كل ميزات خطة Growth خلال فترة التجربة.
+          </div>
+        </details>
+        <details class="group bg-surface-card dark:bg-slate-800 border border-surface-border dark:border-slate-700 rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none font-semibold text-text-primary dark:text-white hover:text-brand-primary transition-colors list-none">
+            هل يدعم النظام اللغة العربية والاتجاه RTL؟
+            <i data-lucide="chevron-down" class="h-5 w-5 text-text-muted transition-transform group-open:rotate-180 flex-shrink-0"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
+            نعم، واجهة النظام كاملاً بالعربية مع دعم كامل لاتجاه RTL من يمين لشمال. استخدام بعض المصطلحات الإنجليزية للحالات التقنية كـ Delivered و Paid لكونها مفاهيم شائعة في تجارة السوق.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FINAL CTA ========== -->
+  <section class="py-20 lg:py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="bg-gradient-brand rounded-3xl p-12 shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+          <div class="absolute -top-10 -end-10 h-40 w-40 rounded-full bg-white/5"></div>
+          <div class="absolute bottom-0 start-0 h-32 w-32 rounded-full bg-white/5"></div>
+        </div>
+        <div class="relative">
+          <h2 class="text-3xl lg:text-4xl font-extrabold text-white mb-4">
+            ابدأ إدارة تجارتك بذكاء اليوم
+          </h2>
+          <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+            لا تحتاج خبرة تقنية. فقط سجّل حسابك وابدأ فوراً مع 14 يوم تجربة مجانية.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="register.html" class="px-8 py-4 text-base font-semibold rounded-2xl bg-white text-brand-primary hover:bg-white/90 transition-colors shadow-lg inline-flex items-center gap-2">
+              <i data-lucide="rocket" class="h-5 w-5"></i>
+              ابدأ مجاناً — 14 يوم
+            </a>
+            <a href="dashboard.html" class="px-8 py-4 text-base font-semibold rounded-2xl border-2 border-white/40 text-white hover:border-white/70 transition-colors inline-flex items-center gap-2">
+              <i data-lucide="monitor" class="h-5 w-5"></i>
+              شاهد العرض التجريبي
+            </a>
+          </div>
+          <p class="text-white/60 text-sm mt-6">لا بطاقة ائتمانية • لا التزامات • إلغاء في أي وقت</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="bg-slate-900 dark:bg-slate-950 text-slate-300 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <!-- Brand -->
+        <div class="md:col-span-1">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="h-10 w-10 rounded-xl bg-gradient-brand flex items-center justify-center">
+              <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-bold text-white text-sm">Smart Merchant OS</p>
+              <p class="text-xs text-slate-500">سمارت مرتشانت</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            نظام إدارة التجارة الذكي للسوق العربي.
+          </p>
+          <div class="flex items-center gap-3 mt-4">
+            <a href="#" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors" aria-label="تويتر">
+              <i data-lucide="twitter" class="h-4 w-4"></i>
+            </a>
+            <a href="#" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors" aria-label="إنستقرام">
+              <i data-lucide="instagram" class="h-4 w-4"></i>
+            </a>
+            <a href="#" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors" aria-label="يوتيوب">
+              <i data-lucide="youtube" class="h-4 w-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Product -->
+        <div>
+          <h4 class="font-semibold text-white mb-4 text-sm">المنتج</h4>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li><a href="features.html" class="hover:text-white transition-colors">الميزات</a></li>
+            <li><a href="pricing.html" class="hover:text-white transition-colors">الأسعار</a></li>
+            <li><a href="dashboard.html" class="hover:text-white transition-colors">العرض التجريبي</a></li>
+            <li><a href="#faq" class="hover:text-white transition-colors">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div>
+          <h4 class="font-semibold text-white mb-4 text-sm">الموارد</h4>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li><a href="#" class="hover:text-white transition-colors">الدليل التعليمي</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">مركز المساعدة</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">المدونة</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">قصص نجاح</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h4 class="font-semibold text-white mb-4 text-sm">الشركة</h4>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li><a href="#" class="hover:text-white transition-colors">من نحن</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">تواصل معنا</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">سياسة الخصوصية</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">الشروط والأحكام</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <p>© 2024 Smart Merchant OS — جميع الحقوق محفوظة</p>
+        <p>صُنع بـ ❤ للسوق العربي</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('mobile-nav-toggle')?.addEventListener('click', function () {
+      var nav = document.getElementById('mobile-nav');
+      nav?.classList.toggle('hidden');
+    });
+  </script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

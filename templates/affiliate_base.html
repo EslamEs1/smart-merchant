@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block html_class %}text-slate-900 dark:text-slate-100{% endblock %}
+
+{% block body_class %}min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased{% endblock %}
+
+{% block body %}
+{% include 'includes/affiliate_sidebar.html' %}
+
+  <!-- Main wrapper -->
+  <div class="lg:ps-64 min-h-screen flex flex-col">
+
+{% include 'includes/affiliate_header.html' %}
+
+<!-- ─── Main Content ──────────────────────────────────────────────────────── -->
+<main class="flex-1 p-4 sm:p-6 lg:p-8 pb-24 lg:pb-8">
+  <div class="max-w-7xl mx-auto">
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+  </div><!-- /lg:ps-64 wrapper -->
+
+{% include 'includes/affiliate_bottom_nav.html' %}
+
+<!-- ─── Copy Toast ────────────────────────────────────────────────────────── -->
+<!-- start-1/2 + -translate-x-1/2: physical translateX works for visual centring in
+     RTL because start-1/2 offsets from the right edge and the physical shift cancels;
+     acceptable per prototype — revisit if Tailwind adds a logical translate variant. -->
+<div id="copied-toast"
+     class="fixed bottom-20 lg:bottom-6 start-1/2 -translate-x-1/2 z-50
+            bg-slate-900 dark:bg-slate-700 text-white text-sm px-4 py-2 rounded-full
+            shadow-lg opacity-0 pointer-events-none transition-opacity duration-300"
+     aria-live="polite" role="status">
+  تم النسخ ✓
+</div>
+{% endblock %}
